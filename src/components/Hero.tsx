@@ -99,7 +99,7 @@ const carouselItems = [{
   layout: () => <div className="relative w-full mb-10 items-start overflow-hidden bg-background">
         {/* Background Image */}
         <div className="absolute -inset-y-0 w-[45%] right-0 top-0">
-          <img src="/lovable-uploads/9947613a-4950-4fe7-bac0-7d4e750181b7.png" alt="Learning Community" className="w-full h-full object-cover object-right" />
+          <img src="/lovable-uploads/b4d39c0d-e245-45f8-acc2-ca4ea2d4036e.png" alt="Learning Community" className="w-full h-full object-cover object-right" />
         </div>
         <div className="flex flex-col gap-6 w-[50%]">
           <h2 className="text-5xl font-display font-black leading-tight">
@@ -124,7 +124,7 @@ const carouselItems = [{
   layout: () => <div className="relative w-full">
         {/* Background Image */}
         <div className="absolute -inset-y-4 w-[50%] right-0">
-          <img src="/lovable-uploads/b4d39c0d-e245-45f8-acc2-ca4ea2d4036e.png" alt="Student Learning" className="w-full h-full object-cover object-right" />
+          <img src="/lovable-uploads/e0c039b5-96f6-4128-b88b-9ed0faf08816.png" alt="Student Learning" className="w-full h-full object-cover object-right" />
         </div>
 
         <div className="flex flex-col gap-4 w-[50%]">
@@ -187,7 +187,7 @@ const carouselItems = [{
   layout: () => <div className="relative w-full">
         {/* Background Image */}
         <div className="absolute -inset-y-3 w-[55%] right-0">
-          <img src="/lovable-uploads/e0c039b5-96f6-4128-b88b-9ed0faf08816.png" alt="Expert Instruction" className="w-full h-full object-cover object-right" />
+          <img src="/lovable-uploads/9947613a-4950-4fe7-bac0-7d4e750181b7.png" alt="Expert Instruction" className="w-full h-full object-cover object-right" />
         </div>
 
         <div className="flex flex-col gap-4 w-[75%]">
