@@ -158,16 +158,18 @@ export default function SmartSearchFilter() {
           {/* Main Content */}
           <main className="md:w-3/4 w-full">
             {/* Upper Filters */}
-            <div className="flex items-center justify-between gap-2 mb-8 flex-nowrap overflow-x-auto min-w-0">
-              <Input
-                type="text"
-                placeholder="Search courses..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-48 flex-shrink-0"
-              />
+            <div className="flex flex-col gap-4 mb-8">
+              <div className="flex justify-start">
+                <Input
+                  type="text"
+                  placeholder="Search courses..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-80"
+                />
+              </div>
 
-              <div className="flex items-center gap-2 flex-nowrap">
+              <div className="flex items-center gap-2 flex-wrap">
                 <Button
                   variant={showFreeOnly ? "default" : "outline"}
                   onClick={() => setShowFreeOnly((prev) => !prev)}
