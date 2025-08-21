@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -28,6 +29,7 @@ const fadeInUp = {
 const userImages = [loginImage1, loginImage2, loginImage3, loginImage4];
 
 export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
+  const navigate = useNavigate();
   const {
     email,
     setEmail,
@@ -175,7 +177,8 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
               Don't have an account?{" "}
               <button
                 onClick={() => {
-                  console.log("Navigate to sign up");
+                  onClose();
+                  navigate("/register");
                 }}
                 className="text-primary hover:text-primary/80 underline font-medium"
               >
