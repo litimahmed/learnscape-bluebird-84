@@ -159,11 +159,12 @@ const Register = () => {
         userType
       };
 
-      // Send OTP first
+      // Create auth user with email and password
       const {
         error: otpError
-      } = await supabase.auth.signInWithOtp({
+      } = await supabase.auth.signUp({
         email: finalData.email,
+        password: finalData.password,
         options: {
           emailRedirectTo: `${window.location.origin}/`
         }
