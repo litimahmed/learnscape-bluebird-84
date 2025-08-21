@@ -53,7 +53,7 @@ export function MegaMenu({ padding = "md", children }: MegaMenuProps) {
         <DropdownMenu.Content
           align="start"
           className={cn(
-            "top-full border shadow-md w-[60%] h-[60%] transition bg-gray-900 border-gray-700 text-white",
+            "top-full border shadow-md w-[80%] transition bg-gray-900 border-gray-700 text-white",
             padding === "sm"
               ? "p-4"
               : padding === "md"
