@@ -33,27 +33,27 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
           {/* Left - Language Selector */}
           <div className="flex-shrink-0">
             <select 
-              className="bg-transparent border border-white/30 text-white text-sm px-3 py-1 rounded hover:bg-white/10 focus:outline-none cursor-pointer"
+              className="bg-transparent border border-white/30 text-white text-sm px-2 md:px-3 py-1 rounded hover:bg-white/10 focus:outline-none cursor-pointer"
               defaultValue="English"
             >
-              <option value="English" className="text-black bg-white">English</option>
-              <option value="Arabic" className="text-black bg-white">Arabic</option>
-              <option value="French" className="text-black bg-white">French</option>
+              <option value="English" className="text-black bg-white">EN</option>
+              <option value="Arabic" className="text-black bg-white">AR</option>
+              <option value="French" className="text-black bg-white">FR</option>
             </select>
           </div>
 
           {/* Center - Text Content */}
-          <div className="flex-1 text-center px-4">
-            <span className="text-white text-sm font-medium hidden sm:inline">
+          <div className="flex-1 text-center px-4 hidden md:block">
+            <span className="text-white text-sm font-medium">
               We build a strong platform that tailor to have different things to function
             </span>
           </div>
 
           {/* Right - Help Center & Theme Toggle */}
-          <div className="flex items-center gap-3 flex-shrink-0">
+          <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
             <Button
               variant="ghost"
-              className="text-white border border-white/30 hover:bg-white/10 text-sm px-4 py-1 h-auto"
+              className="text-white border border-white/30 hover:bg-white/10 text-xs md:text-sm px-2 md:px-4 py-1 h-auto hidden sm:flex"
             >
               Help Center
             </Button>
@@ -64,57 +64,67 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
 
       {/* Main Navigation Bar */}
       <div className="w-full bg-background border-t border-border/50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20">
           <div className="flex items-center justify-between h-16">
             {/* Left - Logo */}
             <div className="flex items-center flex-shrink-0">
               <Link to="/" className="flex items-center">
-                <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
-                  <span className="text-primary-foreground font-bold text-xl">E</span>
+                <div className="w-8 md:w-10 h-8 md:h-10 bg-primary rounded-lg flex items-center justify-center mr-2 md:mr-3">
+                  <span className="text-primary-foreground font-bold text-lg md:text-xl">E</span>
                 </div>
-                <span className="text-xl font-bold text-foreground">Edutech</span>
+                <span className="text-lg md:text-xl font-bold text-foreground">Edutech</span>
               </Link>
             </div>
 
             {/* Center - Explore Menu & Search */}
-            <div className="flex items-center gap-6 flex-1 max-w-2xl mx-6">
-              <MegaMenu width="full" padding="lg">
-                <MegaMenu.Column title="Explore Roles">
-                  <MegaMenu.Item label="Data Analyst" href="/courses/data-analyst" />
-                  <MegaMenu.Item label="Project Manager" href="/courses/project-manager" />
-                  <MegaMenu.Item label="Cyber Security Analyst" href="/courses/cybersecurity" />
-                  <MegaMenu.Item label="Data Scientist" href="/courses/data-scientist" />
-                  <MegaMenu.Item label="Business Intelligence Analyst" href="/courses/business-intelligence" />
-                  <MegaMenu.Item label="Digital Marketing Specialist" href="/courses/digital-marketing" />
-                  <MegaMenu.Item label="UI / UX Designer" href="/courses/ui-ux" />
-                  <MegaMenu.Item label="Machine Learning Engineer" href="/courses/machine-learning" />
-                  <MegaMenu.Item label="Social Media Specialist" href="/courses/social-media" />
-                  <MegaMenu.Item label="Computer Support Specialist" href="/courses/computer-support" />
-                  <MegaMenu.Item label="View all" href="/courses" highlight />
-                </MegaMenu.Column>
+            <div className="flex items-center gap-3 md:gap-6 flex-1 max-w-2xl mx-4 md:mx-6">
+              <div className="hidden lg:block">
+                <MegaMenu width="full" padding="lg">
+                  <MegaMenu.Column title="Explore Roles">
+                    <MegaMenu.Item label="Data Analyst" href="/courses/data-analyst" />
+                    <MegaMenu.Item label="Project Manager" href="/courses/project-manager" />
+                    <MegaMenu.Item label="Cyber Security Analyst" href="/courses/cybersecurity" />
+                    <MegaMenu.Item label="Data Scientist" href="/courses/data-scientist" />
+                    <MegaMenu.Item label="Business Intelligence Analyst" href="/courses/business-intelligence" />
+                    <MegaMenu.Item label="Digital Marketing Specialist" href="/courses/digital-marketing" />
+                    <MegaMenu.Item label="UI / UX Designer" href="/courses/ui-ux" />
+                    <MegaMenu.Item label="Machine Learning Engineer" href="/courses/machine-learning" />
+                    <MegaMenu.Item label="Social Media Specialist" href="/courses/social-media" />
+                    <MegaMenu.Item label="Computer Support Specialist" href="/courses/computer-support" />
+                    <MegaMenu.Item label="View all" href="/courses" highlight />
+                  </MegaMenu.Column>
 
-                <MegaMenu.Column title="Popular Subjects">
-                  <MegaMenu.Item label="Programming" href="/courses/programming" />
-                  <MegaMenu.Item label="Data Science" href="/courses/data-science" />
-                  <MegaMenu.Item label="Web Development" href="/courses/web-development" />
-                  <MegaMenu.Item label="View all" href="/courses" highlight />
-                </MegaMenu.Column>
+                  <MegaMenu.Column title="Popular Subjects">
+                    <MegaMenu.Item label="Programming" href="/courses/programming" />
+                    <MegaMenu.Item label="Data Science" href="/courses/data-science" />
+                    <MegaMenu.Item label="Web Development" href="/courses/web-development" />
+                    <MegaMenu.Item label="View all" href="/courses" highlight />
+                  </MegaMenu.Column>
 
-                <MegaMenu.Column title="Skill Levels">
-                  <MegaMenu.Item label="Beginner" href="/courses?level=beginner" />
-                  <MegaMenu.Item label="Intermediate" href="/courses?level=intermediate" />
-                  <MegaMenu.Item label="Advanced" href="/courses?level=advanced" />
-                  <MegaMenu.Item label="View all" href="/courses" highlight />
-                </MegaMenu.Column>
+                  <MegaMenu.Column title="Skill Levels">
+                    <MegaMenu.Item label="Beginner" href="/courses?level=beginner" />
+                    <MegaMenu.Item label="Intermediate" href="/courses?level=intermediate" />
+                    <MegaMenu.Item label="Advanced" href="/courses?level=advanced" />
+                    <MegaMenu.Item label="View all" href="/courses" highlight />
+                  </MegaMenu.Column>
 
-                <MegaMenu.CTA
-                  image="/lovable-uploads/1f6a2417-0f18-43a3-b0f3-6a65ecad2be2.png"
-                  title="Master Data Science"
-                  description="Enroll in our top-rated course and become a data expert."
-                  buttonText="Get Started"
-                  buttonLink="/courses/data-science"
-                />
-              </MegaMenu>
+                  <MegaMenu.CTA
+                    image="/lovable-uploads/1f6a2417-0f18-43a3-b0f3-6a65ecad2be2.png"
+                    title="Master Data Science"
+                    description="Enroll in our top-rated course and become a data expert."
+                    buttonText="Get Started"
+                    buttonLink="/courses/data-science"
+                  />
+                </MegaMenu>
+              </div>
+
+              {/* Mobile Explore Button */}
+              <Link
+                to="/courses"
+                className="lg:hidden px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors border border-border rounded-md"
+              >
+                Courses
+              </Link>
 
               <div className="flex-1 max-w-md">
                 <SearchBar />
@@ -122,50 +132,50 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
             </div>
 
             {/* Right - Navigation Links & Login */}
-            <div className="flex items-center gap-6 flex-shrink-0">
+            <div className="flex items-center gap-3 md:gap-6 flex-shrink-0">
               {user?.position === "student" ? (
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-3 md:gap-6">
                   <Link
                     to="/my-courses"
-                    className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    className="text-sm font-medium text-foreground hover:text-primary transition-colors hidden md:block"
                   >
                     My Courses
                   </Link>
                   <Link
                     to="/dashboard"
-                    className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    className="text-sm font-medium text-foreground hover:text-primary transition-colors hidden lg:block"
                   >
                     Progress Dashboard
                   </Link>
                   <UserProfileDropdown user={user} />
                 </div>
               ) : user?.position === "teacher" ? (
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-3 md:gap-6">
                   <Link
                     to="/teacher/courses"
-                    className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    className="text-sm font-medium text-foreground hover:text-primary transition-colors hidden md:block"
                   >
                     My Teaching
                   </Link>
                   <Link
                     to="/dashboard"
-                    className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    className="text-sm font-medium text-foreground hover:text-primary transition-colors hidden lg:block"
                   >
                     Teacher Dashboard
                   </Link>
                   <UserProfileDropdown user={user} />
                 </div>
               ) : (
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-3 md:gap-6">
                   <Link
                     to="/register/teacher"
-                    className="text-sm font-medium text-foreground hover:text-primary transition-colors hidden md:block"
+                    className="text-sm font-medium text-foreground hover:text-primary transition-colors hidden lg:block"
                   >
                     Become a Teacher
                   </Link>
                   <Link
                     to="/"
-                    className="text-sm font-medium text-foreground hover:text-primary transition-colors hidden md:block"
+                    className="text-sm font-medium text-foreground hover:text-primary transition-colors hidden xl:block"
                   >
                     Careers
                   </Link>
@@ -177,7 +187,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
                     }}
                   >
                     <Dialog.Trigger asChild>
-                      <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                      <Button className="bg-primary hover:bg-primary/90 text-primary-foreground px-3 md:px-4 py-2 text-sm">
                         Login
                       </Button>
                     </Dialog.Trigger>
