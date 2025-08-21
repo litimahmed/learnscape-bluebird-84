@@ -25,14 +25,18 @@ export function MegaMenu({ padding = "md", children }: MegaMenuProps) {
   const handleMouseEnter = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
+      timeoutRef.current = undefined;
     }
     setOpen(true);
   };
 
   const handleMouseLeave = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
     timeoutRef.current = setTimeout(() => {
       setOpen(false);
-    }, 150); // Small delay to allow moving to content
+    }, 200); // Slightly longer delay to prevent flickering
   };
 
   React.useEffect(() => {
@@ -77,7 +81,7 @@ export function MegaMenu({ padding = "md", children }: MegaMenuProps) {
         <DropdownMenu.Content
           align="start"
           className={cn(
-            "top-full border shadow-md w-screen transition bg-gray-900 border-gray-700 text-white",
+            "border shadow-lg rounded-lg max-w-5xl w-[1000px] max-h-[500px] overflow-y-auto transition bg-gray-900 border-gray-700 text-white z-50",
             padding === "sm"
               ? "p-4"
               : padding === "md"
@@ -88,8 +92,9 @@ export function MegaMenu({ padding = "md", children }: MegaMenuProps) {
           )}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          sideOffset={5}
         >
-          <div className="mx-auto grid grid-cols-4 gap-6 max-w-7xl">
+          <div className="grid grid-cols-4 gap-6">
             {children}
           </div>
         </DropdownMenu.Content>
