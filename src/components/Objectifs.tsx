@@ -50,7 +50,7 @@ export default function Objectifs() {
         </p>
       </div>
 
-      <div className="relative mx-auto max-w-6xl">
+      <div className="relative mx-auto max-w-6xl pt-6">
         {[0, 1].map((rowIndex) => (
           <div
             key={rowIndex}
