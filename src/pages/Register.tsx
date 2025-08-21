@@ -521,13 +521,11 @@ const Register = () => {
               
               <div className="relative z-10 flex flex-col justify-center items-center px-12 py-16 space-y-8">
                 {/* E-learning illustration */}
-                <div className="w-full max-w-lg">
-                  <img 
-                    src="/lovable-uploads/33036365-2096-4b71-813a-f70b9459d29d.png" 
-                    alt="E-learning illustration" 
-                    className="w-full h-auto rounded-2xl shadow-lg"
-                  />
-                </div>
+                <img 
+                  src="/lovable-uploads/33036365-2096-4b71-813a-f70b9459d29d.png" 
+                  alt="E-learning illustration" 
+                  className="w-full max-w-lg h-auto rounded-2xl shadow-lg"
+                />
                 
                 {/* OAuth buttons at the bottom center */}
                 <div className="flex flex-col space-y-3 w-full max-w-sm">
