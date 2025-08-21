@@ -158,20 +158,21 @@ export default function SmartSearchFilter() {
           {/* Main Content */}
           <main className="md:w-3/4 w-full">
             {/* Upper Filters */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+            <div className="flex items-center justify-between gap-2 mb-8 flex-nowrap overflow-x-auto min-w-0">
               <Input
                 type="text"
                 placeholder="Search courses..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="md:w-1/3"
+                className="w-72 flex-shrink-0"
               />
 
-              <div className="flex items-center gap-3 flex-wrap">
+              <div className="flex items-center gap-2 flex-nowrap">
                 <Button
                   variant={showFreeOnly ? "default" : "outline"}
                   onClick={() => setShowFreeOnly((prev) => !prev)}
                   size="sm"
+                  className="whitespace-nowrap"
                 >
                   Free Courses
                 </Button>
@@ -179,6 +180,7 @@ export default function SmartSearchFilter() {
                   variant={showWithCertificates ? "default" : "outline"}
                   onClick={() => setShowWithCertificates((prev) => !prev)}
                   size="sm"
+                  className="whitespace-nowrap"
                 >
                   Certificates
                 </Button>
@@ -186,6 +188,7 @@ export default function SmartSearchFilter() {
                   variant={showRecentlyAdded ? "default" : "outline"}
                   onClick={() => setShowRecentlyAdded((prev) => !prev)}
                   size="sm"
+                  className="whitespace-nowrap"
                 >
                   Recently Added
                 </Button>
@@ -193,11 +196,12 @@ export default function SmartSearchFilter() {
                   variant={showShortCourses ? "default" : "outline"}
                   onClick={() => setshowShortCourses((prev) => !prev)}
                   size="sm"
+                  className="whitespace-nowrap"
                 >
                   Short Courses
                 </Button>
                 <Select value={sort} onValueChange={setSort}>
-                  <SelectTrigger className="w-40">
+                  <SelectTrigger className="w-36">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
