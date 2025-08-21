@@ -1,15 +1,14 @@
 import * as React from "react";
-import * as Dialog from "@radix-ui/react-dialog";
 import { Link } from "react-router-dom";
-import { X, GraduationCap } from "lucide-react";
+import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { SearchBar } from "@/components/ui/SearchBar";
 import { MegaMenu } from "@/components/ui/MegaMenu";
+import { Dialog, DialogContent, DialogTrigger, DialogOverlay } from "@/components/ui/dialog";
 import UserProfileDropdown from "@/components/ui/UserProfileDropdown";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { Skeleton } from "@/components/ui/skeleton";
-import AnimatedText from "@/components/ui/AnimatedText";
+import AuthDialog from "@/components/AuthDialog";
+import { useAuth } from "@/hooks/useAuth";
 
 interface NewHeaderProps {
   isDark: boolean;
@@ -17,9 +16,7 @@ interface NewHeaderProps {
 }
 
 export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
-  // Mock auth state - replace with your actual auth context
-  const [user, setUser] = React.useState<any>(null);
-  const [loading, setLoading] = React.useState(false);
+  const { user, loading } = useAuth();
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const openModal = () => setIsModalOpen(true);
@@ -123,7 +120,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
 
             {/* Right - Navigation Links & Login */}
             <div className="flex items-center gap-6 flex-shrink-0">
-              {user?.position === "student" ? (
+              {user ? (
                 <div className="flex items-center gap-6">
                   <Link
                     to="/my-courses"
@@ -135,23 +132,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
                     to="/dashboard"
                     className="text-sm font-medium text-foreground hover:text-primary transition-colors"
                   >
-                    Progress Dashboard
-                  </Link>
-                  <UserProfileDropdown user={user} />
-                </div>
-              ) : user?.position === "teacher" ? (
-                <div className="flex items-center gap-6">
-                  <Link
-                    to="/teacher/courses"
-                    className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-                  >
-                    My Teaching
-                  </Link>
-                  <Link
-                    to="/dashboard"
-                    className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-                  >
-                    Teacher Dashboard
+                    Dashboard
                   </Link>
                   <UserProfileDropdown user={user} />
                 </div>
@@ -169,52 +150,22 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
                   >
                     Careers
                   </Link>
-                  <Dialog.Root
+                  <Dialog
                     open={isModalOpen}
                     onOpenChange={(open) => {
                       if (open) openModal();
                       else closeModal();
                     }}
                   >
-                    <Dialog.Trigger asChild>
+                    <DialogTrigger asChild>
                       <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
                         Login
                       </Button>
-                    </Dialog.Trigger>
-                    <Dialog.Portal>
-                      <Dialog.Overlay className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm" />
-                      <Dialog.Content className="fixed left-1/2 top-1/2 z-50 max-h-screen w-[95vw] max-w-md -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl bg-background p-6 shadow-xl transition-all duration-300 focus:outline-none">
-                        <Dialog.Close
-                          onClick={closeModal}
-                          className="absolute right-4 top-4 rounded-full p-1 text-muted-foreground transition-colors hover:text-foreground focus:outline-none"
-                        >
-                          <X className="h-5 w-5" />
-                        </Dialog.Close>
-                        <div className="space-y-6">
-                          <div className="space-y-2 text-center">
-                            <h2 className="text-2xl font-bold">Welcome Back</h2>
-                            <p className="text-muted-foreground">Sign in to your account to continue learning</p>
-                          </div>
-                          <div className="space-y-4">
-                            <Button className="w-full" size="lg">
-                              Sign in with Google
-                            </Button>
-                            <Button variant="outline" className="w-full" size="lg">
-                              Sign in with Email
-                            </Button>
-                          </div>
-                          <p className="text-center text-sm text-muted-foreground">
-                            Don't have an account?{" "}
-                            <button className="text-primary hover:underline" onClick={() => {
-                              // Handle sign up
-                            }}>
-                              Sign up
-                            </button>
-                          </p>
-                        </div>
-                      </Dialog.Content>
-                    </Dialog.Portal>
-                  </Dialog.Root>
+                    </DialogTrigger>
+                    <DialogContent className="fixed left-1/2 top-1/2 z-50 max-h-screen w-[95vw] max-w-5xl -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl p-0 shadow-xl">
+                      <AuthDialog onClose={closeModal} isDark={isDark} />
+                    </DialogContent>
+                  </Dialog>
                 </div>
               )}
             </div>
