@@ -64,7 +64,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
 
       {/* Main Navigation Bar */}
       <div className="w-full bg-background border-t border-border/50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-14">
           <div className="flex items-center justify-between h-16">
             {/* Left - Logo */}
             <div className="flex items-center flex-shrink-0">
