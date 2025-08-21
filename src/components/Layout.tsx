@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import NewHeader from "./NewHeader";
+import Footer from "./Footer";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -30,6 +31,7 @@ const Layout = ({ children }: LayoutProps) => {
       <main>
         {children}
       </main>
+      <Footer isDark={isDark} />
     </div>
   );
 };
