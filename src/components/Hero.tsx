@@ -72,7 +72,7 @@ export default function Hero() {
         </Carousel>
         
         {/* Professional Pagination Pills */}
-        <div className="flex justify-center mt-8 gap-2 mx-0 my-0">
+        <div className="flex justify-center mt-4 gap-2 mx-0 my-0">
           {carouselItems.map((_, index) => <button key={index} onClick={() => api?.scrollTo(index)} className={`h-2 rounded-full transition-all duration-300 ease-in-out ${index === current ? 'w-8 bg-primary' : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50'}`} aria-label={`Go to slide ${index + 1}`} />)}
         </div>
       </div>
