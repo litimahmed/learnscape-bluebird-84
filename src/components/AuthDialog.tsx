@@ -83,8 +83,8 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
       }`}
     >
       {/* Left Side - Login Form */}
-      <div className="flex flex-col items-center justify-center p-12 bg-background">
-        <div className="w-full max-w-sm space-y-6">
+      <div className="flex flex-col items-center justify-start p-6 md:p-8 lg:p-12 bg-background overflow-y-auto">
+        <div className="w-full max-w-sm space-y-6 my-auto">
           {/* Header */}
           <div className="text-center space-y-4">
             <div className="inline-block px-4 py-2 border border-primary rounded-full">
@@ -92,7 +92,7 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
                 EDUTECH
               </span>
             </div>
-            <h1 className="text-2xl font-normal text-foreground">
+            <h1 className="text-xl md:text-2xl font-normal text-foreground">
               Login into your <span className="text-primary">Account</span>
             </h1>
           </div>
@@ -108,10 +108,10 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
           </div>
 
           {/* Login Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-5 md:space-y-6">
             {/* Username Field */}
             <div className="space-y-3">
-              <Label htmlFor="username" className="text-foreground font-medium">
+              <Label htmlFor="username" className="text-foreground font-medium text-sm">
                 Username
               </Label>
               <Input
@@ -120,13 +120,13 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
                 placeholder="sofia_ben123"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="h-12 bg-background border-input placeholder:text-muted-foreground"
+                className="h-11 md:h-12 bg-background border-input placeholder:text-muted-foreground text-sm md:text-base"
               />
             </div>
 
             {/* Email Field */}
             <div className="space-y-3">
-              <Label htmlFor="email" className="text-foreground font-medium">
+              <Label htmlFor="email" className="text-foreground font-medium text-sm">
                 Email
               </Label>
               <Input
@@ -135,13 +135,13 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
                 placeholder="sofia.bensalah@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="h-12 bg-background border-input placeholder:text-muted-foreground"
+                className="h-11 md:h-12 bg-background border-input placeholder:text-muted-foreground text-sm md:text-base"
               />
             </div>
 
             {/* Password Field */}
             <div className="space-y-3">
-              <Label htmlFor="password" className="text-foreground font-medium">
+              <Label htmlFor="password" className="text-foreground font-medium text-sm">
                 Password
               </Label>
               <div className="relative">
@@ -151,7 +151,7 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
                   placeholder="********"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="h-12 bg-background border-input placeholder:text-muted-foreground pr-12"
+                  className="h-11 md:h-12 bg-background border-input placeholder:text-muted-foreground pr-12 text-sm md:text-base"
                   required
                 />
                 <button
@@ -159,14 +159,14 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+                  {showPassword ? <FaEyeSlash size={16} className="md:w-[18px] md:h-[18px]" /> : <FaEye size={16} className="md:w-[18px] md:h-[18px]" />}
                 </button>
               </div>
             </div>
 
             {/* Error Message */}
             {error && (
-              <div className="text-destructive text-sm text-center p-3 bg-destructive/10 rounded-md">
+              <div className="text-destructive text-xs md:text-sm text-center p-3 bg-destructive/10 rounded-md">
                 {error}
               </div>
             )}
@@ -174,7 +174,7 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
             {/* Submit Button */}
             <Button
               type="submit"
-              className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
+              className="w-full h-11 md:h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-medium text-sm md:text-base"
               disabled={isLoading || (!username && !email) || !password}
             >
               {isLoading ? (
@@ -189,7 +189,7 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
           </form>
 
           {/* Sign Up Link */}
-          <p className="text-center text-sm text-muted-foreground">
+          <p className="text-center text-xs md:text-sm text-muted-foreground">
             Don't have an account?{" "}
             <button
               onClick={() => {
@@ -204,7 +204,7 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
       </div>
 
       {/* Right Side - Banner */}
-      <div className="relative w-full h-full">
+      <div className="relative w-full h-full hidden lg:block">
         <img
           src={loginBanner}
           alt="Login Banner"
@@ -221,7 +221,7 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
         />
         <div className="absolute inset-y-8 px-8 lg:px-10 pb-8 flex flex-col items-center justify-end">
           <motion.h1
-            className="text-4xl leading-snug font-bold text-center text-gray-200 font-sans"
+            className="text-3xl xl:text-4xl leading-snug font-bold text-center text-gray-200 font-sans"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -230,7 +230,7 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
           </motion.h1>
 
           <motion.p
-            className="text-base leading-relaxed text-center mt-3 text-gray-100 font-sans"
+            className="text-sm xl:text-base leading-relaxed text-center mt-3 text-gray-100 font-sans"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
@@ -243,7 +243,7 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
           </motion.p>
 
           <motion.div
-            className="flex items-center gap-1 mt-8 w-full justify-start"
+            className="flex items-center gap-1 mt-6 xl:mt-8 w-full justify-start"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
@@ -252,7 +252,7 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
               {userImages.map((src, i) => (
                 <div
                   key={i}
-                  className="w-10 h-10 bg-white rounded-full border border-gray-300 overflow-hidden shadow-lg -mb-2 -ml-3 first:ml-0"
+                  className="w-8 xl:w-10 h-8 xl:h-10 bg-white rounded-full border border-gray-300 overflow-hidden shadow-lg -mb-2 -ml-3 first:ml-0"
                 >
                   <img
                     src={src}
@@ -268,14 +268,14 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
                 {[...Array(5)].map((_, i) => (
                   <svg
                     key={i}
-                    className="w-6 h-6 text-yellow-400 fill-current"
+                    className="w-5 xl:w-6 h-5 xl:h-6 text-yellow-400 fill-current"
                     viewBox="0 0 24 24"
                   >
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                   </svg>
                 ))}
               </div>
-              <span className="text-gray-100 -mt-2">from 200+ reviews</span>
+              <span className="text-gray-100 -mt-2 text-xs xl:text-sm">from 200+ reviews</span>
             </div>
           </motion.div>
         </div>
