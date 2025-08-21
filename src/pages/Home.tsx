@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import Brands from "@/components/Brands";
 import Objectifs from "@/components/Objectifs";
 import SmartSearchFilter from "@/components/SmartSearchFilter";
+import Testimonials from "@/components/Testimonials";
 
 const Home = () => {
   return (
@@ -17,6 +18,9 @@ const Home = () => {
       
       {/* Smart Search Filter Section */}
       <SmartSearchFilter />
+      
+      {/* Testimonials Section */}
+      <Testimonials />
     </div>
   );
 };
