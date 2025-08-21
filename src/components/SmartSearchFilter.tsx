@@ -164,7 +164,7 @@ export default function SmartSearchFilter() {
                 placeholder="Search courses..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-48 flex-shrink-0 focus-visible:ring-primary focus-visible:border-primary"
+                className="w-48 flex-shrink-0"
               />
 
               <div className="flex items-center gap-2 flex-nowrap">
