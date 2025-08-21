@@ -5,6 +5,9 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
+import courseReact from "@/assets/course-react.jpg";
+import courseJavaScript from "@/assets/course-javascript.jpg";
+import courseUXDesign from "@/assets/course-ux-design.jpg";
 
 const categories = ["Technology", "Science", "Arts", "Business", "Health"];
 const levels = ["Beginner", "Intermediate", "Advanced"];
@@ -12,7 +15,7 @@ const languages = ["English", "French", "Arabic"];
 
 const mockCourses = [
   {
-    imageSrc: "/placeholder.svg",
+    imageSrc: courseReact,
     title: "React Development Fundamentals",
     instructor: "John Smith",
     rating: 4.8,
@@ -21,7 +24,7 @@ const mockCourses = [
     badge: "Popular"
   },
   {
-    imageSrc: "/placeholder.svg", 
+    imageSrc: courseJavaScript, 
     title: "Advanced JavaScript",
     instructor: "Sarah Johnson",
     rating: 4.9,
@@ -30,7 +33,7 @@ const mockCourses = [
     badge: "New"
   },
   {
-    imageSrc: "/placeholder.svg",
+    imageSrc: courseUXDesign,
     title: "UI/UX Design Principles", 
     instructor: "Mike Davis",
     rating: 4.7,
@@ -53,7 +56,7 @@ export default function SmartSearchFilter() {
   const [showShortCourses, setshowShortCourses] = useState(false);
 
   return (
-    <section className="bg-muted py-10 px-4">
+    <section className="bg-background py-10 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <p className="text-sm font-medium text-primary mb-2 uppercase tracking-wider border border-primary px-3 py-1 inline-block rounded-md">
