@@ -15,6 +15,7 @@ import { ChevronLeft, ChevronRight, Upload, User, GraduationCap, BookOpen, Award
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { OtpVerification } from '@/components/ui/OtpVerification';
 
 // Algeria-specific validation patterns
 const ALGERIA_PHONE_REGEX = /^\+213[0-9]{9}$/;
@@ -94,6 +95,8 @@ const Register = () => {
   const [formData, setFormData] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<Record<string, File>>({});
+  const [showOtpVerification, setShowOtpVerification] = useState(false);
+  const [pendingRegistrationData, setPendingRegistrationData] = useState<any>(null);
 
   const maxSteps = userType === 'student' ? 5 : 6;
 
@@ -167,6 +170,18 @@ const Register = () => {
     try {
       const finalData = { ...formData, ...data, userType };
       
+      // Send OTP first
+      const { error: otpError } = await supabase.auth.signInWithOtp({
+        email: finalData.email,
+        options: {
+          emailRedirectTo: `${window.location.origin}/`,
+        }
+      });
+      
+      if (otpError) {
+        throw otpError;
+      }
+      
       // Upload files from uploadedFiles state
       const uploadPromises: Promise<{key: string, path: string | null}>[] = [];
       
@@ -232,10 +247,39 @@ const Register = () => {
         }
       });
       
-      // Submit to database
+      // Store registration data for after OTP verification
+      setPendingRegistrationData(registrationData);
+      
+      toast({
+        title: "Code de vérification envoyé!",
+        description: "Vérifiez votre email pour le code de vérification.",
+      });
+      
+      // Show OTP verification
+      setShowOtpVerification(true);
+      
+    } catch (error: any) {
+      console.error('Registration error:', error);
+      toast({
+        variant: "destructive",
+        title: "Erreur d'inscription",
+        description: error.message || "Une erreur est survenue lors de l'inscription.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleOtpVerified = async () => {
+    if (!pendingRegistrationData) return;
+    
+    setIsSubmitting(true);
+    
+    try {
+      // Submit to database after OTP verification
       const { error } = await supabase
         .from('user_registrations')
-        .insert([registrationData]);
+        .insert([pendingRegistrationData]);
       
       if (error) {
         throw error;
@@ -252,11 +296,11 @@ const Register = () => {
       navigate('/');
       
     } catch (error: any) {
-      console.error('Registration error:', error);
+      console.error('Final registration error:', error);
       toast({
         variant: "destructive",
         title: "Erreur d'inscription",
-        description: error.message || "Une erreur est survenue lors de l'inscription.",
+        description: error.message || "Une erreur est survenue lors de l'inscription finale.",
       });
     } finally {
       setIsSubmitting(false);
@@ -814,6 +858,17 @@ const Register = () => {
         return null;
     }
   };
+
+  // Show OTP verification screen if needed
+  if (showOtpVerification && pendingRegistrationData) {
+    return (
+      <OtpVerification
+        email={pendingRegistrationData.email}
+        onVerified={handleOtpVerified}
+        loading={isSubmitting}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10 flex items-center justify-center p-4">
