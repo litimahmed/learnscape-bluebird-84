@@ -6,13 +6,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { ChevronLeft, ChevronRight, Upload, User, GraduationCap } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Upload, User, GraduationCap, BookOpen, Award, Shield, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 // Validation schemas for each step
@@ -120,12 +119,12 @@ const Register = () => {
 
   const FileUpload = ({ label, accept = "image/*,.pdf", ...props }: any) => (
     <div className="space-y-2">
-      <Label>{label}</Label>
-      <div className="border-2 border-dashed border-border rounded-lg p-6 text-center hover:bg-muted/50 transition-colors">
-        <Upload className="mx-auto h-8 w-8 text-muted-foreground mb-2" />
+      <Label className="text-sm font-medium">{label}</Label>
+      <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-4 text-center hover:border-muted-foreground/40 transition-colors cursor-pointer group">
+        <Upload className="mx-auto h-6 w-6 text-muted-foreground mb-2 group-hover:text-primary transition-colors" />
         <Input type="file" accept={accept} className="hidden" {...props} />
-        <p className="text-sm text-muted-foreground">Cliquez pour télécharger ou glissez-déposez</p>
-        <p className="text-xs text-muted-foreground mt-1">PDF, JPG, PNG (max 5MB)</p>
+        <p className="text-sm text-muted-foreground">Télécharger un fichier</p>
+        <p className="text-xs text-muted-foreground/70 mt-1">PDF, JPG, PNG (max 5MB)</p>
       </div>
     </div>
   );
@@ -507,112 +506,150 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-muted/20 py-12">
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-4">Créer votre compte</h1>
-            <p className="text-muted-foreground text-lg">
-              Rejoignez notre communauté d'apprentissage
+    <div className="min-h-screen flex">
+      {/* Left Column - Brand & Info */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary via-primary/90 to-primary/80 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-20 w-32 h-32 rounded-full bg-white/20"></div>
+          <div className="absolute bottom-40 right-20 w-24 h-24 rounded-full bg-white/15"></div>
+          <div className="absolute top-1/2 left-10 w-16 h-16 rounded-full bg-white/10"></div>
+        </div>
+        
+        <div className="relative z-10 flex flex-col justify-center px-16 py-20 text-white">
+          <div className="mb-12">
+            <BookOpen className="h-12 w-12 mb-6" />
+            <h1 className="text-4xl font-bold mb-4">Plateforme E-Learning</h1>
+            <p className="text-xl text-white/90 leading-relaxed">
+              Rejoignez des milliers d'apprenants et d'experts dans notre écosystème éducatif de pointe
             </p>
           </div>
-
-          <div className="grid lg:grid-cols-2 gap-8 items-start">
-            {/* Left Column - Info */}
-            <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <User className="h-5 w-5" />
-                    Étudiants
-                  </CardTitle>
-                  <CardDescription>
-                    Accédez à des milliers de cours de qualité, suivez votre progression 
-                    et obtenez des certificats reconnus.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-              
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <GraduationCap className="h-5 w-5" />
-                    Enseignants
-                  </CardTitle>
-                  <CardDescription>
-                    Partagez votre expertise, créez des cours interactifs et 
-                    impactez la vie de milliers d'étudiants.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-              
-              <div className="bg-muted/50 rounded-lg p-6">
-                <h3 className="font-semibold mb-2">🔒 Sécurité et confidentialité</h3>
-                <p className="text-sm text-muted-foreground">
-                  Vos données sont protégées selon les standards internationaux. 
-                  Nous respectons la réglementation algérienne sur la protection des données.
-                </p>
+          
+          <div className="space-y-8">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                <Award className="h-5 w-5" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Certificats Reconnus</h3>
+                <p className="text-white/80 text-sm">Obtenez des certifications valorisées par les entreprises algériennes et internationales</p>
               </div>
             </div>
+            
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                <User className="h-5 w-5" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Experts Qualifiés</h3>
+                <p className="text-white/80 text-sm">Apprenez auprès de professionnels expérimentés et d'enseignants universitaires</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                <Shield className="h-5 w-5" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Sécurisé & Conforme</h3>
+                <p className="text-white/80 text-sm">Protection maximale de vos données selon les standards internationaux</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-12 pt-8 border-t border-white/20">
+            <div className="flex items-center justify-between text-sm text-white/70">
+              <span>+10,000 Étudiants</span>
+              <span>500+ Cours</span>
+              <span>98% Satisfaction</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-            {/* Right Column - Form */}
-            <Card>
-              <CardHeader>
-                <Tabs value={userType} onValueChange={(value) => setUserType(value as 'student' | 'teacher')}>
-                  <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="student">Étudiant(e)</TabsTrigger>
-                    <TabsTrigger value="teacher">Enseignant(e)</TabsTrigger>
-                  </TabsList>
-                </Tabs>
-                
-                <div className="flex items-center justify-between mt-4">
-                  <CardTitle>
-                    Étape {currentStep} sur {maxSteps}
-                  </CardTitle>
-                  <div className="flex gap-1">
-                    {Array.from({ length: maxSteps }, (_, i) => (
-                      <div
-                        key={i}
-                        className={`h-2 w-8 rounded-full ${
-                          i + 1 <= currentStep ? 'bg-primary' : 'bg-muted'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </CardHeader>
+      {/* Right Column - Registration Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-background">
+        <div className="w-full max-w-md space-y-8">
+          {/* Header */}
+          <div className="text-center">
+            <h2 className="text-3xl font-bold tracking-tight">Créer votre compte</h2>
+            <p className="text-muted-foreground mt-2">Commencez votre parcours d'apprentissage</p>
+          </div>
 
-              <CardContent>
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(currentStep === maxSteps ? onSubmit : onNext)}>
-                    {renderStepContent()}
+          {/* User Type Tabs */}
+          <Tabs value={userType} onValueChange={(value) => setUserType(value as 'student' | 'teacher')} className="w-full">
+            <TabsList className="grid w-full grid-cols-2 mb-8">
+              <TabsTrigger value="student" className="flex items-center gap-2">
+                <User className="h-4 w-4" />
+                Étudiant(e)
+              </TabsTrigger>
+              <TabsTrigger value="teacher" className="flex items-center gap-2">
+                <GraduationCap className="h-4 w-4" />
+                Enseignant(e)
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
 
-                    <div className="flex justify-between mt-6">
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={onBack}
-                        disabled={currentStep === 1}
-                      >
-                        <ChevronLeft className="w-4 h-4 mr-2" />
-                        Précédent
-                      </Button>
+          {/* Progress Indicator */}
+          <div className="flex items-center justify-between mb-6">
+            <span className="text-sm font-medium text-muted-foreground">
+              Étape {currentStep} sur {maxSteps}
+            </span>
+            <div className="flex gap-2">
+              {Array.from({ length: maxSteps }, (_, i) => (
+                <div
+                  key={i}
+                  className={`h-2 w-8 rounded-full transition-colors ${
+                    i + 1 <= currentStep ? 'bg-primary' : 'bg-muted'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
 
-                      <Button type="submit">
-                        {currentStep === maxSteps ? (
-                          'Créer le compte'
-                        ) : (
-                          <>
-                            Suivant
-                            <ChevronRight className="w-4 h-4 ml-2" />
-                          </>
-                        )}
-                      </Button>
-                    </div>
-                  </form>
-                </Form>
-              </CardContent>
-            </Card>
+          {/* Form */}
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(currentStep === maxSteps ? onSubmit : onNext)} className="space-y-6">
+              {renderStepContent()}
+
+              <div className="flex justify-between pt-6">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={onBack}
+                  disabled={currentStep === 1}
+                  className="w-24"
+                >
+                  <ChevronLeft className="w-4 h-4 mr-1" />
+                  Retour
+                </Button>
+
+                <Button type="submit" className="w-32">
+                  {currentStep === maxSteps ? (
+                    <>
+                      <CheckCircle className="w-4 h-4 mr-2" />
+                      Créer
+                    </>
+                  ) : (
+                    <>
+                      Suivant
+                      <ChevronRight className="w-4 h-4 ml-1" />
+                    </>
+                  )}
+                </Button>
+              </div>
+            </form>
+          </Form>
+
+          {/* Footer */}
+          <div className="text-center text-sm text-muted-foreground">
+            Déjà inscrit?{' '}
+            <button 
+              onClick={() => navigate('/')} 
+              className="text-primary hover:underline font-medium"
+            >
+              Se connecter
+            </button>
           </div>
         </div>
       </div>
