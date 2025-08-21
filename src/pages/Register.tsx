@@ -511,12 +511,13 @@ const Register = () => {
         <div className="bg-card rounded-2xl shadow-2xl overflow-hidden border">
           <div className="flex min-h-[600px]">
             {/* Left Column - E-learning Background with OAuth */}
-            <div 
-              className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-contain bg-center bg-no-repeat"
-              style={{
-                backgroundImage: `url('/lovable-uploads/33036365-2096-4b71-813a-f70b9459d29d.png')`
-              }}
-            >
+            <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
+              <img
+                src="/lovable-uploads/33036365-2096-4b71-813a-f70b9459d29d.png"
+                alt="E-learning Illustration"
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ objectPosition: "20%" }}
+              />
               {/* Overlay for better contrast */}
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20"></div>
               
