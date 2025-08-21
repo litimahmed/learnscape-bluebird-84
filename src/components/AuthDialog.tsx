@@ -29,8 +29,6 @@ const userImages = [loginImage1, loginImage2, loginImage3, loginImage4];
 
 export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
   const {
-    username,
-    setUsername,
     email,
     setEmail,
     showPassword,
@@ -50,16 +48,13 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
     setError(null);
 
     try {
-      // Use email for authentication (prioritize email over username)
-      const identifier = email || username;
-      
-      if (!identifier || !password) {
+      if (!email || !password) {
         setError("Please fill in all fields.");
         setIsLoading(false);
         return;
       }
 
-      const { error } = await signIn(identifier, password);
+      const { error } = await signIn(email, password);
       
       if (error) {
         if (error.message.includes("Invalid login credentials")) {
@@ -111,21 +106,6 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
 
             {/* Login Form */}
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Username Field */}
-              <div className="space-y-3">
-                <Label htmlFor="username" className="text-foreground font-medium">
-                  Username
-                </Label>
-                <Input
-                  id="username"
-                  type="text"
-                  placeholder="sofia_ben123"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  className="h-12 bg-background border-input placeholder:text-muted-foreground"
-                />
-              </div>
-
               {/* Email Field */}
               <div className="space-y-3">
                 <Label htmlFor="email" className="text-foreground font-medium">
@@ -177,7 +157,7 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
               <Button
                 type="submit"
                 className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
-                disabled={isLoading || (!username && !email) || !password}
+                disabled={isLoading || !email || !password}
               >
                 {isLoading ? (
                   <div className="flex items-center justify-center gap-2">
