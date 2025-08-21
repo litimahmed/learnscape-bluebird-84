@@ -59,7 +59,7 @@ export default function Hero() {
       setCurrent(api.selectedScrollSnap());
     });
   }, [api]);
-  return <section className="section-padding bg-background">
+  return <section className="pb-16 md:pb-24 bg-background">
       <div className="container-custom">
         <Carousel setApi={setApi} className="relative w-full max-w-5xl mx-auto bg-background">
           <CarouselContent className="flex">
