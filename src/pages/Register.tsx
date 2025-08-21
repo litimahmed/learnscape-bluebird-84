@@ -13,13 +13,19 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { ChevronLeft, ChevronRight, Upload, User, GraduationCap, BookOpen, Award, Shield, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
+
+// Algeria-specific validation patterns
+const ALGERIA_PHONE_REGEX = /^\+213[0-9]{9}$/;
+const ALGERIA_NIN_REGEX = /^[0-9]{18}$/; // Algeria NIN is 18 digits
 
 // Validation schemas for each step
 const step1Schema = z.object({
   email: z.string().email('Email invalide'),
   password: z.string().min(8, 'Le mot de passe doit contenir au moins 8 caractères'),
   confirmPassword: z.string(),
-  phone: z.string().regex(/^\+213[0-9]{9}$/, 'Numéro de téléphone invalide (+213xxxxxxxxx)'),
+  phone: z.string().regex(ALGERIA_PHONE_REGEX, 'Numéro de téléphone invalide (+213xxxxxxxxx)'),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Les mots de passe ne correspondent pas",
   path: ["confirmPassword"],
@@ -34,21 +40,21 @@ const step2Schema = z.object({
 });
 
 const step3Schema = z.object({
-  nin: z.string().min(1, 'Numéro d\'identification nationale requis'),
-  nationalIdFront: z.any(),
-  nationalIdBack: z.any(),
+  nin: z.string().regex(ALGERIA_NIN_REGEX, 'NIN doit contenir exactement 18 chiffres'),
+  nationalIdFront: z.any().refine((file) => file && file.length > 0, "Carte d'identité (recto) requise"),
+  nationalIdBack: z.any().refine((file) => file && file.length > 0, "Carte d'identité (verso) requise"),
 });
 
 const studentStep4Schema = z.object({
   educationLevel: z.string().min(1, 'Niveau d\'éducation requis'),
   institutionName: z.string().min(1, 'Nom de l\'établissement requis'),
-  studentCard: z.any(),
+  studentCard: z.any().refine((file) => file && file.length > 0, "Carte d'étudiant ou certificat de scolarité requis"),
 });
 
 const teacherStep4Schema = z.object({
   highestDegree: z.string().min(1, 'Diplôme le plus élevé requis'),
   institutionAffiliation: z.string().min(1, 'Affiliation institutionnelle requise'),
-  teachingQualification: z.any(),
+  teachingQualification: z.any().refine((file) => file && file.length > 0, "Preuve de qualification d'enseignement requise"),
 });
 
 const teacherStep5Schema = z.object({
@@ -82,9 +88,11 @@ const degrees = [
 
 const Register = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [userType, setUserType] = useState<'student' | 'teacher'>('student');
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const maxSteps = userType === 'student' ? 5 : 6;
 
@@ -110,19 +118,138 @@ const Register = () => {
     setCurrentStep(currentStep - 1);
   };
 
+  // File upload utility function
+  const uploadFile = async (file: File, fileName: string): Promise<string | null> => {
+    try {
+      const fileExt = file.name.split('.').pop();
+      const filePath = `${Date.now()}-${fileName}.${fileExt}`;
+      
+      const { error } = await supabase.storage
+        .from('registration-documents')
+        .upload(filePath, file);
+      
+      if (error) {
+        console.error('Upload error:', error);
+        return null;
+      }
+      
+      return filePath;
+    } catch (error) {
+      console.error('File upload failed:', error);
+      return null;
+    }
+  };
+
   const onSubmit = async (data: any) => {
-    const finalData = { ...formData, ...data, userType };
-    console.log('Registration data:', finalData);
-    // Here you would typically submit to your backend
-    navigate('/');
+    setIsSubmitting(true);
+    
+    try {
+      const finalData = { ...formData, ...data, userType };
+      
+      // Upload files if they exist
+      const uploadPromises: Promise<{key: string, path: string | null}>[] = [];
+      
+      if (finalData.nationalIdFront?.[0]) {
+        uploadPromises.push(
+          uploadFile(finalData.nationalIdFront[0], 'national-id-front')
+            .then(path => ({ key: 'national_id_front_path', path }))
+        );
+      }
+      
+      if (finalData.nationalIdBack?.[0]) {
+        uploadPromises.push(
+          uploadFile(finalData.nationalIdBack[0], 'national-id-back')
+            .then(path => ({ key: 'national_id_back_path', path }))
+        );
+      }
+      
+      if (finalData.studentCard?.[0]) {
+        uploadPromises.push(
+          uploadFile(finalData.studentCard[0], 'student-card')
+            .then(path => ({ key: 'student_card_path', path }))
+        );
+      }
+      
+      if (finalData.teachingQualification?.[0]) {
+        uploadPromises.push(
+          uploadFile(finalData.teachingQualification[0], 'teaching-qualification')
+            .then(path => ({ key: 'teaching_qualification_path', path }))
+        );
+      }
+      
+      const uploadResults = await Promise.all(uploadPromises);
+      
+      // Prepare registration data
+      const registrationData: any = {
+        email: finalData.email,
+        phone: finalData.phone,
+        full_name: finalData.fullName,
+        date_of_birth: finalData.dateOfBirth,
+        gender: finalData.gender,
+        wilaya: finalData.wilaya,
+        address: finalData.address || null,
+        nin: finalData.nin,
+        user_type: finalData.userType,
+      };
+      
+      // Add user-type specific fields
+      if (userType === 'student') {
+        registrationData.education_level = finalData.educationLevel;
+        registrationData.institution_name = finalData.institutionName;
+      } else {
+        registrationData.highest_degree = finalData.highestDegree;
+        registrationData.institution_affiliation = finalData.institutionAffiliation;
+        registrationData.bio = finalData.bio;
+        registrationData.linkedin = finalData.linkedIn || null;
+        registrationData.website = finalData.website || null;
+      }
+      
+      // Add file paths
+      uploadResults.forEach(result => {
+        if (result.path) {
+          registrationData[result.key] = result.path;
+        }
+      });
+      
+      // Submit to database
+      const { error } = await supabase
+        .from('user_registrations')
+        .insert([registrationData]);
+      
+      if (error) {
+        throw error;
+      }
+      
+      toast({
+        title: "Inscription réussie!",
+        description: "Votre demande d'inscription a été soumise avec succès.",
+      });
+      
+      navigate('/');
+      
+    } catch (error: any) {
+      console.error('Registration error:', error);
+      toast({
+        variant: "destructive",
+        title: "Erreur d'inscription",
+        description: error.message || "Une erreur est survenue lors de l'inscription.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const FileUpload = ({ label, accept = "image/*,.pdf", ...props }: any) => (
     <div className="space-y-2">
       <Label className="text-sm font-medium">{label}</Label>
-      <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-4 text-center hover:border-muted-foreground/40 transition-colors cursor-pointer group">
+      <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-4 text-center hover:border-muted-foreground/40 transition-colors cursor-pointer group relative">
         <Upload className="mx-auto h-6 w-6 text-muted-foreground mb-2 group-hover:text-primary transition-colors" />
-        <Input type="file" accept={accept} className="hidden" {...props} />
+        <input 
+          type="file" 
+          accept={accept} 
+          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
+          {...props} 
+        />
         <p className="text-sm text-muted-foreground">Télécharger un fichier</p>
         <p className="text-xs text-muted-foreground/70 mt-1">PDF, JPG, PNG (max 5MB)</p>
       </div>
@@ -292,7 +419,11 @@ const Register = () => {
                 <FormItem>
                   <FormLabel>Numéro d'identification nationale (NIN)</FormLabel>
                   <FormControl>
-                    <Input placeholder="رقم التعريف الوطني" {...field} />
+                    <Input 
+                      placeholder="18 chiffres (ex: 123456789012345678)" 
+                      maxLength={18}
+                      {...field} 
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -626,8 +757,13 @@ const Register = () => {
                         Retour
                       </Button>
 
-                      <Button type="submit" className="w-32">
-                        {currentStep === maxSteps ? (
+                      <Button type="submit" className="w-32" disabled={isSubmitting}>
+                        {isSubmitting ? (
+                          <>
+                            <div className="w-4 h-4 mr-2 animate-spin rounded-full border-2 border-background border-t-transparent" />
+                            Envoi...
+                          </>
+                        ) : currentStep === maxSteps ? (
                           <>
                             <CheckCircle className="w-4 h-4 mr-2" />
                             Créer
