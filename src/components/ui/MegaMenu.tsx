@@ -14,11 +14,33 @@ export function MegaMenu({ padding = "md", children }: MegaMenuProps) {
   const [open, setOpen] = React.useState(false);
   const [mounted, setMounted] = React.useState(true);
   const loading = false; // Mock loading state
+  const timeoutRef = React.useRef<NodeJS.Timeout>();
 
   // Ensure `mounted` is set to `false` after the component is mounted
   React.useEffect(() => {
     const timer = setTimeout(() => setMounted(false), 3000); // Adjust the delay as needed
     return () => clearTimeout(timer); // Cleanup the timer
+  }, []);
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setOpen(false);
+    }, 150); // Small delay to allow moving to content
+  };
+
+  React.useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
   }, []);
 
   return (
@@ -40,6 +62,9 @@ export function MegaMenu({ padding = "md", children }: MegaMenuProps) {
               "flex items-center gap-1 px-4 py-2 mr-5 border rounded-md shadow-2xs transition",
               "bg-background border-border text-foreground hover:bg-accent"
             )}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onClick={() => setOpen(!open)}
           >
             Explore
             <ChevronDown className="w-4 h-4" />
@@ -61,6 +86,8 @@ export function MegaMenu({ padding = "md", children }: MegaMenuProps) {
                   ? "p-8"
                   : padding,
           )}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <div className="mx-auto grid grid-cols-4 gap-6 max-w-7xl">
             {children}
