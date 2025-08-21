@@ -512,22 +512,22 @@ const Register = () => {
           <div className="flex min-h-[600px]">
             {/* Left Column - E-learning Background with OAuth */}
             <div 
-              className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-cover bg-center bg-no-repeat"
+              className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-contain bg-center bg-no-repeat"
               style={{
                 backgroundImage: `url('/lovable-uploads/33036365-2096-4b71-813a-f70b9459d29d.png')`
               }}
             >
               {/* Overlay for better contrast */}
-              <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-black/30"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20"></div>
               
-              <div className="relative z-10 flex flex-col justify-end items-center px-12 py-16">
-                {/* OAuth buttons at the bottom center */}
-                <div className="flex flex-col space-y-3 w-full max-w-sm">
+              <div className="relative z-10 flex flex-col justify-end w-full p-8">
+                {/* OAuth buttons at the bottom - full width */}
+                <div className="flex flex-col space-y-4 w-full">
                   {/* Google OAuth Button */}
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full flex items-center justify-center gap-3 h-12 bg-background/95 hover:bg-background border-2 shadow-sm backdrop-blur-sm"
+                    className="w-full flex items-center justify-center gap-3 h-14 bg-background/95 hover:bg-background border-2 shadow-lg backdrop-blur-sm"
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24">
                       <path
@@ -554,7 +554,7 @@ const Register = () => {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full flex items-center justify-center gap-3 h-12 bg-background/95 hover:bg-background border-2 shadow-sm backdrop-blur-sm"
+                    className="w-full flex items-center justify-center gap-3 h-14 bg-background/95 hover:bg-background border-2 shadow-lg backdrop-blur-sm"
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24">
                       <path fill="#f25022" d="M0 0h11v11H0z"/>
