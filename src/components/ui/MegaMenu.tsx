@@ -45,7 +45,7 @@ function MegaMenuRoot({ children }: MegaMenuProps) {
       
       {isOpen && (
         <div
-          className="absolute top-full left-0 z-50 mt-2 bg-background border border-border rounded-lg shadow-lg p-6 grid grid-cols-4 gap-6 w-[800px]"
+          className="absolute top-full left-0 z-50 mt-2 bg-gray-900 border border-gray-800 rounded-lg shadow-2xl p-8 grid grid-cols-4 gap-8 w-[900px]"
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={() => setIsOpen(false)}
         >
@@ -58,9 +58,9 @@ function MegaMenuRoot({ children }: MegaMenuProps) {
 
 function MegaMenuColumn({ title, children }: MegaMenuColumnProps) {
   return (
-    <div className="space-y-3">
-      <h3 className="font-semibold text-sm text-foreground">{title}</h3>
-      <div className="space-y-2">
+    <div className="space-y-4">
+      <h3 className="font-semibold text-base text-white">{title}</h3>
+      <div className="space-y-3">
         {children}
       </div>
     </div>
@@ -71,8 +71,8 @@ function MegaMenuItem({ label, href, highlight }: MegaMenuItemProps) {
   return (
     <Link
       to={href}
-      className={`block text-sm transition-colors hover:text-primary ${
-        highlight ? "text-primary font-medium" : "text-muted-foreground"
+      className={`block text-sm transition-colors hover:text-blue-400 ${
+        highlight ? "text-blue-400 font-medium" : "text-gray-300"
       }`}
     >
       {label}
@@ -82,11 +82,11 @@ function MegaMenuItem({ label, href, highlight }: MegaMenuItemProps) {
 
 function MegaMenuCTA({ image, title, description, buttonText, buttonLink }: MegaMenuCTAProps) {
   return (
-    <div className="bg-muted rounded-lg p-4 space-y-3">
-      <img src={image} alt={title} className="w-full h-24 object-cover rounded" />
-      <h4 className="font-semibold text-sm">{title}</h4>
-      <p className="text-xs text-muted-foreground">{description}</p>
-      <Button size="sm" className="w-full">
+    <div className="bg-gray-800 rounded-lg p-6 space-y-4">
+      <img src={image} alt={title} className="w-full h-32 object-cover rounded-lg" />
+      <h4 className="font-semibold text-lg text-white">{title}</h4>
+      <p className="text-sm text-gray-300 leading-relaxed">{description}</p>
+      <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium">
         <Link to={buttonLink}>{buttonText}</Link>
       </Button>
     </div>
