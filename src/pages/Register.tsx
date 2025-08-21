@@ -745,7 +745,7 @@ const Register = () => {
                 {/* Footer */}
                 <div className="text-center text-sm text-muted-foreground">
                   Déjà inscrit?{' '}
-                  <button onClick={() => navigate('/')} className="text-primary hover:underline font-medium">
+                  <button onClick={() => navigate('/?login=true')} className="text-primary hover:underline font-medium">
                     Se connecter
                   </button>
                 </div>

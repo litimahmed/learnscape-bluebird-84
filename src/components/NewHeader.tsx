@@ -22,6 +22,19 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+  // Listen for custom event to open login modal
+  React.useEffect(() => {
+    const handleOpenLoginModal = () => {
+      openModal();
+    };
+
+    window.addEventListener('openLoginModal', handleOpenLoginModal);
+    
+    return () => {
+      window.removeEventListener('openLoginModal', handleOpenLoginModal);
+    };
+  }, []);
+
   return (
     <div className="w-full sticky top-0 z-50 bg-background border-b border-border">
       {/* Top Header Bar */}
