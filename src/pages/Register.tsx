@@ -646,13 +646,17 @@ const Register = () => {
               <img
                 src="/lovable-uploads/33036365-2096-4b71-813a-f70b9459d29d.png"
                 alt="E-learning Illustration"
-                className="absolute inset-0 w-full h-full object-cover transform-none"
-                style={{ objectPosition: "20%", transform: "none" }}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ 
+                  objectPosition: "20%",
+                  transform: "none !important",
+                  transition: "none !important"
+                }}
               />
               {/* Overlay for better contrast */}
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20"></div>
               
-              <div className="relative z-10 flex flex-col justify-end w-full p-8">
+              <div className="absolute bottom-0 left-0 right-0 z-10 flex flex-col justify-end w-full p-8">
                 {/* OAuth buttons at the bottom - full width */}
                 <div className="flex flex-col space-y-4 w-full">
                   {/* Google OAuth Button */}
