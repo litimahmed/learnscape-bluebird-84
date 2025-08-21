@@ -3,12 +3,13 @@ import * as Toggle from "@radix-ui/react-toggle";
 import { cn } from "@/lib/utils";
 import {
   SiGoogle,
-  SiCoursera,
-  SiUdemy,
-  SiVoidlinux,
-  SiLinuxfoundation,
-  SiRockylinux,
-  SiArtixlinux,
+  SiApple,
+  SiAmazon,
+  SiMeta,
+  SiNetflix,
+  SiSpotify,
+  SiAdobe,
+  SiTesla,
 } from "react-icons/si";
 import { useTheme } from "next-themes";
 
@@ -67,48 +68,51 @@ export default function Brands() {
         {/* Placeholder brand icons */}
         <div className="flex flex-wrap justify-center items-center gap-14 text-center">
           <div className="flex flex-col items-center">
-            <SiGoogle color={isDark ? "#D1D5DB" : "#4B5563"} size={40} />
+            <SiGoogle color="#4285F4" size={40} />
             <span className="text-sm mt-2 text-muted-foreground">
               Google
             </span>
           </div>
           <div className="flex flex-col items-center">
-            <SiCoursera color={isDark ? "#D1D5DB" : "#4B5563"} size={40} />
+            <SiApple color={isDark ? "#FFFFFF" : "#000000"} size={40} />
             <span className="text-sm mt-2 text-muted-foreground">
-              Coursera
+              Apple
             </span>
           </div>
           <div className="flex flex-col items-center">
-            <SiUdemy color={isDark ? "#D1D5DB" : "#4B5563"} size={40} />
+            <SiAmazon color="#FF9900" size={40} />
             <span className="text-sm mt-2 text-muted-foreground">
-              Udemy
+              Amazon
             </span>
           </div>
           <div className="flex flex-col items-center">
-            <SiVoidlinux color={isDark ? "#D1D5DB" : "#4B5563"} size={40} />
+            <SiMeta color="#0866FF" size={40} />
             <span className="text-sm mt-2 text-muted-foreground">
-              Void Linux
+              Meta
             </span>
           </div>
           <div className="flex flex-col items-center">
-            <SiLinuxfoundation
-              color={isDark ? "#D1D5DB" : "#4B5563"}
-              size={40}
-            />
+            <SiNetflix color="#E50914" size={40} />
             <span className="text-sm mt-2 text-muted-foreground">
-              Linux Foundation
+              Netflix
             </span>
           </div>
           <div className="flex flex-col items-center">
-            <SiRockylinux color={isDark ? "#D1D5DB" : "#4B5563"} size={40} />
+            <SiSpotify color="#1DB954" size={40} />
             <span className="text-sm mt-2 text-muted-foreground">
-              Rocky Linux
+              Spotify
             </span>
           </div>
           <div className="flex flex-col items-center">
-            <SiArtixlinux color={isDark ? "#D1D5DB" : "#4B5563"} size={40} />
+            <SiAdobe color="#FF0000" size={40} />
             <span className="text-sm mt-2 text-muted-foreground">
-              Artix Linux
+              Adobe
+            </span>
+          </div>
+          <div className="flex flex-col items-center">
+            <SiTesla color={isDark ? "#FFFFFF" : "#CC0000"} size={40} />
+            <span className="text-sm mt-2 text-muted-foreground">
+              Tesla
             </span>
           </div>
         </div>
