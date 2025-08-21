@@ -259,13 +259,33 @@ const Register = () => {
     if (!pendingRegistrationData) return;
     setIsSubmitting(true);
     try {
-      // Submit to database after OTP verification
-      const {
-        error
-      } = await supabase.from('user_registrations').insert([pendingRegistrationData]);
+      // Check if user already exists and update or insert accordingly
+      const { data: existingUser, error: selectError } = await supabase
+        .from('user_registrations')
+        .select('email')
+        .eq('email', pendingRegistrationData.email)
+        .maybeSingle();
+
+      let error;
+      if (existingUser) {
+        // Update existing registration
+        const { error: updateError } = await supabase
+          .from('user_registrations')
+          .update({ ...pendingRegistrationData, status: 'pending' })
+          .eq('email', pendingRegistrationData.email);
+        error = updateError;
+      } else {
+        // Insert new registration
+        const { error: insertError } = await supabase
+          .from('user_registrations')
+          .insert([pendingRegistrationData]);
+        error = insertError;
+      }
+
       if (error) {
         throw error;
       }
+
       toast({
         title: "Inscription réussie!",
         description: "Votre demande d'inscription a été soumise avec succès."

@@ -5,6 +5,7 @@ import { OtpInput } from './OtpInput';
 import { Shield, Mail, RotateCcw, CheckCircle2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 interface OtpVerificationProps {
   email: string;
@@ -19,7 +20,25 @@ export const OtpVerification = ({ email, onVerified, onResend, loading = false }
   const [isResending, setIsResending] = useState(false);
   const [countdown, setCountdown] = useState(60);
   const [canResend, setCanResend] = useState(false);
+  const [isDark, setIsDark] = useState(false);
   const { toast } = useToast();
+
+  // Load theme on component mount
+  useEffect(() => {
+    const saved = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const shouldBeDark = saved === "dark" || (!saved && prefersDark);
+    
+    setIsDark(shouldBeDark);
+    document.documentElement.classList.toggle("dark", shouldBeDark);
+  }, []);
+
+  const toggleTheme = () => {
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
+    document.documentElement.classList.toggle("dark", newIsDark);
+    localStorage.setItem("theme", newIsDark ? "dark" : "light");
+  };
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -79,10 +98,11 @@ export const OtpVerification = ({ email, onVerified, onResend, loading = false }
     setIsResending(true);
     
     try {
-      const { error } = await supabase.auth.signInWithOtp({
-        email,
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email: email,
         options: {
-          emailRedirectTo: `${window.location.origin}/`,
+          emailRedirectTo: `${window.location.origin}/`
         }
       });
 
@@ -121,8 +141,15 @@ export const OtpVerification = ({ email, onVerified, onResend, loading = false }
   const maskedEmail = email.replace(/(.{2})(.*)(@.*)/, '$1***$3');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-secondary/10 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md shadow-xl border-0 bg-white/95 backdrop-blur-sm">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10 flex items-center justify-center p-4">
+      {/* Theme Toggle - Fixed Position */}
+      <div className="fixed top-4 right-4 z-50">
+        <div className="bg-card/80 backdrop-blur-sm border rounded-lg p-1">
+          <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
+        </div>
+      </div>
+
+      <Card className="w-full max-w-md shadow-xl border bg-card/95 backdrop-blur-sm">
         <CardHeader className="text-center pb-2">
           <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
             <Shield className="w-8 h-8 text-primary" />
