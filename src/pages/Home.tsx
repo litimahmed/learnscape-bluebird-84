@@ -4,6 +4,7 @@ import Objectifs from "@/components/Objectifs";
 import SmartSearchFilter from "@/components/SmartSearchFilter";
 import Testimonials from "@/components/Testimonials";
 import AppMobile from "@/components/AppMobile";
+import NewsLetter from "@/components/NewsLetter";
 
 const Home = () => {
   return (
@@ -25,6 +26,9 @@ const Home = () => {
       
       {/* App Mobile Section */}
       <AppMobile />
+      
+      {/* Newsletter Section */}
+      <NewsLetter />
     </div>
   );
 };
