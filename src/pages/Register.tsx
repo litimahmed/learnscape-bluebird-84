@@ -510,30 +510,24 @@ const Register = () => {
       <div className="w-full max-w-6xl mx-auto">
         <div className="bg-card rounded-2xl shadow-2xl overflow-hidden border">
           <div className="flex min-h-[600px]">
-            {/* Left Column - E-learning Illustration with OAuth */}
-            <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary/10 via-background to-muted/5 relative overflow-hidden">
-              {/* Background Pattern */}
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-20 left-20 w-32 h-32 rounded-full bg-primary/20"></div>
-                <div className="absolute bottom-40 right-20 w-24 h-24 rounded-full bg-primary/15"></div>
-                <div className="absolute top-1/2 left-10 w-16 h-16 rounded-full bg-primary/10"></div>
-              </div>
+            {/* Left Column - E-learning Background with OAuth */}
+            <div 
+              className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url('/lovable-uploads/33036365-2096-4b71-813a-f70b9459d29d.png')`
+              }}
+            >
+              {/* Overlay for better contrast */}
+              <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-black/30"></div>
               
-              <div className="relative z-10 flex flex-col justify-center items-center px-12 py-16 space-y-8">
-                {/* E-learning illustration */}
-                <img 
-                  src="/lovable-uploads/33036365-2096-4b71-813a-f70b9459d29d.png" 
-                  alt="E-learning illustration" 
-                  className="w-full max-w-lg h-auto rounded-2xl shadow-lg"
-                />
-                
+              <div className="relative z-10 flex flex-col justify-end items-center px-12 py-16">
                 {/* OAuth buttons at the bottom center */}
                 <div className="flex flex-col space-y-3 w-full max-w-sm">
                   {/* Google OAuth Button */}
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full flex items-center justify-center gap-3 h-12 bg-background/95 hover:bg-background border-2 shadow-sm"
+                    className="w-full flex items-center justify-center gap-3 h-12 bg-background/95 hover:bg-background border-2 shadow-sm backdrop-blur-sm"
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24">
                       <path
@@ -560,7 +554,7 @@ const Register = () => {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full flex items-center justify-center gap-3 h-12 bg-background/95 hover:bg-background border-2 shadow-sm"
+                    className="w-full flex items-center justify-center gap-3 h-12 bg-background/95 hover:bg-background border-2 shadow-sm backdrop-blur-sm"
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24">
                       <path fill="#f25022" d="M0 0h11v11H0z"/>
