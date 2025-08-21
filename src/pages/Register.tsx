@@ -512,7 +512,7 @@ const Register = () => {
           <div className="flex min-h-[600px]">
             {/* Left Column - E-learning Background with OAuth */}
             <div 
-              className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-contain bg-center bg-no-repeat"
+              className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-cover bg-center bg-no-repeat"
               style={{
                 backgroundImage: `url('/lovable-uploads/33036365-2096-4b71-813a-f70b9459d29d.png')`
               }}
