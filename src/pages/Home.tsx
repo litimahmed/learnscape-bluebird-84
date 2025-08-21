@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import Brands from "@/components/Brands";
+import Objectifs from "@/components/Objectifs";
 
 const Home = () => {
   return (
@@ -9,6 +10,9 @@ const Home = () => {
       
       {/* Brands Section */}
       <Brands />
+      
+      {/* Objectifs Section */}
+      <Objectifs />
     </div>
   );
 };
