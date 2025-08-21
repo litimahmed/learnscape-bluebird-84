@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { OtpVerification } from '@/components/ui/OtpVerification';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 // Algeria-specific validation patterns
 const ALGERIA_PHONE_REGEX = /^\+213[0-9]{9}$/;
@@ -79,10 +80,18 @@ const Register = () => {
   const [uploadedFiles, setUploadedFiles] = useState<Record<string, File>>({});
   const [showOtpVerification, setShowOtpVerification] = useState(false);
   const [pendingRegistrationData, setPendingRegistrationData] = useState<any>(null);
+  const [isDark, setIsDark] = useState(false);
   const maxSteps = userType === 'student' ? 5 : 6;
 
-  // Load uploaded files from localStorage on component mount
+  // Load theme and uploaded files on component mount
   useEffect(() => {
+    const saved = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const shouldBeDark = saved === "dark" || (!saved && prefersDark);
+    
+    setIsDark(shouldBeDark);
+    document.documentElement.classList.toggle("dark", shouldBeDark);
+
     const savedFiles = localStorage.getItem('registration-uploaded-files');
     if (savedFiles) {
       try {
@@ -93,6 +102,13 @@ const Register = () => {
       }
     }
   }, []);
+
+  const toggleTheme = () => {
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
+    document.documentElement.classList.toggle("dark", newIsDark);
+    localStorage.setItem("theme", newIsDark ? "dark" : "light");
+  };
 
   // Save uploaded files to localStorage whenever uploadedFiles changes
   useEffect(() => {
@@ -643,6 +659,13 @@ const Register = () => {
     return <OtpVerification email={pendingRegistrationData.email} onVerified={handleOtpVerified} loading={isSubmitting} />;
   }
   return <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10 flex items-center justify-center p-4">
+      {/* Theme Toggle - Fixed Position */}
+      <div className="fixed top-4 right-4 z-50">
+        <div className="bg-card/80 backdrop-blur-sm border rounded-lg p-1">
+          <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
+        </div>
+      </div>
+
       <div className="w-full max-w-6xl mx-auto">
         <div className="bg-card rounded-2xl shadow-2xl overflow-hidden border">
           <div className="flex h-[700px]">
