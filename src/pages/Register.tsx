@@ -239,22 +239,92 @@ const Register = () => {
     }
   };
 
-  const FileUpload = ({ label, accept = "image/*,.pdf", ...props }: any) => (
-    <div className="space-y-2">
-      <Label className="text-sm font-medium">{label}</Label>
-      <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-4 text-center hover:border-muted-foreground/40 transition-colors cursor-pointer group relative">
-        <Upload className="mx-auto h-6 w-6 text-muted-foreground mb-2 group-hover:text-primary transition-colors" />
-        <input 
-          type="file" 
-          accept={accept} 
-          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
-          {...props} 
-        />
-        <p className="text-sm text-muted-foreground">Télécharger un fichier</p>
-        <p className="text-xs text-muted-foreground/70 mt-1">PDF, JPG, PNG (max 5MB)</p>
+  const FileUpload = ({ label, accept = "image/*,.pdf", field, onChange }: any) => {
+    const [uploadProgress, setUploadProgress] = useState<number | null>(null);
+    const [uploadStatus, setUploadStatus] = useState<'idle' | 'uploading' | 'success' | 'error'>('idle');
+    
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      
+      setUploadStatus('uploading');
+      setUploadProgress(0);
+      
+      // Simulate progress
+      const progressInterval = setInterval(() => {
+        setUploadProgress(prev => {
+          if (prev === null || prev >= 90) return prev;
+          return prev + Math.random() * 20;
+        });
+      }, 100);
+      
+      try {
+        // Pass the FileList to the form
+        onChange(e.target.files);
+        
+        // Complete progress
+        setTimeout(() => {
+          setUploadProgress(100);
+          setUploadStatus('success');
+          clearInterval(progressInterval);
+          
+          // Reset after 2 seconds
+          setTimeout(() => {
+            setUploadProgress(null);
+            setUploadStatus('idle');
+          }, 2000);
+        }, 500);
+        
+      } catch (error) {
+        setUploadStatus('error');
+        clearInterval(progressInterval);
+        setUploadProgress(null);
+      }
+    };
+
+    return (
+      <div className="space-y-2">
+        <Label className="text-sm font-medium">{label}</Label>
+        <div className={`border-2 border-dashed rounded-lg p-4 text-center transition-colors cursor-pointer group relative ${
+          uploadStatus === 'success' ? 'border-green-500 bg-green-50' :
+          uploadStatus === 'error' ? 'border-red-500 bg-red-50' :
+          'border-muted-foreground/25 hover:border-muted-foreground/40'
+        }`}>
+          {uploadStatus === 'uploading' ? (
+            <>
+              <div className="w-6 h-6 mx-auto mb-2 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
+              <p className="text-sm text-primary">Téléchargement...</p>
+              {uploadProgress !== null && (
+                <div className="w-full bg-muted rounded-full h-2 mt-2">
+                  <div 
+                    className="bg-primary h-2 rounded-full transition-all duration-300"
+                    style={{ width: `${uploadProgress}%` }}
+                  ></div>
+                </div>
+              )}
+            </>
+          ) : uploadStatus === 'success' ? (
+            <>
+              <CheckCircle className="mx-auto h-6 w-6 text-green-600 mb-2" />
+              <p className="text-sm text-green-600">Fichier téléchargé avec succès</p>
+            </>
+          ) : (
+            <>
+              <Upload className="mx-auto h-6 w-6 text-muted-foreground mb-2 group-hover:text-primary transition-colors" />
+              <input 
+                type="file" 
+                accept={accept} 
+                onChange={handleFileChange}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
+              />
+              <p className="text-sm text-muted-foreground">Télécharger un fichier</p>
+              <p className="text-xs text-muted-foreground/70 mt-1">PDF, JPG, PNG (max 5MB)</p>
+            </>
+          )}
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const renderStepContent = () => {
     switch (currentStep) {
@@ -429,13 +499,33 @@ const Register = () => {
                 </FormItem>
               )}
             />
-            <FileUpload
-              label="Carte d'identité nationale (recto)"
-              {...form.register('nationalIdFront')}
+            <FormField
+              control={form.control}
+              name="nationalIdFront"
+              render={({ field }) => (
+                <FormItem>
+                  <FileUpload
+                    label="Carte d'identité nationale (recto)"
+                    field={field}
+                    onChange={field.onChange}
+                  />
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-            <FileUpload
-              label="Carte d'identité nationale (verso)"
-              {...form.register('nationalIdBack')}
+            <FormField
+              control={form.control}
+              name="nationalIdBack"
+              render={({ field }) => (
+                <FormItem>
+                  <FileUpload
+                    label="Carte d'identité nationale (verso)"
+                    field={field}
+                    onChange={field.onChange}
+                  />
+                  <FormMessage />
+                </FormItem>
+              )}
             />
           </div>
         );
@@ -479,9 +569,19 @@ const Register = () => {
                   </FormItem>
                 )}
               />
-              <FileUpload
-                label="Carte d'étudiant ou certificat de scolarité"
-                {...form.register('studentCard')}
+              <FormField
+                control={form.control}
+                name="studentCard"
+                render={({ field }) => (
+                  <FormItem>
+                    <FileUpload
+                      label="Carte d'étudiant ou certificat de scolarité"
+                      field={field}
+                      onChange={field.onChange}
+                    />
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
             </div>
           );
@@ -523,10 +623,20 @@ const Register = () => {
                   </FormItem>
                 )}
               />
-              <FileUpload
-                label="Preuve de qualification d'enseignement (Diplôme/Attestation/CV)"
-                accept="image/*,.pdf"
-                {...form.register('teachingQualification')}
+              <FormField
+                control={form.control}
+                name="teachingQualification"
+                render={({ field }) => (
+                  <FormItem>
+                    <FileUpload
+                      label="Preuve de qualification d'enseignement (Diplôme/Attestation/CV)"
+                      accept="image/*,.pdf"
+                      field={field}
+                      onChange={field.onChange}
+                    />
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
             </div>
           );
