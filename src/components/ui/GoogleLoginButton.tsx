@@ -23,8 +23,8 @@ export default function GoogleLoginButton() {
   return (
     <Button
       type="button"
-      variant="outline"
-      className="w-full flex items-center justify-center gap-3 py-3 border-2 border-gray-200 hover:border-primary hover:bg-primary/5"
+      variant="secondary"
+      className="w-full flex items-center justify-center gap-3 py-3 bg-muted hover:bg-muted/80 border-none"
       onClick={handleGoogleLogin}
       disabled={isLoading}
     >

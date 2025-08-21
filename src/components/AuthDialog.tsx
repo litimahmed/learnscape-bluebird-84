@@ -117,275 +117,136 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
     >
       {/* Left Side - Login Form */}
       <motion.div
-        className={`px-8 pt-7 max-w-lg w-full mx-auto ${
-          isDark ? "bg-zinc-800 text-white" : "bg-white"
-        }`}
+        className="px-8 py-8 max-w-md w-full mx-auto"
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <motion.div
-          className="max-w-2xl mx-auto text-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15, duration: 0.6 }}
-        >
-          <p
-            className={`text-sm font-semibold mb-2 uppercase tracking-wider border px-3 py-1 inline-block rounded-md ${
-              isDark
-                ? "text-primary border-primary"
-                : "text-primary border-primary"
-            }`}
-          >
-            Edutech
-          </p>
-          <h3 className="text-2xl mb-5">
-            Login into your{" "}
-            <span className="text-primary font-medium">Account</span>
-          </h3>
-        </motion.div>
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-semibold text-foreground mb-2">Welcome back</h2>
+          <p className="text-muted-foreground">Sign in to your account</p>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-        >
+        <div className="mb-6">
           <GoogleLoginButton />
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="flex items-center justify-center mt-4 mb-2"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.45, duration: 0.6 }}
-        >
-          <div className={`h-px flex-1 ${isDark ? "bg-gray-500" : "bg-primary"}`} />
-          <span
-            className={`font-medium text-sm tracking-wide uppercase px-3 ${
-              isDark ? "text-gray-300" : "text-gray-600"
-            }`}
-          >
-            OR
-          </span>
-          <div className={`h-px flex-1 ${isDark ? "bg-gray-500" : "bg-primary"}`} />
-        </motion.div>
+        <div className="relative mb-6">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-border"></div>
+          </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="px-2 bg-background text-muted-foreground">or continue with</span>
+          </div>
+        </div>
 
-        <AnimatePresence>
-          {method && (
-            <motion.div
-              className={`flex items-center justify-between text-sm rounded-lg px-4 py-3 mb-2 ${
-                isDark
-                  ? "text-gray-300 bg-zinc-700"
-                  : "text-gray-700 bg-gray-100"
-              }`}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+        {method && (
+          <div className="flex items-center justify-between text-sm bg-muted rounded-md px-3 py-2 mb-4">
+            <span className="text-muted-foreground">
+              Using <strong>{method}</strong>
+            </span>
+            <button
+              className="text-primary hover:text-primary/80 font-medium"
+              onClick={handleResetForm}
             >
-              <span>
-                logging in with <strong>{method}</strong>.
-              </span>
-              <button
-                className="text-primary font-medium hover:underline"
-                onClick={handleResetForm}
-              >
-                Switch method
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              Switch
+            </button>
+          </div>
+        )}
 
-        <motion.form
-          className="space-y-4 mt-1"
-          initial="hidden"
-          animate="visible"
-          onSubmit={handleSubmit}
-        >
-          {/* Username */}
-          <motion.div 
-            className="grid"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-          >
-            <Label
-              className="font-medium text-primary"
-              htmlFor="username"
-            >
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div className="space-y-2">
+            <Label htmlFor="username" className="text-sm font-medium">
               Username
             </Label>
             <Input
               id="username"
               type="text"
-              name="username"
-              placeholder="sofia_ben123"
+              placeholder="Enter username"
               value={username}
               onChange={(e) => handleInputChange("username", e.target.value)}
-              className={`transition-all duration-300 border-primary focus:ring-1 focus:ring-primary ${
+              className={`${
                 method && method !== "username"
-                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                  : isDark
-                    ? "bg-zinc-700 text-white"
-                    : "bg-white"
-              } ${error?.field === "identifier" ? "border-red-500" : ""}`}
+                  ? "bg-muted/50 text-muted-foreground cursor-not-allowed"
+                  : ""
+              } ${error?.field === "identifier" ? "border-destructive" : ""}`}
               disabled={!!(method && method !== "username")}
             />
-          </motion.div>
+          </div>
 
-          {/* Email */}
-          <motion.div 
-            className="grid"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.75, duration: 0.6 }}
-          >
-            <Label
-              className="font-medium text-primary"
-              htmlFor="email"
-            >
+          <div className="space-y-2">
+            <Label htmlFor="email" className="text-sm font-medium">
               Email
             </Label>
             <Input
               id="email"
               type="email"
-              name="email"
-              placeholder="sofia.bensalah@email.com"
+              placeholder="Enter email"
               value={email}
-              className={`transition-all duration-300 border-primary focus:ring-1 focus:ring-primary ${
-                method && method !== "email"
-                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                  : isDark
-                    ? "bg-zinc-700 text-white"
-                    : "bg-white"
-              } ${error?.field === "identifier" ? "border-red-500" : ""}`}
               onChange={(e) => handleInputChange("email", e.target.value)}
+              className={`${
+                method && method !== "email"
+                  ? "bg-muted/50 text-muted-foreground cursor-not-allowed"
+                  : ""
+              } ${error?.field === "identifier" ? "border-destructive" : ""}`}
               disabled={!!(method && method !== "email")}
             />
-          </motion.div>
+          </div>
 
-          {/* Password */}
-          <motion.div 
-            className="grid"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.6 }}
-          >
-            <Label
-              className="font-medium text-primary"
-              htmlFor="password"
-            >
+          <div className="space-y-2">
+            <Label htmlFor="password" className="text-sm font-medium">
               Password
             </Label>
             <div className="relative">
               <Input
                 id="password"
                 type={showPassword ? "text" : "password"}
-                name="password"
-                placeholder="********"
+                placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className={`transition-all duration-300 border-primary focus:ring-1 focus:ring-primary ${
-                  isDark ? "bg-zinc-700 text-white" : ""
-                } ${error?.field === "password" ? "border-red-500" : ""}`}
+                className={error?.field === "password" ? "border-destructive" : ""}
                 required
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
               >
-                {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+                {showPassword ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
               </button>
             </div>
-          </motion.div>
+          </div>
 
-          {/* General Error Message */}
           {error?.field === "general" && (
-            <motion.div
-              className="text-red-500 text-sm text-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
+            <div className="text-destructive text-sm text-center p-3 bg-destructive/10 rounded-md">
               {error.message}
-            </motion.div>
+            </div>
           )}
 
-          {/* Submit */}
-          <motion.div 
-            className="relative"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.05, duration: 0.6 }}
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={
+              !method ||
+              (method === "username" && !username) ||
+              (method === "email" && !email) ||
+              !password ||
+              isLoading
+            }
           >
-            <Button
-              type="submit"
-              className={`w-full py-3 text-sm font-medium rounded-md transition-colors duration-200 ${
-                isLoading ? "opacity-75 cursor-not-allowed" : ""
-              }`}
-              disabled={
-                !method ||
-                (method === "username" && !username) ||
-                (method === "email" && !email) ||
-                !password ||
-                isLoading
-              }
-            >
-              {isLoading ? (
-                <motion.div
-                  className="flex items-center justify-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <svg
-                    className="animate-spin h-5 w-5 mr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8v8H4z"
-                    />
-                  </svg>
-                  Loading...
-                </motion.div>
-              ) : (
-                "Sign In"
-              )}
-            </Button>
-          </motion.div>
-        </motion.form>
+            {isLoading ? "Signing in..." : "Sign In"}
+          </Button>
+        </form>
 
-        <motion.p
-          className={`text-center mt-6 text-sm leading-relaxed ${
-            isDark ? "text-gray-400" : "text-gray-600"
-          }`}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-        >
+        <p className="text-center mt-6 text-sm text-muted-foreground">
           Don't have an account?{" "}
           <button
-            onClick={() => {
-              // Handle sign up navigation
-              console.log("Navigate to sign up");
-            }}
-            className="underline font-medium text-primary hover:text-primary/80"
+            onClick={() => console.log("Navigate to sign up")}
+            className="text-primary hover:text-primary/80 font-medium"
           >
-            Create one
+            Sign up
           </button>
-        </motion.p>
+        </p>
       </motion.div>
 
       {/* Right Side - Banner */}
