@@ -111,7 +111,11 @@ const carouselItems = [{
             Connect with peers, track your progress, and earn industry-recognized certificates.
           </p>
           <div className="flex w-full gap-4">
-            <Button size="lg" className="flex-2 cursor-pointer bg-primary hover:bg-primary/90 font-prose font-semibold">
+            <Button 
+              size="lg" 
+              className="flex-2 cursor-pointer bg-primary hover:bg-primary/90 font-prose font-semibold"
+              onClick={() => window.location.href = '/register'}
+            >
               Create your free account
             </Button>
             <Button variant="outline" size="lg" className="flex-1 cursor-pointer font-prose font-semibold">
