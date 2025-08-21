@@ -25,17 +25,19 @@ export default function AnimatedText({ staticText, words, interval = 3000 }: Ani
   return (
     <span className="text-white font-medium leading-relaxed">
       {staticText}{' '}
-      <span className="relative inline-block overflow-hidden">
+      <span className="relative inline-block">
         <span 
-          className={`inline-block font-bold text-yellow-200 transition-all duration-500 ease-out ${
+          className={`inline-block font-bold text-primary-soft transition-all duration-500 ease-out ${
             isSliding 
-              ? 'opacity-0 translate-y-4 scale-90' 
+              ? 'opacity-0 translate-y-1 scale-95' 
               : 'opacity-100 translate-y-0 scale-100'
           }`}
           style={{ 
-            minWidth: '140px', 
+            minWidth: `${Math.max(...words.map(word => word.length * 0.6))}em`,
             textAlign: 'left',
-            textShadow: '0 2px 4px rgba(0,0,0,0.3)'
+            textShadow: '0 2px 8px rgba(0,0,0,0.4)',
+            display: 'inline-block',
+            verticalAlign: 'baseline'
           }}
         >
           {words[currentWordIndex]}
