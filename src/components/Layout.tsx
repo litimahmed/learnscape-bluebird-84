@@ -27,7 +27,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen bg-background">
       <NewHeader isDark={isDark} toggleTheme={toggleTheme} />
-      <main className="pt-16">
+      <main>
         {children}
       </main>
     </div>

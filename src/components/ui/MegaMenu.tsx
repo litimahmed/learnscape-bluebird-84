@@ -38,8 +38,8 @@ export function MegaMenu({ padding = "md", children }: MegaMenuProps) {
         ) : (
           <button
             className={cn(
-              "flex items-center gap-1 px-4 py-2 mr-5 border rounded-md shadow-2xs transition",
-              "bg-background border-border text-foreground hover:bg-accent"
+              "flex items-center gap-1 px-4 py-2 mr-5 border rounded-md shadow-sm transition-colors",
+              "bg-background border-border text-foreground hover:bg-accent hover:text-accent-foreground"
             )}
           >
             Explore
@@ -51,9 +51,10 @@ export function MegaMenu({ padding = "md", children }: MegaMenuProps) {
       {/* Mega Menu Content */}
       <DropdownMenu.Portal>
         <DropdownMenu.Content
-          align="start"
+          align="center"
+          sideOffset={0}
           className={cn(
-            "top-full border shadow-md w-[80%] transition bg-gray-900 border-gray-700 text-white",
+            "border shadow-lg max-w-6xl w-[95vw] sm:w-[90vw] lg:w-[80vw] transition-all duration-200 z-50 bg-background border-border text-foreground",
             padding === "sm"
               ? "p-4"
               : padding === "md"
@@ -63,7 +64,7 @@ export function MegaMenu({ padding = "md", children }: MegaMenuProps) {
                   : padding,
           )}
         >
-          <div className="mx-auto grid grid-cols-4 gap-6 max-w-7xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {children}
           </div>
         </DropdownMenu.Content>
@@ -82,10 +83,10 @@ MegaMenu.Column = function Column({
 }) {
   return (
     <div>
-      <h3 className="font-semibold text-base mb-4 text-white">
+      <h3 className="font-semibold text-sm mb-4 text-foreground">
         {title}
       </h3>
-      <ul className="space-y-3">{children}</ul>
+      <ul className="space-y-2">{children}</ul>
     </div>
   );
 };
@@ -105,8 +106,8 @@ MegaMenu.Item = function Item({
       <a
         href={href}
         className={cn(
-          "text-sm transition text-gray-300 hover:text-blue-400",
-          highlight && "font-semibold text-blue-400",
+          "text-sm transition-colors text-muted-foreground hover:text-primary",
+          highlight && "font-semibold text-primary",
         )}
       >
         {label}
@@ -130,7 +131,7 @@ MegaMenu.CTA = function CTA({
   buttonLink: string;
 }) {
   return (
-    <div className="flex flex-col items-center text-center p-6 rounded-lg transition bg-gray-800 text-white">
+    <div className="flex flex-col items-center text-center p-6 rounded-lg transition-colors bg-accent border border-border">
       <img
         src={image}
         width={200}
@@ -138,13 +139,13 @@ MegaMenu.CTA = function CTA({
         alt={title}
         className="rounded-lg mb-4 w-full h-32 object-cover"
       />
-      <h4 className="text-lg font-semibold mb-2 text-white">{title}</h4>
-      <p className="text-sm mb-4 text-gray-300 leading-relaxed">
+      <h4 className="text-lg font-semibold mb-2 text-foreground">{title}</h4>
+      <p className="text-sm mb-4 text-muted-foreground leading-relaxed">
         {description}
       </p>
       <a
         href={buttonLink}
-        className="px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded-md hover:bg-blue-700 transition w-full"
+        className="px-4 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors w-full"
       >
         {buttonText}
       </a>
