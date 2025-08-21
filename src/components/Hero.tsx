@@ -179,7 +179,7 @@ const carouselItems = [{
           </div>
         </div>
         {/* Background Image */}
-        <div className="absolute w-[70%] max-w-none left-[-15%] top-1/2 -translate-y-1/2 overflow-hidden">
+        <div className="absolute w-[70%] max-w-none right-[-15%] top-1/2 -translate-y-1/2 overflow-hidden">
           <img src="/lovable-uploads/7b9d2247-6c4d-49a9-8e4b-1372bd527f76.png" alt="Learning Success" className="object-cover object-right scale-75 w-[900px] h-[600px]" loading="eager" fetchPriority="high" />
         </div>
       </div>
