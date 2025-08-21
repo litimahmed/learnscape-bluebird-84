@@ -39,7 +39,7 @@ export function MegaMenu({ padding = "md", children }: MegaMenuProps) {
           <button
             className={cn(
               "flex items-center gap-1 px-4 py-2 mr-5 border rounded-md shadow-2xs transition",
-              "bg-white border-zinc-300 text-zinc-800 hover:bg-zinc-100"
+              "bg-background border-border text-foreground hover:bg-accent"
             )}
           >
             Explore
@@ -53,7 +53,7 @@ export function MegaMenu({ padding = "md", children }: MegaMenuProps) {
         <DropdownMenu.Content
           align="start"
           className={cn(
-            "top-full border shadow-md w-screen transition bg-white border-zinc-200 text-zinc-800",
+            "top-full border shadow-md w-screen transition bg-gray-900 border-gray-700 text-white",
             padding === "sm"
               ? "p-4"
               : padding === "md"
@@ -82,10 +82,10 @@ MegaMenu.Column = function Column({
 }) {
   return (
     <div>
-      <h3 className="font-semibold text-sm mb-2 text-zinc-700">
+      <h3 className="font-semibold text-base mb-4 text-white">
         {title}
       </h3>
-      <ul className="space-y-1">{children}</ul>
+      <ul className="space-y-3">{children}</ul>
     </div>
   );
 };
@@ -105,8 +105,8 @@ MegaMenu.Item = function Item({
       <a
         href={href}
         className={cn(
-          "text-sm transition text-zinc-600 hover:text-blue-500",
-          highlight && "font-semibold text-blue-500",
+          "text-sm transition text-gray-300 hover:text-blue-400",
+          highlight && "font-semibold text-blue-400",
         )}
       >
         {label}
@@ -130,21 +130,21 @@ MegaMenu.CTA = function CTA({
   buttonLink: string;
 }) {
   return (
-    <div className="flex flex-col items-center text-center p-4 rounded-md transition bg-zinc-100 text-zinc-800">
+    <div className="flex flex-col items-center text-center p-6 rounded-lg transition bg-gray-800 text-white">
       <img
         src={image}
         width={200}
         height={120}
         alt={title}
-        className="rounded-md mb-3 w-full h-32 object-cover"
+        className="rounded-lg mb-4 w-full h-32 object-cover"
       />
-      <h4 className="text-md font-semibold mb-1">{title}</h4>
-      <p className="text-sm mb-3 text-zinc-600">
+      <h4 className="text-lg font-semibold mb-2 text-white">{title}</h4>
+      <p className="text-sm mb-4 text-gray-300 leading-relaxed">
         {description}
       </p>
       <a
         href={buttonLink}
-        className="px-4 py-2 text-sm font-medium bg-blue-500 text-white rounded-md hover:bg-blue-600 transition w-full"
+        className="px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded-md hover:bg-blue-700 transition w-full"
       >
         {buttonText}
       </a>
