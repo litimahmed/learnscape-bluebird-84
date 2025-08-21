@@ -710,7 +710,11 @@ const Register = () => {
                 </div>
 
                 {/* User Type Tabs */}
-                <Tabs value={userType} onValueChange={(value) => setUserType(value as 'student' | 'teacher')} className="w-full">
+                <Tabs value={userType} onValueChange={(value) => {
+                  setUserType(value as 'student' | 'teacher');
+                  setCurrentStep(1);
+                  form.reset();
+                }} className="w-full">
                   <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="student" className="flex items-center gap-2">
                       <User className="h-4 w-4" />
