@@ -3,6 +3,7 @@ import Brands from "@/components/Brands";
 import Objectifs from "@/components/Objectifs";
 import SmartSearchFilter from "@/components/SmartSearchFilter";
 import Testimonials from "@/components/Testimonials";
+import AppMobile from "@/components/AppMobile";
 
 const Home = () => {
   return (
@@ -21,6 +22,9 @@ const Home = () => {
       
       {/* Testimonials Section */}
       <Testimonials />
+      
+      {/* App Mobile Section */}
+      <AppMobile />
     </div>
   );
 };
