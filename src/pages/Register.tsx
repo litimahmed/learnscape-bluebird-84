@@ -506,150 +506,156 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex">
-      {/* Left Column - Brand & Info */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary via-primary/90 to-primary/80 relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-20 w-32 h-32 rounded-full bg-white/20"></div>
-          <div className="absolute bottom-40 right-20 w-24 h-24 rounded-full bg-white/15"></div>
-          <div className="absolute top-1/2 left-10 w-16 h-16 rounded-full bg-white/10"></div>
-        </div>
-        
-        <div className="relative z-10 flex flex-col justify-center px-16 py-20 text-white">
-          <div className="mb-12">
-            <BookOpen className="h-12 w-12 mb-6" />
-            <h1 className="text-4xl font-bold mb-4">Plateforme E-Learning</h1>
-            <p className="text-xl text-white/90 leading-relaxed">
-              Rejoignez des milliers d'apprenants et d'experts dans notre écosystème éducatif de pointe
-            </p>
-          </div>
-          
-          <div className="space-y-8">
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
-                <Award className="h-5 w-5" />
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10 flex items-center justify-center p-4">
+      <div className="w-full max-w-6xl mx-auto">
+        <div className="bg-card rounded-2xl shadow-2xl overflow-hidden border">
+          <div className="flex min-h-[600px]">
+            {/* Left Column - Brand & Info */}
+            <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary via-primary/90 to-primary/80 relative overflow-hidden">
+              {/* Background Pattern */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute top-20 left-20 w-32 h-32 rounded-full bg-white/20"></div>
+                <div className="absolute bottom-40 right-20 w-24 h-24 rounded-full bg-white/15"></div>
+                <div className="absolute top-1/2 left-10 w-16 h-16 rounded-full bg-white/10"></div>
               </div>
-              <div>
-                <h3 className="font-semibold mb-2">Certificats Reconnus</h3>
-                <p className="text-white/80 text-sm">Obtenez des certifications valorisées par les entreprises algériennes et internationales</p>
+              
+              <div className="relative z-10 flex flex-col justify-center px-12 py-16 text-white">
+                <div className="mb-8">
+                  <BookOpen className="h-10 w-10 mb-4" />
+                  <h1 className="text-3xl font-bold mb-3">Plateforme E-Learning</h1>
+                  <p className="text-lg text-white/90 leading-relaxed">
+                    Rejoignez des milliers d'apprenants et d'experts dans notre écosystème éducatif
+                  </p>
+                </div>
+                
+                <div className="space-y-6">
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+                      <Award className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-1">Certificats Reconnus</h3>
+                      <p className="text-white/80 text-sm">Certifications valorisées par les entreprises</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+                      <User className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-1">Experts Qualifiés</h3>
+                      <p className="text-white/80 text-sm">Professionnels expérimentés et enseignants</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+                      <Shield className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-1">Sécurisé & Conforme</h3>
+                      <p className="text-white/80 text-sm">Protection maximale de vos données</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-8 pt-6 border-t border-white/20">
+                  <div className="flex items-center justify-between text-sm text-white/70">
+                    <span>+10K Étudiants</span>
+                    <span>500+ Cours</span>
+                    <span>98% Satisfaction</span>
+                  </div>
+                </div>
               </div>
             </div>
-            
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
-                <User className="h-5 w-5" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-2">Experts Qualifiés</h3>
-                <p className="text-white/80 text-sm">Apprenez auprès de professionnels expérimentés et d'enseignants universitaires</p>
+
+            {/* Right Column - Registration Form */}
+            <div className="w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-12">
+              <div className="w-full max-w-md space-y-6">
+                {/* Header */}
+                <div className="text-center">
+                  <h2 className="text-2xl font-bold tracking-tight">Créer votre compte</h2>
+                  <p className="text-muted-foreground mt-2">Commencez votre parcours d'apprentissage</p>
+                </div>
+
+                {/* User Type Tabs */}
+                <Tabs value={userType} onValueChange={(value) => setUserType(value as 'student' | 'teacher')} className="w-full">
+                  <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="student" className="flex items-center gap-2">
+                      <User className="h-4 w-4" />
+                      Étudiant(e)
+                    </TabsTrigger>
+                    <TabsTrigger value="teacher" className="flex items-center gap-2">
+                      <GraduationCap className="h-4 w-4" />
+                      Enseignant(e)
+                    </TabsTrigger>
+                  </TabsList>
+                </Tabs>
+
+                {/* Progress Indicator */}
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-muted-foreground">
+                    Étape {currentStep} sur {maxSteps}
+                  </span>
+                  <div className="flex gap-1">
+                    {Array.from({ length: maxSteps }, (_, i) => (
+                      <div
+                        key={i}
+                        className={`h-2 w-6 rounded-full transition-colors ${
+                          i + 1 <= currentStep ? 'bg-primary' : 'bg-muted'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Form */}
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(currentStep === maxSteps ? onSubmit : onNext)} className="space-y-5">
+                    {renderStepContent()}
+
+                    <div className="flex justify-between pt-4">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={onBack}
+                        disabled={currentStep === 1}
+                        className="w-24"
+                      >
+                        <ChevronLeft className="w-4 h-4 mr-1" />
+                        Retour
+                      </Button>
+
+                      <Button type="submit" className="w-32">
+                        {currentStep === maxSteps ? (
+                          <>
+                            <CheckCircle className="w-4 h-4 mr-2" />
+                            Créer
+                          </>
+                        ) : (
+                          <>
+                            Suivant
+                            <ChevronRight className="w-4 h-4 ml-1" />
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                  </form>
+                </Form>
+
+                {/* Footer */}
+                <div className="text-center text-sm text-muted-foreground">
+                  Déjà inscrit?{' '}
+                  <button 
+                    onClick={() => navigate('/')} 
+                    className="text-primary hover:underline font-medium"
+                  >
+                    Se connecter
+                  </button>
+                </div>
               </div>
             </div>
-            
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
-                <Shield className="h-5 w-5" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-2">Sécurisé & Conforme</h3>
-                <p className="text-white/80 text-sm">Protection maximale de vos données selon les standards internationaux</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="mt-12 pt-8 border-t border-white/20">
-            <div className="flex items-center justify-between text-sm text-white/70">
-              <span>+10,000 Étudiants</span>
-              <span>500+ Cours</span>
-              <span>98% Satisfaction</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Right Column - Registration Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-background">
-        <div className="w-full max-w-md space-y-8">
-          {/* Header */}
-          <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight">Créer votre compte</h2>
-            <p className="text-muted-foreground mt-2">Commencez votre parcours d'apprentissage</p>
-          </div>
-
-          {/* User Type Tabs */}
-          <Tabs value={userType} onValueChange={(value) => setUserType(value as 'student' | 'teacher')} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-8">
-              <TabsTrigger value="student" className="flex items-center gap-2">
-                <User className="h-4 w-4" />
-                Étudiant(e)
-              </TabsTrigger>
-              <TabsTrigger value="teacher" className="flex items-center gap-2">
-                <GraduationCap className="h-4 w-4" />
-                Enseignant(e)
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
-
-          {/* Progress Indicator */}
-          <div className="flex items-center justify-between mb-6">
-            <span className="text-sm font-medium text-muted-foreground">
-              Étape {currentStep} sur {maxSteps}
-            </span>
-            <div className="flex gap-2">
-              {Array.from({ length: maxSteps }, (_, i) => (
-                <div
-                  key={i}
-                  className={`h-2 w-8 rounded-full transition-colors ${
-                    i + 1 <= currentStep ? 'bg-primary' : 'bg-muted'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Form */}
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(currentStep === maxSteps ? onSubmit : onNext)} className="space-y-6">
-              {renderStepContent()}
-
-              <div className="flex justify-between pt-6">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={onBack}
-                  disabled={currentStep === 1}
-                  className="w-24"
-                >
-                  <ChevronLeft className="w-4 h-4 mr-1" />
-                  Retour
-                </Button>
-
-                <Button type="submit" className="w-32">
-                  {currentStep === maxSteps ? (
-                    <>
-                      <CheckCircle className="w-4 h-4 mr-2" />
-                      Créer
-                    </>
-                  ) : (
-                    <>
-                      Suivant
-                      <ChevronRight className="w-4 h-4 ml-1" />
-                    </>
-                  )}
-                </Button>
-              </div>
-            </form>
-          </Form>
-
-          {/* Footer */}
-          <div className="text-center text-sm text-muted-foreground">
-            Déjà inscrit?{' '}
-            <button 
-              onClick={() => navigate('/')} 
-              className="text-primary hover:underline font-medium"
-            >
-              Se connecter
-            </button>
           </div>
         </div>
       </div>
