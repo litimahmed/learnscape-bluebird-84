@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAuth } from "@/hooks/useAuth";
 
 interface UserProfileDropdownProps {
   user?: {
@@ -21,9 +22,14 @@ interface UserProfileDropdownProps {
 }
 
 export default function UserProfileDropdown({ user }: UserProfileDropdownProps) {
+  const { signOut } = useAuth();
   const initials = user?.name
     ? user.name.split(' ').map(n => n[0]).join('').toUpperCase()
     : 'U';
+
+  const handleLogout = async () => {
+    await signOut();
+  };
 
   return (
     <DropdownMenu>
@@ -64,7 +70,7 @@ export default function UserProfileDropdown({ user }: UserProfileDropdownProps) 
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer">
+        <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>
         </DropdownMenuItem>
