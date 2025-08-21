@@ -102,7 +102,7 @@ const carouselItems = [{
           <img src="/lovable-uploads/b4d39c0d-e245-45f8-acc2-ca4ea2d4036e.png" alt="Learning Community" className="w-full h-full object-cover object-right" loading="eager" fetchPriority="high" />
         </div>
         <div className="flex flex-col gap-6 w-[50%]">
-          <h2 className="text-5xl font-display font-black leading-tight">
+          <h2 className="text-5xl font-hero font-black leading-tight">
             Join a Thriving Community of{" "}
             <span className="text-primary">Learners!</span>
           </h2>
@@ -132,7 +132,7 @@ const carouselItems = [{
         </div>
 
         <div className="flex flex-col gap-4 w-[50%]">
-          <h2 className="text-5xl font-display font-black leading-tight">
+          <h2 className="text-5xl font-hero font-black leading-tight">
             Online Learning <span className="text-primary">Programs!</span>
           </h2>
           <Separator className="bg-primary h-1 w-[40%]" />
@@ -164,7 +164,7 @@ const carouselItems = [{
 }, {
   layout: () => <div className="relative w-full flex flex-row-reverse items-center overflow-hidden">
         <div className="flex flex-col gap-4 w-[60%] z-10">
-          <h2 className="text-4xl font-display font-black leading-tight ml-24">
+          <h2 className="text-4xl font-hero font-black leading-tight ml-24">
             Advanced Learning{" "}
             <span className="text-primary">Methods!</span>
           </h2>
@@ -195,7 +195,7 @@ const carouselItems = [{
         </div>
 
         <div className="flex flex-col gap-4 w-[75%]">
-          <h2 className="text-5xl font-display font-black leading-tight w-[60%]">
+          <h2 className="text-5xl font-hero font-black leading-tight w-[60%]">
             Expert-Led <span className="text-primary">Education!</span>
           </h2>
           <Separator className="bg-primary h-1 w-[40%]" />

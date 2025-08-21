@@ -19,6 +19,7 @@ export default {
 		},
 		extend: {
 			fontFamily: {
+				'hero': ['Poppins', 'sans-serif'],
 				'display': ['Playfair Display', 'serif'],
 				'prose': ['Source Sans Pro', 'sans-serif'],
 				'heading': ['Manrope', 'sans-serif'],
