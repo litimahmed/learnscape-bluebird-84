@@ -24,7 +24,7 @@ const FlipCard = ({
   backButtonLink: string;
 }) => {
   const [isFlipped, setIsFlipped] = React.useState(false);
-  return <div className="relative w-full h-32 cursor-pointer" onMouseEnter={() => setIsFlipped(true)} onMouseLeave={() => setIsFlipped(false)}>
+  return <div className="relative w-full h-64 cursor-pointer" onMouseEnter={() => setIsFlipped(true)} onMouseLeave={() => setIsFlipped(false)}>
       <div className={`absolute inset-0 w-full h-full transition-transform duration-500 transform-style-preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}>
         {/* Front */}
         <Card className="absolute inset-0 w-full h-full p-4 flex flex-col items-center text-center backface-hidden">
