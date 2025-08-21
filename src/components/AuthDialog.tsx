@@ -108,10 +108,10 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
           </div>
 
           {/* Login Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-6">
             {/* Username Field */}
-            <div className="space-y-2">
-              <Label htmlFor="username" className="text-primary font-medium">
+            <div className="space-y-3">
+              <Label htmlFor="username" className="text-foreground font-medium">
                 Username
               </Label>
               <Input
@@ -125,8 +125,8 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
             </div>
 
             {/* Email Field */}
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-primary font-medium">
+            <div className="space-y-3">
+              <Label htmlFor="email" className="text-foreground font-medium">
                 Email
               </Label>
               <Input
@@ -140,8 +140,8 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
             </div>
 
             {/* Password Field */}
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-primary font-medium">
+            <div className="space-y-3">
+              <Label htmlFor="password" className="text-foreground font-medium">
                 Password
               </Label>
               <div className="relative">
