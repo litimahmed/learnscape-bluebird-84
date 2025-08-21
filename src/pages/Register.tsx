@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { ChevronLeft, ChevronRight, Upload, User, GraduationCap, BookOpen, Award, Shield, CheckCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Upload, User, GraduationCap, BookOpen, Award, Shield, CheckCircle, X, FileText } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -93,8 +93,29 @@ const Register = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState<Record<string, File>>({});
 
   const maxSteps = userType === 'student' ? 5 : 6;
+
+  // Load uploaded files from localStorage on component mount
+  useEffect(() => {
+    const savedFiles = localStorage.getItem('registration-uploaded-files');
+    if (savedFiles) {
+      try {
+        const parsed = JSON.parse(savedFiles);
+        setUploadedFiles(parsed);
+      } catch (error) {
+        console.error('Failed to parse saved files:', error);
+      }
+    }
+  }, []);
+
+  // Save uploaded files to localStorage whenever uploadedFiles changes
+  useEffect(() => {
+    if (Object.keys(uploadedFiles).length > 0) {
+      localStorage.setItem('registration-uploaded-files', JSON.stringify(uploadedFiles));
+    }
+  }, [uploadedFiles]);
 
   const form = useForm({
     resolver: zodResolver(
@@ -146,33 +167,33 @@ const Register = () => {
     try {
       const finalData = { ...formData, ...data, userType };
       
-      // Upload files if they exist
+      // Upload files from uploadedFiles state
       const uploadPromises: Promise<{key: string, path: string | null}>[] = [];
       
-      if (finalData.nationalIdFront?.[0]) {
+      if (uploadedFiles.nationalIdFront) {
         uploadPromises.push(
-          uploadFile(finalData.nationalIdFront[0], 'national-id-front')
+          uploadFile(uploadedFiles.nationalIdFront, 'national-id-front')
             .then(path => ({ key: 'national_id_front_path', path }))
         );
       }
       
-      if (finalData.nationalIdBack?.[0]) {
+      if (uploadedFiles.nationalIdBack) {
         uploadPromises.push(
-          uploadFile(finalData.nationalIdBack[0], 'national-id-back')
+          uploadFile(uploadedFiles.nationalIdBack, 'national-id-back')
             .then(path => ({ key: 'national_id_back_path', path }))
         );
       }
       
-      if (finalData.studentCard?.[0]) {
+      if (uploadedFiles.studentCard) {
         uploadPromises.push(
-          uploadFile(finalData.studentCard[0], 'student-card')
+          uploadFile(uploadedFiles.studentCard, 'student-card')
             .then(path => ({ key: 'student_card_path', path }))
         );
       }
       
-      if (finalData.teachingQualification?.[0]) {
+      if (uploadedFiles.teachingQualification) {
         uploadPromises.push(
-          uploadFile(finalData.teachingQualification[0], 'teaching-qualification')
+          uploadFile(uploadedFiles.teachingQualification, 'teaching-qualification')
             .then(path => ({ key: 'teaching_qualification_path', path }))
         );
       }
@@ -225,6 +246,9 @@ const Register = () => {
         description: "Votre demande d'inscription a été soumise avec succès.",
       });
       
+      // Clear localStorage after successful submission
+      localStorage.removeItem('registration-uploaded-files');
+      
       navigate('/');
       
     } catch (error: any) {
@@ -239,10 +263,13 @@ const Register = () => {
     }
   };
 
-  const FileUpload = ({ label, accept = "image/*,.pdf", field, onChange }: any) => {
+  const FileUpload = ({ label, accept = "image/*,.pdf", field, fieldName }: any) => {
     const [uploadProgress, setUploadProgress] = useState<number | null>(null);
     const [uploadStatus, setUploadStatus] = useState<'idle' | 'uploading' | 'success' | 'error'>('idle');
     
+    const existingFile = uploadedFiles[fieldName];
+    const isUploaded = !!existingFile;
+
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (!file) return;
@@ -259,20 +286,27 @@ const Register = () => {
       }, 100);
       
       try {
-        // Pass the FileList to the form
-        onChange(e.target.files);
-        
-        // Complete progress
+        // Complete progress and save file
         setTimeout(() => {
           setUploadProgress(100);
           setUploadStatus('success');
           clearInterval(progressInterval);
           
-          // Reset after 2 seconds
+          // Save file to uploadedFiles state
+          setUploadedFiles(prev => ({
+            ...prev,
+            [fieldName]: file
+          }));
+          
+          // Create FileList for form validation
+          const dt = new DataTransfer();
+          dt.items.add(file);
+          field.onChange(dt.files);
+          
+          // Keep success state
           setTimeout(() => {
             setUploadProgress(null);
-            setUploadStatus('idle');
-          }, 2000);
+          }, 1000);
         }, 500);
         
       } catch (error) {
@@ -282,13 +316,23 @@ const Register = () => {
       }
     };
 
+    const handleRemoveFile = () => {
+      setUploadedFiles(prev => {
+        const newFiles = { ...prev };
+        delete newFiles[fieldName];
+        return newFiles;
+      });
+      field.onChange(null);
+      setUploadStatus('idle');
+    };
+
     return (
       <div className="space-y-2">
         <Label className="text-sm font-medium">{label}</Label>
-        <div className={`border-2 border-dashed rounded-lg p-4 text-center transition-colors cursor-pointer group relative ${
-          uploadStatus === 'success' ? 'border-green-500 bg-green-50' :
+        <div className={`border-2 border-dashed rounded-lg p-4 text-center transition-colors group relative ${
+          isUploaded || uploadStatus === 'success' ? 'border-green-500 bg-green-50' :
           uploadStatus === 'error' ? 'border-red-500 bg-red-50' :
-          'border-muted-foreground/25 hover:border-muted-foreground/40'
+          'border-muted-foreground/25 hover:border-muted-foreground/40 cursor-pointer'
         }`}>
           {uploadStatus === 'uploading' ? (
             <>
@@ -297,16 +341,41 @@ const Register = () => {
               {uploadProgress !== null && (
                 <div className="w-full bg-muted rounded-full h-2 mt-2">
                   <div 
-                    className="bg-primary h-2 rounded-full transition-all duration-300"
+                    className="bg-green-600 h-2 rounded-full transition-all duration-300"
                     style={{ width: `${uploadProgress}%` }}
                   ></div>
                 </div>
               )}
             </>
-          ) : uploadStatus === 'success' ? (
+          ) : isUploaded || uploadStatus === 'success' ? (
             <>
-              <CheckCircle className="mx-auto h-6 w-6 text-green-600 mb-2" />
-              <p className="text-sm text-green-600">Fichier téléchargé avec succès</p>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <FileText className="h-5 w-5 text-green-600" />
+                  <div className="text-left">
+                    <p className="text-sm text-green-600 font-medium">Fichier téléchargé</p>
+                    <p className="text-xs text-green-600/70">{existingFile?.name || 'Fichier sélectionné'}</p>
+                  </div>
+                </div>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleRemoveFile}
+                  className="h-8 w-8 p-0 hover:bg-red-100"
+                >
+                  <X className="h-4 w-4 text-red-500" />
+                </Button>
+              </div>
+              <div className="text-center mt-2">
+                <input 
+                  type="file" 
+                  accept={accept} 
+                  onChange={handleFileChange}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
+                />
+                <p className="text-xs text-green-600/70">Cliquer pour changer le fichier</p>
+              </div>
             </>
           ) : (
             <>
@@ -504,11 +573,11 @@ const Register = () => {
               name="nationalIdFront"
               render={({ field }) => (
                 <FormItem>
-                  <FileUpload
-                    label="Carte d'identité nationale (recto)"
-                    field={field}
-                    onChange={field.onChange}
-                  />
+                   <FileUpload
+                     label="Carte d'identité nationale (recto)"
+                     field={field}
+                     fieldName="nationalIdFront"
+                   />
                   <FormMessage />
                 </FormItem>
               )}
@@ -518,11 +587,11 @@ const Register = () => {
               name="nationalIdBack"
               render={({ field }) => (
                 <FormItem>
-                  <FileUpload
-                    label="Carte d'identité nationale (verso)"
-                    field={field}
-                    onChange={field.onChange}
-                  />
+                   <FileUpload
+                     label="Carte d'identité nationale (verso)"
+                     field={field}
+                     fieldName="nationalIdBack"
+                   />
                   <FormMessage />
                 </FormItem>
               )}
@@ -569,20 +638,20 @@ const Register = () => {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="studentCard"
-                render={({ field }) => (
-                  <FormItem>
-                    <FileUpload
-                      label="Carte d'étudiant ou certificat de scolarité"
-                      field={field}
-                      onChange={field.onChange}
-                    />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <FormField
+              control={form.control}
+              name="studentCard"
+              render={({ field }) => (
+                <FormItem>
+                  <FileUpload 
+                    label="Carte d'étudiant ou certificat de scolarité" 
+                    field={field} 
+                    fieldName="studentCard"
+                  />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             </div>
           );
         } else {
@@ -628,12 +697,12 @@ const Register = () => {
                 name="teachingQualification"
                 render={({ field }) => (
                   <FormItem>
-                    <FileUpload
-                      label="Preuve de qualification d'enseignement (Diplôme/Attestation/CV)"
-                      accept="image/*,.pdf"
-                      field={field}
-                      onChange={field.onChange}
-                    />
+                     <FileUpload
+                       label="Preuve de qualification d'enseignement (Diplôme/Attestation/CV)"
+                       accept="image/*,.pdf"
+                       field={field}
+                       fieldName="teachingQualification"
+                     />
                     <FormMessage />
                   </FormItem>
                 )}
