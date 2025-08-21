@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { SidebarProvider } from "@/components/ui/sidebar";
 import NewHeader from "./NewHeader";
 
 interface LayoutProps {
@@ -26,14 +25,12 @@ const Layout = ({ children }: LayoutProps) => {
   };
 
   return (
-    <SidebarProvider>
-      <div className="min-h-screen bg-background w-full">
-        <NewHeader isDark={isDark} toggleTheme={toggleTheme} />
-        <main>
-          {children}
-        </main>
-      </div>
-    </SidebarProvider>
+    <div className="min-h-screen bg-background">
+      <NewHeader isDark={isDark} toggleTheme={toggleTheme} />
+      <main>
+        {children}
+      </main>
+    </div>
   );
 };
 
