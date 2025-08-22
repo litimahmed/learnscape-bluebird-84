@@ -10,11 +10,14 @@ import {
   Settings,
   User,
   LogOut,
-  ChevronRight,
+  ChevronLeft,
   BarChart3,
   FileText,
   Clock,
-  Star
+  Star,
+  Zap,
+  Target,
+  Bookmark
 } from "lucide-react";
 import {
   Sidebar,
@@ -29,7 +32,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 
 const mainNavItems = [
   { title: "Dashboard", url: "/dashboard", icon: Home },
@@ -70,38 +73,45 @@ export function StudentSidebar() {
       collapsible="icon"
     >
       <SidebarContent className="bg-card modern-scrollbar">
-        {/* Logo Section */}
-        <div className="p-4 border-b border-border">
+        {/* Header with Toggle */}
+        <div className="p-4 border-b border-border flex items-center justify-between">
           {!collapsed ? (
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <GraduationCap className="w-5 h-5 text-primary-foreground" />
+              <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg">
+                <Zap className="w-4 h-4 text-primary-foreground" />
               </div>
               <div>
-                <h3 className="font-semibold text-foreground">EduPlatform</h3>
-                <p className="text-xs text-muted-foreground">Student Portal</p>
+                <h3 className="font-bold text-foreground text-lg">LearnHub</h3>
+                <div className="flex items-center space-x-2">
+                  <Badge variant="secondary" className="text-xs">Pro</Badge>
+                  <span className="text-xs text-muted-foreground">Level 5</span>
+                </div>
               </div>
             </div>
           ) : (
             <div className="flex justify-center">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <GraduationCap className="w-5 h-5 text-primary-foreground" />
+              <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg">
+                <Zap className="w-4 h-4 text-primary-foreground" />
               </div>
             </div>
           )}
+          
+          <SidebarTrigger className="h-8 w-8 hover:bg-accent rounded-lg flex items-center justify-center">
+            <ChevronLeft className={`w-4 h-4 transition-transform duration-200 ${collapsed ? "rotate-180" : ""}`} />
+          </SidebarTrigger>
         </div>
 
-        {/* User Profile Section */}
+        {/* Quick Stats */}
         {!collapsed && (
           <div className="p-4 border-b border-border">
-            <div className="flex items-center space-x-3">
-              <Avatar className="w-10 h-10">
-                <AvatarImage src="/api/placeholder/40/40" alt="Student" />
-                <AvatarFallback>JD</AvatarFallback>
-              </Avatar>
-              <div className="flex-1 min-w-0">
-                <p className="font-medium text-foreground truncate">John Doe</p>
-                <p className="text-sm text-muted-foreground truncate">Computer Science</p>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-primary/5 rounded-lg p-3 text-center">
+                <div className="text-lg font-bold text-primary">67%</div>
+                <div className="text-xs text-muted-foreground">Progress</div>
+              </div>
+              <div className="bg-green-500/10 rounded-lg p-3 text-center">
+                <div className="text-lg font-bold text-green-600">4</div>
+                <div className="text-xs text-muted-foreground">Courses</div>
               </div>
             </div>
           </div>
@@ -197,13 +207,6 @@ export function StudentSidebar() {
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
-        </div>
-
-        {/* Sidebar Toggle */}
-        <div className="p-2 border-t border-border">
-          <SidebarTrigger className="w-full h-10 flex items-center justify-center hover:bg-accent rounded-lg">
-            <ChevronRight className={`w-4 h-4 transition-transform ${collapsed ? "" : "rotate-180"}`} />
-          </SidebarTrigger>
         </div>
       </SidebarContent>
     </Sidebar>
