@@ -74,32 +74,29 @@ export function StudentSidebar() {
     >
       <SidebarContent className="bg-card modern-scrollbar">
         {/* Header with Toggle */}
-        <div className="p-4 border-b border-border flex items-center justify-between">
+        <div className={`p-4 border-b border-border flex items-center ${collapsed ? "justify-center" : "justify-between"}`}>
           {!collapsed ? (
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg">
-                <Zap className="w-4 h-4 text-primary-foreground" />
-              </div>
-              <div>
-                <h3 className="font-bold text-foreground text-lg">LearnHub</h3>
-                <div className="flex items-center space-x-2">
-                  <Badge variant="secondary" className="text-xs">Pro</Badge>
-                  <span className="text-xs text-muted-foreground">Level 5</span>
+            <>
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg">
+                  <Zap className="w-4 h-4 text-primary-foreground" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-foreground text-lg">LearnHub</h3>
+                  <div className="flex items-center space-x-2">
+                    <Badge variant="secondary" className="text-xs">Pro</Badge>
+                    <span className="text-xs text-muted-foreground">Level 5</span>
+                  </div>
                 </div>
               </div>
-            </div>
+              <SidebarTrigger className="h-8 w-8 hover:bg-accent rounded-lg flex items-center justify-center">
+                <ChevronLeft className="w-4 h-4 transition-transform duration-200" />
+              </SidebarTrigger>
+            </>
           ) : (
-            <div className="flex justify-center w-full">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg">
-                <Zap className="w-4 h-4 text-primary-foreground" />
-              </div>
+            <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg">
+              <Zap className="w-4 h-4 text-primary-foreground" />
             </div>
-          )}
-          
-          {!collapsed && (
-            <SidebarTrigger className="h-8 w-8 hover:bg-accent rounded-lg flex items-center justify-center">
-              <ChevronLeft className="w-4 h-4 transition-transform duration-200" />
-            </SidebarTrigger>
           )}
         </div>
 
