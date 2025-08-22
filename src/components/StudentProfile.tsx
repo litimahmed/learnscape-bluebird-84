@@ -51,8 +51,6 @@ function StudentProfileContent() {
   const [selectedCertificate, setSelectedCertificate] = React.useState<string | null>(null);
   const [selectedThumbnail, setSelectedThumbnail] = React.useState<number | null>(null);
   const [isShareOpen, setIsShareOpen] = React.useState(false);
-  const [selectedGradient, setSelectedGradient] = React.useState<number>(0);
-  const [showGradientSelector, setShowGradientSelector] = React.useState(false);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const shareRef = React.useRef<HTMLDivElement>(null);
 
@@ -86,25 +84,8 @@ function StudentProfileContent() {
   const nin = "123XXXX567";
   const biography = "Passionate student focused on learning and growth in technology.";
 
-  // Gradient options for cover
-  const gradientOptions = [
-    {
-      name: "Ocean Blue",
-      gradient: "linear-gradient(135deg, #2994ff 0%, #1a73e8 100%)"
-    },
-    {
-      name: "Sunset Orange",
-      gradient: "linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%)"
-    },
-    {
-      name: "Forest Green",
-      gradient: "linear-gradient(135deg, #00b894 0%, #00a085 100%)"
-    },
-    {
-      name: "Royal Purple",
-      gradient: "linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%)"
-    }
-  ];
+  // Blue gradient for cover
+  const coverGradient = "linear-gradient(135deg, #2994ff 0%, #1a73e8 100%)";
 
   // Mock data
   const recentActivities = [
@@ -239,42 +220,9 @@ function StudentProfileContent() {
 
       {/* Cover Image */}
       <div
-        className="h-40 bg-cover bg-center relative cursor-pointer group"
-        style={{ background: gradientOptions[selectedGradient].gradient }}
-        onClick={() => setShowGradientSelector(!showGradientSelector)}
+        className="h-40 bg-cover bg-center relative"
+        style={{ background: coverGradient }}
       >
-        {/* Gradient Selector */}
-        {showGradientSelector && (
-          <div className="absolute top-4 left-4 bg-card border border-border rounded-lg p-3 shadow-lg z-10 animate-fade-in">
-            <h4 className="text-sm font-semibold text-card-foreground mb-2">Choose Cover Style</h4>
-            <div className="grid grid-cols-2 gap-2">
-              {gradientOptions.map((option, index) => (
-                <div
-                  key={index}
-                  className={`w-16 h-12 rounded-md cursor-pointer border-2 transition-all duration-200 hover:scale-105 ${
-                    selectedGradient === index ? 'border-primary shadow-lg' : 'border-border'
-                  }`}
-                  style={{ background: option.gradient }}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedGradient(index);
-                    setShowGradientSelector(false);
-                  }}
-                  title={option.name}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-        
-        {/* Hover indicator */}
-        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-          <div className="bg-white/20 backdrop-blur-sm rounded-full p-2">
-            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-            </svg>
-          </div>
-        </div>
         {/* Profile Image */}
         <motion.div
           className="absolute -bottom-16 left-6"
