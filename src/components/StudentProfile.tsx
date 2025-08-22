@@ -90,7 +90,7 @@ function StudentProfileContent() {
   const gradientOptions = [
     {
       name: "Ocean Blue",
-      gradient: "linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)"
+      gradient: "linear-gradient(135deg, #2994ff 0%, #1a73e8 100%)"
     },
     {
       name: "Sunset Orange",
