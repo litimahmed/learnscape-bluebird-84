@@ -27,6 +27,7 @@ interface DashboardHeaderProps {
 }
 
 export function DashboardHeader({ isDark, toggleTheme }: DashboardHeaderProps) {
+  // Force refresh - Avatar components have been replaced with UserProfileDropdown
   return (
     <header className="h-16 bg-card border-b border-border px-6 flex items-center justify-between sticky top-0 z-40 backdrop-blur-sm">
       {/* Left Section - Breadcrumbs */}
