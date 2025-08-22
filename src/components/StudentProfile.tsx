@@ -1,0 +1,527 @@
+import * as React from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  MoreVertical,
+  Mail,
+  Phone,
+  Calendar,
+  MapPin,
+  Fingerprint,
+  CheckCircle,
+  Linkedin,
+  Github,
+  Plus,
+  X,
+  Download,
+  Award,
+} from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { Input } from "@/components/ui/input";
+import { toast } from "@/hooks/use-toast";
+import { Dialog, DialogContent, DialogOverlay } from "@/components/ui/dialog";
+
+// Dialog Component Wrapping StudentProfile
+interface StudentProfileDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+
+export default function StudentProfileDialog({
+  open,
+  onOpenChange,
+}: StudentProfileDialogProps) {
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogOverlay className="fixed inset-0 bg-black/30 backdrop-blur-md z-40" />
+      <DialogContent className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="relative w-full max-w-6xl max-h-[85vh] bg-white rounded-xl shadow-xl">
+          {/* Close Button */}
+          <Button
+            onClick={() => onOpenChange(false)}
+            className="absolute top-4 right-4 z-50 p-2 bg-white rounded-full shadow-md hover:bg-gray-100"
+            aria-label="Close"
+          >
+            <X className="w-5 h-5 text-gray-600" />
+          </Button>
+
+          {/* Scrollable Content */}
+          <div className="overflow-y-auto h-full max-h-[85vh] scrollbar-thin scrollbar-thumb-gray-300">
+            <StudentProfileContent />
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+function StudentProfileContent() {
+  const { user } = useAuth();
+  const [loading, setLoading] = React.useState(true);
+  const [currentProfilePicture, setCurrentProfilePicture] = React.useState<string | null>(null);
+  const [showFullNIN, setShowFullNIN] = React.useState(false);
+  const [selectedCertificate, setSelectedCertificate] = React.useState<string | null>(null);
+  const [selectedThumbnail, setSelectedThumbnail] = React.useState<number | null>(null);
+  const [isShareOpen, setIsShareOpen] = React.useState(false);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const shareRef = React.useRef<HTMLDivElement>(null);
+
+  // Simulate loading
+  React.useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Close share options on click outside
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (shareRef.current && !shareRef.current.contains(event.target as Node)) {
+        setIsShareOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Mock user data (in real app, this would come from your backend)
+  const profilePicture = currentProfilePicture || "/lovable-uploads/1f6a2417-0f18-43a3-b0f3-6a65ecad2be2.png";
+  const firstName = user?.user_metadata?.first_name || "Student";
+  const lastName = user?.user_metadata?.last_name || "User";
+  const address = "Es Senia, Oran, Algeria";
+  const username = user?.email?.split('@')[0] || "student123";
+  const email = user?.email || "Not provided";
+  const phoneNumber = user?.user_metadata?.phone || "Not provided";
+  const birthDate = user?.user_metadata?.birth_date || "Not provided";
+  const birthPlace = user?.user_metadata?.birth_place || "Not provided";
+  const nin = "123XXXX567";
+  const biography = "Passionate student focused on learning and growth in technology.";
+
+  // Mock data
+  const recentActivities = [
+    { activity: "Completed Course: React Basics", date: "April 28, 2025" },
+    { activity: "Earned Badge: Quick Thinker", date: "April 27, 2025" },
+    { activity: "Submitted Assignment: Django Project", date: "April 25, 2025" },
+  ];
+
+  const socialLinks = {
+    linkedin: "https://linkedin.com/in/student",
+    github: "https://github.com/student",
+    behance: "https://behance.net/student",
+  };
+
+  const certificates = [
+    { id: 1, src: "/lovable-uploads/33036365-2096-4b71-813a-f70b9459d29d.png", alt: "Certificate 1" },
+    { id: 2, src: "/lovable-uploads/7b9d2247-6c4d-49a9-8e4b-1372bd527f76.png", alt: "Certificate 2" },
+    { id: 3, src: "/lovable-uploads/9947613a-4950-4fe7-bac0-7d4e750181b7.png", alt: "Certificate 3" },
+  ];
+
+  const skills = ["React", "TypeScript", "JavaScript", "CSS", "Node.js"];
+
+  const badges = [
+    { title: "Top Performer", src: "/lovable-uploads/b4d39c0d-e245-45f8-acc2-ca4ea2d4036e.png" },
+    { title: "Best Learner", src: "/lovable-uploads/e0c039b5-96f6-4128-b88b-9ed0faf08816.png" },
+    { title: "Class Leader", src: "/lovable-uploads/33036365-2096-4b71-813a-f70b9459d29d.png" },
+    { title: "Quick Thinker", src: "/lovable-uploads/7b9d2247-6c4d-49a9-8e4b-1372bd527f76.png" },
+  ];
+
+  // Helper functions
+  const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  const fullName = firstName || lastName ? `${capitalize(firstName)} ${capitalize(lastName)}`.trim() : "User";
+
+  const handleUsernameClick = () => {
+    navigator.clipboard.writeText(username).then(() => {
+      toast({ title: "Copied to clipboard", description: "Username copied successfully" });
+    });
+  };
+
+  const handleNINClick = () => {
+    setShowFullNIN(!showFullNIN);
+  };
+
+  const displayNIN = showFullNIN ? nin : nin.length >= 3 ? `${nin.slice(0, 3)}XXXX` : "Not provided";
+
+  const handleThumbnailClick = (id: number) => {
+    setSelectedThumbnail(selectedThumbnail === id ? null : id);
+  };
+
+  const handleViewCertificate = (src: string) => {
+    setSelectedCertificate(src);
+    setSelectedThumbnail(null);
+  };
+
+  const handleDownloadCertificate = (alt: string) => {
+    toast({ title: "Download started", description: `Downloading ${alt}...` });
+    setSelectedThumbnail(null);
+  };
+
+  const closeCertificateModal = () => {
+    setSelectedCertificate(null);
+  };
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, staggerChildren: 0.2 },
+    },
+  };
+
+  const childVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4 },
+    },
+  };
+
+  if (loading) {
+    return (
+      <div className="w-full bg-white overflow-hidden">
+        <div className="h-40 bg-gray-200 animate-pulse"></div>
+        <div className="relative -mt-16 ml-6">
+          <div className="w-32 h-32 bg-gray-200 rounded-full border-4 border-white animate-pulse"></div>
+        </div>
+        <div className="pt-20 pb-8 px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <Skeleton className="w-2/3 h-6 rounded-lg" />
+              <Skeleton className="w-1/2 h-4 rounded-lg" />
+              <Skeleton className="w-full h-4 rounded-lg" />
+            </div>
+            <div className="space-y-4">
+              <Skeleton className="w-1/2 h-6 rounded-lg" />
+              <Skeleton className="w-3/4 h-4 rounded-lg" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <motion.div
+      className="w-full bg-white overflow-hidden"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {/* Certificate Modal */}
+      {selectedCertificate && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+          <div className="relative max-w-4xl w-full p-4">
+            <img
+              src={selectedCertificate}
+              alt="Certificate Full View"
+              className="w-full h-auto rounded-lg"
+            />
+            <Button
+              onClick={closeCertificateModal}
+              className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-100"
+            >
+              <X className="w-6 h-6 text-gray-800" />
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* Cover Image */}
+      <div
+        className="h-40 bg-cover bg-center relative"
+        style={{ backgroundImage: `url(/hero-learning.jpg)` }}
+      >
+        {/* Profile Image */}
+        <motion.div
+          className="absolute -bottom-16 left-6"
+          variants={childVariants}
+          whileHover={{ scale: 1.05 }}
+        >
+          <div className="relative group">
+            <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-md">
+              <img
+                src={profilePicture}
+                alt="Profile"
+                className="w-full h-full object-cover"
+                onError={(e) => (e.currentTarget.src = "/lovable-uploads/1f6a2417-0f18-43a3-b0f3-6a65ecad2be2.png")}
+              />
+            </div>
+          </div>
+        </motion.div>
+
+        {/* More Options */}
+        <div className="absolute -bottom-14 right-5">
+          <MoreVertical className="w-5 h-5 text-gray-900 cursor-pointer" />
+        </div>
+      </div>
+
+      {/* Profile Info - Two Column Layout */}
+      <div className="pt-20 pb-8 px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Left Column */}
+          <div className="mt-2">
+            <motion.div variants={childVariants} className="space-y-1">
+              <h2 className="text-2xl font-bold text-black">{fullName}</h2>
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-gray-500" />
+                <p className="text-sm font-normal text-gray-600">{address}</p>
+              </div>
+              <div className="flex items-center gap-1">
+                <div className="relative group">
+                  <span
+                    className="text-sm font-medium text-blue-600 cursor-pointer"
+                    onClick={handleUsernameClick}
+                  >
+                    @{username}
+                  </span>
+                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="bg-blue-500 text-white text-xs font-medium px-3 py-1 rounded-lg shadow-md">
+                      Copy to Clipboard
+                    </div>
+                  </div>
+                </div>
+                <span className="text-gray-400"> • </span>
+                <div className="flex items-center gap-1 bg-gray-100 px-2 py-1 rounded-md">
+                  <span className="text-sm font-normal text-gray-700">Student</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Buttons */}
+            <motion.div className="flex gap-3 mt-4 relative" variants={childVariants}>
+              <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-100">
+                Message
+              </Button>
+
+              <div className="relative">
+                <Button
+                  onClick={() => setIsShareOpen((prev) => !prev)}
+                  className="bg-blue-600 hover:bg-blue-700 text-white"
+                >
+                  Share profile
+                </Button>
+
+                {/* Share Options */}
+                {isShareOpen && (
+                  <div
+                    ref={shareRef}
+                    className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-lg p-3 w-56 z-50 shadow-lg"
+                  >
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-3 w-full px-2 py-2 hover:bg-blue-50 rounded-md cursor-pointer">
+                        <Linkedin className="w-5 h-5 text-blue-600" />
+                        <span className="text-sm">Share on LinkedIn</span>
+                      </div>
+                      <div className="flex items-center gap-3 w-full px-2 py-2 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <Github className="w-5 h-5 text-gray-600" />
+                        <span className="text-sm">Share on GitHub</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+
+            {/* Short Bio */}
+            <motion.div variants={childVariants} className="mt-4">
+              <h3 className="text-lg font-bold text-black">Short Bio</h3>
+              <p className="text-sm font-normal text-gray-600 leading-relaxed mt-1">
+                {biography}
+              </p>
+            </motion.div>
+
+            {/* Recent Activity */}
+            <motion.div variants={childVariants} className="mt-4">
+              <h3 className="text-lg font-bold text-black">Recent Activity</h3>
+              <div className="space-y-2 mt-1">
+                {recentActivities.map((activity, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-500" />
+                    <div>
+                      <p className="text-sm font-normal text-gray-600">{activity.activity}</p>
+                      <p className="text-xs font-normal text-gray-400">{activity.date}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Social Links */}
+            <motion.div variants={childVariants} className="mt-4">
+              <h3 className="text-lg font-bold text-black">Social Links</h3>
+              <div className="space-y-2 mt-2">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-normal text-gray-600">LinkedIn</p>
+                  <Linkedin className="w-4 h-4 text-gray-500 hover:text-blue-600 cursor-pointer" />
+                </div>
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-normal text-gray-600">GitHub</p>
+                  <Github className="w-4 h-4 text-gray-500 hover:text-blue-600 cursor-pointer" />
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Certificates */}
+            <motion.div variants={childVariants} className="mt-6">
+              <h3 className="text-lg font-bold text-black">Certificates</h3>
+              <div className="flex flex-wrap gap-3 mt-2">
+                {certificates.map((certificate) => (
+                  <motion.div
+                    key={certificate.id}
+                    variants={childVariants}
+                    whileHover={{ scale: 1.05 }}
+                    className="relative cursor-pointer"
+                    onClick={() => handleThumbnailClick(certificate.id)}
+                  >
+                    <img
+                      src={certificate.src}
+                      alt={certificate.alt}
+                      className="w-16 h-16 rounded-md object-cover border border-gray-200 shadow-sm"
+                    />
+                    {selectedThumbnail === certificate.id && (
+                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-white rounded-lg shadow-md p-2 z-10">
+                        <div className="flex gap-2">
+                          <Button
+                            onClick={() => handleDownloadCertificate(certificate.alt)}
+                            className="flex items-center gap-1 px-3 py-1 text-sm"
+                            variant="outline"
+                          >
+                            <Download className="w-4 h-4" />
+                            Download
+                          </Button>
+                          <Button
+                            onClick={() => handleViewCertificate(certificate.src)}
+                            className="flex items-center gap-1 px-3 py-1 text-sm"
+                          >
+                            View
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Column */}
+          <div className="mt-2">
+            {/* Skills */}
+            <motion.div variants={childVariants}>
+              <h3 className="text-lg font-bold text-black">Skills</h3>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {skills.map((skill, index) => (
+                  <span
+                    key={skill}
+                    className="inline-block bg-blue-50 text-blue-800 text-sm font-medium px-4 py-1.5 rounded-full"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Badges */}
+            <motion.div variants={childVariants} className="mt-6">
+              <h3 className="text-lg font-bold text-black">Badges</h3>
+              <div className="flex flex-wrap gap-3 mt-2">
+                {badges.map((badge, index) => (
+                  <motion.div
+                    key={badge.title}
+                    whileHover={{ scale: 1.1 }}
+                    className="relative group"
+                  >
+                    <img
+                      src={badge.src}
+                      alt={badge.title}
+                      className="w-8 h-8 object-contain"
+                    />
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="bg-gray-800 text-white text-xs px-2 py-1 rounded-lg">
+                        {badge.title}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Contact Information */}
+            <motion.div
+              variants={childVariants}
+              className="mt-6 border border-gray-100 rounded-lg p-5 shadow-sm bg-white"
+            >
+              <h3 className="text-xl font-bold text-black border-b border-gray-200 pb-2 mb-4">
+                Contact Information
+              </h3>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <Mail className="w-5 h-5 text-gray-500" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-500">Contact Email</p>
+                    <p className="text-base font-normal text-gray-700">{email}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-gray-500" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-500">Phone</p>
+                    <p className="text-base font-normal text-gray-700">{phoneNumber}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Calendar className="w-5 h-5 text-gray-500" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-500">Birth Date</p>
+                    <p className="text-base font-normal text-gray-700">{birthDate}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <MapPin className="w-5 h-5 text-gray-500" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-500">Birth Place</p>
+                    <p className="text-base font-normal text-gray-700">{birthPlace}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Fingerprint className="w-5 h-5 text-gray-500" />
+                  <div className="relative group">
+                    <p className="text-sm font-medium text-gray-500">NIN</p>
+                    <p
+                      className="text-base font-normal text-gray-700 cursor-pointer"
+                      onClick={handleNINClick}
+                    >
+                      {displayNIN}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Achievements */}
+            <motion.div variants={childVariants} className="mt-6">
+              <h3 className="text-lg font-bold text-black">Achievements</h3>
+              <div className="space-y-2 mt-2">
+                {[
+                  { title: "Completed Full-Stack Development Program", date: "April 2025" },
+                  { title: "30-Day Study Streak Achieved", date: "March 2025" },
+                  { title: "Top Student of the Month", date: "April 2025" },
+                ].map((achievement, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                    <Award className="w-5 h-5 text-yellow-500" />
+                    <div>
+                      <p className="text-sm font-normal text-gray-600">{achievement.title}</p>
+                      <p className="text-xs font-normal text-gray-400">{achievement.date}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}

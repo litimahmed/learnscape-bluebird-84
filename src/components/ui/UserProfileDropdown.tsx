@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "@/hooks/useAuth";
+import StudentProfileDialog from "@/components/StudentProfile";
 
 interface UserProfileDropdownProps {
   user?: {
@@ -23,6 +24,7 @@ interface UserProfileDropdownProps {
 
 export default function UserProfileDropdown({ user }: UserProfileDropdownProps) {
   const { signOut } = useAuth();
+  const [isProfileOpen, setIsProfileOpen] = React.useState(false);
   const initials = user?.name
     ? user.name.split(' ').map(n => n[0]).join('').toUpperCase()
     : 'U';
@@ -51,11 +53,12 @@ export default function UserProfileDropdown({ user }: UserProfileDropdownProps) 
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link to="/profile" className="flex items-center cursor-pointer">
-            <User className="mr-2 h-4 w-4" />
-            <span>Profile</span>
-          </Link>
+        <DropdownMenuItem 
+          className="flex items-center cursor-pointer"
+          onClick={() => setIsProfileOpen(true)}
+        >
+          <User className="mr-2 h-4 w-4" />
+          <span>Profile</span>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link to="/dashboard" className="flex items-center cursor-pointer">
@@ -75,6 +78,12 @@ export default function UserProfileDropdown({ user }: UserProfileDropdownProps) 
           <span>Log out</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
+      
+      {/* Student Profile Dialog */}
+      <StudentProfileDialog 
+        open={isProfileOpen} 
+        onOpenChange={setIsProfileOpen} 
+      />
     </DropdownMenu>
   );
 }
