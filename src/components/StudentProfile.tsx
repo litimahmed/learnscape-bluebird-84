@@ -34,8 +34,8 @@ export default function StudentProfileDialog({
 }: StudentProfileDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-6xl w-full max-h-[85vh] p-0 overflow-hidden">
-        <div className="overflow-y-auto h-full max-h-[85vh] scrollbar-thin scrollbar-thumb-muted-foreground">
+      <DialogContent className="max-w-6xl w-full max-h-[85vh] p-0 overflow-hidden border-0 focus:outline-none focus-visible:outline-none">
+        <div className="overflow-y-auto h-full max-h-[85vh] scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted-foreground/20 hover:scrollbar-thumb-muted-foreground/40 scrollbar-thumb-rounded-full">
           <StudentProfileContent />
         </div>
       </DialogContent>
@@ -202,18 +202,18 @@ function StudentProfileContent() {
     >
       {/* Certificate Modal */}
       {selectedCertificate && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="relative max-w-4xl w-full p-4">
             <img
               src={selectedCertificate}
               alt="Certificate Full View"
-              className="w-full h-auto rounded-lg"
+              className="w-full h-auto rounded-lg shadow-2xl"
             />
             <Button
               onClick={closeCertificateModal}
-              className="absolute top-2 right-2 p-2 bg-background rounded-full shadow-md hover:bg-muted"
+              className="absolute -top-2 -right-2 w-10 h-10 p-0 bg-background/90 hover:bg-background border border-border rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110"
             >
-              <X className="w-6 h-6 text-foreground" />
+              <X className="w-5 h-5 text-foreground" />
             </Button>
           </div>
         </div>
