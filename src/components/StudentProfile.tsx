@@ -20,7 +20,7 @@ import {
 import { useAuth } from "@/hooks/useAuth";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
-import { Dialog, DialogContent, DialogOverlay } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 // Dialog Component Wrapping StudentProfile
 interface StudentProfileDialogProps {
@@ -34,22 +34,9 @@ export default function StudentProfileDialog({
 }: StudentProfileDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogOverlay className="fixed inset-0 bg-black/30 backdrop-blur-md z-40" />
-      <DialogContent className="fixed inset-0 z-50 flex items-center justify-center p-4">
-        <div className="relative w-full max-w-6xl max-h-[85vh] bg-white rounded-xl shadow-xl">
-          {/* Close Button */}
-          <Button
-            onClick={() => onOpenChange(false)}
-            className="absolute top-4 right-4 z-50 p-2 bg-white rounded-full shadow-md hover:bg-gray-100"
-            aria-label="Close"
-          >
-            <X className="w-5 h-5 text-gray-600" />
-          </Button>
-
-          {/* Scrollable Content */}
-          <div className="overflow-y-auto h-full max-h-[85vh] scrollbar-thin scrollbar-thumb-gray-300">
-            <StudentProfileContent />
-          </div>
+      <DialogContent className="max-w-6xl w-full max-h-[85vh] p-0 overflow-hidden">
+        <div className="overflow-y-auto h-full max-h-[85vh] scrollbar-thin scrollbar-thumb-gray-300">
+          <StudentProfileContent />
         </div>
       </DialogContent>
     </Dialog>
