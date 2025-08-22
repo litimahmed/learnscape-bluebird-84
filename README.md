@@ -35,6 +35,36 @@
 
 This targets the B2B market instead of individual learners, which typically means higher revenue per customer and more stable, long-term contracts.
 
+## How "For Business" Works - Detailed Implementation
+
+**Registration Model:**
+- **Separate Business Workspace:** Companies don't use regular student/teacher registration
+- **Company Admin Flow:** A company representative creates a business workspace and invites employees
+- **Employee Lightweight Signup:** Employees receive invitations and join with minimal registration (just basic info)
+
+**Course Access:**
+- **Same Course Catalog:** By default, business users access the same courses as individual learners
+- **Optional Exclusive Content:** Companies can request custom/exclusive courses for their specific needs
+- **Organized Learning Paths:** Admins can create structured learning programs using existing courses
+
+**Key Features:**
+- **Business Workspace:** Each company gets their own isolated environment
+- **Admin Dashboard:** Company admins can manage employees, track progress, assign courses
+- **Employee Management:** Add/remove employees, organize into teams/departments
+- **Progress Analytics:** Detailed reporting on training completion and effectiveness
+- **License Management:** Control how many employees can access the platform
+
+**User Roles:**
+- **Company Admin:** Manages the business workspace, invites employees, tracks progress
+- **Business Employee:** Access to courses with company-specific assignments and tracking
+- **Individual Learner:** Regular users who sign up independently (existing flow)
+- **Teacher:** Content creators (existing flow)
+
+**Revenue Model:**
+- **Per-Employee Licensing:** Companies pay monthly/annually based on number of active employees
+- **Tiered Pricing:** Different feature sets (basic tracking vs advanced analytics)
+- **Enterprise Contracts:** Custom pricing for large organizations with special requirements
+
 ## How can I edit this code?
 
 There are several ways of editing your application.
