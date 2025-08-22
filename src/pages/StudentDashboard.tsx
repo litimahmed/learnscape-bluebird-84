@@ -5,6 +5,7 @@ import { StudentSidebar } from "@/components/dashboard/StudentSidebar";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { DashboardContent } from "@/components/dashboard/DashboardContent";
 import { ComingSoon } from "@/components/dashboard/ComingSoon";
+import { MyCourses } from "@/components/dashboard/courses/MyCourses";
 
 const StudentDashboard = () => {
   const [isDark, setIsDark] = useState(false);
@@ -34,7 +35,7 @@ const StudentDashboard = () => {
           <main className="flex-1 p-6 modern-scrollbar overflow-auto">
             <Routes>
               <Route path="/" element={<DashboardContent />} />
-              <Route path="/courses" element={<ComingSoon title="My Courses" description="View and manage your enrolled courses, track progress, and access course materials." />} />
+              <Route path="/courses" element={<MyCourses />} />
               <Route path="/learning-path" element={<ComingSoon title="Learning Path" description="Follow personalized learning paths designed to help you achieve your goals." />} />
               <Route path="/schedule" element={<ComingSoon title="Schedule" description="Manage your class schedule, upcoming sessions, and important deadlines." />} />
               <Route path="/achievements" element={<ComingSoon title="Achievements" description="Track your accomplishments, certificates, and learning milestones." />} />
