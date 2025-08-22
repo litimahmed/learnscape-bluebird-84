@@ -27,6 +27,14 @@ export function ActiveLearning() {
       status: "upcoming", 
       urgency: "Prepare now",
       type: "quiz"
+    },
+    {
+      title: "Study Session",
+      description: "Weekly goal check-in",
+      timeLeft: "3 days",
+      status: "scheduled",
+      urgency: "This week",
+      type: "goal"
     }
   ];
 

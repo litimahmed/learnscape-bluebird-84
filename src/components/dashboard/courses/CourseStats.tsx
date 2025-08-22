@@ -28,12 +28,12 @@ export function CourseStats() {
       bgColor: "bg-green-500/10"
     },
     {
-      title: "Due Soon",
-      value: "3",
-      subtitle: "assignments pending",
-      icon: AlertCircle,
-      color: "text-red-500", 
-      bgColor: "bg-red-500/10"
+      title: "Average Grade",
+      value: "92%",
+      subtitle: "across all courses",
+      icon: GraduationCap,
+      color: "text-green-500", 
+      bgColor: "bg-green-500/10"
     }
   ];
 
