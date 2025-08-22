@@ -54,7 +54,7 @@ export function MegaMenu({ padding = "md", children }: MegaMenuProps) {
           align="center"
           sideOffset={0}
           className={cn(
-            "border shadow-lg max-w-6xl w-[95vw] sm:w-[90vw] lg:w-[80vw] transition-all duration-200 z-50 bg-background border-border text-foreground mx-auto left-1/2 transform translate-x-[25%]",
+            "border shadow-lg max-w-6xl w-[95vw] sm:w-[90vw] lg:w-[80vw] transition-all duration-200 z-50 bg-background border-border text-foreground mx-auto left-1/2 transform translate-x-[15%]",
             padding === "sm"
               ? "p-4"
               : padding === "md"
