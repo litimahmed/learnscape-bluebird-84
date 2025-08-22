@@ -13,28 +13,28 @@ import {
 export function ActiveLearning() {
   const priorityActions = [
     {
-      title: "React Assignment",
-      description: "Component Lifecycle project due",
-      timeLeft: "2h 30m",
-      status: "critical",
-      urgency: "Due today",
-      type: "assignment"
+      title: "Profile Setup",
+      description: "Complete your student profile for better recommendations",
+      timeLeft: "No deadline",
+      status: "pending",
+      urgency: "Complete now",
+      type: "profile"
     },
     {
-      title: "JavaScript Quiz",
-      description: "Async/Await concepts review",
-      timeLeft: "1 day",
-      status: "upcoming", 
-      urgency: "Prepare now",
-      type: "quiz"
-    },
-    {
-      title: "Study Session",
-      description: "Weekly goal check-in",
-      timeLeft: "3 days",
-      status: "scheduled",
+      title: "Study Schedule",
+      description: "Set up your weekly learning schedule",
+      timeLeft: "Flexible",
+      status: "recommended", 
       urgency: "This week",
-      type: "goal"
+      type: "planning"
+    },
+    {
+      title: "Career Goals",
+      description: "Define your learning objectives and career path",
+      timeLeft: "Flexible",
+      status: "optional",
+      urgency: "When ready",
+      type: "goal-setting"
     }
   ];
 
@@ -75,9 +75,9 @@ export function ActiveLearning() {
             <div>
               <CardTitle className="flex items-center">
                 <Play className="w-5 h-5 mr-2 text-primary" />
-                Priority Actions
+                Getting Started
               </CardTitle>
-              <CardDescription>Critical tasks requiring immediate attention</CardDescription>
+              <CardDescription>Essential setup tasks to optimize your learning experience</CardDescription>
             </div>
             <Button variant="ghost" size="sm">
               <ArrowRight className="w-4 h-4 mr-2" />
