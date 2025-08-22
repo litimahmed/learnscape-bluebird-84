@@ -1,7 +1,6 @@
-import { Search, Bell, Settings, User, LogOut, Plus, Filter, Command } from "lucide-react";
+import { Search, Bell, Plus, Filter, Command } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,16 +11,45 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb";
+import UserProfileDropdown from "@/components/ui/UserProfileDropdown";
 
-export function DashboardHeader() {
+interface DashboardHeaderProps {
+  isDark: boolean;
+  toggleTheme: () => void;
+}
+
+export function DashboardHeader({ isDark, toggleTheme }: DashboardHeaderProps) {
   return (
     <header className="h-16 bg-card border-b border-border px-6 flex items-center justify-between sticky top-0 z-40 backdrop-blur-sm">
-      {/* Search Section */}
-      <div className="flex items-center flex-1 max-w-2xl">
-        <div className="relative w-full max-w-md">
+      {/* Left Section - Breadcrumbs */}
+      <div className="flex items-center flex-1 max-w-xl">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Student Portal</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
+
+      {/* Center Section - Search */}
+      <div className="flex items-center flex-1 max-w-md mx-6">
+        <div className="relative w-full">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
           <Input
-            placeholder="Search courses, assignments, or resources..."
+            placeholder="Search courses, assignments..."
             className="pl-10 pr-20 h-10 bg-background/50 border-border focus:bg-background transition-colors"
           />
           <kbd className="absolute right-3 top-1/2 transform -translate-y-1/2 inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
@@ -45,7 +73,7 @@ export function DashboardHeader() {
         </Button>
 
         {/* Theme Toggle */}
-        <ThemeToggle isDark={false} toggleTheme={() => {}} />
+        <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
 
         {/* Notifications */}
         <DropdownMenu>
@@ -108,42 +136,7 @@ export function DashboardHeader() {
         </DropdownMenu>
 
         {/* User Profile Dropdown */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-9 px-2">
-              <Avatar className="w-7 h-7 mr-2">
-                <AvatarImage src="/api/placeholder/32/32" alt="John Doe" />
-                <AvatarFallback>JD</AvatarFallback>
-              </Avatar>
-              <div className="text-left hidden sm:block">
-                <p className="text-sm font-medium text-foreground">John Doe</p>
-                <p className="text-xs text-muted-foreground">Student</p>
-              </div>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56" align="end">
-            <DropdownMenuLabel>
-              <div className="flex flex-col space-y-1">
-                <p className="font-medium">John Doe</p>
-                <p className="text-sm text-muted-foreground">john.doe@university.edu</p>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer">
-              <User className="mr-2 h-4 w-4" />
-              Profile
-            </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer">
-              <Settings className="mr-2 h-4 w-4" />
-              Settings
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive">
-              <LogOut className="mr-2 h-4 w-4" />
-              Logout
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <UserProfileDropdown />
       </div>
     </header>
   );
