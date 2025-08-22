@@ -154,10 +154,10 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
               ) : (
                 <div className="flex items-center gap-6">
                   <Link
-                    to="/register/teacher"
+                    to="/business"
                     className="text-sm font-medium text-foreground hover:text-primary transition-colors hidden md:block"
                   >
-                    Become a Teacher
+                    For Business
                   </Link>
                   <Link
                     to="/"
