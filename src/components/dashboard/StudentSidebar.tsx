@@ -64,7 +64,7 @@ export function StudentSidebar() {
   const isActive = (path: string) => currentPath === path;
   const getNavClasses = (path: string) =>
     isActive(path)
-      ? "bg-primary/10 text-primary border-r-2 border-primary font-medium"
+      ? "bg-primary/10 text-primary font-medium"
       : "text-muted-foreground hover:text-foreground hover:bg-accent/50";
 
   return (

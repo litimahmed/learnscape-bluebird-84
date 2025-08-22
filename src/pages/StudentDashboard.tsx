@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { StudentSidebar } from "@/components/dashboard/StudentSidebar";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { DashboardContent } from "@/components/dashboard/DashboardContent";
+import { ComingSoon } from "@/components/dashboard/ComingSoon";
 
 const StudentDashboard = () => {
   const [isDark, setIsDark] = useState(false);
@@ -30,7 +32,20 @@ const StudentDashboard = () => {
         <div className="flex-1 flex flex-col">
           <DashboardHeader isDark={isDark} toggleTheme={toggleTheme} />
           <main className="flex-1 p-6 modern-scrollbar overflow-auto">
-            <DashboardContent />
+            <Routes>
+              <Route path="/" element={<DashboardContent />} />
+              <Route path="/courses" element={<ComingSoon title="My Courses" description="View and manage your enrolled courses, track progress, and access course materials." />} />
+              <Route path="/learning-path" element={<ComingSoon title="Learning Path" description="Follow personalized learning paths designed to help you achieve your goals." />} />
+              <Route path="/schedule" element={<ComingSoon title="Schedule" description="Manage your class schedule, upcoming sessions, and important deadlines." />} />
+              <Route path="/achievements" element={<ComingSoon title="Achievements" description="Track your accomplishments, certificates, and learning milestones." />} />
+              <Route path="/progress" element={<ComingSoon title="Progress" description="Monitor your learning progress with detailed analytics and insights." />} />
+              <Route path="/assignments" element={<ComingSoon title="Assignments" description="View and submit your assignments, track deadlines and grades." />} />
+              <Route path="/study-time" element={<ComingSoon title="Study Time" description="Track your study hours and optimize your learning schedule." />} />
+              <Route path="/reviews" element={<ComingSoon title="Reviews" description="Review and rate courses, instructors, and learning materials." />} />
+              <Route path="/messages" element={<ComingSoon title="Messages" description="Communicate with instructors and fellow students." />} />
+              <Route path="/profile" element={<ComingSoon title="Profile" description="Manage your personal information and account settings." />} />
+              <Route path="/settings" element={<ComingSoon title="Settings" description="Customize your learning experience and account preferences." />} />
+            </Routes>
           </main>
         </div>
       </div>
