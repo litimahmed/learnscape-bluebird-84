@@ -90,19 +90,19 @@ function StudentProfileContent() {
   const gradientOptions = [
     {
       name: "Ocean Blue",
-      gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+      gradient: "linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)"
     },
     {
       name: "Sunset Orange",
-      gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"
+      gradient: "linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%)"
     },
     {
       name: "Forest Green",
-      gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"
+      gradient: "linear-gradient(135deg, #00b894 0%, #00a085 100%)"
     },
     {
       name: "Royal Purple",
-      gradient: "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)"
+      gradient: "linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%)"
     }
   ];
 
