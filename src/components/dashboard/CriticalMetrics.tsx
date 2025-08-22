@@ -21,14 +21,14 @@ export function CriticalMetrics() {
       trend: "+12% this week"
     },
     {
-      title: "Active Courses",
-      value: "3",
-      description: "in progress",
+      title: "Learning Hours",
+      value: "24",
+      description: "this month",
       progress: 75,
       icon: BookOpen,
       color: "text-blue-500",
       bgColor: "bg-blue-500/10",
-      trend: "Next: React Hooks"
+      trend: "+8hrs vs last month"
     },
     {
       title: "Study Streak",

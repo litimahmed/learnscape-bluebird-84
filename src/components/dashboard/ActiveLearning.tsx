@@ -11,22 +11,22 @@ import {
 } from "lucide-react";
 
 export function ActiveLearning() {
-  const activeCourses = [
+  const priorityActions = [
     {
-      title: "React Fundamentals",
-      nextAction: "Complete Component Lifecycle",
-      progress: 75,
+      title: "React Assignment",
+      description: "Component Lifecycle project due",
       timeLeft: "2h 30m",
       status: "critical",
-      urgency: "Due today"
+      urgency: "Due today",
+      type: "assignment"
     },
     {
-      title: "JavaScript Advanced",
-      nextAction: "Start Async/Await Module",
-      progress: 45,
-      timeLeft: "4h 15m",
-      status: "active",
-      urgency: "Continue learning"
+      title: "JavaScript Quiz",
+      description: "Async/Await concepts review",
+      timeLeft: "1 day",
+      status: "upcoming", 
+      urgency: "Prepare now",
+      type: "quiz"
     }
   ];
 
@@ -60,16 +60,16 @@ export function ActiveLearning() {
 
   return (
     <div className="space-y-6">
-      {/* Continue Learning */}
+      {/* Priority Actions */}
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
               <CardTitle className="flex items-center">
                 <Play className="w-5 h-5 mr-2 text-primary" />
-                Continue Learning
+                Priority Actions
               </CardTitle>
-              <CardDescription>Pick up where you left off</CardDescription>
+              <CardDescription>Critical tasks requiring immediate attention</CardDescription>
             </div>
             <Button variant="ghost" size="sm">
               <ArrowRight className="w-4 h-4 mr-2" />
@@ -78,7 +78,7 @@ export function ActiveLearning() {
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
-          {activeCourses.map((course, index) => (
+          {priorityActions.map((action, index) => (
             <div key={index} className="p-4 border border-border rounded-lg hover:bg-accent/50 transition-all duration-200 group">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center space-x-3">
@@ -86,30 +86,29 @@ export function ActiveLearning() {
                     <BookOpen className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground">{course.title}</h4>
-                    <p className="text-sm text-muted-foreground">{course.nextAction}</p>
+                    <h4 className="font-semibold text-foreground">{action.title}</h4>
+                    <p className="text-sm text-muted-foreground">{action.description}</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <Badge variant={course.status === "critical" ? "destructive" : "secondary"}>
-                    {course.urgency}
+                  <Badge variant={action.status === "critical" ? "destructive" : "secondary"}>
+                    {action.urgency}
                   </Badge>
                   <Button size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity">
                     <Play className="w-4 h-4 mr-2" />
-                    Continue
+                    Start
                   </Button>
                 </div>
               </div>
               
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground flex items-center">
-                    <Clock className="w-4 h-4 mr-1" />
-                    {course.timeLeft} remaining
-                  </span>
-                  <span className="font-medium text-foreground">{course.progress}%</span>
-                </div>
-                <Progress value={course.progress} className="h-2" />
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground flex items-center">
+                  <Clock className="w-4 h-4 mr-1" />
+                  {action.timeLeft} remaining
+                </span>
+                <Badge variant="outline" className="text-xs">
+                  {action.type}
+                </Badge>
               </div>
             </div>
           ))}
