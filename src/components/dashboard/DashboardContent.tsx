@@ -25,17 +25,17 @@ export function DashboardContent() {
               </div>
               <div>
                 <h1 className="text-2xl font-semibold text-foreground">Welcome back, John</h1>
-                <p className="text-sm text-muted-foreground">Ready to continue your learning journey?</p>
+                <p className="text-sm text-muted-foreground">Let's optimize your learning experience today</p>
               </div>
             </div>
             <div className="flex items-center space-x-3">
               <Button className="bg-gradient-primary hover:opacity-90 shadow-md">
                 <Sparkles className="w-4 h-4 mr-2" />
-                Continue Learning
+                Complete Setup
               </Button>
               <Button variant="outline" className="border-primary/20 hover:bg-primary/5">
                 <ArrowRight className="w-4 h-4 mr-2" />
-                Live Session
+                View Schedule
               </Button>
             </div>
           </div>
@@ -45,15 +45,15 @@ export function DashboardContent() {
             <div className="flex items-center space-x-8">
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-sm font-medium text-foreground">67% to Goal</span>
+                <span className="text-sm font-medium text-foreground">67% Profile Complete</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="text-sm text-muted-foreground">4 Active Courses</span>
+                <span className="text-sm text-muted-foreground">24h Study Time</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                <span className="text-sm text-muted-foreground">Next: React Advanced</span>
+                <span className="text-sm text-muted-foreground">12 Day Streak</span>
               </div>
             </div>
             <div className="text-xs text-muted-foreground">
