@@ -37,16 +37,6 @@ export function ActiveCoursesList() {
     }
   ];
 
-  const getUrgencyColor = (urgency: string) => {
-    switch (urgency) {
-      case "high":
-        return "border-l-red-500";
-      case "medium":
-        return "border-l-orange-500";
-      default:
-        return "border-l-blue-500";
-    }
-  };
 
   return (
     <Card>
@@ -60,7 +50,7 @@ export function ActiveCoursesList() {
       </CardHeader>
       <CardContent className="space-y-4">
         {activeCourses.map((course) => (
-          <Card key={course.id} className={`border-l-4 ${getUrgencyColor(course.urgency)} hover:shadow-md transition-all`}>
+          <Card key={course.id} className="hover:shadow-lg transition-all border-0 bg-card/50 backdrop-blur-sm">
             <CardContent className="p-4">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex-1">
