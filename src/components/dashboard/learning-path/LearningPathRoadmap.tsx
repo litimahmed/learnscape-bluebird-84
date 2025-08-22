@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { PathSelector } from "./PathSelector";
-import { RoadmapCanvas } from "./RoadmapCanvas";
+import { StructuredRoadmap } from "./StructuredRoadmap";
 import { PathControls } from "./PathControls";
 import { PathSidebar } from "./PathSidebar";
 import { NodeModal } from "./NodeModal";
@@ -92,11 +92,9 @@ export function LearningPathRoadmap() {
           </div>
         )}
 
-        {/* Roadmap Canvas */}
-        <div className="flex-1 relative">
-          <RoadmapCanvas
-            learningPath={selectedPath}
-            filters={filters}
+        {/* Structured Roadmap */}
+        <div className="flex-1 relative overflow-y-auto max-h-screen">
+          <StructuredRoadmap
             onNodeClick={handleNodeClick}
           />
         </div>
