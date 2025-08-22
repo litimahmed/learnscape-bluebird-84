@@ -22,9 +22,9 @@ export function MyCourses() {
       <CourseFilters />
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-8">
-        {/* Primary Content Area - 8 columns */}
-        <div className="xl:col-span-8 space-y-8">
+      <div className="grid grid-cols-1 2xl:grid-cols-12 gap-8">
+        {/* Primary Content Area - 9 columns on 2xl screens */}
+        <div className="2xl:col-span-9 space-y-8">
           {/* Active Courses Priority Section */}
           <ActiveCoursesList />
           
@@ -32,8 +32,8 @@ export function MyCourses() {
           <CourseGrid />
         </div>
 
-        {/* Sidebar - 4 columns */}
-        <div className="xl:col-span-4 space-y-6">
+        {/* Sidebar - 3 columns on 2xl screens, hidden on smaller screens */}
+        <div className="hidden 2xl:block 2xl:col-span-3 space-y-6">
           <UpcomingDeadlines />
         </div>
       </div>
