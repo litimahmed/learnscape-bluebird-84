@@ -34,6 +34,7 @@ const StudentDashboard = () => {
           <DashboardHeader isDark={isDark} toggleTheme={toggleTheme} />
           <main className="flex-1 p-6 modern-scrollbar overflow-auto">
             <Routes>
+              <Route index element={<DashboardContent />} />
               <Route path="/" element={<DashboardContent />} />
               <Route path="/courses" element={<MyCourses />} />
               <Route path="/learning-path" element={<ComingSoon title="Learning Path" description="Follow personalized learning paths designed to help you achieve your goals." />} />
