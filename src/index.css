@@ -131,6 +131,11 @@
     @apply backdrop-blur-xl bg-white/10 border border-white/20;
   }
   
+  /* Gradient Backgrounds */
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
   /* Feature Cards */
   .feature-card {
     @apply bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1;
