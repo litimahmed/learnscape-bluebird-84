@@ -74,7 +74,7 @@ export function StudentSidebar() {
     >
       <SidebarContent className="bg-card modern-scrollbar">
         {/* Header with Toggle */}
-        <div className={`p-4 border-b border-border flex items-center ${collapsed ? "justify-center" : "justify-between"}`}>
+        <div className={`border-b border-border flex items-center ${collapsed ? "justify-center py-4" : "justify-between p-4"}`}>
           {!collapsed ? (
             <>
               <div className="flex items-center space-x-3">
@@ -94,8 +94,10 @@ export function StudentSidebar() {
               </SidebarTrigger>
             </>
           ) : (
-            <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg">
-              <Zap className="w-4 h-4 text-primary-foreground" />
+            <div className="h-11 w-full flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg">
+                <Zap className="w-4 h-4 text-primary-foreground" />
+              </div>
             </div>
           )}
         </div>
