@@ -40,8 +40,13 @@ export function CourseCard({ course }: CourseCardProps) {
     <Card className="group hover:shadow-lg transition-all duration-300 border-border hover:border-primary/20">
       <CardContent className="p-0">
         {/* Course Image/Thumbnail */}
-        <div className="relative h-40 bg-gradient-to-br from-primary/10 to-primary/5 rounded-t-lg overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+        <div className="relative h-40 rounded-t-lg overflow-hidden">
+          <img 
+            src={course.image} 
+            alt={`${course.title} course thumbnail`}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
           <div className="absolute top-3 left-3">
             <Badge className={getStatusColor(course.status)}>
               {course.status}
