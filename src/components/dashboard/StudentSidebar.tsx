@@ -10,14 +10,11 @@ import {
   Settings,
   User,
   LogOut,
-  ChevronLeft,
+  ChevronRight,
   BarChart3,
   FileText,
   Clock,
-  Star,
-  Zap,
-  Target,
-  Bookmark
+  Star
 } from "lucide-react";
 import {
   Sidebar,
@@ -32,7 +29,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const mainNavItems = [
   { title: "Dashboard", url: "/dashboard", icon: Home },
@@ -73,55 +70,38 @@ export function StudentSidebar() {
       collapsible="icon"
     >
       <SidebarContent className="bg-card modern-scrollbar">
-        {/* Header with Toggle */}
-        <div className={`border-b border-border flex items-center ${collapsed ? "justify-center py-4" : "justify-between p-4"}`}>
+        {/* Logo Section */}
+        <div className="p-4 border-b border-border">
           {!collapsed ? (
-            <>
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg">
-                  <Zap className="w-4 h-4 text-primary-foreground" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-foreground text-lg">LearnHub</h3>
-                  <div className="flex items-center space-x-2">
-                    <Badge variant="secondary" className="text-xs">Pro</Badge>
-                    <span className="text-xs text-muted-foreground">Level 5</span>
-                  </div>
-                </div>
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                <GraduationCap className="w-5 h-5 text-primary-foreground" />
               </div>
-              <SidebarTrigger className="h-8 w-8 hover:bg-accent rounded-lg flex items-center justify-center">
-                <ChevronLeft className="w-4 h-4 transition-transform duration-200" />
-              </SidebarTrigger>
-            </>
+              <div>
+                <h3 className="font-semibold text-foreground">EduPlatform</h3>
+                <p className="text-xs text-muted-foreground">Student Portal</p>
+              </div>
+            </div>
           ) : (
-            <div className="h-11 w-full flex items-center justify-center">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg">
-                <Zap className="w-4 h-4 text-primary-foreground" />
+            <div className="flex justify-center">
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                <GraduationCap className="w-5 h-5 text-primary-foreground" />
               </div>
             </div>
           )}
         </div>
 
-        {/* Collapsed Toggle Button */}
-        {collapsed && (
-          <div className="p-2 border-b border-border flex justify-center">
-            <SidebarTrigger className="h-8 w-8 hover:bg-accent rounded-lg flex items-center justify-center">
-              <ChevronLeft className="w-4 h-4 transition-transform duration-200 rotate-180" />
-            </SidebarTrigger>
-          </div>
-        )}
-
-        {/* Quick Stats */}
+        {/* User Profile Section */}
         {!collapsed && (
           <div className="p-4 border-b border-border">
-            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-primary/5 rounded-lg p-3 text-center">
-                <div className="text-lg font-bold text-primary">67%</div>
-                <div className="text-xs text-muted-foreground">Progress</div>
-              </div>
-              <div className="bg-green-500/10 rounded-lg p-3 text-center">
-                <div className="text-lg font-bold text-green-600">4</div>
-                <div className="text-xs text-muted-foreground">Courses</div>
+            <div className="flex items-center space-x-3">
+              <Avatar className="w-10 h-10">
+                <AvatarImage src="/api/placeholder/40/40" alt="Student" />
+                <AvatarFallback>JD</AvatarFallback>
+              </Avatar>
+              <div className="flex-1 min-w-0">
+                <p className="font-medium text-foreground truncate">John Doe</p>
+                <p className="text-sm text-muted-foreground truncate">Computer Science</p>
               </div>
             </div>
           </div>
@@ -136,17 +116,17 @@ export function StudentSidebar() {
                 Main
               </SidebarGroupLabel>
             )}
-            <SidebarGroupContent className={collapsed ? "px-1" : "px-2"}>
+            <SidebarGroupContent className="px-2">
               <SidebarMenu>
                 {mainNavItems.map((item) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild className="h-11">
                       <NavLink
                         to={item.url}
-                        className={`flex items-center ${collapsed ? "justify-center px-0" : "px-3"} py-2 rounded-lg transition-all duration-200 ${getNavClasses(item.url)}`}
+                        className={`flex items-center px-3 py-2 rounded-lg transition-all duration-200 ${getNavClasses(item.url)}`}
                       >
-                        <item.icon className="w-5 h-5" />
-                        {!collapsed && <span className="font-medium ml-3">{item.title}</span>}
+                        <item.icon className={`${collapsed ? "w-5 h-5" : "w-5 h-5 mr-3"}`} />
+                        {!collapsed && <span className="font-medium">{item.title}</span>}
                       </NavLink>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -162,17 +142,17 @@ export function StudentSidebar() {
                 Learning
               </SidebarGroupLabel>
             )}
-            <SidebarGroupContent className={collapsed ? "px-1" : "px-2"}>
+            <SidebarGroupContent className="px-2">
               <SidebarMenu>
                 {secondaryNavItems.map((item) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild className="h-11">
                       <NavLink
                         to={item.url}
-                        className={`flex items-center ${collapsed ? "justify-center px-0" : "px-3"} py-2 rounded-lg transition-all duration-200 ${getNavClasses(item.url)}`}
+                        className={`flex items-center px-3 py-2 rounded-lg transition-all duration-200 ${getNavClasses(item.url)}`}
                       >
-                        <item.icon className="w-5 h-5" />
-                        {!collapsed && <span className="font-medium ml-3">{item.title}</span>}
+                        <item.icon className={`${collapsed ? "w-5 h-5" : "w-5 h-5 mr-3"}`} />
+                        {!collapsed && <span className="font-medium">{item.title}</span>}
                       </NavLink>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -188,17 +168,17 @@ export function StudentSidebar() {
                 Account
               </SidebarGroupLabel>
             )}
-            <SidebarGroupContent className={collapsed ? "px-1" : "px-2"}>
+            <SidebarGroupContent className="px-2">
               <SidebarMenu>
                 {accountItems.map((item) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild className="h-11">
                       <NavLink
                         to={item.url}
-                        className={`flex items-center ${collapsed ? "justify-center px-0" : "px-3"} py-2 rounded-lg transition-all duration-200 ${getNavClasses(item.url)}`}
+                        className={`flex items-center px-3 py-2 rounded-lg transition-all duration-200 ${getNavClasses(item.url)}`}
                       >
-                        <item.icon className="w-5 h-5" />
-                        {!collapsed && <span className="font-medium ml-3">{item.title}</span>}
+                        <item.icon className={`${collapsed ? "w-5 h-5" : "w-5 h-5 mr-3"}`} />
+                        {!collapsed && <span className="font-medium">{item.title}</span>}
                       </NavLink>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -207,16 +187,23 @@ export function StudentSidebar() {
                   <SidebarMenuButton asChild className="h-11">
                     <Button
                       variant="ghost"
-                      className={`w-full text-muted-foreground hover:text-foreground hover:bg-accent/50 h-11 ${collapsed ? "justify-center px-0" : "justify-start px-3"}`}
+                      className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-accent/50 h-11 px-3"
                     >
-                      <LogOut className="w-5 h-5" />
-                      {!collapsed && <span className="font-medium ml-3">Logout</span>}
+                      <LogOut className={`${collapsed ? "w-5 h-5" : "w-5 h-5 mr-3"}`} />
+                      {!collapsed && <span className="font-medium">Logout</span>}
                     </Button>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
+        </div>
+
+        {/* Sidebar Toggle */}
+        <div className="p-2 border-t border-border">
+          <SidebarTrigger className="w-full h-10 flex items-center justify-center hover:bg-accent rounded-lg">
+            <ChevronRight className={`w-4 h-4 transition-transform ${collapsed ? "" : "rotate-180"}`} />
+          </SidebarTrigger>
         </div>
       </SidebarContent>
     </Sidebar>
