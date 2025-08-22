@@ -149,7 +149,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
                   >
                     Dashboard
                   </Link>
-                  <UserProfileDropdown user={user} />
+                  <UserProfileDropdown />
                 </div>
               ) : (
                 <div className="flex items-center gap-6">
