@@ -89,17 +89,28 @@ export function StudentSidebar() {
               </div>
             </div>
           ) : (
-            <div className="flex justify-center">
+            <div className="flex justify-center w-full">
               <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg">
                 <Zap className="w-4 h-4 text-primary-foreground" />
               </div>
             </div>
           )}
           
-          <SidebarTrigger className="h-8 w-8 hover:bg-accent rounded-lg flex items-center justify-center">
-            <ChevronLeft className={`w-4 h-4 transition-transform duration-200 ${collapsed ? "rotate-180" : ""}`} />
-          </SidebarTrigger>
+          {!collapsed && (
+            <SidebarTrigger className="h-8 w-8 hover:bg-accent rounded-lg flex items-center justify-center">
+              <ChevronLeft className="w-4 h-4 transition-transform duration-200" />
+            </SidebarTrigger>
+          )}
         </div>
+
+        {/* Collapsed Toggle Button */}
+        {collapsed && (
+          <div className="p-2 border-b border-border flex justify-center">
+            <SidebarTrigger className="h-8 w-8 hover:bg-accent rounded-lg flex items-center justify-center">
+              <ChevronLeft className="w-4 h-4 transition-transform duration-200 rotate-180" />
+            </SidebarTrigger>
+          </div>
+        )}
 
         {/* Quick Stats */}
         {!collapsed && (
@@ -126,17 +137,17 @@ export function StudentSidebar() {
                 Main
               </SidebarGroupLabel>
             )}
-            <SidebarGroupContent className="px-2">
+            <SidebarGroupContent className={collapsed ? "px-1" : "px-2"}>
               <SidebarMenu>
                 {mainNavItems.map((item) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild className="h-11">
                       <NavLink
                         to={item.url}
-                        className={`flex items-center px-3 py-2 rounded-lg transition-all duration-200 ${getNavClasses(item.url)}`}
+                        className={`flex items-center ${collapsed ? "justify-center px-0" : "px-3"} py-2 rounded-lg transition-all duration-200 ${getNavClasses(item.url)}`}
                       >
-                        <item.icon className={`${collapsed ? "w-5 h-5" : "w-5 h-5 mr-3"}`} />
-                        {!collapsed && <span className="font-medium">{item.title}</span>}
+                        <item.icon className="w-5 h-5" />
+                        {!collapsed && <span className="font-medium ml-3">{item.title}</span>}
                       </NavLink>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -152,17 +163,17 @@ export function StudentSidebar() {
                 Learning
               </SidebarGroupLabel>
             )}
-            <SidebarGroupContent className="px-2">
+            <SidebarGroupContent className={collapsed ? "px-1" : "px-2"}>
               <SidebarMenu>
                 {secondaryNavItems.map((item) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild className="h-11">
                       <NavLink
                         to={item.url}
-                        className={`flex items-center px-3 py-2 rounded-lg transition-all duration-200 ${getNavClasses(item.url)}`}
+                        className={`flex items-center ${collapsed ? "justify-center px-0" : "px-3"} py-2 rounded-lg transition-all duration-200 ${getNavClasses(item.url)}`}
                       >
-                        <item.icon className={`${collapsed ? "w-5 h-5" : "w-5 h-5 mr-3"}`} />
-                        {!collapsed && <span className="font-medium">{item.title}</span>}
+                        <item.icon className="w-5 h-5" />
+                        {!collapsed && <span className="font-medium ml-3">{item.title}</span>}
                       </NavLink>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -178,17 +189,17 @@ export function StudentSidebar() {
                 Account
               </SidebarGroupLabel>
             )}
-            <SidebarGroupContent className="px-2">
+            <SidebarGroupContent className={collapsed ? "px-1" : "px-2"}>
               <SidebarMenu>
                 {accountItems.map((item) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild className="h-11">
                       <NavLink
                         to={item.url}
-                        className={`flex items-center px-3 py-2 rounded-lg transition-all duration-200 ${getNavClasses(item.url)}`}
+                        className={`flex items-center ${collapsed ? "justify-center px-0" : "px-3"} py-2 rounded-lg transition-all duration-200 ${getNavClasses(item.url)}`}
                       >
-                        <item.icon className={`${collapsed ? "w-5 h-5" : "w-5 h-5 mr-3"}`} />
-                        {!collapsed && <span className="font-medium">{item.title}</span>}
+                        <item.icon className="w-5 h-5" />
+                        {!collapsed && <span className="font-medium ml-3">{item.title}</span>}
                       </NavLink>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -197,10 +208,10 @@ export function StudentSidebar() {
                   <SidebarMenuButton asChild className="h-11">
                     <Button
                       variant="ghost"
-                      className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-accent/50 h-11 px-3"
+                      className={`w-full text-muted-foreground hover:text-foreground hover:bg-accent/50 h-11 ${collapsed ? "justify-center px-0" : "justify-start px-3"}`}
                     >
-                      <LogOut className={`${collapsed ? "w-5 h-5" : "w-5 h-5 mr-3"}`} />
-                      {!collapsed && <span className="font-medium">Logout</span>}
+                      <LogOut className="w-5 h-5" />
+                      {!collapsed && <span className="font-medium ml-3">Logout</span>}
                     </Button>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
