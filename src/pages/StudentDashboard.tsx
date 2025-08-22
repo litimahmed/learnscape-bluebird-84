@@ -6,6 +6,7 @@ import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { DashboardContent } from "@/components/dashboard/DashboardContent";
 import { ComingSoon } from "@/components/dashboard/ComingSoon";
 import { MyCourses } from "@/components/dashboard/courses/MyCourses";
+import { LearningPathRoadmap } from "@/components/dashboard/learning-path/LearningPathRoadmap";
 
 const StudentDashboard = () => {
   const [isDark, setIsDark] = useState(false);
@@ -37,7 +38,7 @@ const StudentDashboard = () => {
               <Route index element={<DashboardContent />} />
               <Route path="/" element={<DashboardContent />} />
               <Route path="/courses" element={<MyCourses />} />
-              <Route path="/learning-path" element={<ComingSoon title="Learning Path" description="Follow personalized learning paths designed to help you achieve your goals." />} />
+              <Route path="/learning-path" element={<LearningPathRoadmap />} />
               <Route path="/schedule" element={<ComingSoon title="Schedule" description="Manage your class schedule, upcoming sessions, and important deadlines." />} />
               <Route path="/achievements" element={<ComingSoon title="Achievements" description="Track your accomplishments, certificates, and learning milestones." />} />
               <Route path="/progress" element={<ComingSoon title="Progress" description="Monitor your learning progress with detailed analytics and insights." />} />
