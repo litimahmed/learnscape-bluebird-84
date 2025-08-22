@@ -69,7 +69,7 @@ export function StudentSidebar() {
       className={`${collapsed ? "w-16" : "w-64"} border-r border-border transition-all duration-300`}
       collapsible="icon"
     >
-      <SidebarContent className="bg-card">
+      <SidebarContent className="bg-card modern-scrollbar">
         {/* Logo Section */}
         <div className="p-4 border-b border-border">
           {!collapsed ? (
