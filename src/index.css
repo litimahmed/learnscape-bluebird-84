@@ -167,6 +167,39 @@
   }
 }
 
+/* Modern Professional Scrollbar */
+.modern-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.2) transparent;
+}
+
+.modern-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.modern-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.modern-scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.2);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: all 0.2s ease;
+}
+
+.modern-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.4);
+  border-width: 1px;
+}
+
+.modern-scrollbar::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
