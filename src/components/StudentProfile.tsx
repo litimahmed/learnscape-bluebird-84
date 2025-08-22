@@ -86,6 +86,7 @@ function StudentProfileContent() {
 
   // Blue gradient for cover
   const coverGradient = "linear-gradient(135deg, #2994ff 0%, #1a73e8 100%)";
+  console.log("coverGradient defined:", coverGradient);
 
   // Mock data
   const recentActivities = [
