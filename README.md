@@ -4,6 +4,37 @@
 
 **URL**: https://lovable.dev/projects/8413fa12-8a9d-46fc-9a33-9c3551ffd870
 
+## "For Business" - Simple Explanation
+
+**What it is:** A corporate training solution that helps companies train their employees online.
+
+**Who it's for:**
+- Companies that want to train their staff
+- HR departments managing employee development
+- Organizations needing compliance training
+
+**What it offers:**
+- **Team Management** - Organize employees into groups and assign courses
+- **Progress Tracking** - See who completed what training and how they're doing
+- **Custom Training Paths** - Create specific learning programs for different roles
+- **Analytics** - Get reports on training effectiveness and completion rates
+- **Compliance Training** - Ensure employees meet regulatory requirements
+
+**Real-world examples:**
+- New Employee Onboarding - Automatically assign training to new hires
+- Skills Development - Upskill teams in new technologies or soft skills
+- Leadership Training - Develop managers and executives
+- Safety Training - Ensure workplace compliance and certifications
+
+**The business model:**
+- Monthly subscription per employee ($19-$59/month depending on features)
+- Enterprise deals for large companies
+- Free trials to get companies started
+
+**Think of it like:** Netflix for corporate training - companies pay a monthly fee to give their employees access to professional courses and training programs, with admin tools to manage and track everything.
+
+This targets the B2B market instead of individual learners, which typically means higher revenue per customer and more stable, long-term contracts.
+
 ## How can I edit this code?
 
 There are several ways of editing your application.
