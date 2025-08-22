@@ -61,12 +61,14 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
 
           {/* Right - Help Center & Theme Toggle */}
           <div className="flex items-center gap-3 flex-shrink-0">
-            <Button
-              variant="ghost"
-              className="text-white border border-white/30 hover:bg-white/10 text-sm px-4 py-1 h-auto"
-            >
-              Help Center
-            </Button>
+            <Link to="/help">
+              <Button
+                variant="ghost"
+                className="text-white border border-white/30 hover:bg-white/10 text-sm px-4 py-1 h-auto"
+              >
+                Help Center
+              </Button>
+            </Link>
             <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
           </div>
         </div>
