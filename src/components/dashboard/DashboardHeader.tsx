@@ -1,0 +1,150 @@
+import { Search, Bell, Settings, User, LogOut, Plus, Filter, Command } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Badge } from "@/components/ui/badge";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
+
+export function DashboardHeader() {
+  return (
+    <header className="h-16 bg-card border-b border-border px-6 flex items-center justify-between sticky top-0 z-40 backdrop-blur-sm">
+      {/* Search Section */}
+      <div className="flex items-center flex-1 max-w-2xl">
+        <div className="relative w-full max-w-md">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+          <Input
+            placeholder="Search courses, assignments, or resources..."
+            className="pl-10 pr-20 h-10 bg-background/50 border-border focus:bg-background transition-colors"
+          />
+          <kbd className="absolute right-3 top-1/2 transform -translate-y-1/2 inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+            <Command className="h-3 w-3" />
+            K
+          </kbd>
+        </div>
+      </div>
+
+      {/* Action Buttons & User Menu */}
+      <div className="flex items-center space-x-3">
+        {/* Quick Actions */}
+        <Button variant="outline" size="sm" className="h-9">
+          <Plus className="w-4 h-4 mr-2" />
+          New Note
+        </Button>
+        
+        <Button variant="outline" size="sm" className="h-9">
+          <Filter className="w-4 h-4 mr-2" />
+          Filter
+        </Button>
+
+        {/* Theme Toggle */}
+        <ThemeToggle isDark={false} toggleTheme={() => {}} />
+
+        {/* Notifications */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="sm" className="relative h-9 w-9 p-0">
+              <Bell className="w-4 h-4" />
+              <Badge 
+                variant="destructive" 
+                className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs"
+              >
+                3
+              </Badge>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-80 p-0" align="end">
+            <DropdownMenuLabel className="p-4 border-b">
+              <div className="flex items-center justify-between">
+                <span className="font-semibold">Notifications</span>
+                <Badge variant="secondary" className="text-xs">3 new</Badge>
+              </div>
+            </DropdownMenuLabel>
+            <div className="max-h-64 overflow-y-auto">
+              <div className="p-3 border-b hover:bg-accent/50 transition-colors cursor-pointer">
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-foreground">New assignment posted</p>
+                    <p className="text-sm text-muted-foreground truncate">React Fundamentals - Project 3 is now available</p>
+                    <p className="text-xs text-muted-foreground mt-1">2 minutes ago</p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-3 border-b hover:bg-accent/50 transition-colors cursor-pointer">
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-foreground">Course completion</p>
+                    <p className="text-sm text-muted-foreground truncate">Congratulations! You've completed JavaScript Basics</p>
+                    <p className="text-xs text-muted-foreground mt-1">1 hour ago</p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-3 hover:bg-accent/50 transition-colors cursor-pointer">
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-foreground">Upcoming deadline</p>
+                    <p className="text-sm text-muted-foreground truncate">Database Design assignment due in 2 days</p>
+                    <p className="text-xs text-muted-foreground mt-1">3 hours ago</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="p-3 border-t">
+              <Button variant="ghost" className="w-full text-sm">
+                View all notifications
+              </Button>
+            </div>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        {/* User Profile Dropdown */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-9 px-2">
+              <Avatar className="w-7 h-7 mr-2">
+                <AvatarImage src="/api/placeholder/32/32" alt="John Doe" />
+                <AvatarFallback>JD</AvatarFallback>
+              </Avatar>
+              <div className="text-left hidden sm:block">
+                <p className="text-sm font-medium text-foreground">John Doe</p>
+                <p className="text-xs text-muted-foreground">Student</p>
+              </div>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56" align="end">
+            <DropdownMenuLabel>
+              <div className="flex flex-col space-y-1">
+                <p className="font-medium">John Doe</p>
+                <p className="text-sm text-muted-foreground">john.doe@university.edu</p>
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="cursor-pointer">
+              <User className="mr-2 h-4 w-4" />
+              Profile
+            </DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
+              <Settings className="mr-2 h-4 w-4" />
+              Settings
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive">
+              <LogOut className="mr-2 h-4 w-4" />
+              Logout
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    </header>
+  );
+}

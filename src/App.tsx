@@ -11,6 +11,7 @@ import Contact from "./pages/Contact";
 import Register from "./pages/Register";
 import HelpCenter from "./pages/HelpCenter";
 import Business from "./pages/Business";
+import StudentDashboard from "./pages/StudentDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/register" element={<Register />} />
+          <Route path="/dashboard/*" element={<StudentDashboard />} />
           <Route path="/*" element={
             <Layout>
               <Routes>
