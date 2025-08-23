@@ -7,6 +7,10 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import helpCenterHero from "@/assets/help-center-hero.jpg";
+import articleCreateCourse from "@/assets/article-create-course.jpg";
+import articlePaymentMethods from "@/assets/article-payment-methods.jpg";
+import articleVideoTroubleshooting from "@/assets/article-video-troubleshooting.jpg";
+import articleAccountSecurity from "@/assets/article-account-security.jpg";
 
 const HelpCenter = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -62,24 +66,36 @@ const HelpCenter = () => {
       category: "Getting Started",
       views: 2500,
       helpful: 95,
+      image: articleCreateCourse,
+      description: "A comprehensive guide to building your first online course from start to finish.",
+      readTime: "8 min read"
     },
     {
       title: "Setting up your payment methods",
       category: "Billing & Payments",
       views: 1800,
       helpful: 92,
+      image: articlePaymentMethods,
+      description: "Learn how to securely configure and manage your payment options.",
+      readTime: "5 min read"
     },
     {
       title: "Troubleshooting video playback issues",
       category: "Technical Support",
       views: 1200,
       helpful: 88,
+      image: articleVideoTroubleshooting,
+      description: "Resolve common video streaming problems and optimize your viewing experience.",
+      readTime: "6 min read"
     },
     {
       title: "Managing your account security",
       category: "Privacy & Security",
       views: 980,
       helpful: 94,
+      image: articleAccountSecurity,
+      description: "Essential security practices to protect your account and personal data.",
+      readTime: "7 min read"
     },
   ];
 
@@ -269,37 +285,107 @@ const HelpCenter = () => {
         </div>
       </section>
 
-      {/* Popular Articles */}
-      <section className="py-16 px-6 bg-muted/30">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Popular Articles</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Enhanced Popular Articles Section */}
+      <section className="py-24 px-6 bg-gradient-to-br from-background via-accent/5 to-background relative overflow-hidden">
+        {/* Floating Background Decorations */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-br from-primary/8 to-transparent rounded-full blur-3xl" />
+          <div className="absolute bottom-32 left-20 w-96 h-96 bg-gradient-to-br from-accent/6 to-transparent rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full mb-6">
+              <Star className="h-4 w-4" />
+              <span className="text-sm font-medium">Most Popular</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-br from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent">
+              Popular Articles
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Discover the most helpful resources our community relies on
+            </p>
+          </div>
+
+          {/* Professional Article Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {popularArticles.map((article, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow cursor-pointer">
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <Badge variant="outline">{article.category}</Badge>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <span className="flex items-center gap-1">
-                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                        {article.helpful}% helpful
-                      </span>
-                      <span>{article.views} views</span>
-                    </div>
+              <Card key={index} className="group relative overflow-hidden border-0 bg-card/60 backdrop-blur-sm hover:bg-card/90 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer">
+                {/* Image Container */}
+                <div className="relative h-56 overflow-hidden">
+                  <img 
+                    src={article.image} 
+                    alt={article.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  {/* Image Overlay Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
+                  
+                  {/* Category Badge on Image */}
+                  <div className="absolute top-4 left-4">
+                    <Badge className="bg-primary/90 text-primary-foreground backdrop-blur-sm border-0 shadow-lg">
+                      {article.category}
+                    </Badge>
                   </div>
-                  <h3 className="font-semibold text-lg mb-2 hover:text-primary transition-colors">
-                    {article.title}
-                  </h3>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground flex items-center gap-1">
-                      <Clock className="h-4 w-4" />
-                      2 min read
-                    </span>
-                    <ArrowRight className="h-4 w-4 text-primary" />
+
+                  {/* Stats Overlay */}
+                  <div className="absolute top-4 right-4 flex gap-2">
+                    <Badge variant="secondary" className="bg-background/80 text-foreground backdrop-blur-sm">
+                      <Star className="h-3 w-3 mr-1 fill-yellow-400 text-yellow-400" />
+                      {article.helpful}%
+                    </Badge>
+                  </div>
+                </div>
+
+                {/* Content Container */}
+                <CardContent className="p-8 relative">
+                  {/* Floating Card Accent */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-transparent to-accent/3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  <div className="relative space-y-4">
+                    {/* Title */}
+                    <h3 className="text-2xl font-bold leading-tight group-hover:text-primary transition-colors duration-300">
+                      {article.title}
+                    </h3>
+                    
+                    {/* Description */}
+                    <p className="text-muted-foreground leading-relaxed">
+                      {article.description}
+                    </p>
+
+                    {/* Meta Information */}
+                    <div className="flex items-center justify-between pt-4 border-t border-border/50">
+                      <div className="flex items-center gap-6 text-sm text-muted-foreground">
+                        <span className="flex items-center gap-2">
+                          <Clock className="h-4 w-4" />
+                          {article.readTime}
+                        </span>
+                        <span className="flex items-center gap-2">
+                          <Users className="h-4 w-4" />
+                          {article.views.toLocaleString()} views
+                        </span>
+                      </div>
+                      
+                      {/* Read More Arrow */}
+                      <div className="flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all duration-300">
+                        <span className="text-sm">Read More</span>
+                        <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                      </div>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
             ))}
+          </div>
+
+          {/* View All Articles CTA */}
+          <div className="text-center mt-16">
+            <Button size="lg" className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 px-8 py-6">
+              <Book className="h-5 w-5 mr-2" />
+              View All Articles
+              <ArrowRight className="h-5 w-5 ml-2" />
+            </Button>
           </div>
         </div>
       </section>
