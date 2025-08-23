@@ -139,25 +139,25 @@ const HelpCenter = () => {
       <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/90 to-primary/70 text-primary-foreground py-24">
         {/* Professional Background Elements */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/20 via-transparent to-transparent" />
-          <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-radial from-white/10 to-transparent rounded-full blur-3xl" />
-          <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-radial from-white/10 to-transparent rounded-full blur-3xl" />
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary-foreground/20 via-transparent to-transparent" />
+          <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-radial from-primary-foreground/10 to-transparent rounded-full blur-3xl" />
+          <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-radial from-primary-foreground/10 to-transparent rounded-full blur-3xl" />
         </div>
         
         {/* Subtle Grid Pattern */}
         <div className="absolute inset-0 opacity-5">
-          <div className="h-full w-full bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:40px_40px]" />
+          <div className="h-full w-full bg-[linear-gradient(hsl(var(--primary-foreground)/0.1)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--primary-foreground)/0.1)_1px,transparent_1px)] bg-[size:40px_40px]" />
         </div>
 
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <div className="mb-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-foreground/10 backdrop-blur-sm rounded-full border border-primary-foreground/20 mb-6">
               <HelpCircle className="h-4 w-4" />
               <span className="text-sm font-medium">Help Center</span>
             </div>
           </div>
           
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-br from-white via-white/95 to-white/80 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-br from-primary-foreground via-primary-foreground/95 to-primary-foreground/80 bg-clip-text text-transparent">
             How can we help you?
           </h1>
           <p className="text-xl md:text-2xl mb-12 opacity-90 max-w-3xl mx-auto leading-relaxed">
@@ -171,23 +171,23 @@ const HelpCenter = () => {
               <Input
                 type="text"
                 placeholder="Search for help articles, guides, and more..."
-                className="pl-16 pr-6 py-6 text-lg bg-white/95 backdrop-blur-sm text-foreground border-0 shadow-2xl rounded-2xl focus:ring-2 focus:ring-white/50 transition-all duration-300 group-hover:shadow-xl"
+                className="pl-16 pr-6 py-6 text-lg bg-background/95 backdrop-blur-sm text-foreground border-0 shadow-2xl rounded-2xl focus:ring-2 focus:ring-primary-foreground/50 transition-all duration-300 group-hover:shadow-xl"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 rounded-2xl blur-xl -z-10 opacity-50" />
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-foreground/20 to-primary-foreground/10 rounded-2xl blur-xl -z-10 opacity-50" />
             </div>
           </div>
           
           {/* Quick Action Buttons */}
           <div className="flex flex-wrap justify-center gap-4 mt-8">
-            <Button variant="secondary" className="bg-white/10 hover:bg-white/20 text-white border-white/20 backdrop-blur-sm">
+            <Button variant="secondary" className="bg-primary-foreground/10 hover:bg-primary-foreground/20 text-primary-foreground border-primary-foreground/20 backdrop-blur-sm">
               Popular Articles
             </Button>
-            <Button variant="secondary" className="bg-white/10 hover:bg-white/20 text-white border-white/20 backdrop-blur-sm">
+            <Button variant="secondary" className="bg-primary-foreground/10 hover:bg-primary-foreground/20 text-primary-foreground border-primary-foreground/20 backdrop-blur-sm">
               Video Tutorials
             </Button>
-            <Button variant="secondary" className="bg-white/10 hover:bg-white/20 text-white border-white/20 backdrop-blur-sm">
+            <Button variant="secondary" className="bg-primary-foreground/10 hover:bg-primary-foreground/20 text-primary-foreground border-primary-foreground/20 backdrop-blur-sm">
               Contact Support
             </Button>
           </div>
