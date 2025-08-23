@@ -30,16 +30,14 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="min-h-screen bg-background relative">
       {/* Professional Floating Background Blobs */}
       <div className="fixed inset-0 pointer-events-none z-[9999] overflow-hidden">
-        {/* Primary Blob */}
-        <div className="absolute top-20 -left-[3%] w-96 h-96 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full blur-3xl animate-float" />
+        {/* Large Left Blob */}
+        <div className="fixed top-32 left-0 w-96 h-96 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full blur-3xl animate-float" />
         
-        {/* Secondary Blob */}
-        <div className="absolute top-20 right-[40%] w-40 h-40 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full blur-3xl animate-float" style={{animationDelay: '2s', animationDirection: 'reverse'}} />
+        {/* Small Left Blob */}
+        <div className="fixed top-80 left-20 w-40 h-40 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full blur-3xl animate-float" style={{animationDelay: '2s', animationDirection: 'reverse'}} />
 
-        
-        {/* Quaternary Blob */}
-        
-        
+        {/* Right Blob */}
+        <div className="fixed top-40 right-0 w-64 h-64 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full blur-3xl animate-float" style={{animationDelay: '4s'}} />
       </div>
 
       {/* Content with higher z-index */}
