@@ -39,7 +39,6 @@ const Layout = ({ children }: LayoutProps) => {
         {/* Tertiary Blob */}
         
         {/* Quaternary Blob */}
-        <div className="absolute bottom-10 -right-20 w-72 h-72 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full blur-3xl animate-float" style={{animationDelay: '1s', animationDirection: 'reverse'}} />
         
         {/* Small Accent Blobs */}
         
