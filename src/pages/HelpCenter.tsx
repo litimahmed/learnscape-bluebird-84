@@ -194,36 +194,74 @@ const HelpCenter = () => {
         </div>
       </section>
 
-      {/* Quick Links */}
-      <section className="py-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Browse Help Topics</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Enhanced Help Topics Section */}
+      <section className="py-24 px-6 bg-gradient-to-br from-background via-muted/20 to-background relative overflow-hidden">
+        {/* Subtle Background Elements */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-br from-accent/8 to-transparent rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full mb-6">
+              <Book className="h-4 w-4" />
+              <span className="text-sm font-medium">Help Topics</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-br from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent">
+              Browse Help Topics
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Find exactly what you're looking for in our comprehensive knowledge base
+            </p>
+          </div>
+
+          {/* Enhanced Category Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {helpCategories.map((category, index) => {
               const IconComponent = category.icon;
               return (
-                <Card key={index} className="hover:shadow-lg transition-shadow cursor-pointer group">
-                  <CardHeader>
-                    <div className="flex items-center gap-4">
-                      <div className={`p-3 rounded-lg ${category.color}`}>
-                        <IconComponent className="h-6 w-6 text-white" />
+                <Card key={index} className="group relative overflow-hidden border-0 bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                  {/* Card Background Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  <CardHeader className="relative">
+                    <div className="flex items-start gap-6">
+                      <div className={`p-4 rounded-2xl ${category.color} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                        <IconComponent className="h-8 w-8 text-white" />
                       </div>
-                      <div className="flex-1">
-                        <CardTitle className="group-hover:text-primary transition-colors">
-                          {category.title}
-                        </CardTitle>
-                        <Badge variant="secondary" className="mt-1">
+                      <div className="flex-1 space-y-3">
+                        <div className="flex items-center justify-between">
+                          <CardTitle className="text-xl group-hover:text-primary transition-colors duration-300">
+                            {category.title}
+                          </CardTitle>
+                          <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
+                        </div>
+                        <Badge variant="secondary" className="bg-primary/10 text-primary hover:bg-primary/20">
                           {category.articles} articles
                         </Badge>
                       </div>
                     </div>
                   </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">{category.description}</p>
+                  <CardContent className="relative pt-0">
+                    <p className="text-muted-foreground leading-relaxed">{category.description}</p>
+                    
+                    {/* Hover Effect Border */}
+                    <div className="absolute inset-0 border-2 border-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </CardContent>
                 </Card>
               );
             })}
+          </div>
+
+          {/* Call to Action */}
+          <div className="text-center mt-16">
+            <p className="text-muted-foreground mb-6">Can't find what you're looking for?</p>
+            <Button size="lg" className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300">
+              <MessageCircle className="h-5 w-5 mr-2" />
+              Contact Our Support Team
+            </Button>
           </div>
         </div>
       </section>
