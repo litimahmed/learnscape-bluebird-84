@@ -31,10 +31,10 @@ const Layout = ({ children }: LayoutProps) => {
       {/* Professional Floating Background Blobs */}
       <div className="fixed inset-0 pointer-events-none z-[9999] overflow-hidden">
         {/* Primary Blob */}
-        <div className="absolute top-20 -left-32 w-96 h-96 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full blur-3xl animate-float" />
+        <div className="absolute top-20 -left-[20%] w-96 h-96 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full blur-3xl animate-float" />
         
         {/* Secondary Blob */}
-        <div className="absolute top-1/2 right-[20%] w-80 h-80 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full blur-3xl animate-float" style={{animationDelay: '2s', animationDirection: 'reverse'}} />
+        <div className="absolute top-1/5 right-[40%] w-80 h-80 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full blur-3xl animate-float" style={{animationDelay: '2s', animationDirection: 'reverse'}} />
 
         
         {/* Quaternary Blob */}
