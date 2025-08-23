@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SearchBar } from "@/components/ui/SearchBar";
@@ -17,6 +17,7 @@ interface NewHeaderProps {
 
 export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
   const { user, loading } = useAuth();
+  const location = useLocation();
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const openModal = () => setIsModalOpen(true);
@@ -154,10 +155,10 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
               ) : (
                 <div className="flex items-center gap-6">
                   <Link
-                    to="/business"
+                    to={location.pathname === "/business" ? "/" : "/business"}
                     className="text-sm font-medium text-foreground hover:text-primary transition-colors hidden md:block"
                   >
-                    For Business
+                    {location.pathname === "/business" ? "For Individuals" : "For Business"}
                   </Link>
                   <Link
                     to="/"
