@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import helpCenterHero from "@/assets/help-center-hero.jpg";
 
 const HelpCenter = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -136,58 +137,63 @@ const HelpCenter = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/90 to-primary/70 text-primary-foreground py-24">
-        {/* Professional Background Elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary-foreground/20 via-transparent to-transparent" />
-          <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-radial from-primary-foreground/10 to-transparent rounded-full blur-3xl" />
-          <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-radial from-primary-foreground/10 to-transparent rounded-full blur-3xl" />
-        </div>
+      <section className="relative overflow-hidden py-24">
+        {/* Professional Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${helpCenterHero})`
+          }}
+        />
         
-        {/* Subtle Grid Pattern */}
-        <div className="absolute inset-0 opacity-5">
+        {/* Enhanced Overlay for Better Contrast */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/85 to-primary/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-primary/10" />
+        
+        {/* Subtle Pattern Overlay */}
+        <div className="absolute inset-0 opacity-10">
           <div className="h-full w-full bg-[linear-gradient(hsl(var(--primary-foreground)/0.1)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--primary-foreground)/0.1)_1px,transparent_1px)] bg-[size:40px_40px]" />
         </div>
 
-        <div className="relative max-w-4xl mx-auto px-6 text-center">
+        <div className="relative max-w-4xl mx-auto px-6 text-center text-primary-foreground">
           <div className="mb-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-foreground/10 backdrop-blur-sm rounded-full border border-primary-foreground/20 mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-foreground/15 backdrop-blur-sm rounded-full border border-primary-foreground/25 mb-6">
               <HelpCircle className="h-4 w-4" />
               <span className="text-sm font-medium">Help Center</span>
             </div>
           </div>
           
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-br from-primary-foreground via-primary-foreground/95 to-primary-foreground/80 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-primary-foreground drop-shadow-lg">
             How can we help you?
           </h1>
-          <p className="text-xl md:text-2xl mb-12 opacity-90 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl mb-12 opacity-95 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
             Find answers to your questions, get support, and learn how to make the most of our platform
           </p>
           
-          {/* Enhanced Search Bar */}
+          {/* Enhanced Search Bar with Better Contrast */}
           <div className="relative max-w-2xl mx-auto">
             <div className="relative group">
               <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-muted-foreground h-6 w-6 z-10" />
               <Input
                 type="text"
                 placeholder="Search for help articles, guides, and more..."
-                className="pl-16 pr-6 py-6 text-lg bg-background/95 backdrop-blur-sm text-foreground border-0 shadow-2xl rounded-2xl focus:ring-2 focus:ring-primary-foreground/50 transition-all duration-300 group-hover:shadow-xl"
+                className="pl-16 pr-6 py-6 text-lg bg-background/98 backdrop-blur-md text-foreground border-0 shadow-2xl rounded-2xl focus:ring-2 focus:ring-primary-foreground/60 transition-all duration-300 group-hover:shadow-xl group-hover:bg-background"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-primary-foreground/20 to-primary-foreground/10 rounded-2xl blur-xl -z-10 opacity-50" />
+              <div className="absolute inset-0 bg-gradient-to-r from-background/20 to-background/10 rounded-2xl blur-xl -z-10 opacity-50" />
             </div>
           </div>
           
-          {/* Quick Action Buttons */}
+          {/* Enhanced Quick Action Buttons */}
           <div className="flex flex-wrap justify-center gap-4 mt-8">
-            <Button variant="secondary" className="bg-primary-foreground/10 hover:bg-primary-foreground/20 text-primary-foreground border-primary-foreground/20 backdrop-blur-sm">
+            <Button variant="secondary" className="bg-primary-foreground/15 hover:bg-primary-foreground/25 text-primary-foreground border-primary-foreground/25 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300">
               Popular Articles
             </Button>
-            <Button variant="secondary" className="bg-primary-foreground/10 hover:bg-primary-foreground/20 text-primary-foreground border-primary-foreground/20 backdrop-blur-sm">
+            <Button variant="secondary" className="bg-primary-foreground/15 hover:bg-primary-foreground/25 text-primary-foreground border-primary-foreground/25 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300">
               Video Tutorials
             </Button>
-            <Button variant="secondary" className="bg-primary-foreground/10 hover:bg-primary-foreground/20 text-primary-foreground border-primary-foreground/20 backdrop-blur-sm">
+            <Button variant="secondary" className="bg-primary-foreground/15 hover:bg-primary-foreground/25 text-primary-foreground border-primary-foreground/25 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300">
               Contact Support
             </Button>
           </div>
