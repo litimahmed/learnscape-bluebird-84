@@ -83,9 +83,9 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
             <div className="flex items-center flex-shrink-0">
               <Link to="/" className="flex items-center">
                 <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
-                  <span className="text-primary-foreground font-bold text-xl">E</span>
+                  <span className="text-primary-foreground font-bold text-xl">F</span>
                 </div>
-                <span className="text-xl font-bold text-foreground">Edutech</span>
+                <span className="text-xl font-bold text-foreground">Formacad</span>
               </Link>
             </div>
 
