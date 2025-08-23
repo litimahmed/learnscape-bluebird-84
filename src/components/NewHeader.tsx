@@ -9,6 +9,7 @@ import UserProfileDropdown from "@/components/ui/UserProfileDropdown";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import AuthDialog from "@/components/AuthDialog";
 import { useAuth } from "@/hooks/useAuth";
+import formacadLogo from "@/assets/formacad-logo.png";
 
 interface NewHeaderProps {
   isDark: boolean;
@@ -82,9 +83,11 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
             {/* Left - Logo */}
             <div className="flex items-center flex-shrink-0">
               <Link to="/" className="flex items-center">
-                <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
-                  <span className="text-primary-foreground font-bold text-xl">F</span>
-                </div>
+                <img 
+                  src={formacadLogo} 
+                  alt="Formacad Logo" 
+                  className="w-10 h-10 mr-3 object-contain"
+                />
                 <span className="text-xl font-bold text-foreground">Formacad</span>
               </Link>
             </div>
