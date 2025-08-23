@@ -252,9 +252,6 @@ const HelpCenter = () => {
                   </CardHeader>
                   <CardContent className="relative pt-0">
                     <p className="text-muted-foreground leading-relaxed">{category.description}</p>
-                    
-                    {/* Hover Effect Border */}
-                    <div className="absolute inset-0 border-2 border-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </CardContent>
                 </Card>
               );
