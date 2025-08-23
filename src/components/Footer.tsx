@@ -176,7 +176,8 @@ const Footer = ({ isDark }: FooterProps) => {
                 <img
                   src={method.src}
                   alt={method.label}
-                  className="w-8 h-8 mb-2"
+                  className="w-8 h-8 mb-2 object-contain filter brightness-0 dark:filter-none dark:brightness-100"
+                  loading="lazy"
                 />
                 <span className="text-[10px] text-muted-foreground">
                   {method.label}
