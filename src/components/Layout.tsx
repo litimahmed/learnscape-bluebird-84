@@ -43,8 +43,7 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="absolute bottom-10 -right-20 w-72 h-72 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full blur-3xl animate-float" style={{animationDelay: '1s', animationDirection: 'reverse'}} />
         
         {/* Small Accent Blobs */}
-        <div className="absolute top-2/3 left-1/2 w-48 h-48 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full blur-3xl animate-float" style={{animationDelay: '3s'}} />
-        <div className="absolute top-10 right-1/3 w-40 h-40 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full blur-3xl animate-float" style={{animationDelay: '5s', animationDirection: 'reverse'}} />
+        
       </div>
 
       {/* Content with higher z-index */}
