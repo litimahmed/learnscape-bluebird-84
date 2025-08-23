@@ -27,8 +27,8 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className="min-h-screen bg-background relative">
-      {/* DEBUG MODE - Testing blob visibility */}
-      <div className="fixed inset-0 pointer-events-none z-10">
+      {/* Background blobs - behind everything */}
+      <div className="fixed inset-0 pointer-events-none z-0">
         {/* DEBUG: Primary Blob - Solid red for testing */}
         <div className="absolute top-20 left-10 w-96 h-96 bg-red-500 rounded-full animate-float" />
         
@@ -46,11 +46,13 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="absolute top-10 right-1/3 w-40 h-40 bg-cyan-500 rounded-full animate-float" style={{animationDelay: '5s', animationDirection: 'reverse'}} />
       </div>
 
-      {/* Content with higher z-index */}
-      <div className="relative z-20">
+      {/* Content with transparent/semi-transparent backgrounds */}
+      <div className="relative z-10">
         <NewHeader isDark={isDark} toggleTheme={toggleTheme} />
-        <main className="relative z-20">
-          {children}
+        <main className="relative">
+          <div className="bg-background/80 backdrop-blur-sm">
+            {children}
+          </div>
         </main>
         <Footer isDark={isDark} />
       </div>
