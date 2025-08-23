@@ -34,7 +34,7 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="absolute top-20 -left-32 w-96 h-96 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full blur-3xl animate-float" />
         
         {/* Secondary Blob */}
-        <div className="absolute top-1/3 -right-30 w-80 h-80 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full blur-3xl animate-float" style={{animationDelay: '2s', animationDirection: 'reverse'}} />
+        <div className="absolute top-1/3 -left-30 w-80 h-80 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full blur-3xl animate-float" style={{animationDelay: '2s', animationDirection: 'reverse'}} />
 
         
         {/* Quaternary Blob */}
