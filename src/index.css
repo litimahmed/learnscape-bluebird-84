@@ -172,10 +172,54 @@
   }
 }
 
-/* Modern Professional Scrollbar */
+/* Enhanced Global Scrollbar with Platform Color Semantics */
+body, html {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--primary) / 0.3) hsl(var(--muted) / 0.5);
+}
+
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+body::-webkit-scrollbar-track,
+html::-webkit-scrollbar-track {
+  background: hsl(var(--muted) / 0.3);
+  border-radius: 8px;
+  margin: 4px;
+}
+
+body::-webkit-scrollbar-thumb,
+html::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, hsl(var(--primary) / 0.6) 0%, hsl(var(--primary) / 0.4) 100%);
+  border-radius: 8px;
+  border: 2px solid hsl(var(--background));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body::-webkit-scrollbar-thumb:hover,
+html::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, hsl(var(--primary) / 0.8) 0%, hsl(var(--primary) / 0.6) 100%);
+  border-width: 1px;
+  transform: scale(1.1);
+}
+
+body::-webkit-scrollbar-thumb:active,
+html::-webkit-scrollbar-thumb:active {
+  background: hsl(var(--primary) / 0.9);
+}
+
+body::-webkit-scrollbar-corner,
+html::-webkit-scrollbar-corner {
+  background: hsl(var(--muted) / 0.3);
+}
+
+/* Modern Professional Scrollbar for Components */
 .modern-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: hsl(var(--muted-foreground) / 0.2) transparent;
+  scrollbar-color: hsl(var(--primary) / 0.4) hsl(var(--muted) / 0.2);
 }
 
 .modern-scrollbar::-webkit-scrollbar {
@@ -184,25 +228,20 @@
 }
 
 .modern-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 10px;
+  background: hsl(var(--muted) / 0.2);
+  border-radius: 6px;
 }
 
 .modern-scrollbar::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground) / 0.2);
-  border-radius: 10px;
-  border: 2px solid transparent;
-  background-clip: content-box;
+  background: linear-gradient(180deg, hsl(var(--primary) / 0.5) 0%, hsl(var(--primary) / 0.3) 100%);
+  border-radius: 6px;
+  border: 1px solid hsl(var(--background));
   transition: all 0.2s ease;
 }
 
 .modern-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground) / 0.4);
-  border-width: 1px;
-}
-
-.modern-scrollbar::-webkit-scrollbar-corner {
-  background: transparent;
+  background: linear-gradient(180deg, hsl(var(--primary) / 0.7) 0%, hsl(var(--primary) / 0.5) 100%);
+  transform: scale(1.05);
 }
 
 /* Hide scrollbar on tablet and mobile devices */
@@ -220,11 +259,17 @@
   /* Override for specific containers that need scrollbars */
   .force-scrollbar {
     scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary) / 0.4) transparent;
   }
 
   .force-scrollbar::-webkit-scrollbar {
     display: block;
     width: 6px;
+  }
+
+  .force-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.5);
+    border-radius: 3px;
   }
 }
 
