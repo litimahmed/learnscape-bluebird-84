@@ -37,7 +37,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
   }, []);
 
   return (
-    <div className="w-full sticky top-0 z-50 bg-background border-b border-border">
+    <div className="w-full sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border supports-[backdrop-filter]:bg-background/60">
       {/* Top Header Bar */}
       <div className="w-full bg-primary px-4 lg:px-6">
         <div className="max-w-7xl mx-auto flex items-center justify-between h-12">
