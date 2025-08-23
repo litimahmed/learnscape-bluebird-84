@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Building, Users, Target, FileText, Upload, Check, ArrowRight, Send } from 'lucide-react';
+import { ArrowLeft, Building, FileText, Users, Check, ArrowRight, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -16,25 +16,35 @@ import { useToast } from '@/hooks/use-toast';
 const steps = [
   {
     id: 1,
-    title: 'Company Information',
-    description: 'Tell us about your organization',
+    title: 'Legal Entity Information',
+    description: 'Company registration and legal details',
     icon: Building,
-    fields: ['companyName', 'website', 'industry', 'size', 'location']
+    fields: ['companyName', 'legalForm', 'rc', 'nif', 'nis', 'address', 'wilaya']
   },
   {
     id: 2,
-    title: 'Partnership Details',
-    description: 'Define your partnership goals',
-    icon: Target,
-    fields: ['partnershipType', 'expectedStudents', 'targetAudience', 'goals']
+    title: 'Business Details',
+    description: 'Industry and operational information',
+    icon: Users,
+    fields: ['sector', 'employeeCount', 'establishedYear', 'website', 'description']
   },
   {
     id: 3,
-    title: 'Contact & Legal',
-    description: 'Contact information and documentation',
+    title: 'Partnership Proposal',
+    description: 'Collaboration scope and objectives',
     icon: FileText,
-    fields: ['contactName', 'email', 'phone', 'position', 'documents']
+    fields: ['partnershipType', 'targetMarket', 'expectedVolume', 'contactPerson', 'email', 'phone']
   }
+];
+
+const wilayas = [
+  'Adrar', 'Chlef', 'Laghouat', 'Oum El Bouaghi', 'Batna', 'Béjaïa', 'Biskra', 'Béchar',
+  'Blida', 'Bouira', 'Tamanrasset', 'Tébessa', 'Tlemcen', 'Tiaret', 'Tizi Ouzou', 'Alger',
+  'Djelfa', 'Jijel', 'Sétif', 'Saïda', 'Skikda', 'Sidi Bel Abbès', 'Annaba', 'Guelma',
+  'Constantine', 'Médéa', 'Mostaganem', 'MSila', 'Mascara', 'Ouargla', 'Oran', 'El Bayadh',
+  'Illizi', 'Bordj Bou Arréridj', 'Boumerdès', 'El Tarf', 'Tindouf', 'Tissemsilt', 'El Oued',
+  'Khenchela', 'Souk Ahras', 'Tipaza', 'Mila', 'Aïn Defla', 'Naâma', 'Aïn Témouchent',
+  'Ghardaïa', 'Relizane'
 ];
 
 const PartnerApplication = () => {
@@ -43,25 +53,29 @@ const PartnerApplication = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    // Step 1: Company Information
+    // Step 1: Legal Entity
     companyName: '',
+    legalForm: '',
+    rc: '', // Registre de Commerce
+    nif: '', // Numéro d'Identification Fiscale
+    nis: '', // Numéro d'Identification Statistique
+    address: '',
+    wilaya: '',
+    
+    // Step 2: Business Details
+    sector: '',
+    employeeCount: '',
+    establishedYear: '',
     website: '',
-    industry: '',
-    size: '',
-    location: '',
+    description: '',
     
-    // Step 2: Partnership Details
+    // Step 3: Partnership
     partnershipType: '',
-    expectedStudents: '',
-    targetAudience: '',
-    goals: '',
-    
-    // Step 3: Contact & Legal
-    contactName: '',
+    targetMarket: '',
+    expectedVolume: '',
+    contactPerson: '',
     email: '',
-    phone: '',
-    position: '',
-    documents: [] as File[]
+    phone: ''
   });
 
   const progress = (currentStep / steps.length) * 100;
@@ -70,28 +84,9 @@ const PartnerApplication = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleFileUpload = (files: FileList | null) => {
-    if (files) {
-      setFormData(prev => ({ 
-        ...prev, 
-        documents: [...prev.documents, ...Array.from(files)]
-      }));
-    }
-  };
-
-  const removeFile = (index: number) => {
-    setFormData(prev => ({
-      ...prev,
-      documents: prev.documents.filter((_, i) => i !== index)
-    }));
-  };
-
   const validateStep = (step: number) => {
     const stepFields = steps.find(s => s.id === step)?.fields || [];
-    return stepFields.every(field => {
-      if (field === 'documents') return true; // Documents are optional
-      return formData[field as keyof typeof formData];
-    });
+    return stepFields.every(field => formData[field as keyof typeof formData]);
   };
 
   const nextStep = () => {
@@ -99,8 +94,8 @@ const PartnerApplication = () => {
       setCurrentStep(prev => Math.min(prev + 1, steps.length));
     } else {
       toast({
-        title: "Missing Information",
-        description: "Please fill in all required fields before continuing.",
+        title: "Information requise",
+        description: "Veuillez remplir tous les champs obligatoires.",
         variant: "destructive"
       });
     }
@@ -113,446 +108,421 @@ const PartnerApplication = () => {
   const handleSubmit = async () => {
     if (!validateStep(currentStep)) {
       toast({
-        title: "Missing Information",
-        description: "Please fill in all required fields.",
+        title: "Information requise",
+        description: "Veuillez remplir tous les champs obligatoires.",
         variant: "destructive"
       });
       return;
     }
 
     setIsSubmitting(true);
-    
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 2000));
     
     toast({
-      title: "Application Submitted!",
-      description: "We'll review your application and get back to you within 2-3 business days.",
+      title: "Demande soumise avec succès",
+      description: "Nous examinerons votre demande et vous contacterons sous 2-3 jours ouvrables.",
     });
     
     setIsSubmitting(false);
     navigate('/');
   };
 
-  const stepVariants = {
-    hidden: { opacity: 0, x: 50 },
-    visible: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: -50 }
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-soft via-background to-accent">
-      <div className="container-custom section-padding">
+    <div className="min-h-screen bg-background">
+      <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
-        >
+        <div className="mb-8">
           <Button
             variant="ghost"
             onClick={() => navigate('/')}
-            className="absolute top-8 left-8 text-muted-foreground hover:text-foreground"
+            className="mb-6 text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Home
+            Retour
           </Button>
           
-          <h1 className="text-4xl font-heading font-bold text-foreground mb-4">
-            Partner Application
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Join our network of educational partners and help us deliver world-class learning experiences
-          </p>
-        </motion.div>
+          <div className="text-center">
+            <h1 className="text-3xl font-bold text-foreground mb-2">
+              Demande de Partenariat
+            </h1>
+            <p className="text-muted-foreground">
+              Rejoignez notre réseau de partenaires éducatifs en Algérie
+            </p>
+          </div>
+        </div>
 
-        {/* Progress Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="max-w-4xl mx-auto mb-12"
-        >
-          <div className="bg-card rounded-2xl border border-border p-8 shadow-lg">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-semibold text-foreground">
-                Step {currentStep} of {steps.length}
-              </h2>
-              <Badge variant="secondary" className="px-3 py-1">
-                {Math.round(progress)}% Complete
-              </Badge>
+        {/* Progress */}
+        <Card className="mb-8">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-sm font-medium">Étape {currentStep} sur {steps.length}</span>
+              <Badge variant="secondary">{Math.round(progress)}%</Badge>
             </div>
             
-            <Progress value={progress} className="mb-6 h-2" />
+            <Progress value={progress} className="mb-6" />
             
-            <div className="flex items-center justify-between">
+            <div className="flex justify-between">
               {steps.map((step, index) => (
-                <div key={step.id} className="flex items-center">
+                <div key={step.id} className="flex flex-col items-center">
                   <div className={`
-                    flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all
+                    w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
                     ${currentStep >= step.id 
-                      ? 'bg-primary border-primary text-primary-foreground' 
-                      : 'border-border bg-background text-muted-foreground'
+                      ? 'bg-primary text-primary-foreground' 
+                      : 'bg-muted text-muted-foreground'
                     }
                   `}>
-                    {currentStep > step.id ? (
-                      <Check className="w-5 h-5" />
-                    ) : (
-                      <step.icon className="w-5 h-5" />
-                    )}
+                    {currentStep > step.id ? <Check className="w-4 h-4" /> : step.id}
                   </div>
-                  
-                  {index < steps.length - 1 && (
-                    <div className={`
-                      w-16 h-0.5 mx-4 transition-all
-                      ${currentStep > step.id ? 'bg-primary' : 'bg-border'}
-                    `} />
-                  )}
+                  <span className="text-xs mt-2 text-center max-w-20">{step.title}</span>
                 </div>
               ))}
             </div>
-          </div>
-        </motion.div>
+          </CardContent>
+        </Card>
 
         {/* Form Content */}
-        <div className="max-w-4xl mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentStep}
-              variants={stepVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              transition={{ duration: 0.3 }}
-            >
-              <Card className="border border-border shadow-xl">
-                <CardHeader className="text-center pb-8">
-                  <div className="flex justify-center mb-4">
-                    {React.createElement(steps[currentStep - 1].icon, {
-                      className: "w-12 h-12 text-primary"
-                    })}
-                  </div>
-                  <CardTitle className="text-2xl font-heading">
-                    {steps[currentStep - 1].title}
-                  </CardTitle>
-                  <CardDescription className="text-lg">
-                    {steps[currentStep - 1].description}
-                  </CardDescription>
-                </CardHeader>
-
-                <CardContent className="p-8">
-                  {/* Step 1: Company Information */}
-                  {currentStep === 1 && (
-                    <div className="space-y-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="companyName">Company Name *</Label>
-                          <Input
-                            id="companyName"
-                            value={formData.companyName}
-                            onChange={(e) => handleInputChange('companyName', e.target.value)}
-                            placeholder="Enter your company name"
-                            className="h-12"
-                          />
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <Label htmlFor="website">Website *</Label>
-                          <Input
-                            id="website"
-                            value={formData.website}
-                            onChange={(e) => handleInputChange('website', e.target.value)}
-                            placeholder="https://yourcompany.com"
-                            className="h-12"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="space-y-2">
-                          <Label>Industry *</Label>
-                          <Select 
-                            value={formData.industry} 
-                            onValueChange={(value) => handleInputChange('industry', value)}
-                          >
-                            <SelectTrigger className="h-12">
-                              <SelectValue placeholder="Select industry" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="technology">Technology</SelectItem>
-                              <SelectItem value="healthcare">Healthcare</SelectItem>
-                              <SelectItem value="finance">Finance</SelectItem>
-                              <SelectItem value="education">Education</SelectItem>
-                              <SelectItem value="manufacturing">Manufacturing</SelectItem>
-                              <SelectItem value="retail">Retail</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label>Company Size *</Label>
-                          <Select 
-                            value={formData.size} 
-                            onValueChange={(value) => handleInputChange('size', value)}
-                          >
-                            <SelectTrigger className="h-12">
-                              <SelectValue placeholder="Select size" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="1-10">1-10 employees</SelectItem>
-                              <SelectItem value="11-50">11-50 employees</SelectItem>
-                              <SelectItem value="51-200">51-200 employees</SelectItem>
-                              <SelectItem value="201-1000">201-1000 employees</SelectItem>
-                              <SelectItem value="1000+">1000+ employees</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="location">Location *</Label>
-                          <Input
-                            id="location"
-                            value={formData.location}
-                            onChange={(e) => handleInputChange('location', e.target.value)}
-                            placeholder="City, Country"
-                            className="h-12"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Step 2: Partnership Details */}
-                  {currentStep === 2 && (
-                    <div className="space-y-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label>Partnership Type *</Label>
-                          <Select 
-                            value={formData.partnershipType} 
-                            onValueChange={(value) => handleInputChange('partnershipType', value)}
-                          >
-                            <SelectTrigger className="h-12">
-                              <SelectValue placeholder="Select partnership type" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="corporate-training">Corporate Training</SelectItem>
-                              <SelectItem value="education-provider">Education Provider</SelectItem>
-                              <SelectItem value="content-partner">Content Partner</SelectItem>
-                              <SelectItem value="technology-integration">Technology Integration</SelectItem>
-                              <SelectItem value="reseller">Reseller</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label>Expected Students *</Label>
-                          <Select 
-                            value={formData.expectedStudents} 
-                            onValueChange={(value) => handleInputChange('expectedStudents', value)}
-                          >
-                            <SelectTrigger className="h-12">
-                              <SelectValue placeholder="Select range" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="1-50">1-50 students</SelectItem>
-                              <SelectItem value="51-200">51-200 students</SelectItem>
-                              <SelectItem value="201-500">201-500 students</SelectItem>
-                              <SelectItem value="501-1000">501-1000 students</SelectItem>
-                              <SelectItem value="1000+">1000+ students</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="targetAudience">Target Audience *</Label>
-                        <Textarea
-                          id="targetAudience"
-                          value={formData.targetAudience}
-                          onChange={(e) => handleInputChange('targetAudience', e.target.value)}
-                          placeholder="Describe your target audience (e.g., software developers, marketing professionals, students)"
-                          rows={4}
-                          className="resize-none"
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="goals">Partnership Goals *</Label>
-                        <Textarea
-                          id="goals"
-                          value={formData.goals}
-                          onChange={(e) => handleInputChange('goals', e.target.value)}
-                          placeholder="What do you hope to achieve through this partnership?"
-                          rows={4}
-                          className="resize-none"
-                        />
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Step 3: Contact & Legal */}
-                  {currentStep === 3 && (
-                    <div className="space-y-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="contactName">Contact Name *</Label>
-                          <Input
-                            id="contactName"
-                            value={formData.contactName}
-                            onChange={(e) => handleInputChange('contactName', e.target.value)}
-                            placeholder="Full name"
-                            className="h-12"
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="position">Position *</Label>
-                          <Input
-                            id="position"
-                            value={formData.position}
-                            onChange={(e) => handleInputChange('position', e.target.value)}
-                            placeholder="Job title"
-                            className="h-12"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="email">Email Address *</Label>
-                          <Input
-                            id="email"
-                            type="email"
-                            value={formData.email}
-                            onChange={(e) => handleInputChange('email', e.target.value)}
-                            placeholder="contact@company.com"
-                            className="h-12"
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="phone">Phone Number *</Label>
-                          <Input
-                            id="phone"
-                            value={formData.phone}
-                            onChange={(e) => handleInputChange('phone', e.target.value)}
-                            placeholder="+1 (555) 123-4567"
-                            className="h-12"
-                          />
-                        </div>
-                      </div>
-
-                      <Separator />
-
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-3">
-                          <Upload className="w-5 h-5 text-primary" />
-                          <div>
-                            <Label>Supporting Documents</Label>
-                            <p className="text-sm text-muted-foreground">
-                              Upload company profile, certifications, or other relevant documents
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary/50 transition-colors">
-                          <input
-                            type="file"
-                            multiple
-                            accept=".pdf,.doc,.docx,.jpg,.png"
-                            onChange={(e) => handleFileUpload(e.target.files)}
-                            className="hidden"
-                            id="documents"
-                          />
-                          <label htmlFor="documents" className="cursor-pointer">
-                            <Upload className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
-                            <p className="text-sm text-muted-foreground">
-                              Click to upload or drag and drop
-                            </p>
-                            <p className="text-xs text-muted-foreground mt-1">
-                              PDF, DOC, JPG, PNG up to 10MB each
-                            </p>
-                          </label>
-                        </div>
-
-                        {formData.documents.length > 0 && (
-                          <div className="space-y-2">
-                            {formData.documents.map((file, index) => (
-                              <div key={index} className="flex items-center justify-between bg-muted p-3 rounded-lg">
-                                <div className="flex items-center gap-2">
-                                  <FileText className="w-4 h-4 text-muted-foreground" />
-                                  <span className="text-sm">{file.name}</span>
-                                  <Badge variant="outline" className="text-xs">
-                                    {(file.size / 1024 / 1024).toFixed(1)} MB
-                                  </Badge>
-                                </div>
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  onClick={() => removeFile(index)}
-                                  className="text-destructive hover:text-destructive"
-                                >
-                                  Remove
-                                </Button>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Navigation */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex justify-between items-center mt-8"
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentStep}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.2 }}
           >
-            <Button
-              variant="outline"
-              onClick={prevStep}
-              disabled={currentStep === 1}
-              className="h-12 px-6"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Previous
-            </Button>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-3">
+                  {React.createElement(steps[currentStep - 1].icon, {
+                    className: "w-5 h-5 text-primary"
+                  })}
+                  {steps[currentStep - 1].title}
+                </CardTitle>
+                <CardDescription>
+                  {steps[currentStep - 1].description}
+                </CardDescription>
+              </CardHeader>
 
-            {currentStep < steps.length ? (
-              <Button
-                onClick={nextStep}
-                className="h-12 px-6 bg-gradient-primary hover:opacity-90"
-              >
-                Continue
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            ) : (
-              <Button
-                onClick={handleSubmit}
-                disabled={isSubmitting}
-                className="h-12 px-8 bg-gradient-primary hover:opacity-90"
-              >
-                {isSubmitting ? (
+              <CardContent className="space-y-6">
+                {/* Step 1: Legal Entity */}
+                {currentStep === 1 && (
                   <>
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                    Submitting...
-                  </>
-                ) : (
-                  <>
-                    Submit Application
-                    <Send className="w-4 h-4 ml-2" />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="companyName">Raison sociale *</Label>
+                        <Input
+                          id="companyName"
+                          value={formData.companyName}
+                          onChange={(e) => handleInputChange('companyName', e.target.value)}
+                          placeholder="Nom complet de l'entreprise"
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label>Forme juridique *</Label>
+                        <Select 
+                          value={formData.legalForm} 
+                          onValueChange={(value) => handleInputChange('legalForm', value)}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Sélectionner" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="sarl">SARL</SelectItem>
+                            <SelectItem value="spa">SPA</SelectItem>
+                            <SelectItem value="eurl">EURL</SelectItem>
+                            <SelectItem value="snc">SNC</SelectItem>
+                            <SelectItem value="scs">SCS</SelectItem>
+                            <SelectItem value="ei">Entreprise Individuelle</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="rc">Registre de Commerce *</Label>
+                        <Input
+                          id="rc"
+                          value={formData.rc}
+                          onChange={(e) => handleInputChange('rc', e.target.value)}
+                          placeholder="ex: 16/00-123456B10"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="nif">NIF *</Label>
+                        <Input
+                          id="nif"
+                          value={formData.nif}
+                          onChange={(e) => handleInputChange('nif', e.target.value)}
+                          placeholder="Numéro d'identification fiscale"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="nis">NIS *</Label>
+                        <Input
+                          id="nis"
+                          value={formData.nis}
+                          onChange={(e) => handleInputChange('nis', e.target.value)}
+                          placeholder="Numéro d'identification statistique"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="address">Adresse du siège social *</Label>
+                      <Input
+                        id="address"
+                        value={formData.address}
+                        onChange={(e) => handleInputChange('address', e.target.value)}
+                        placeholder="Adresse complète"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>Wilaya *</Label>
+                      <Select 
+                        value={formData.wilaya} 
+                        onValueChange={(value) => handleInputChange('wilaya', value)}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Sélectionner la wilaya" />
+                        </SelectTrigger>
+                        <SelectContent className="max-h-60">
+                          {wilayas.map(wilaya => (
+                            <SelectItem key={wilaya} value={wilaya}>{wilaya}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </>
                 )}
-              </Button>
-            )}
+
+                {/* Step 2: Business Details */}
+                {currentStep === 2 && (
+                  <>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label>Secteur d'activité *</Label>
+                        <Select 
+                          value={formData.sector} 
+                          onValueChange={(value) => handleInputChange('sector', value)}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Sélectionner" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="education">Éducation et Formation</SelectItem>
+                            <SelectItem value="technology">Technologies de l'Information</SelectItem>
+                            <SelectItem value="consulting">Conseil et Services</SelectItem>
+                            <SelectItem value="healthcare">Santé</SelectItem>
+                            <SelectItem value="finance">Finance et Banque</SelectItem>
+                            <SelectItem value="manufacturing">Industrie</SelectItem>
+                            <SelectItem value="energy">Énergie</SelectItem>
+                            <SelectItem value="tourism">Tourisme</SelectItem>
+                            <SelectItem value="agriculture">Agriculture</SelectItem>
+                            <SelectItem value="other">Autre</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label>Nombre d'employés *</Label>
+                        <Select 
+                          value={formData.employeeCount} 
+                          onValueChange={(value) => handleInputChange('employeeCount', value)}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Sélectionner" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="1-9">1-9 employés (Micro)</SelectItem>
+                            <SelectItem value="10-49">10-49 employés (Petite)</SelectItem>
+                            <SelectItem value="50-249">50-249 employés (Moyenne)</SelectItem>
+                            <SelectItem value="250+">250+ employés (Grande)</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="establishedYear">Année de création *</Label>
+                        <Input
+                          id="establishedYear"
+                          type="number"
+                          min="1960"
+                          max={new Date().getFullYear()}
+                          value={formData.establishedYear}
+                          onChange={(e) => handleInputChange('establishedYear', e.target.value)}
+                          placeholder="YYYY"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="website">Site web</Label>
+                        <Input
+                          id="website"
+                          value={formData.website}
+                          onChange={(e) => handleInputChange('website', e.target.value)}
+                          placeholder="https://www.exemple.com"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="description">Description de l'activité *</Label>
+                      <Textarea
+                        id="description"
+                        value={formData.description}
+                        onChange={(e) => handleInputChange('description', e.target.value)}
+                        placeholder="Décrivez brièvement vos activités principales et votre expertise"
+                        rows={4}
+                      />
+                    </div>
+                  </>
+                )}
+
+                {/* Step 3: Partnership */}
+                {currentStep === 3 && (
+                  <>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label>Type de partenariat *</Label>
+                        <Select 
+                          value={formData.partnershipType} 
+                          onValueChange={(value) => handleInputChange('partnershipType', value)}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Sélectionner" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="training-provider">Prestataire de formation</SelectItem>
+                            <SelectItem value="content-creator">Création de contenu</SelectItem>
+                            <SelectItem value="technology-integration">Intégration technologique</SelectItem>
+                            <SelectItem value="local-distributor">Distribution locale</SelectItem>
+                            <SelectItem value="corporate-training">Formation d'entreprise</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label>Marché cible *</Label>
+                        <Select 
+                          value={formData.targetMarket} 
+                          onValueChange={(value) => handleInputChange('targetMarket', value)}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Sélectionner" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="individuals">Particuliers</SelectItem>
+                            <SelectItem value="sme">PME/PMI</SelectItem>
+                            <SelectItem value="large-enterprises">Grandes entreprises</SelectItem>
+                            <SelectItem value="government">Secteur public</SelectItem>
+                            <SelectItem value="universities">Universités</SelectItem>
+                            <SelectItem value="mixed">Mixte</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>Volume d'activité estimé *</Label>
+                      <Select 
+                        value={formData.expectedVolume} 
+                        onValueChange={(value) => handleInputChange('expectedVolume', value)}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Sélectionner" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="50-200">50-200 apprenants/an</SelectItem>
+                          <SelectItem value="200-500">200-500 apprenants/an</SelectItem>
+                          <SelectItem value="500-1000">500-1000 apprenants/an</SelectItem>
+                          <SelectItem value="1000+">1000+ apprenants/an</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <Separator className="my-6" />
+
+                    <h4 className="font-semibold text-foreground mb-4">Contact commercial</h4>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="contactPerson">Nom et prénom *</Label>
+                        <Input
+                          id="contactPerson"
+                          value={formData.contactPerson}
+                          onChange={(e) => handleInputChange('contactPerson', e.target.value)}
+                          placeholder="Responsable commercial"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email professionnel *</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => handleInputChange('email', e.target.value)}
+                          placeholder="contact@entreprise.com"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="phone">Téléphone *</Label>
+                      <Input
+                        id="phone"
+                        value={formData.phone}
+                        onChange={(e) => handleInputChange('phone', e.target.value)}
+                        placeholder="+213 XX XX XX XX XX"
+                      />
+                    </div>
+                  </>
+                )}
+              </CardContent>
+            </Card>
           </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation */}
+        <div className="flex justify-between items-center mt-8">
+          <Button
+            variant="outline"
+            onClick={prevStep}
+            disabled={currentStep === 1}
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Précédent
+          </Button>
+
+          {currentStep < steps.length ? (
+            <Button onClick={nextStep}>
+              Suivant
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+          ) : (
+            <Button
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                  Envoi en cours...
+                </>
+              ) : (
+                <>
+                  Soumettre la demande
+                  <Send className="w-4 h-4 ml-2" />
+                </>
+              )}
+            </Button>
+          )}
         </div>
       </div>
     </div>
