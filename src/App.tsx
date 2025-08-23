@@ -12,6 +12,7 @@ import Register from "./pages/Register";
 import HelpCenter from "./pages/HelpCenter";
 import Business from "./pages/Business";
 import StudentDashboard from "./pages/StudentDashboard";
+import PartnerApplication from "./pages/PartnerApplication";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/help" element={<HelpCenter />} />
                 <Route path="/business" element={<Business />} />
+                <Route path="/partner-application" element={<PartnerApplication />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
