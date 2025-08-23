@@ -27,32 +27,30 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className="min-h-screen bg-background relative">
-      {/* Background blobs - behind everything */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        {/* DEBUG: Primary Blob - Solid red for testing */}
-        <div className="absolute top-20 left-10 w-96 h-96 bg-red-500 rounded-full animate-float" />
+      {/* Professional Floating Background Blobs */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        {/* Primary Blob */}
+        <div className="absolute top-20 -left-32 w-96 h-96 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full blur-3xl animate-float" />
         
-        {/* DEBUG: Secondary Blob - Solid blue for testing */}
-        <div className="absolute top-1/3 right-10 w-80 h-80 bg-blue-500 rounded-full animate-float" style={{animationDelay: '2s', animationDirection: 'reverse'}} />
+        {/* Secondary Blob */}
+        <div className="absolute top-1/3 -right-40 w-80 h-80 bg-gradient-to-br from-blue-500/15 to-purple-500/25 rounded-full blur-3xl animate-float" style={{animationDelay: '2s', animationDirection: 'reverse'}} />
         
-        {/* DEBUG: Tertiary Blob - Solid green for testing */}
-        <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-green-500 rounded-full animate-float" style={{animationDelay: '4s'}} />
+        {/* Tertiary Blob */}
+        <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-gradient-to-br from-green-500/12 to-teal-500/20 rounded-full blur-3xl animate-float" style={{animationDelay: '4s'}} />
         
-        {/* DEBUG: Quaternary Blob - Solid orange for testing */}
-        <div className="absolute bottom-10 right-20 w-72 h-72 bg-orange-500 rounded-full animate-float" style={{animationDelay: '1s', animationDirection: 'reverse'}} />
+        {/* Quaternary Blob */}
+        <div className="absolute bottom-10 -right-20 w-72 h-72 bg-gradient-to-br from-orange-500/15 to-pink-500/25 rounded-full blur-3xl animate-float" style={{animationDelay: '1s', animationDirection: 'reverse'}} />
         
-        {/* DEBUG: Small Accent Blobs - Solid colors for testing */}
-        <div className="absolute top-2/3 left-1/2 w-48 h-48 bg-purple-500 rounded-full animate-float" style={{animationDelay: '3s'}} />
-        <div className="absolute top-10 right-1/3 w-40 h-40 bg-cyan-500 rounded-full animate-float" style={{animationDelay: '5s', animationDirection: 'reverse'}} />
+        {/* Small Accent Blobs */}
+        <div className="absolute top-2/3 left-1/2 w-48 h-48 bg-gradient-to-br from-indigo-500/12 to-purple-500/18 rounded-full blur-2xl animate-float" style={{animationDelay: '3s'}} />
+        <div className="absolute top-10 right-1/3 w-40 h-40 bg-gradient-to-br from-cyan-500/15 to-blue-500/20 rounded-full blur-2xl animate-float" style={{animationDelay: '5s', animationDirection: 'reverse'}} />
       </div>
 
-      {/* Content with transparent/semi-transparent backgrounds */}
+      {/* Content with higher z-index */}
       <div className="relative z-10">
         <NewHeader isDark={isDark} toggleTheme={toggleTheme} />
-        <main className="relative">
-          <div className="bg-background/80 backdrop-blur-sm">
-            {children}
-          </div>
+        <main>
+          {children}
         </main>
         <Footer isDark={isDark} />
       </div>

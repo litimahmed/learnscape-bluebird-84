@@ -59,11 +59,11 @@ export default function Hero() {
       setCurrent(api.selectedScrollSnap());
     });
   }, [api]);
-  return <section className="pb-16 md:pb-24 bg-background/80">
+  return <section className="pb-16 md:pb-24 bg-background">
       <div className="container-custom">
-        <Carousel setApi={setApi} className="relative w-full max-w-5xl mx-auto bg-transparent">
+        <Carousel setApi={setApi} className="relative w-full max-w-5xl mx-auto bg-background">
           <CarouselContent className="flex">
-            {carouselItems.map((item, index) => <CarouselItem key={index} className="flex items-center justify-center p-8 bg-transparent">
+            {carouselItems.map((item, index) => <CarouselItem key={index} className="flex items-center justify-center p-8 bg-background">
                 <div className="w-full">{item.layout()}</div>
               </CarouselItem>)}
           </CarouselContent>
@@ -98,7 +98,7 @@ const cardsData = [{
 const carouselItems = [{
   layout: () => <div className="relative w-full mb-10 items-start overflow-hidden bg-background">
         {/* Background Image */}
-        <div className="absolute -inset-y-0 w-[45%] right-0 top-0 opacity-70">
+        <div className="absolute -inset-y-0 w-[45%] right-0 top-0">
           <img src="/lovable-uploads/b4d39c0d-e245-45f8-acc2-ca4ea2d4036e.png" alt="Learning Community" className="w-full h-full object-cover object-right" loading="eager" fetchPriority="high" />
         </div>
         <div className="flex flex-col gap-6 w-[50%]">
@@ -127,7 +127,7 @@ const carouselItems = [{
 }, {
   layout: () => <div className="relative w-full">
         {/* Background Image */}
-        <div className="absolute -inset-y-4 w-[50%] right-0 opacity-70">
+        <div className="absolute -inset-y-4 w-[50%] right-0">
           <img src="/lovable-uploads/e0c039b5-96f6-4128-b88b-9ed0faf08816.png" alt="Student Learning" className="w-full h-full object-cover object-right" loading="eager" fetchPriority="high" />
         </div>
 
@@ -183,14 +183,14 @@ const carouselItems = [{
           </div>
         </div>
         {/* Background Image */}
-        <div className="absolute w-[120%] max-w-none right-[-15%] top-1/2 -translate-y-1/2 overflow-hidden opacity-70">
+        <div className="absolute w-[120%] max-w-none right-[-15%] top-1/2 -translate-y-1/2 overflow-hidden">
           <img src="/lovable-uploads/7b9d2247-6c4d-49a9-8e4b-1372bd527f76.png" alt="Learning Success" className="object-cover object-right scale-75 w-[900px] h-[600px]" loading="eager" fetchPriority="high" />
         </div>
       </div>
 }, {
   layout: () => <div className="relative w-full">
         {/* Background Image */}
-        <div className="absolute -inset-y-3 w-[55%] right-0 opacity-70">
+        <div className="absolute -inset-y-3 w-[55%] right-0">
           <img src="/lovable-uploads/9947613a-4950-4fe7-bac0-7d4e750181b7.png" alt="Expert Instruction" className="w-full h-full object-cover object-right" loading="eager" fetchPriority="high" />
         </div>
 
