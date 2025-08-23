@@ -132,100 +132,176 @@ const Business = () => {
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section className="section-padding">
+      {/* Enterprise Features Grid */}
+      <section className="section-padding bg-gradient-to-br from-background via-accent/5 to-background">
         <div className="container-custom">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
-              Everything Your Business Needs
+          <div className="text-center space-y-6 mb-20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
+              <Shield className="h-4 w-4" />
+              Enterprise-Grade Platform
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-foreground">
+              Built for Enterprise Success
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Comprehensive tools designed for enterprise-scale learning and development
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Comprehensive learning infrastructure designed to scale with your organization's growth and compliance requirements
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="feature-card group">
-              <CardHeader>
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <Users className="h-6 w-6 text-primary" />
+            {/* Skills Assessment & Analytics */}
+            <Card className="group relative overflow-hidden border-border/50 hover:border-primary/20 transition-all duration-300 hover:shadow-xl bg-card/50 backdrop-blur-sm">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <CardHeader className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <BarChart3 className="h-7 w-7 text-primary" />
                 </div>
-                <CardTitle>Team Management</CardTitle>
+                <CardTitle className="text-xl font-semibold">Skills Gap Analytics</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Organize teams, assign courses, and track progress across departments with advanced user management.
+              <CardContent className="relative">
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  AI-powered assessment identifies skill gaps, benchmarks performance, and recommends targeted learning interventions for maximum ROI.
                 </p>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                    Real-time competency mapping
+                  </li>
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                    Predictive learning analytics
+                  </li>
+                </ul>
               </CardContent>
             </Card>
 
-            <Card className="feature-card group">
-              <CardHeader>
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <BarChart3 className="h-6 w-6 text-primary" />
+            {/* Compliance Management */}
+            <Card className="group relative overflow-hidden border-border/50 hover:border-primary/20 transition-all duration-300 hover:shadow-xl bg-card/50 backdrop-blur-sm">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <CardHeader className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Shield className="h-7 w-7 text-primary" />
                 </div>
-                <CardTitle>Advanced Analytics</CardTitle>
+                <CardTitle className="text-xl font-semibold">Compliance Automation</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Detailed insights into learning progress, completion rates, and skill development metrics.
+              <CardContent className="relative">
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  Automated compliance tracking with industry-specific certifications, audit trails, and regulatory reporting capabilities.
                 </p>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                    SOC 2 & GDPR compliance
+                  </li>
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                    Automated audit reports
+                  </li>
+                </ul>
               </CardContent>
             </Card>
 
-            <Card className="feature-card group">
-              <CardHeader>
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <Target className="h-6 w-6 text-primary" />
+            {/* HRIS Integration */}
+            <Card className="group relative overflow-hidden border-border/50 hover:border-primary/20 transition-all duration-300 hover:shadow-xl bg-card/50 backdrop-blur-sm">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <CardHeader className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Globe className="h-7 w-7 text-primary" />
                 </div>
-                <CardTitle>Custom Learning Paths</CardTitle>
+                <CardTitle className="text-xl font-semibold">HRIS Integration</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Create personalized learning journeys tailored to specific roles and skill requirements.
+              <CardContent className="relative">
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  Seamless integration with Workday, SAP SuccessFactors, BambooHR, and 50+ HR systems for unified employee development.
                 </p>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                    Single sign-on (SSO)
+                  </li>
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                    Automated user provisioning
+                  </li>
+                </ul>
               </CardContent>
             </Card>
 
-            <Card className="feature-card group">
-              <CardHeader>
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <Shield className="h-6 w-6 text-primary" />
+            {/* Advanced ROI Analytics */}
+            <Card className="group relative overflow-hidden border-border/50 hover:border-primary/20 transition-all duration-300 hover:shadow-xl bg-card/50 backdrop-blur-sm">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <CardHeader className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Target className="h-7 w-7 text-primary" />
                 </div>
-                <CardTitle>Compliance Training</CardTitle>
+                <CardTitle className="text-xl font-semibold">ROI Measurement</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Ensure regulatory compliance with automated tracking and certification management.
+              <CardContent className="relative">
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  Quantify training impact with advanced analytics measuring productivity gains, retention rates, and business performance metrics.
                 </p>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                    Business impact dashboards
+                  </li>
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                    Cost-per-outcome tracking
+                  </li>
+                </ul>
               </CardContent>
             </Card>
 
-            <Card className="feature-card group">
-              <CardHeader>
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <Globe className="h-6 w-6 text-primary" />
+            {/* White-Label Solution */}
+            <Card className="group relative overflow-hidden border-border/50 hover:border-primary/20 transition-all duration-300 hover:shadow-xl bg-card/50 backdrop-blur-sm">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <CardHeader className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Award className="h-7 w-7 text-primary" />
                 </div>
-                <CardTitle>API Integration</CardTitle>
+                <CardTitle className="text-xl font-semibold">White-Label Platform</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Seamlessly integrate with your existing HR systems, CRM, and business tools.
+              <CardContent className="relative">
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  Fully customizable platform with your branding, domain, and corporate identity for seamless employee experience.
                 </p>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                    Custom domain & SSL
+                  </li>
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                    Brand theme customization
+                  </li>
+                </ul>
               </CardContent>
             </Card>
 
-            <Card className="feature-card group">
-              <CardHeader>
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <HeadphonesIcon className="h-6 w-6 text-primary" />
+            {/* Enterprise Security */}
+            <Card className="group relative overflow-hidden border-border/50 hover:border-primary/20 transition-all duration-300 hover:shadow-xl bg-card/50 backdrop-blur-sm">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <CardHeader className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <HeadphonesIcon className="h-7 w-7 text-primary" />
                 </div>
-                <CardTitle>24/7 Support</CardTitle>
+                <CardTitle className="text-xl font-semibold">Enterprise Security</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Dedicated account management and priority support for enterprise customers.
+              <CardContent className="relative">
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  Bank-grade security with end-to-end encryption, multi-factor authentication, and dedicated cloud infrastructure.
                 </p>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                    256-bit encryption
+                  </li>
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                    ISO 27001 certified
+                  </li>
+                </ul>
               </CardContent>
             </Card>
           </div>
