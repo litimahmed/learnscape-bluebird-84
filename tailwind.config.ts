@@ -87,11 +87,23 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translate(0px, 0px) rotate(0deg)'
+					},
+					'33%': {
+						transform: 'translate(30px, -30px) rotate(120deg)'
+					},
+					'66%': {
+						transform: 'translate(-20px, 20px) rotate(240deg)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 20s ease-in-out infinite'
 			}
 		}
 	},
