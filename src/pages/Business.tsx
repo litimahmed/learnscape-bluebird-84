@@ -339,21 +339,21 @@ const Business = () => {
                 </p>
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                     <div>
                       <div className="font-medium text-sm">Technology Adoption Programs</div>
                       <div className="text-xs text-muted-foreground">Cloud migration, AI tools, automation</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                     <div>
                       <div className="font-medium text-sm">Change Management Training</div>
                       <div className="text-xs text-muted-foreground">Agile methodologies, process optimization</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                     <div>
                       <div className="font-medium text-sm">Digital Skills Assessment</div>
                       <div className="text-xs text-muted-foreground">Competency mapping and gap analysis</div>
@@ -415,21 +415,21 @@ const Business = () => {
                 </p>
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                     <div>
                       <div className="font-medium text-sm">Sales Excellence Programs</div>
                       <div className="text-xs text-muted-foreground">Revenue growth, customer success</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                     <div>
                       <div className="font-medium text-sm">Operational Efficiency</div>
                       <div className="text-xs text-muted-foreground">Process improvement, quality management</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                     <div>
                       <div className="font-medium text-sm">Customer Experience</div>
                       <div className="text-xs text-muted-foreground">Service excellence, retention strategies</div>
