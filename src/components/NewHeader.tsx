@@ -93,9 +93,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
                 />
                 <link rel="preload" as="image" href={formacadLogoLight} />
                 <link rel="preload" as="image" href={formacadLogoDark} />
-                <span className="text-2xl font-brand font-bold text-primary tracking-tight bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent hover:from-primary/90 hover:to-primary transition-all duration-300 drop-shadow-sm">
-                  Formacad
-                </span>
+                <span className="text-xl font-extrabold text-primary">Formacad</span>
               </Link>
             </div>
 
