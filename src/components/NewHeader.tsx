@@ -9,7 +9,7 @@ import UserProfileDropdown from "@/components/ui/UserProfileDropdown";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import AuthDialog from "@/components/AuthDialog";
 import { useAuth } from "@/hooks/useAuth";
-import formacadLogo from "@/assets/formacad-logo-professional.png";
+import formacadLogo from "@/assets/formacad-icon-logo.png";
 
 interface NewHeaderProps {
   isDark: boolean;
