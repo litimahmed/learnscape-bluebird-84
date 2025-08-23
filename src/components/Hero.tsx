@@ -59,11 +59,11 @@ export default function Hero() {
       setCurrent(api.selectedScrollSnap());
     });
   }, [api]);
-  return <section className="pb-16 md:pb-24 bg-background">
+  return <section className="pb-16 md:pb-24 bg-background/80">
       <div className="container-custom">
-        <Carousel setApi={setApi} className="relative w-full max-w-5xl mx-auto bg-background">
+        <Carousel setApi={setApi} className="relative w-full max-w-5xl mx-auto bg-transparent">
           <CarouselContent className="flex">
-            {carouselItems.map((item, index) => <CarouselItem key={index} className="flex items-center justify-center p-8 bg-background">
+            {carouselItems.map((item, index) => <CarouselItem key={index} className="flex items-center justify-center p-8 bg-transparent">
                 <div className="w-full">{item.layout()}</div>
               </CarouselItem>)}
           </CarouselContent>

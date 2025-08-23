@@ -18,9 +18,9 @@ export default function Brands() {
   const isDark = theme === "dark";
 
   return (
-    <section className="w-full pt-1 pb-10 flex flex-col items-center text-center px-4 bg-background text-foreground">
+    <section className="w-full pt-1 pb-10 flex flex-col items-center text-center px-4 bg-background/80 text-foreground">
       <div className="max-w-4xl">
-        <section className="text-center px-4 py-12 text-foreground">
+        <section className="text-center px-4 py-12 text-foreground bg-transparent">
           {/* Line 1: subtle tagline */}
           <p className="text-[0.7rem] font-medium tracking-widest uppercase mb-4 text-muted-foreground">
             Consulting, Programming & Design
