@@ -442,336 +442,122 @@ const Business = () => {
         </div>
       </section>
 
-      {/* Enhanced Pricing Section */}
-      <section className="section-padding bg-gradient-to-br from-background via-primary/5 to-accent/5 relative overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 opacity-50"></div>
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>
-        
-        <div className="container-custom relative">
-          <div className="text-center space-y-8 mb-20">
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 backdrop-blur-sm border border-primary/20">
-              <Target className="h-5 w-5 text-primary" />
-              <span className="text-primary font-semibold text-sm">Investment in Excellence</span>
-            </div>
-            <div className="space-y-6">
-              <h2 className="text-4xl lg:text-6xl font-bold text-foreground leading-tight">
-                Transform Your Organization
-                <span className="block text-primary">Starting Today</span>
-              </h2>
-              <p className="text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-                Choose the perfect plan to unlock your team's potential with enterprise-grade learning infrastructure
-              </p>
-            </div>
-            <div className="flex items-center justify-center gap-8 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-primary" />
-                <span>No setup fees</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-primary" />
-                <span>Cancel anytime</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-primary" />
-                <span>30-day money back</span>
-              </div>
-            </div>
+      {/* Pricing Section */}
+      <section className="section-padding">
+        <div className="container-custom">
+          <div className="text-center space-y-4 mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
+              Enterprise Pricing Plans
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              Scalable solutions for organizations of every size
+            </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {/* Growth Plan */}
-            <Card className="group relative overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl bg-card/50 backdrop-blur-sm hover:scale-105">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-accent"></div>
-              
-              <CardHeader className="relative pb-8">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Zap className="h-6 w-6 text-primary" />
-                  </div>
-                  <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
-                    Best for SMBs
-                  </Badge>
-                </div>
-                <CardTitle className="text-2xl font-bold text-foreground mb-2">Growth</CardTitle>
-                <div className="space-y-3">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-5xl font-bold text-foreground">$29</span>
-                    <span className="text-lg text-muted-foreground">/user/month</span>
-                  </div>
-                  <p className="text-muted-foreground leading-relaxed">Perfect for growing teams ready to scale their learning initiatives</p>
+          <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <Card className="relative">
+              <CardHeader>
+                <CardTitle className="text-2xl">Starter</CardTitle>
+                <div className="space-y-2">
+                  <div className="text-3xl font-bold">$19<span className="text-lg font-normal text-muted-foreground">/user/month</span></div>
+                  <p className="text-muted-foreground">Perfect for small teams</p>
                 </div>
               </CardHeader>
-              
-              <CardContent className="relative space-y-6">
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">Up to 100 Users</div>
-                      <div className="text-sm text-muted-foreground">Perfect team size for scaling organizations</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">Advanced Analytics</div>
-                      <div className="text-sm text-muted-foreground">Learning progress, engagement metrics</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">Custom Learning Paths</div>
-                      <div className="text-sm text-muted-foreground">Personalized skill development journeys</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">Priority Support</div>
-                      <div className="text-sm text-muted-foreground">24/5 email and chat support</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">API Integration</div>
-                      <div className="text-sm text-muted-foreground">Connect with your existing tools</div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="pt-4 border-t border-border/50">
-                  <Button className="w-full group-hover:bg-primary/90 transition-colors" size="lg">
-                    Start Free Trial
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                  <p className="text-xs text-muted-foreground text-center mt-2">14-day free trial, no credit card required</p>
-                </div>
+              <CardContent className="space-y-4">
+                <ul className="space-y-3">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span>Up to 50 users</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span>Basic analytics</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span>Email support</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span>Standard integrations</span>
+                  </li>
+                </ul>
+                <Button className="w-full" variant="outline">Get Started</Button>
               </CardContent>
             </Card>
 
-            {/* Professional Plan - Featured */}
-            <Card className="group relative overflow-hidden border-primary/50 hover:border-primary transition-all duration-500 hover:shadow-2xl bg-card/70 backdrop-blur-sm hover:scale-105 ring-2 ring-primary/20">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/5 opacity-70 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-primary to-accent"></div>
-              
-              {/* Popular Badge */}
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <Badge className="bg-gradient-to-r from-primary to-accent text-primary-foreground px-6 py-2 text-sm font-semibold shadow-lg">
-                  <Award className="h-4 w-4 mr-2" />
-                  Most Popular
-                </Badge>
-              </div>
-              
-              <CardHeader className="relative pb-8 pt-8">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary/30 to-primary/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Target className="h-6 w-6 text-primary" />
-                  </div>
-                  <Badge className="bg-gradient-to-r from-primary/20 to-accent/20 text-primary border-primary/30">
-                    Enterprise Ready
-                  </Badge>
-                </div>
-                <CardTitle className="text-2xl font-bold text-foreground mb-2">Professional</CardTitle>
-                <div className="space-y-3">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-5xl font-bold text-foreground">$59</span>
-                    <span className="text-lg text-muted-foreground">/user/month</span>
-                  </div>
-                  <p className="text-muted-foreground leading-relaxed">Comprehensive solution for established organizations driving transformation</p>
+            <Card className="relative border-primary">
+              <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary">
+                Most Popular
+              </Badge>
+              <CardHeader>
+                <CardTitle className="text-2xl">Professional</CardTitle>
+                <div className="space-y-2">
+                  <div className="text-3xl font-bold">$39<span className="text-lg font-normal text-muted-foreground">/user/month</span></div>
+                  <p className="text-muted-foreground">For growing organizations</p>
                 </div>
               </CardHeader>
-              
-              <CardContent className="relative space-y-6">
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-primary/30 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">Up to 1,000 Users</div>
-                      <div className="text-sm text-muted-foreground">Scale across departments and divisions</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-primary/30 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">Skills Gap Analytics</div>
-                      <div className="text-sm text-muted-foreground">AI-powered competency mapping</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-primary/30 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">Compliance Management</div>
-                      <div className="text-sm text-muted-foreground">Automated tracking and reporting</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-primary/30 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">HRIS Integration</div>
-                      <div className="text-sm text-muted-foreground">SSO and automated provisioning</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-primary/30 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">ROI Measurement</div>
-                      <div className="text-sm text-muted-foreground">Business impact dashboards</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-primary/30 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">Dedicated Success Manager</div>
-                      <div className="text-sm text-muted-foreground">Strategic guidance and optimization</div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="pt-4 border-t border-primary/20">
-                  <Button className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 transition-all" size="lg">
-                    Start Free Trial
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                  <p className="text-xs text-muted-foreground text-center mt-2">30-day free trial with full feature access</p>
-                </div>
+              <CardContent className="space-y-4">
+                <ul className="space-y-3">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span>Up to 500 users</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span>Advanced analytics</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span>Priority support</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span>Custom learning paths</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span>API access</span>
+                  </li>
+                </ul>
+                <Button className="w-full">Start Free Trial</Button>
               </CardContent>
             </Card>
 
-            {/* Enterprise Plan */}
-            <Card className="group relative overflow-hidden border-border/50 hover:border-accent/30 transition-all duration-500 hover:shadow-2xl bg-card/50 backdrop-blur-sm hover:scale-105">
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent to-primary"></div>
-              
-              <CardHeader className="relative pb-8">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-accent/20 to-accent/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Building2 className="h-6 w-6 text-accent" />
-                  </div>
-                  <Badge variant="outline" className="bg-accent/10 text-accent border-accent/20">
-                    Custom Solution
-                  </Badge>
-                </div>
-                <CardTitle className="text-2xl font-bold text-foreground mb-2">Enterprise</CardTitle>
-                <div className="space-y-3">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-5xl font-bold text-foreground">Custom</span>
-                  </div>
-                  <p className="text-muted-foreground leading-relaxed">Tailored infrastructure for global organizations with complex requirements</p>
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-2xl">Enterprise</CardTitle>
+                <div className="space-y-2">
+                  <div className="text-3xl font-bold">Custom</div>
+                  <p className="text-muted-foreground">For large organizations</p>
                 </div>
               </CardHeader>
-              
-              <CardContent className="relative space-y-6">
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-accent/20 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="h-4 w-4 text-accent" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">Unlimited Users</div>
-                      <div className="text-sm text-muted-foreground">Global deployment across all locations</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-accent/20 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="h-4 w-4 text-accent" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">White-Label Platform</div>
-                      <div className="text-sm text-muted-foreground">Full brand customization and domain</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-accent/20 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="h-4 w-4 text-accent" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">Enterprise Security</div>
-                      <div className="text-sm text-muted-foreground">SOC 2, GDPR, ISO 27001 compliance</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-accent/20 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="h-4 w-4 text-accent" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">Custom Integrations</div>
-                      <div className="text-sm text-muted-foreground">Bespoke connectors and workflows</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-accent/20 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="h-4 w-4 text-accent" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">24/7 Premium Support</div>
-                      <div className="text-sm text-muted-foreground">Dedicated team with SLA guarantees</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-accent/20 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="h-4 w-4 text-accent" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">Strategic Consulting</div>
-                      <div className="text-sm text-muted-foreground">Learning transformation advisory</div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="pt-4 border-t border-border/50">
-                  <Button variant="outline" className="w-full border-accent/30 text-accent hover:bg-accent/10 group-hover:border-accent transition-colors" size="lg">
-                    Contact Sales
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                  <p className="text-xs text-muted-foreground text-center mt-2">Custom pricing based on your requirements</p>
-                </div>
+              <CardContent className="space-y-4">
+                <ul className="space-y-3">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span>Unlimited users</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span>Enterprise analytics</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span>24/7 dedicated support</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span>Custom integrations</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span>White-label options</span>
+                  </li>
+                </ul>
+                <Button className="w-full" variant="outline">Contact Sales</Button>
               </CardContent>
             </Card>
-          </div>
-          
-          {/* Additional Value Props */}
-          <div className="mt-16 text-center">
-            <div className="inline-flex items-center gap-8 px-8 py-4 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50">
-              <div className="flex items-center gap-3">
-                <Shield className="h-5 w-5 text-primary" />
-                <span className="text-sm font-medium text-muted-foreground">Enterprise Security</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <HeadphonesIcon className="h-5 w-5 text-primary" />
-                <span className="text-sm font-medium text-muted-foreground">Expert Support</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Globe className="h-5 w-5 text-primary" />
-                <span className="text-sm font-medium text-muted-foreground">Global Scale</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>
