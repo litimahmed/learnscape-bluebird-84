@@ -92,25 +92,41 @@ const Business = () => {
         </div>
       </section>
 
-      {/* Statistics Section */}
-      <section className="section-padding bg-primary text-primary-foreground">
+      {/* Dynamic Statistics Section */}
+      <section className="section-padding bg-gradient-to-r from-accent/10 via-primary/5 to-accent/10 border-y border-border/50">
         <div className="container-custom">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-            <div className="space-y-2">
-              <div className="text-4xl font-bold">500+</div>
-              <div className="text-primary-foreground/80">Companies Trust Us</div>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4">Trusted by Industry Leaders</h2>
+            <p className="text-muted-foreground">Join thousands of organizations transforming their workforce</p>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="group text-center space-y-3 p-6 rounded-xl bg-card/50 border border-border/30 hover:bg-card transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              <div className="text-4xl lg:text-5xl font-bold text-primary group-hover:text-primary/80 transition-colors animate-fade-in">
+                500<span className="text-accent">+</span>
+              </div>
+              <div className="text-sm font-medium text-muted-foreground">Companies Trust Us</div>
+              <div className="h-1 w-12 bg-gradient-to-r from-primary to-accent mx-auto rounded-full opacity-60 group-hover:opacity-100 transition-opacity"></div>
             </div>
-            <div className="space-y-2">
-              <div className="text-4xl font-bold">100K+</div>
-              <div className="text-primary-foreground/80">Employees Trained</div>
+            <div className="group text-center space-y-3 p-6 rounded-xl bg-card/50 border border-border/30 hover:bg-card transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              <div className="text-4xl lg:text-5xl font-bold text-primary group-hover:text-primary/80 transition-colors animate-fade-in" style={{animationDelay: "0.1s"}}>
+                100<span className="text-accent">K+</span>
+              </div>
+              <div className="text-sm font-medium text-muted-foreground">Employees Trained</div>
+              <div className="h-1 w-12 bg-gradient-to-r from-primary to-accent mx-auto rounded-full opacity-60 group-hover:opacity-100 transition-opacity"></div>
             </div>
-            <div className="space-y-2">
-              <div className="text-4xl font-bold">95%</div>
-              <div className="text-primary-foreground/80">Satisfaction Rate</div>
+            <div className="group text-center space-y-3 p-6 rounded-xl bg-card/50 border border-border/30 hover:bg-card transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              <div className="text-4xl lg:text-5xl font-bold text-primary group-hover:text-primary/80 transition-colors animate-fade-in" style={{animationDelay: "0.2s"}}>
+                95<span className="text-accent">%</span>
+              </div>
+              <div className="text-sm font-medium text-muted-foreground">Satisfaction Rate</div>
+              <div className="h-1 w-12 bg-gradient-to-r from-primary to-accent mx-auto rounded-full opacity-60 group-hover:opacity-100 transition-opacity"></div>
             </div>
-            <div className="space-y-2">
-              <div className="text-4xl font-bold">50+</div>
-              <div className="text-primary-foreground/80">Countries Served</div>
+            <div className="group text-center space-y-3 p-6 rounded-xl bg-card/50 border border-border/30 hover:bg-card transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              <div className="text-4xl lg:text-5xl font-bold text-primary group-hover:text-primary/80 transition-colors animate-fade-in" style={{animationDelay: "0.3s"}}>
+                50<span className="text-accent">+</span>
+              </div>
+              <div className="text-sm font-medium text-muted-foreground">Countries Served</div>
+              <div className="h-1 w-12 bg-gradient-to-r from-primary to-accent mx-auto rounded-full opacity-60 group-hover:opacity-100 transition-opacity"></div>
             </div>
           </div>
         </div>
