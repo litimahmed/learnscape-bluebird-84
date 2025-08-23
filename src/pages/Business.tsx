@@ -328,7 +328,7 @@ const Business = () => {
             <Card className="group relative overflow-hidden border-border/50 hover:border-accent/30 transition-all duration-300 hover:shadow-xl bg-card/50 backdrop-blur-sm">
               <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <CardHeader className="relative">
-                <div className="w-14 h-14 bg-gradient-to-br from-accent/20 to-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <Building2 className="h-7 w-7 text-primary" />
                 </div>
                 <CardTitle className="text-xl font-semibold">Digital Transformation</CardTitle>
@@ -404,7 +404,7 @@ const Business = () => {
             <Card className="group relative overflow-hidden border-border/50 hover:border-accent/30 transition-all duration-300 hover:shadow-xl bg-card/50 backdrop-blur-sm">
               <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <CardHeader className="relative">
-                <div className="w-14 h-14 bg-gradient-to-br from-accent/20 to-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <Award className="h-7 w-7 text-primary" />
                 </div>
                 <CardTitle className="text-xl font-semibold">Performance Optimization</CardTitle>
