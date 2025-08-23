@@ -309,7 +309,7 @@ const HelpCenter = () => {
           </div>
 
           {/* Professional Article Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             {popularArticles.map((article, index) => (
               <Card key={index} className="group relative overflow-hidden border-0 bg-card/60 backdrop-blur-sm hover:bg-card/90 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer">
                 {/* Image Container */}
