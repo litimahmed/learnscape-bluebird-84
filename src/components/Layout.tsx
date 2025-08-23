@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import NewHeader from "./NewHeader";
 import Footer from "./Footer";
+import { ChatbotFAB } from "./ui/ChatbotFAB";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -53,6 +54,7 @@ const Layout = ({ children }: LayoutProps) => {
           {children}
         </main>
         <Footer isDark={isDark} />
+        <ChatbotFAB />
       </div>
     </div>
   );
