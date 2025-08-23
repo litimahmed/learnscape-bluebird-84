@@ -12,96 +12,100 @@ import {
   Shield,
   Lightbulb,
   Zap,
+  Star,
+  MapPin,
+  Languages,
+  Briefcase,
 } from "lucide-react";
 
 const About = () => {
   const values = [
     {
-      icon: <Target className="w-6 h-6" />,
-      title: "Excellence in Education",
+      icon: <Languages className="w-6 h-6" />,
+      title: "Multilingual Excellence",
       description:
-        "We strive to deliver the highest quality educational content and experiences, ensuring every learner achieves their full potential.",
+        "Supporting Arabic, French, and English to ensure every Algerian learner can access quality education in their preferred language.",
     },
     {
-      icon: <Heart className="w-6 h-6" />,
-      title: "Learner-Centric Approach",
+      icon: <MapPin className="w-6 h-6" />,
+      title: "Local Market Focus",
       description:
-        "Our platform is designed with learners at the center, prioritizing accessibility, engagement, and personalized learning experiences.",
+        "Curriculum designed specifically for Algeria's growing tech sector and economic transformation needs.",
     },
     {
-      icon: <Globe className="w-6 h-6" />,
-      title: "Global Accessibility",
+      icon: <Briefcase className="w-6 h-6" />,
+      title: "Career Alignment",
       description:
-        "We believe quality education should be accessible to everyone, regardless of location, background, or circumstances.",
+        "Direct partnership with Algerian companies and government initiatives to ensure job-ready skills training.",
     },
     {
-      icon: <Lightbulb className="w-6 h-6" />,
-      title: "Innovation & Technology",
+      icon: <Shield className="w-6 h-6" />,
+      title: "Trusted Learning",
       description:
-        "We continuously innovate, leveraging cutting-edge technology to enhance learning outcomes and create engaging experiences.",
+        "Certified programs recognized by Algerian institutions and aligned with national digital transformation goals.",
     },
   ];
 
   const teamMembers = [
     {
-      name: "Dr. Sarah Williams",
-      role: "Chief Executive Officer",
-      background: "Former VP of Education at Google",
-      expertise: "Educational Technology, Strategic Leadership",
+      name: "Dr. Amina Benali",
+      role: "Directrice Générale",
+      background: "Ancienne Directrice pédagogique à l'USTHB",
+      expertise: "Technologies Éducatives, Leadership Stratégique",
     },
     {
-      name: "Michael Rodriguez",
-      role: "Chief Technology Officer",
-      background: "Ex-Senior Engineer at Microsoft",
-      expertise: "Platform Architecture, AI/ML Systems",
+      name: "Karim Messaoudi",
+      role: "Directeur Technique",
+      background: "Ex-Ingénieur Senior chez Djezzy",
+      expertise: "Architecture Plateforme, Systèmes IA/ML",
     },
     {
-      name: "Dr. James Chen",
-      role: "Head of Curriculum",
-      background: "Former Dean at Stanford Online",
-      expertise: "Curriculum Design, Learning Sciences",
+      name: "Dr. Yasmine Boukhalfa",
+      role: "Responsable Curriculum",
+      background: "Ancienne Doyenne à l'ESI Alger",
+      expertise: "Conception Programmes, Sciences de l'Apprentissage",
     },
     {
-      name: "Lisa Thompson",
-      role: "Head of Product Design",
-      background: "Former Design Lead at Adobe",
-      expertise: "User Experience, Educational Design",
+      name: "Ahmed Zemmouri",
+      role: "Responsable Relations Entreprises",
+      background: "Ex-DRH chez Sonatrach Digital",
+      expertise: "Partenariats Industrie, Insertion Professionnelle",
     },
   ];
 
   const milestones = [
     {
-      year: "2020",
-      title: "Company Founded",
-      description: "LearnSpace was founded with a mission to democratize quality education through technology.",
-    },
-    {
       year: "2021",
-      title: "Platform Launch",
-      description: "Launched our first MVP with 50 courses and 1,000 registered users.",
+      title: "Création de la Plateforme",
+      description: "Lancement d'EduDZ avec pour mission de démocratiser l'éducation numérique en Algérie.",
     },
     {
       year: "2022",
-      title: "Major Growth",
-      description: "Reached 25,000 active learners and partnered with 100+ industry experts.",
+      title: "Partenariats Stratégiques",
+      description: "Collaboration avec l'USTHB, l'ESI et plusieurs universités algériennes pour la validation des programmes.",
     },
     {
       year: "2023",
-      title: "AI Integration",
-      description: "Integrated AI-powered personalization and advanced analytics features.",
+      title: "Certification Officielle",
+      description: "Reconnaissance par le Ministère de l'Enseignement Supérieur et intégration dans le plan national numérique.",
     },
     {
       year: "2024",
-      title: "Global Expansion",
-      description: "Expanded to serve learners in 50+ countries with localized content.",
+      title: "Expansion Nationale",
+      description: "Présence dans les 48 wilayas avec 15,000+ apprenants actifs et 200+ instructeurs certifiés.",
+    },
+    {
+      year: "2025",
+      title: "Innovation IA",
+      description: "Intégration d'outils d'IA adaptés au contexte algérien et lancement des programmes bilingues avancés.",
     },
   ];
 
   const stats = [
-    { value: "50,000+", label: "Active Learners", icon: <Users className="w-5 h-5" /> },
-    { value: "500+", label: "Expert Instructors", icon: <Award className="w-5 h-5" /> },
-    { value: "1,200+", label: "Courses", icon: <BookOpen className="w-5 h-5" /> },
-    { value: "95%", label: "Success Rate", icon: <TrendingUp className="w-5 h-5" /> },
+    { value: "15,000+", label: "Apprenants Actifs", icon: <Users className="w-5 h-5" /> },
+    { value: "200+", label: "Instructeurs Certifiés", icon: <Award className="w-5 h-5" /> },
+    { value: "300+", label: "Cours Spécialisés", icon: <BookOpen className="w-5 h-5" /> },
+    { value: "92%", label: "Taux de Réussite", icon: <TrendingUp className="w-5 h-5" /> },
   ];
 
   return (
@@ -109,20 +113,34 @@ const About = () => {
       {/* Hero Section */}
       <section className="section-padding bg-gradient-to-br from-primary/10 via-primary/5 to-background">
         <div className="container-custom">
-          <div className="max-w-3xl mx-auto text-center animate-fade-in">
-            <Badge className="mb-6">About LearnSpace</Badge>
+          <div className="max-w-4xl mx-auto text-center animate-fade-in">
+            <Badge className="mb-6">À propos d'EduDZ</Badge>
             <h1 className="text-5xl md:text-6xl font-heading font-bold mb-6">
-              Empowering
-              <span className="text-primary"> Minds</span> Through
-              <span className="text-primary"> Innovation</span>
+              L'Excellence Éducative
+              <span className="text-primary"> Algérienne</span> Pour
+              <span className="text-primary"> l'Avenir</span>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-              We're on a mission to make world-class education accessible to everyone. 
-              Through cutting-edge technology and expert-designed curricula, we're 
-              transforming how people learn and grow in their careers.
+              Première plateforme d'apprentissage numérique dédiée aux Algériens. 
+              Nous développons les compétences techniques et professionnelles dont 
+              l'Algérie a besoin pour sa transformation digitale et économique.
             </p>
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <div className="flex items-center gap-2 text-sm font-medium">
+                <MapPin className="w-4 h-4 text-primary" />
+                <span>48 Wilayas</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm font-medium">
+                <Languages className="w-4 h-4 text-primary" />
+                <span>Arabe • Français • Anglais</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm font-medium">
+                <Star className="w-4 h-4 text-primary" />
+                <span>Certifié Ministère</span>
+              </div>
+            </div>
             <Button size="lg" className="font-semibold">
-              Join Our Mission
+              Rejoindre Notre Mission
             </Button>
           </div>
         </div>
@@ -133,43 +151,65 @@ const About = () => {
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="animate-slide-up">
-              <Badge className="mb-4">Our Mission</Badge>
+              <Badge className="mb-4">Notre Mission</Badge>
               <h2 className="text-4xl font-heading font-bold mb-6">
-                Democratizing Quality Education
+                Développer les Talents Algériens
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Our mission is to break down barriers to quality education by providing 
-                accessible, engaging, and effective learning experiences that empower 
-                individuals to achieve their personal and professional goals.
+                Notre mission est de former une nouvelle génération d'Algériens qualifiés 
+                dans les technologies émergentes, répondant aux besoins du marché local 
+                et contribuant à l'économie numérique nationale.
               </p>
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                  <Shield className="w-6 h-6 text-primary" />
+              <div className="space-y-4">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <Shield className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Certifications Reconnues</h3>
+                    <p className="text-sm text-muted-foreground">Validées par les institutions algériennes</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold">Quality Assured</h3>
-                  <p className="text-sm text-muted-foreground">Every course is vetted by industry experts</p>
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <Briefcase className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Insertion Professionnelle</h3>
+                    <p className="text-sm text-muted-foreground">Partenariats avec 50+ entreprises algériennes</p>
+                  </div>
                 </div>
               </div>
             </div>
             
             <div className="animate-slide-up" style={{ animationDelay: "0.2s" }}>
-              <Badge className="mb-4">Our Vision</Badge>
+              <Badge className="mb-4">Notre Vision</Badge>
               <h2 className="text-4xl font-heading font-bold mb-6">
-                A World Where Learning Never Stops
+                L'Algérie Leader du Numérique
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                We envision a future where continuous learning is seamlessly integrated 
-                into everyone's life, enabling them to adapt, grow, and thrive in an 
-                ever-changing world.
+                Nous visons à faire de l'Algérie un hub technologique régional en formant 
+                500,000 spécialistes IT d'ici 2030, alignés sur la stratégie nationale 
+                de transformation digitale "Algérie 2030".
               </p>
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                  <Zap className="w-6 h-6 text-primary" />
+              <div className="space-y-4">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <Globe className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Rayonnement Régional</h3>
+                    <p className="text-sm text-muted-foreground">Exportation du savoir-faire algérien</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold">Innovation Driven</h3>
-                  <p className="text-sm text-muted-foreground">Powered by the latest educational technology</p>
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <Target className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Innovation Continue</h3>
+                    <p className="text-sm text-muted-foreground">R&D en technologies émergentes</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -181,13 +221,13 @@ const About = () => {
       <section className="section-padding bg-secondary/30">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <Badge className="mb-4">Our Values</Badge>
+            <Badge className="mb-4">Nos Valeurs</Badge>
             <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
-              What Drives Us
+              L'Excellence à l'Algérienne
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Our core values shape everything we do, from product development 
-              to customer support.
+              Nos valeurs fondamentales reflètent l'identité algérienne et guident 
+              notre approche pédagogique et technologique.
             </p>
           </div>
 
@@ -216,10 +256,14 @@ const About = () => {
       <section className="section-padding">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <Badge className="mb-4">Our Impact</Badge>
+            <Badge className="mb-4">Notre Impact</Badge>
             <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
-              Numbers That Matter
+              Les Chiffres de Notre Réussite
             </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Des résultats concrets qui témoignent de notre engagement envers 
+              l'excellence éducative en Algérie.
+            </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -244,13 +288,13 @@ const About = () => {
       <section className="section-padding bg-secondary/30">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <Badge className="mb-4">Our Team</Badge>
+            <Badge className="mb-4">Notre Équipe</Badge>
             <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
-              Meet the Experts
+              Des Experts Algériens
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Our diverse team brings together decades of experience in education, 
-              technology, and product design.
+              Une équipe pluridisciplinaire d'experts algériens combinant excellence 
+              académique, expertise technologique et connaissance du marché local.
             </p>
           </div>
 
@@ -279,10 +323,14 @@ const About = () => {
       <section className="section-padding">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <Badge className="mb-4">Our Journey</Badge>
+            <Badge className="mb-4">Notre Parcours</Badge>
             <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
-              Building the Future
+              Construire l'Avenir Ensemble
             </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Chaque étape de notre développement est guidée par notre engagement 
+              envers l'excellence éducative algérienne.
+            </p>
           </div>
 
           <div className="max-w-3xl mx-auto">
@@ -313,22 +361,22 @@ const About = () => {
       <section className="section-padding bg-primary text-primary-foreground">
         <div className="container-custom text-center">
           <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
-            Want to Be Part of Our Story?
+            Prêt à Rejoindre Notre Vision?
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-            Whether you're a learner looking to grow, an expert wanting to teach, 
-            or a partner interested in collaboration, we'd love to hear from you.
+            Que vous soyez apprenant, expert souhaitant enseigner, ou partenaire 
+            intéressé par une collaboration, nous serions ravis d'échanger avec vous.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" className="font-semibold">
-              Start Learning
+              Commencer l'Apprentissage
             </Button>
             <Button
               size="lg"
               variant="outline"
               className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-semibold"
             >
-              Join Our Team
+              Rejoindre l'Équipe
             </Button>
           </div>
         </div>

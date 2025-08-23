@@ -66,7 +66,10 @@ export default function Brands() {
           >
             Become a partner
           </button>
-          <button className="font-medium underline underline-offset-4 transition cursor-pointer text-foreground hover:text-foreground/80">
+          <button 
+            onClick={() => navigate('/about')}
+            className="font-medium underline underline-offset-4 transition cursor-pointer text-foreground hover:text-foreground/80"
+          >
             More about us
           </button>
         </div>
