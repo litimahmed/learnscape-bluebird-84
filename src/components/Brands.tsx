@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import * as Toggle from "@radix-ui/react-toggle";
 import { cn } from "@/lib/utils";
 import {
@@ -12,10 +13,12 @@ import {
   SiTesla,
 } from "react-icons/si";
 import { useTheme } from "next-themes";
+import { PartnerApplicationModal } from "./ui/PartnerApplicationModal";
 
 export default function Brands() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
+  const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
 
   return (
     <section className="w-full pt-1 pb-10 flex flex-col items-center text-center px-4 bg-background text-foreground">
@@ -57,13 +60,21 @@ export default function Brands() {
         </section>
 
         <div className="flex flex-col sm:flex-row justify-center gap-4 mb-14">
-          <button className="bg-primary hover:bg-primary/90 transition-colors text-primary-foreground px-6 py-3 rounded-full font-semibold shadow-md cursor-pointer">
+          <button 
+            onClick={() => setIsPartnerModalOpen(true)}
+            className="bg-primary hover:bg-primary/90 transition-colors text-primary-foreground px-6 py-3 rounded-full font-semibold shadow-md cursor-pointer"
+          >
             Become a partner
           </button>
           <button className="font-medium underline underline-offset-4 transition cursor-pointer text-foreground hover:text-foreground/80">
             More about us
           </button>
         </div>
+
+        <PartnerApplicationModal 
+          open={isPartnerModalOpen} 
+          onOpenChange={setIsPartnerModalOpen} 
+        />
 
         {/* Placeholder brand icons */}
         <div className="flex flex-wrap justify-center items-center gap-14 text-center">
