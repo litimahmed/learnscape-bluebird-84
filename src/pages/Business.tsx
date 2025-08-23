@@ -308,91 +308,134 @@ const Business = () => {
         </div>
       </section>
 
-      {/* Use Cases */}
-      <section className="section-padding bg-accent/50">
+      {/* Enterprise Use Cases */}
+      <section className="section-padding bg-gradient-to-br from-accent/10 via-background to-primary/5">
         <div className="container-custom">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
-              Transform Every Aspect of Your Business
+          <div className="text-center space-y-6 mb-20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium">
+              <Building2 className="h-4 w-4" />
+              Enterprise Solutions
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-foreground">
+              Transforming Business Operations
             </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Strategic learning initiatives that drive measurable business outcomes across your organization
+            </p>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8">
-            <Card className="bg-card">
-              <CardHeader>
-                <Building2 className="h-8 w-8 text-primary mb-2" />
-                <CardTitle>Employee Onboarding</CardTitle>
+            <Card className="group relative overflow-hidden border-border/50 hover:border-accent/30 transition-all duration-300 hover:shadow-xl bg-card/50 backdrop-blur-sm">
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <CardHeader className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-accent/20 to-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Building2 className="h-7 w-7 text-accent" />
+                </div>
+                <CardTitle className="text-xl font-semibold">Digital Transformation</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Streamline new hire training with structured onboarding programs that ensure consistent knowledge transfer.
+              <CardContent className="relative space-y-4">
+                <p className="text-muted-foreground leading-relaxed">
+                  Accelerate technology adoption and digital literacy across your workforce with structured change management programs.
                 </p>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                    <span>Automated course assignments</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                    <span>Progress tracking</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                    <span>Interactive assessments</span>
-                  </li>
-                </ul>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                    <div>
+                      <div className="font-medium text-sm">Technology Adoption Programs</div>
+                      <div className="text-xs text-muted-foreground">Cloud migration, AI tools, automation</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                    <div>
+                      <div className="font-medium text-sm">Change Management Training</div>
+                      <div className="text-xs text-muted-foreground">Agile methodologies, process optimization</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                    <div>
+                      <div className="font-medium text-sm">Digital Skills Assessment</div>
+                      <div className="text-xs text-muted-foreground">Competency mapping and gap analysis</div>
+                    </div>
+                  </div>
+                </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-card">
-              <CardHeader>
-                <Zap className="h-8 w-8 text-primary mb-2" />
-                <CardTitle>Skills Development</CardTitle>
+            <Card className="group relative overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-xl bg-card/50 backdrop-blur-sm">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <CardHeader className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Zap className="h-7 w-7 text-primary" />
+                </div>
+                <CardTitle className="text-xl font-semibold">Leadership Excellence</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Upskill your workforce with cutting-edge courses in technology, leadership, and industry-specific skills.
+              <CardContent className="relative space-y-4">
+                <p className="text-muted-foreground leading-relaxed">
+                  Develop future leaders with comprehensive management training and succession planning programs.
                 </p>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                    <span>Personalized learning paths</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                    <span>Skill gap analysis</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                    <span>Industry certifications</span>
-                  </li>
-                </ul>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                    <div>
+                      <div className="font-medium text-sm">Executive Development</div>
+                      <div className="text-xs text-muted-foreground">C-suite readiness, strategic thinking</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                    <div>
+                      <div className="font-medium text-sm">Manager Effectiveness</div>
+                      <div className="text-xs text-muted-foreground">Team leadership, performance management</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                    <div>
+                      <div className="font-medium text-sm">Succession Planning</div>
+                      <div className="text-xs text-muted-foreground">Talent pipeline development</div>
+                    </div>
+                  </div>
+                </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-card">
-              <CardHeader>
-                <Award className="h-8 w-8 text-primary mb-2" />
-                <CardTitle>Leadership Training</CardTitle>
+            <Card className="group relative overflow-hidden border-border/50 hover:border-accent/30 transition-all duration-300 hover:shadow-xl bg-card/50 backdrop-blur-sm">
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <CardHeader className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-accent/20 to-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Award className="h-7 w-7 text-accent" />
+                </div>
+                <CardTitle className="text-xl font-semibold">Performance Optimization</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Develop future leaders with comprehensive management and leadership development programs.
+              <CardContent className="relative space-y-4">
+                <p className="text-muted-foreground leading-relaxed">
+                  Drive measurable performance improvements through skills-based training aligned with business objectives.
                 </p>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                    <span>Executive coaching modules</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                    <span>Team building exercises</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                    <span>360-degree feedback</span>
-                  </li>
-                </ul>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                    <div>
+                      <div className="font-medium text-sm">Sales Excellence Programs</div>
+                      <div className="text-xs text-muted-foreground">Revenue growth, customer success</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                    <div>
+                      <div className="font-medium text-sm">Operational Efficiency</div>
+                      <div className="text-xs text-muted-foreground">Process improvement, quality management</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                    <div>
+                      <div className="font-medium text-sm">Customer Experience</div>
+                      <div className="text-xs text-muted-foreground">Service excellence, retention strategies</div>
+                    </div>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>
