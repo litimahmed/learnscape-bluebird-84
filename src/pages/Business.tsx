@@ -312,7 +312,7 @@ const Business = () => {
       <section className="section-padding bg-gradient-to-br from-accent/10 via-background to-primary/5">
         <div className="container-custom">
           <div className="text-center space-y-6 mb-20">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
               <Building2 className="h-4 w-4" />
               Enterprise Solutions
             </div>
