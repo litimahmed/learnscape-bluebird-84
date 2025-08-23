@@ -54,12 +54,11 @@ const Business = () => {
                   Enterprise Learning Solutions
                 </Badge>
                 <h1 className="text-4xl lg:text-6xl font-bold text-foreground leading-tight">
-                  Transform Your Team with 
-                  <span className="text-primary block">Professional Training</span>
+                  Scale Your Team's 
+                  <span className="text-primary block">Excellence</span>
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed">
-                  Empower your workforce with cutting-edge skills through our comprehensive corporate learning platform. 
-                  Scale training across your organization with advanced analytics and personalized learning paths.
+                  Advanced corporate learning platform with AI-powered analytics and personalized training paths.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -83,24 +82,11 @@ const Business = () => {
               </div>
             </div>
             <div className="relative">
-              <div className="bg-card border border-border rounded-2xl p-8 shadow-xl">
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-semibold text-foreground">Team Dashboard</h3>
-                    <Badge variant="secondary">Live</Badge>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="stats-card">
-                      <div className="text-2xl font-bold text-primary">2,847</div>
-                      <div className="text-sm text-muted-foreground">Active Learners</div>
-                    </div>
-                    <div className="stats-card">
-                      <div className="text-2xl font-bold text-primary">94%</div>
-                      <div className="text-sm text-muted-foreground">Completion Rate</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <img 
+                src="/src/assets/enterprise-hero.jpg" 
+                alt="Professional team collaboration in modern office environment" 
+                className="w-full h-auto rounded-2xl shadow-xl object-cover"
+              />
             </div>
           </div>
         </div>
