@@ -12,20 +12,19 @@ interface MegaMenuProps {
 
 export function MegaMenu({ padding = "md", children }: MegaMenuProps) {
   const [open, setOpen] = React.useState(false);
-  const [mounted, setMounted] = React.useState(true);
+  const [mounted, setMounted] = React.useState(false);
   const loading = false; // Mock loading state
 
-  // Ensure `mounted` is set to `false` after the component is mounted
+  // Set mounted immediately on component mount
   React.useEffect(() => {
-    const timer = setTimeout(() => setMounted(false), 3000); // Adjust the delay as needed
-    return () => clearTimeout(timer); // Cleanup the timer
+    setMounted(true);
   }, []);
 
   return (
     <DropdownMenu.Root open={open} onOpenChange={setOpen}>
       {/* Trigger Button */}
       <DropdownMenu.Trigger asChild>
-        {loading || mounted ? (
+        {loading || !mounted ? (
           <Skeleton
             style={{
               width: "160px",
