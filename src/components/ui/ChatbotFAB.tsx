@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Bot } from "lucide-react";
+import { GraduationCap, X, Send, Bot } from "lucide-react";
 import { useState } from "react";
 import { ScrollArea } from "./scroll-area";
 import { Button } from "./button";
@@ -189,18 +189,22 @@ export function ChatbotFAB() {
               {/* Icon */}
               <motion.div
                 className="relative z-10 flex items-center justify-center w-full h-full"
+                animate={{
+                  rotate: [0, 5, -5, 0],
+                }}
                 whileHover={{
-                  y: [-2, 0, -2],
+                  rotate: [0, 10, -10, 5, -5, 0],
+                  scale: [1, 1.1, 1],
                 }}
                 transition={{
-                  y: {
-                    duration: 0.6,
+                  rotate: {
+                    duration: 4,
                     repeat: Infinity,
                     ease: "easeInOut",
                   },
                 }}
               >
-                <MessageCircle 
+                <GraduationCap 
                   size={24} 
                   className="drop-shadow-sm" 
                   strokeWidth={2}
