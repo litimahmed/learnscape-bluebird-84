@@ -205,6 +205,29 @@
   background: transparent;
 }
 
+/* Hide scrollbar on tablet and mobile devices */
+@media (max-width: 1024px) {
+  body, html {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  }
+
+  body::-webkit-scrollbar,
+  html::-webkit-scrollbar {
+    display: none; /* WebKit */
+  }
+
+  /* Override for specific containers that need scrollbars */
+  .force-scrollbar {
+    scrollbar-width: thin;
+  }
+
+  .force-scrollbar::-webkit-scrollbar {
+    display: block;
+    width: 6px;
+  }
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
