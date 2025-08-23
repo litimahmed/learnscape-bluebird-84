@@ -151,7 +151,7 @@ const HelpCenter = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-primary/15 via-transparent to-primary/5" />
         
         {/* Subtle Pattern Overlay */}
-        <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 opacity-7">
           <div className="h-full w-full bg-[linear-gradient(hsl(var(--primary-foreground)/0.1)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--primary-foreground)/0.1)_1px,transparent_1px)] bg-[size:40px_40px]" />
         </div>
 
