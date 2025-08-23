@@ -19,7 +19,6 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'brand': ['Lexend', 'sans-serif'],
 				'hero': ['Poppins', 'sans-serif'],
 				'display': ['Playfair Display', 'serif'],
 				'prose': ['Source Sans Pro', 'sans-serif'],
