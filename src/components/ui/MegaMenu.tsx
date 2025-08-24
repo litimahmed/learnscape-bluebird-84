@@ -130,24 +130,61 @@ MegaMenu.CTA = function CTA({
   buttonLink: string;
 }) {
   return (
-    <div className="flex flex-col items-center text-center p-6 rounded-lg transition-colors bg-accent border border-border">
-      <img
-        src={image}
-        width={200}
-        height={120}
-        alt={title}
-        className="rounded-lg mb-4 w-full h-32 object-cover"
-      />
-      <h4 className="text-lg font-semibold mb-2 text-foreground">{title}</h4>
-      <p className="text-sm mb-4 text-muted-foreground leading-relaxed">
-        {description}
-      </p>
-      <a
-        href={buttonLink}
-        className="px-4 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors w-full"
-      >
-        {buttonText}
-      </a>
+    <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-primary/5 via-primary/3 to-primary/5 border border-primary/10 hover:border-primary/20 transition-all duration-300 hover:shadow-lg">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-grid-primary/[0.02] opacity-50" />
+      
+      {/* Content */}
+      <div className="relative p-6 space-y-4">
+        {/* Image with enhanced styling */}
+        <div className="relative overflow-hidden rounded-lg bg-background/80 p-2">
+          <img
+            src={image}
+            width={200}
+            height={120}
+            alt={title}
+            className="rounded-md w-full h-28 object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent rounded-md" />
+        </div>
+        
+        {/* Text Content */}
+        <div className="space-y-3">
+          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-2 py-1 rounded-full text-xs font-medium">
+            <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+            Featured
+          </div>
+          
+          <h4 className="text-lg font-heading font-semibold text-foreground group-hover:text-primary transition-colors">
+            {title}
+          </h4>
+          
+          <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+            {description}
+          </p>
+        </div>
+        
+        {/* CTA Button */}
+        <a
+          href={buttonLink}
+          className="inline-flex items-center justify-center w-full px-4 py-2.5 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 group-hover:scale-[1.02]"
+        >
+          {buttonText}
+          <svg 
+            className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M9 5l7 7-7 7" 
+            />
+          </svg>
+        </a>
+      </div>
     </div>
   );
 };
