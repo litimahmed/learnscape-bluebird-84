@@ -4,10 +4,10 @@ import { ArrowRight, Globe, Users, Award } from "lucide-react";
 
 const AboutHero = () => {
   return (
-    <section className="relative min-h-[80vh] flex items-center bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+    <section className="relative min-h-[80vh] flex items-center bg-gradient-to-br from-primary/5 via-background to-secondary/5 pt-20">
       <div className="container-custom">
         <div className="max-w-4xl mx-auto text-center">
-          <Badge variant="secondary" className="mb-6 text-sm font-medium">
+          <Badge className="mb-6 text-sm font-medium bg-primary/10 text-primary border-primary/20">
             About Formacad
           </Badge>
           

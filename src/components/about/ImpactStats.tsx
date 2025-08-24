@@ -98,7 +98,7 @@ const ImpactStats = () => {
       <div className="container-custom">
         {/* Header Section */}
         <div className="text-center mb-16 space-y-6">
-          <Badge variant="outline" className="text-sm font-medium">
+          <Badge className="text-sm font-medium bg-primary/10 text-primary border-primary/20">
             Our Global Impact
           </Badge>
           <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground">

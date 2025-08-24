@@ -10,7 +10,7 @@ const MissionVision = () => {
           {/* Mission */}
           <div className="space-y-8">
             <div>
-              <Badge variant="outline" className="mb-4">Our Mission</Badge>
+              <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Our Mission</Badge>
               <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
                 Democratizing Quality Education
               </h2>
@@ -46,7 +46,7 @@ const MissionVision = () => {
           {/* Vision */}
           <div className="space-y-8">
             <div>
-              <Badge variant="outline" className="mb-4">Our Vision</Badge>
+              <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Our Vision</Badge>
               <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
                 The Future of Learning
               </h2>

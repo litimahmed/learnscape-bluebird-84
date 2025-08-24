@@ -40,7 +40,7 @@ const CoreValues = () => {
     <section className="section-padding bg-secondary/30">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <Badge variant="secondary" className="mb-4">Our Values</Badge>
+          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Our Values</Badge>
           <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
             What Drives Us Forward
           </h2>
