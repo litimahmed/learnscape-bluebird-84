@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin, Users, TrendingUp } from "lucide-react";
+import careersHeroOverlay from "@/assets/careers-hero-overlay.jpg";
 
 const CareersHero = () => {
   return (
@@ -63,7 +64,11 @@ const CareersHero = () => {
             {/* Image/Visual */}
             <div className="relative">
               <div className="relative bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl p-8 h-96">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl"></div>
+                <div 
+                  className="absolute inset-0 rounded-2xl bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${careersHeroOverlay})` }}
+                ></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/40 via-primary/20 to-transparent rounded-2xl"></div>
                 <div className="relative h-full flex items-center justify-center">
                   <div className="text-center space-y-4">
                     <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
