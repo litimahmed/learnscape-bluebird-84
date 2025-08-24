@@ -12,6 +12,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { ChevronLeft, ChevronRight, Upload, User, GraduationCap, BookOpen, Award, Shield, CheckCircle, X, FileText, Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { PhoneInput } from '@/components/ui/PhoneInput';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -649,8 +650,7 @@ const Register = () => {
                   <FormLabel>Numéro de téléphone</FormLabel>
                   <FormControl>
                     <div className="relative">
-                      <Input 
-                        placeholder="+213xxxxxxxxx" 
+                      <PhoneInput 
                         autoComplete="tel"
                         {...field} 
                         onBlur={(e) => {
