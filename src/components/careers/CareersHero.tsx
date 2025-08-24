@@ -11,16 +11,19 @@ const CareersHero = () => {
             {/* Content */}
             <div className="space-y-8">
               <div className="space-y-6">
-                <div className="space-y-2">
-                  <p className="text-sm font-medium text-primary">انضم إلينا • Rejoignez-nous • Join Us</p>
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                    Shape Algeria's
-                    <span className="text-primary block">Digital Future</span>
+                <div className="space-y-4">
+                  <p className="text-sm font-semibold text-primary uppercase tracking-wider">Join Our Team</p>
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground leading-tight">
+                    Build the Future of
+                    <span className="text-primary block bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                      Digital Education
+                    </span>
                   </h1>
                 </div>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Join Formacad's mission to democratize education across Algeria. Be part of a team that's 
-                  transforming lives through technology while building your own exceptional career.
+                <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
+                  Join a dynamic team of innovators, educators, and technologists dedicated to transforming 
+                  the educational landscape. Make a meaningful impact while advancing your career in a 
+                  fast-growing EdTech company.
                 </p>
               </div>
 
