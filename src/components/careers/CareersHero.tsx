@@ -2,8 +2,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin, Users, TrendingUp } from "lucide-react";
 
 const CareersHero = () => {
-  console.log("CareersHero rendering...");
-  
   return (
     <section className="pt-24 pb-16 md:pb-24 bg-gradient-to-br from-primary/5 via-background to-accent/5">
       <div className="container-custom">
