@@ -25,9 +25,22 @@ export default {
 				'prose': ['Source Sans Pro', 'sans-serif'],
 				'heading': ['Manrope', 'sans-serif'],
 				'body': ['Inter', 'sans-serif'],
-				'brand': ['Space Grotesk', 'sans-serif'],
-				'brand-alt': ['Outfit', 'sans-serif'],
-				'brand-modern': ['DM Sans', 'sans-serif'],
+				'brand': ['Outfit', 'sans-serif'], // Currently active
+				'brand-space': ['Space Grotesk', 'sans-serif'], // Geometric modern
+				'brand-dm': ['DM Sans', 'sans-serif'], // Clean professional
+				'brand-orbitron': ['Orbitron', 'monospace'], // Futuristic tech
+				'brand-righteous': ['Righteous', 'cursive'], // Bold playful
+				'brand-bebas': ['Bebas Neue', 'cursive'], // Strong condensed
+				'brand-oswald': ['Oswald', 'sans-serif'], // Editorial strong
+				'brand-montserrat': ['Montserrat', 'sans-serif'], // Classic versatile
+				'brand-raleway': ['Raleway', 'sans-serif'], // Elegant thin
+				'brand-ubuntu': ['Ubuntu', 'sans-serif'], // Humanist friendly
+				'brand-nunito': ['Nunito', 'sans-serif'], // Rounded warm
+				'brand-roboto-slab': ['Roboto Slab', 'serif'], // Modern slab serif
+				'brand-crimson': ['Crimson Text', 'serif'], // Traditional academic
+				'brand-merriweather': ['Merriweather', 'serif'], // Readable serif
+				'brand-lora': ['Lora', 'serif'], // Elegant serif
+				'brand-source-serif': ['Source Serif Pro', 'serif'], // Professional serif
 			},
 			colors: {
 				border: 'hsl(var(--border))',
