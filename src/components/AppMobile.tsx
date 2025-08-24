@@ -52,28 +52,28 @@ const AppMobile = () => {
 
             {/* Download Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              {/* App Store Button - Dark Theme */}
+              {/* App Store Button - Primary Theme */}
               <a
                 href="#"
-                className="flex items-center w-[200px] h-[56px] px-4 py-3 rounded-xl bg-foreground text-background hover:bg-foreground/90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                className="flex items-center w-[200px] h-[56px] px-4 py-3 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 <img
                   src="/app-store-icons/apple-store.svg"
                   alt="App Store"
-                  className="w-8 h-8 mr-4 filter brightness-0 invert"
+                  className="w-8 h-8 mr-4"
                 />
                 <div className="text-left leading-none">
-                  <p className="text-xs font-medium text-background/70">Download on the</p>
-                  <p className="text-base font-semibold text-background">
+                  <p className="text-xs font-medium text-primary-foreground/70">Download on the</p>
+                  <p className="text-base font-semibold text-primary-foreground">
                     App Store
                   </p>
                 </div>
               </a>
 
-              {/* Google Play Button - Light Theme */}
+              {/* Google Play Button - Secondary Theme */}
               <a
                 href="#"
-                className="flex items-center w-[200px] h-[56px] px-4 py-3 rounded-xl border-2 border-foreground bg-background text-foreground hover:bg-foreground hover:text-background transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                className="flex items-center w-[200px] h-[56px] px-4 py-3 rounded-xl bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 <img
                   src="/app-store-icons/google-play.svg"
@@ -81,8 +81,8 @@ const AppMobile = () => {
                   className="w-8 h-8 mr-4"
                 />
                 <div className="text-left leading-none">
-                  <p className="text-xs font-medium text-muted-foreground">GET IT ON</p>
-                  <p className="text-base font-semibold text-foreground">
+                  <p className="text-xs font-medium text-secondary-foreground/70">GET IT ON</p>
+                  <p className="text-base font-semibold text-secondary-foreground">
                     Google Play
                   </p>
                 </div>
