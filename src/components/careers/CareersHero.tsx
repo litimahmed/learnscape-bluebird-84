@@ -70,15 +70,6 @@ const CareersHero = () => {
                 ></div>
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/40 via-primary/20 to-transparent rounded-2xl"></div>
                 <div className="relative h-full flex items-center justify-center">
-                  <div className="text-center space-y-4">
-                    <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
-                      <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-                        <Users className="w-6 h-6 text-primary-foreground" />
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-semibold text-foreground">Join Our Growing Team</h3>
-                    <p className="text-muted-foreground">Be part of Algeria's education revolution</p>
-                  </div>
                 </div>
               </div>
               
