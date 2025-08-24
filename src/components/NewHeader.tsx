@@ -51,7 +51,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
           {/* Left - Language Selector */}
           <div className="flex-shrink-0">
             <select
-              className="bg-transparent border border-white/30 text-white text-sm px-3 py-1 rounded hover:bg-white/10 focus:outline-none cursor-pointer"
+              className="bg-transparent border border-primary-foreground/20 text-primary-foreground text-sm px-3 py-1 rounded hover:bg-primary-foreground/10 focus:outline-none cursor-pointer"
               defaultValue="English"
             >
               <option value="English" className="text-black bg-white">
@@ -68,7 +68,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
 
           {/* Center - Text Content */}
           <div className="flex-1 text-center px-4">
-            <span className="text-white text-sm font-medium hidden sm:inline">
+            <span className="text-primary-foreground text-sm font-medium hidden sm:inline">
               We build a strong platform that tailor to have different things to
               function
             </span>
@@ -79,7 +79,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
             <Link to="/help">
               <Button
                 variant="ghost"
-                className="text-white border border-white/30 hover:bg-white/10 text-sm px-4 py-1 h-auto"
+                className="text-primary-foreground border border-primary-foreground/20 hover:bg-primary-foreground/10 text-sm px-4 py-1 h-auto"
               >
                 Help Center
               </Button>

@@ -13,7 +13,7 @@ export function ThemeToggle({ isDark, toggleTheme }: ThemeToggleProps) {
       variant="ghost"
       size="sm"
       onClick={toggleTheme}
-      className="w-9 h-9 p-0 border border-white/20 text-white hover:bg-white/10"
+      className="w-9 h-9 p-0 border border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10"
     >
       {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
     </Button>
