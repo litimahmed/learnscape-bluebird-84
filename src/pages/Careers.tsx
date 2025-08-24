@@ -4,11 +4,7 @@ import WhyWorkWithUs from "@/components/careers/WhyWorkWithUs";
 import OpenPositions from "@/components/careers/OpenPositions";
 import BenefitsSection from "@/components/careers/BenefitsSection";
 import CompanyCulture from "@/components/careers/CompanyCulture";
-import CareerDevelopment from "@/components/careers/CareerDevelopment";
-import EmployeeTestimonials from "@/components/careers/EmployeeTestimonials";
 import ApplicationProcess from "@/components/careers/ApplicationProcess";
-import OfficeLocations from "@/components/careers/OfficeLocations";
-import SocialImpact from "@/components/careers/SocialImpact";
 
 const Careers = () => {
   return (
@@ -36,20 +32,8 @@ const Careers = () => {
         {/* Company Culture */}
         <CompanyCulture />
         
-        {/* Career Development */}
-        <CareerDevelopment />
-        
-        {/* Employee Testimonials */}
-        <EmployeeTestimonials />
-        
         {/* Application Process */}
         <ApplicationProcess />
-        
-        {/* Office Locations */}
-        <OfficeLocations />
-        
-        {/* Social Impact */}
-        <SocialImpact />
       </div>
     </>
   );
