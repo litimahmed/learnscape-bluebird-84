@@ -79,7 +79,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
             <Link to="/help">
               <Button
                 variant="ghost"
-                className="text-primary-foreground border border-primary-foreground/20 hover:bg-primary-foreground/10 text-sm px-4 py-1 h-auto"
+                className="text-primary-foreground border border-primary-foreground/20 hover:bg-background hover:text-primary text-sm px-4 py-1 h-auto"
               >
                 Help Center
               </Button>
