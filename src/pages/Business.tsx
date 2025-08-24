@@ -47,7 +47,7 @@ const Business = () => {
       {/* Hero Section */}
       <section className="pb-16 md:pb-24 bg-gradient-to-br from-primary/5 via-background to-accent/5">
         <div className="container-custom">
-          <div className="relative w-full max-w-6xl mx-auto bg-background rounded-lg p-6 md:p-8">
+          <div className="relative w-full max-w-6xl mx-auto rounded-lg p-6 md:p-8">
             <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
