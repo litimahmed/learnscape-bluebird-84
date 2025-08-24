@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import NewHeader from "./NewHeader";
 import Footer from "./Footer";
 import { ChatbotFAB } from "./ui/ChatbotFAB";
+import ScrollToTop from "./ui/ScrollToTop";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -46,6 +47,7 @@ const Layout = ({ children }: LayoutProps) => {
         </main>
         <Footer isDark={isDark} />
         <ChatbotFAB />
+        <ScrollToTop />
       </div>
     </div>
   );

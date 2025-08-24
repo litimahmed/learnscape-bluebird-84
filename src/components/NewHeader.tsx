@@ -168,7 +168,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
                     {location.pathname === "/business" ? "For Individuals" : "For Business"}
                   </Link>
                   <Link
-                    to="/"
+                    to="/careers"
                     className="text-sm font-medium text-foreground hover:text-primary transition-colors hidden md:block"
                   >
                     Careers
