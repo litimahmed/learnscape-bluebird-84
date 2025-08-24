@@ -11,6 +11,8 @@ import OfficeLocations from "@/components/careers/OfficeLocations";
 import SocialImpact from "@/components/careers/SocialImpact";
 
 const Careers = () => {
+  console.log("Careers page rendering...");
+  
   return (
     <>
       <Helmet>
@@ -27,29 +29,15 @@ const Careers = () => {
         {/* Why Work With Us */}
         <WhyWorkWithUs />
         
-        {/* Open Positions */}
-        <OpenPositions />
-        
-        {/* Benefits & Compensation */}
+        {/* Testing - commenting out other components temporarily */}
+        {/* <OpenPositions />
         <BenefitsSection />
-        
-        {/* Company Culture */}
         <CompanyCulture />
-        
-        {/* Career Development */}
         <CareerDevelopment />
-        
-        {/* Employee Testimonials */}
         <EmployeeTestimonials />
-        
-        {/* Application Process */}
         <ApplicationProcess />
-        
-        {/* Office Locations */}
         <OfficeLocations />
-        
-        {/* Social Impact */}
-        <SocialImpact />
+        <SocialImpact /> */}
       </div>
     </>
   );

@@ -109,6 +109,17 @@ export default {
 				'fade-in': 'fade-in 0.6s ease-out',
 				'slide-up': 'slide-up 0.8s ease-out',
 				'scale': 'scale-in 0.5s ease-out'
+			},
+			animationDelay: {
+				'0': '0s',
+				'75': '75ms',
+				'100': '100ms',
+				'150': '150ms',
+				'200': '200ms',
+				'300': '300ms',
+				'500': '500ms',
+				'700': '700ms',
+				'1000': '1s',
 			}
 		}
 	},

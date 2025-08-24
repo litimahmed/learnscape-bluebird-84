@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin, Users, TrendingUp } from "lucide-react";
 
 const CareersHero = () => {
+  console.log("CareersHero rendering...");
+  
   return (
     <section className="pt-24 pb-16 md:pb-24 bg-gradient-to-br from-primary/5 via-background to-accent/5">
       <div className="container-custom">
@@ -79,7 +81,7 @@ const CareersHero = () => {
               
               {/* Floating Elements */}
               <div className="absolute -top-4 -right-4 w-20 h-20 bg-accent/20 rounded-full blur-xl animate-pulse"></div>
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-primary/20 rounded-full blur-xl animate-pulse" style={{animationDelay: '1s'}}></div>
+              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-primary/20 rounded-full blur-xl"></div>
             </div>
           </div>
         </div>
