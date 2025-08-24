@@ -62,7 +62,7 @@ const CompanyCulture = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-background">
+    <section id="company-culture" className="py-16 md:py-24 bg-background">
       <div className="container-custom">
         <div className="max-w-6xl mx-auto">
           {/* Header */}

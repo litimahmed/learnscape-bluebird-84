@@ -54,11 +54,19 @@ const CareersHero = () => {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="group">
+                <Button 
+                  size="lg" 
+                  className="group"
+                  onClick={() => document.getElementById('open-positions')?.scrollIntoView({ behavior: 'smooth' })}
+                >
                   View Open Positions
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                <Button variant="outline" size="lg">
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  onClick={() => document.getElementById('company-culture')?.scrollIntoView({ behavior: 'smooth' })}
+                >
                   Learn About Our Culture
                 </Button>
               </div>
