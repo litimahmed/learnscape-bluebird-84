@@ -52,28 +52,28 @@ const AppMobile = () => {
 
             {/* Download Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              {/* App Store Button */}
+              {/* App Store Button - Dark Theme */}
               <a
                 href="#"
-                className="flex items-center w-[200px] h-[56px] px-4 py-3 rounded-xl border border-border bg-background hover:bg-accent transition-all duration-300 hover:scale-105"
+                className="flex items-center w-[200px] h-[56px] px-4 py-3 rounded-xl bg-foreground text-background hover:bg-foreground/90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 <img
                   src="/app-store-icons/apple-store.svg"
                   alt="App Store"
-                  className="w-8 h-8 mr-4"
+                  className="w-8 h-8 mr-4 filter brightness-0 invert"
                 />
                 <div className="text-left leading-none">
-                  <p className="text-xs font-medium text-muted-foreground">Download on the</p>
-                  <p className="text-base font-semibold text-foreground">
+                  <p className="text-xs font-medium text-background/70">Download on the</p>
+                  <p className="text-base font-semibold text-background">
                     App Store
                   </p>
                 </div>
               </a>
 
-              {/* Google Play Button */}
+              {/* Google Play Button - Light Theme */}
               <a
                 href="#"
-                className="flex items-center w-[200px] h-[56px] px-4 py-3 rounded-xl border border-border bg-background hover:bg-accent transition-all duration-300 hover:scale-105"
+                className="flex items-center w-[200px] h-[56px] px-4 py-3 rounded-xl border-2 border-foreground bg-background text-foreground hover:bg-foreground hover:text-background transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 <img
                   src="/app-store-icons/google-play.svg"
