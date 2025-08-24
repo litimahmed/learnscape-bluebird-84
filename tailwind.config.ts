@@ -24,6 +24,7 @@ export default {
 				'prose': ['Source Sans Pro', 'sans-serif'],
 				'heading': ['Manrope', 'sans-serif'],
 				'body': ['Inter', 'sans-serif'],
+				'brand': ['Lexend', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

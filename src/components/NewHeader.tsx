@@ -90,7 +90,9 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
                   className="w-10 h-10 mr-3 object-contain"
                   loading="eager"
                 />
-                <span className="text-xl font-extrabold text-primary">Formacad</span>
+                <span className="text-2xl font-brand font-bold bg-gradient-to-r from-primary via-primary to-blue-600 bg-clip-text text-transparent hover:from-blue-600 hover:via-primary hover:to-primary transition-all duration-300 tracking-tight">
+                  Formacad
+                </span>
               </Link>
             </div>
 
