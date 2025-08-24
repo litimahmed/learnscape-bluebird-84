@@ -47,8 +47,8 @@ const Business = () => {
       {/* Hero Section */}
       <section className="pb-16 md:pb-24 bg-gradient-to-br from-primary/5 via-background to-accent/5">
         <div className="container-custom">
-          <div className="relative w-full max-w-5xl mx-auto bg-background rounded-2xl p-8 md:p-12 shadow-xl">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="relative w-full max-w-6xl mx-auto bg-background rounded-lg p-6 md:p-8">
+            <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
                 <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
@@ -86,7 +86,7 @@ const Business = () => {
               <img 
                 src="/src/assets/enterprise-hero.jpg" 
                 alt="Professional team collaboration in modern office environment" 
-                className="w-full h-auto rounded-2xl shadow-xl object-cover"
+                className="w-full h-[400px] lg:h-[500px] rounded-xl object-cover"
               />
             </div>
           </div>
