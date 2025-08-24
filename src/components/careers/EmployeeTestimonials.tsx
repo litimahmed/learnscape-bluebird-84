@@ -3,13 +3,19 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Quote, Star, MapPin, Calendar } from "lucide-react";
 
+// Import avatar images
+import avatarFatima from "@/assets/avatar-fatima.jpg";
+import avatarHassan from "@/assets/avatar-hassan.jpg";
+import avatarAhmad from "@/assets/avatar-ahmad.jpg";
+import avatarNicolas from "@/assets/avatar-nicolas.jpg";
+
 const EmployeeTestimonials = () => {
   const testimonials = [
     {
       name: "Amina Benali",
       role: "Senior Frontend Developer",
       location: "Algiers",
-      avatar: "/src/assets/avatar-fatima.jpg",
+      avatar: avatarFatima,
       joinDate: "2022",
       rating: 5,
       quote: "Joining Formacad was a career-defining moment. I've grown from a junior developer to leading major product features. The mentorship program and learning budget helped me master React and TypeScript. Most importantly, I'm proud to contribute to Algeria's digital transformation.",
@@ -19,7 +25,7 @@ const EmployeeTestimonials = () => {
       name: "Yacine Mammeri",
       role: "DevOps Engineer",
       location: "Oran",
-      avatar: "/src/assets/avatar-hassan.jpg",
+      avatar: avatarHassan,
       joinDate: "2021",
       rating: 5,
       quote: "The remote-first culture allows me to work from Oran while collaborating with the Algiers team seamlessly. I've built our entire cloud infrastructure from scratch and learned cutting-edge technologies. The work-life balance respects our cultural values.",
@@ -29,7 +35,7 @@ const EmployeeTestimonials = () => {
       name: "Sarah Khelifi",
       role: "Product Manager",
       location: "Constantine",
-      avatar: "/src/assets/avatar-fatima.jpg",
+      avatar: avatarFatima,
       joinDate: "2023",
       rating: 5,
       quote: "As a Product Manager, I shape products used by thousands of Algerian students. The company invests heavily in my professional development - I attended PMI conferences in Dubai and Paris. The impact we create motivates me every day.",
@@ -39,7 +45,7 @@ const EmployeeTestimonials = () => {
       name: "Karim Boumediene",
       role: "Content Developer",
       location: "Algiers",
-      avatar: "/src/assets/avatar-ahmad.jpg",
+      avatar: avatarAhmad,
       joinDate: "2022",
       rating: 5,
       quote: "Working in educational content allows me to combine my passion for Arabic language with technology. I've developed curriculum used across Algeria's schools. The multilingual environment and cultural sensitivity make this the perfect workplace for me.",
@@ -49,7 +55,7 @@ const EmployeeTestimonials = () => {
       name: "Lina Cherif",
       role: "UX Designer",
       location: "Remote",
-      avatar: "/src/assets/avatar-fatima.jpg",
+      avatar: avatarFatima,
       joinDate: "2023",
       rating: 5,
       quote: "The design culture here is incredible. I work on products that truly matter - making education accessible to students in remote areas of Algeria. The team trusts my creative vision and provides resources to execute world-class designs.",
@@ -59,7 +65,7 @@ const EmployeeTestimonials = () => {
       name: "Omar Taleb",
       role: "Business Development",
       location: "Algiers",
-      avatar: "/src/assets/avatar-nicolas.jpg", 
+      avatar: avatarNicolas, 
       joinDate: "2021",
       rating: 5,
       quote: "I've helped establish partnerships with 50+ educational institutions across Algeria. The sales training and government relations experience I've gained here are invaluable. Plus, the competitive compensation and benefits package exceeded my expectations.",
