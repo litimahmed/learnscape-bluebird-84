@@ -25,22 +25,20 @@ export default {
 				'prose': ['Source Sans Pro', 'sans-serif'],
 				'heading': ['Manrope', 'sans-serif'],
 				'body': ['Inter', 'sans-serif'],
-				'brand': ['Outfit', 'sans-serif'], // Currently active
-				'brand-space': ['Space Grotesk', 'sans-serif'], // Geometric modern
-				'brand-dm': ['DM Sans', 'sans-serif'], // Clean professional
-				'brand-orbitron': ['Orbitron', 'monospace'], // Futuristic tech
-				'brand-righteous': ['Righteous', 'cursive'], // Bold playful
-				'brand-bebas': ['Bebas Neue', 'cursive'], // Strong condensed
-				'brand-oswald': ['Oswald', 'sans-serif'], // Editorial strong
-				'brand-montserrat': ['Montserrat', 'sans-serif'], // Classic versatile
-				'brand-raleway': ['Raleway', 'sans-serif'], // Elegant thin
-				'brand-ubuntu': ['Ubuntu', 'sans-serif'], // Humanist friendly
-				'brand-nunito': ['Nunito', 'sans-serif'], // Rounded warm
-				'brand-roboto-slab': ['Roboto Slab', 'serif'], // Modern slab serif
-				'brand-crimson': ['Crimson Text', 'serif'], // Traditional academic
-				'brand-merriweather': ['Merriweather', 'serif'], // Readable serif
-				'brand-lora': ['Lora', 'serif'], // Elegant serif
-				'brand-source-serif': ['Source Serif Pro', 'serif'], // Professional serif
+				'brand': ['Fredoka', 'sans-serif'], // Currently active - Playful rounded
+				'brand-comfortaa': ['Comfortaa', 'cursive'], // Soft bubbly geometric
+				'brand-pacifico': ['Pacifico', 'cursive'], // Handwritten script flowing
+				'brand-bungee': ['Bungee', 'display'], // Bold blocky graffiti style
+				'brand-pixel': ['Press Start 2P', 'monospace'], // Retro 8-bit gaming
+				'brand-kalam': ['Kalam', 'cursive'], // Handwritten casual marker
+				'brand-caveat': ['Caveat', 'cursive'], // Natural handwriting
+				'brand-bangers': ['Bangers', 'display'], // Comic book explosion
+				'brand-griffy': ['Griffy', 'display'], // Decorative vintage serif
+				'brand-faster': ['Faster One', 'display'], // Racing speed lines
+				'brand-creepster': ['Creepster', 'display'], // Horror movie poster
+				'brand-blackops': ['Black Ops One', 'display'], // Military stencil
+				'brand-audiowide': ['Audiowide', 'sans-serif'], // Sci-fi technology
+				'brand-orbitron': ['Orbitron', 'sans-serif'], // Futuristic space
 			},
 			colors: {
 				border: 'hsl(var(--border))',
