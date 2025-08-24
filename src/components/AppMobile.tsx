@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import mobileAppHero from "@/assets/mobile-app-hero.jpg";
+import formacadMobileMockup from "@/assets/formacad-mobile-mockup.jpg";
 
 const AppMobile = () => {
   return (
@@ -116,8 +116,8 @@ const AppMobile = () => {
           >
             <div className="relative">
               <img
-                src={mobileAppHero}
-                alt="Mobile app interface showing learning platform"
+                src={formacadMobileMockup}
+                alt="Formacad mobile app mockup showing iOS and Android devices with course dashboard, lesson details, and student profile"
                 className="w-full h-auto rounded-2xl shadow-2xl"
               />
               
