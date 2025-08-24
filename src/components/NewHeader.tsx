@@ -4,13 +4,18 @@ import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SearchBar } from "@/components/ui/SearchBar";
 import { MegaMenu } from "@/components/ui/MegaMenu";
-import { Dialog, DialogContent, DialogTrigger, DialogOverlay } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogOverlay,
+} from "@/components/ui/dialog";
 import UserProfileDropdown from "@/components/ui/UserProfileDropdown";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import AuthDialog from "@/components/AuthDialog";
 import { useAuth } from "@/hooks/useAuth";
-import formacadLogoLight from "@/assets/formacad-logo-light.png";
-import formacadLogoDark from "@/assets/formacad-logo-dark.png";
+import formacadLogoLight from "@/assets/light_logo.svg";
+import formacadLogoDark from "@/assets/dark_logo.svg";
 
 interface NewHeaderProps {
   isDark: boolean;
@@ -31,10 +36,10 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
       openModal();
     };
 
-    window.addEventListener('openLoginModal', handleOpenLoginModal);
-    
+    window.addEventListener("openLoginModal", handleOpenLoginModal);
+
     return () => {
-      window.removeEventListener('openLoginModal', handleOpenLoginModal);
+      window.removeEventListener("openLoginModal", handleOpenLoginModal);
     };
   }, []);
 
@@ -45,20 +50,27 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
         <div className="max-w-7xl mx-auto flex items-center justify-between h-12">
           {/* Left - Language Selector */}
           <div className="flex-shrink-0">
-            <select 
+            <select
               className="bg-transparent border border-white/30 text-white text-sm px-3 py-1 rounded hover:bg-white/10 focus:outline-none cursor-pointer"
               defaultValue="English"
             >
-              <option value="English" className="text-black bg-white">English</option>
-              <option value="Arabic" className="text-black bg-white">Arabic</option>
-              <option value="French" className="text-black bg-white">French</option>
+              <option value="English" className="text-black bg-white">
+                English
+              </option>
+              <option value="Arabic" className="text-black bg-white">
+                Arabic
+              </option>
+              <option value="French" className="text-black bg-white">
+                French
+              </option>
             </select>
           </div>
 
           {/* Center - Text Content */}
           <div className="flex-1 text-center px-4">
             <span className="text-white text-sm font-medium hidden sm:inline">
-              We build a strong platform that tailor to have different things to function
+              We build a strong platform that tailor to have different things to
+              function
             </span>
           </div>
 
@@ -84,13 +96,14 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
             {/* Left - Logo */}
             <div className="flex items-center flex-shrink-0">
               <Link to="/" className="flex items-center">
-                <img 
-                  src={isDark ? formacadLogoDark : formacadLogoLight} 
-                  alt="Formacad Logo" 
-                  className="w-10 h-10 mr-3 object-contain"
+                <img
+                  src={isDark ? formacadLogoDark : formacadLogoLight}
+                  alt="Formacad Logo"
+                  style={{ width: 75, height: 75 }}
+                  className="object-contain"
                   loading="eager"
                 />
-                <span className="text-2xl font-brand font-bold bg-gradient-to-r from-primary via-primary to-blue-600 bg-clip-text text-transparent hover:from-blue-600 hover:via-primary hover:to-primary transition-all duration-300 tracking-tight">
+                <span className="text-2xl relative -left-3 font-brand font-bold bg-gradient-to-r from-primary via-primary to-blue-600 bg-clip-text text-transparent hover:from-blue-600 hover:via-primary hover:to-primary transition-all duration-300 tracking-tight">
                   Formacad
                 </span>
               </Link>
@@ -100,30 +113,78 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
             <div className="flex items-center gap-6 flex-1 max-w-2xl mx-6">
               <MegaMenu width="full" padding="lg">
                 <MegaMenu.Column title="Explore Roles">
-                  <MegaMenu.Item label="Data Analyst" href="/courses/data-analyst" />
-                  <MegaMenu.Item label="Project Manager" href="/courses/project-manager" />
-                  <MegaMenu.Item label="Cyber Security Analyst" href="/courses/cybersecurity" />
-                  <MegaMenu.Item label="Data Scientist" href="/courses/data-scientist" />
-                  <MegaMenu.Item label="Business Intelligence Analyst" href="/courses/business-intelligence" />
-                  <MegaMenu.Item label="Digital Marketing Specialist" href="/courses/digital-marketing" />
-                  <MegaMenu.Item label="UI / UX Designer" href="/courses/ui-ux" />
-                  <MegaMenu.Item label="Machine Learning Engineer" href="/courses/machine-learning" />
-                  <MegaMenu.Item label="Social Media Specialist" href="/courses/social-media" />
-                  <MegaMenu.Item label="Computer Support Specialist" href="/courses/computer-support" />
+                  <MegaMenu.Item
+                    label="Data Analyst"
+                    href="/courses/data-analyst"
+                  />
+                  <MegaMenu.Item
+                    label="Project Manager"
+                    href="/courses/project-manager"
+                  />
+                  <MegaMenu.Item
+                    label="Cyber Security Analyst"
+                    href="/courses/cybersecurity"
+                  />
+                  <MegaMenu.Item
+                    label="Data Scientist"
+                    href="/courses/data-scientist"
+                  />
+                  <MegaMenu.Item
+                    label="Business Intelligence Analyst"
+                    href="/courses/business-intelligence"
+                  />
+                  <MegaMenu.Item
+                    label="Digital Marketing Specialist"
+                    href="/courses/digital-marketing"
+                  />
+                  <MegaMenu.Item
+                    label="UI / UX Designer"
+                    href="/courses/ui-ux"
+                  />
+                  <MegaMenu.Item
+                    label="Machine Learning Engineer"
+                    href="/courses/machine-learning"
+                  />
+                  <MegaMenu.Item
+                    label="Social Media Specialist"
+                    href="/courses/social-media"
+                  />
+                  <MegaMenu.Item
+                    label="Computer Support Specialist"
+                    href="/courses/computer-support"
+                  />
                   <MegaMenu.Item label="View all" href="/courses" highlight />
                 </MegaMenu.Column>
 
                 <MegaMenu.Column title="Popular Subjects">
-                  <MegaMenu.Item label="Programming" href="/courses/programming" />
-                  <MegaMenu.Item label="Data Science" href="/courses/data-science" />
-                  <MegaMenu.Item label="Web Development" href="/courses/web-development" />
+                  <MegaMenu.Item
+                    label="Programming"
+                    href="/courses/programming"
+                  />
+                  <MegaMenu.Item
+                    label="Data Science"
+                    href="/courses/data-science"
+                  />
+                  <MegaMenu.Item
+                    label="Web Development"
+                    href="/courses/web-development"
+                  />
                   <MegaMenu.Item label="View all" href="/courses" highlight />
                 </MegaMenu.Column>
 
                 <MegaMenu.Column title="Skill Levels">
-                  <MegaMenu.Item label="Beginner" href="/courses?level=beginner" />
-                  <MegaMenu.Item label="Intermediate" href="/courses?level=intermediate" />
-                  <MegaMenu.Item label="Advanced" href="/courses?level=advanced" />
+                  <MegaMenu.Item
+                    label="Beginner"
+                    href="/courses?level=beginner"
+                  />
+                  <MegaMenu.Item
+                    label="Intermediate"
+                    href="/courses?level=intermediate"
+                  />
+                  <MegaMenu.Item
+                    label="Advanced"
+                    href="/courses?level=advanced"
+                  />
                   <MegaMenu.Item label="View all" href="/courses" highlight />
                 </MegaMenu.Column>
 
@@ -165,7 +226,9 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
                     to={location.pathname === "/business" ? "/" : "/business"}
                     className="text-sm font-medium text-foreground hover:text-primary transition-colors hidden md:block"
                   >
-                    {location.pathname === "/business" ? "For Individuals" : "For Business"}
+                    {location.pathname === "/business"
+                      ? "For Individuals"
+                      : "For Business"}
                   </Link>
                   <Link
                     to="/careers"

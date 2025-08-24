@@ -131,7 +131,7 @@ const HelpCenter = () => {
       icon: Mail,
       title: "Email Support",
       description: "Get help via email",
-      contact: "support@edutech.com",
+      contact: "support@Formacad.com",
       response: "Response within 24 hours",
     },
     {

@@ -38,10 +38,10 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
     password,
     setPassword,
   } = useLoginForm();
-  
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
+
   const { signIn } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -57,7 +57,7 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
       }
 
       const { error } = await signIn(email, password);
-      
+
       if (error) {
         if (error.message.includes("Invalid login credentials")) {
           setError("Incorrect email or password.");
@@ -88,7 +88,7 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
             <div className="text-center space-y-4">
               <div className="inline-block px-4 py-2 border border-primary rounded-full">
                 <span className="text-primary text-sm font-semibold uppercase tracking-wide">
-                  EDUTECH
+                  FORMACAD
                 </span>
               </div>
               <h1 className="text-2xl font-normal text-foreground">
@@ -125,7 +125,10 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
 
               {/* Password Field */}
               <div className="space-y-3">
-                <Label htmlFor="password" className="text-foreground font-medium">
+                <Label
+                  htmlFor="password"
+                  className="text-foreground font-medium"
+                >
                   Password
                 </Label>
                 <div className="relative">
@@ -143,7 +146,11 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+                    {showPassword ? (
+                      <FaEyeSlash size={18} />
+                    ) : (
+                      <FaEye size={18} />
+                    )}
                   </button>
                 </div>
               </div>
@@ -199,9 +206,7 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
           />
           <div
             className={`absolute inset-0 ${
-              isDark
-                ? "bg-black/50"
-                : "bg-black/30"
+              isDark ? "bg-black/50" : "bg-black/30"
             }`}
           />
           <div className="absolute inset-y-8 px-8 lg:px-10 pb-8 flex flex-col items-center justify-end">
@@ -223,8 +228,8 @@ export default function AuthDialog({ onClose, isDark }: AuthDialogProps) {
               Join thousands of professionals using our platform to empower
               learning.
               <br />
-              Sign up for free and explore all features for 30 days—no credit card
-              required.
+              Sign up for free and explore all features for 30 days—no credit
+              card required.
             </motion.p>
 
             <motion.div

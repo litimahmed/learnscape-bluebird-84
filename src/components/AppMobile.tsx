@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import formacadMobileMockup from "@/assets/formacad-mobile-mockup.jpg";
+import formacadMobileMockup from "@/assets/mobile-app-hero.png";
 
 const AppMobile = () => {
   return (
@@ -21,12 +21,13 @@ const AppMobile = () => {
                 Mobile App
               </p>
               <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-                Learn on the{" "}
-                <span className="text-primary">go</span> with our mobile app
+                Learn on the <span className="text-primary">go</span> with our
+                mobile app
               </h2>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Take your learning experience anywhere. Download our mobile app for iOS and Android 
-                to access courses, track progress, and continue learning even when you're offline.
+                Take your learning experience anywhere. Download our mobile app
+                for iOS and Android to access courses, track progress, and
+                continue learning even when you're offline.
               </p>
             </div>
 
@@ -34,19 +35,27 @@ const AppMobile = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-foreground font-medium">Offline Learning</span>
+                <span className="text-foreground font-medium">
+                  Offline Learning
+                </span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-foreground font-medium">Progress Sync</span>
+                <span className="text-foreground font-medium">
+                  Progress Sync
+                </span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-foreground font-medium">Push Notifications</span>
+                <span className="text-foreground font-medium">
+                  Push Notifications
+                </span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-foreground font-medium">Mobile Optimized</span>
+                <span className="text-foreground font-medium">
+                  Mobile Optimized
+                </span>
               </div>
             </div>
 
@@ -63,7 +72,9 @@ const AppMobile = () => {
                   className="w-8 h-8 mr-4"
                 />
                 <div className="text-left leading-none">
-                  <p className="text-xs font-medium text-primary-foreground/70">Download on the</p>
+                  <p className="text-xs font-medium text-primary-foreground/70">
+                    Download on the
+                  </p>
                   <p className="text-base font-semibold text-primary-foreground">
                     App Store
                   </p>
@@ -81,7 +92,9 @@ const AppMobile = () => {
                   className="w-8 h-8 mr-4"
                 />
                 <div className="text-left leading-none">
-                  <p className="text-xs font-medium text-secondary-foreground/70">GET IT ON</p>
+                  <p className="text-xs font-medium text-secondary-foreground/70">
+                    GET IT ON
+                  </p>
                   <p className="text-base font-semibold text-secondary-foreground">
                     Google Play
                   </p>
@@ -93,7 +106,9 @@ const AppMobile = () => {
             <div className="flex flex-wrap gap-8 pt-8 border-t border-border">
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">4.8★</div>
-                <div className="text-sm text-muted-foreground">App Store Rating</div>
+                <div className="text-sm text-muted-foreground">
+                  App Store Rating
+                </div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">100K+</div>
@@ -101,7 +116,9 @@ const AppMobile = () => {
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">50K+</div>
-                <div className="text-sm text-muted-foreground">Active Users</div>
+                <div className="text-sm text-muted-foreground">
+                  Active Users
+                </div>
               </div>
             </div>
           </motion.div>
@@ -120,37 +137,6 @@ const AppMobile = () => {
                 alt="Formacad mobile app mockup showing iOS and Android devices with course dashboard, lesson details, and student profile"
                 className="w-full h-auto rounded-2xl shadow-2xl"
               />
-              
-              {/* Floating Elements */}
-              <motion.div
-                animate={{
-                  y: [0, -10, 0],
-                  rotate: [0, 2, 0],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="absolute -top-4 -right-4 bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold shadow-lg"
-              >
-                New Update Available!
-              </motion.div>
-              
-              <motion.div
-                animate={{
-                  y: [0, 10, 0],
-                  rotate: [0, -2, 0],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="absolute -bottom-4 -left-4 bg-background border border-border px-4 py-2 rounded-full text-sm font-semibold shadow-lg"
-              >
-                📱 Available on all devices
-              </motion.div>
             </div>
           </motion.div>
         </div>

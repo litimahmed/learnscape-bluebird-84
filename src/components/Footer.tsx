@@ -29,7 +29,7 @@ const Footer = ({ isDark }: FooterProps) => {
           {/* Logo, Slogan, and Social Icons */}
           <div className="max-w-[280px] text-left">
             <h1 className="text-primary text-4xl font-extrabold tracking-tight mb-4">
-              Edutech
+              Formacad
             </h1>
 
             <p className="text-muted-foreground text-sm leading-relaxed mb-6">
@@ -72,14 +72,30 @@ const Footer = ({ isDark }: FooterProps) => {
               Explore Topics
             </h2>
             <ul className="space-y-2 text-muted-foreground">
-              <li className="cursor-pointer hover:text-foreground transition-colors">Latest Trends in AI</li>
-              <li className="cursor-pointer hover:text-foreground transition-colors">Future of Web Development</li>
-              <li className="cursor-pointer hover:text-foreground transition-colors">Cybersecurity Best Practices</li>
-              <li className="cursor-pointer hover:text-foreground transition-colors">DevOps Culture and Tools</li>
-              <li className="cursor-pointer hover:text-foreground transition-colors">Ethical Implications of AI</li>
-              <li className="cursor-pointer hover:text-foreground transition-colors">Building Scalable Applications</li>
-              <li className="cursor-pointer hover:text-foreground transition-colors">Introduction to Cloud Computing</li>
-              <li className="cursor-pointer hover:text-foreground transition-colors">Data Privacy and Security</li>
+              <li className="cursor-pointer hover:text-foreground transition-colors">
+                Latest Trends in AI
+              </li>
+              <li className="cursor-pointer hover:text-foreground transition-colors">
+                Future of Web Development
+              </li>
+              <li className="cursor-pointer hover:text-foreground transition-colors">
+                Cybersecurity Best Practices
+              </li>
+              <li className="cursor-pointer hover:text-foreground transition-colors">
+                DevOps Culture and Tools
+              </li>
+              <li className="cursor-pointer hover:text-foreground transition-colors">
+                Ethical Implications of AI
+              </li>
+              <li className="cursor-pointer hover:text-foreground transition-colors">
+                Building Scalable Applications
+              </li>
+              <li className="cursor-pointer hover:text-foreground transition-colors">
+                Introduction to Cloud Computing
+              </li>
+              <li className="cursor-pointer hover:text-foreground transition-colors">
+                Data Privacy and Security
+              </li>
             </ul>
           </div>
 
@@ -87,14 +103,30 @@ const Footer = ({ isDark }: FooterProps) => {
           <div className="min-w-[200px]">
             <h2 className="font-bold text-lg mb-4 text-primary">Resources</h2>
             <ul className="space-y-2 text-muted-foreground">
-              <li className="cursor-pointer hover:text-foreground transition-colors">Free E-books</li>
-              <li className="cursor-pointer hover:text-foreground transition-colors">Webinars and Workshops</li>
-              <li className="cursor-pointer hover:text-foreground transition-colors">Community Forums</li>
-              <li className="cursor-pointer hover:text-foreground transition-colors">Online Coding Challenges</li>
-              <li className="cursor-pointer hover:text-foreground transition-colors">Career Guidance</li>
-              <li className="cursor-pointer hover:text-foreground transition-colors">Open Source Projects</li>
-              <li className="cursor-pointer hover:text-foreground transition-colors">Developer Tools</li>
-              <li className="cursor-pointer hover:text-foreground transition-colors">Learning Roadmaps</li>
+              <li className="cursor-pointer hover:text-foreground transition-colors">
+                Free E-books
+              </li>
+              <li className="cursor-pointer hover:text-foreground transition-colors">
+                Webinars and Workshops
+              </li>
+              <li className="cursor-pointer hover:text-foreground transition-colors">
+                Community Forums
+              </li>
+              <li className="cursor-pointer hover:text-foreground transition-colors">
+                Online Coding Challenges
+              </li>
+              <li className="cursor-pointer hover:text-foreground transition-colors">
+                Career Guidance
+              </li>
+              <li className="cursor-pointer hover:text-foreground transition-colors">
+                Open Source Projects
+              </li>
+              <li className="cursor-pointer hover:text-foreground transition-colors">
+                Developer Tools
+              </li>
+              <li className="cursor-pointer hover:text-foreground transition-colors">
+                Learning Roadmaps
+              </li>
             </ul>
           </div>
 
@@ -106,7 +138,7 @@ const Footer = ({ isDark }: FooterProps) => {
             <p className="text-muted-foreground mb-4 text-sm">
               Get our app on Play Store and App Store.
             </p>
-            
+
             <div className="mb-6">
               <div className="flex items-center mb-3">
                 <div className="bg-primary/20 rounded-full w-8 h-8 flex items-center justify-center text-primary mr-3">
@@ -120,7 +152,9 @@ const Footer = ({ isDark }: FooterProps) => {
                 <div className="bg-primary/20 rounded-full w-8 h-8 flex items-center justify-center text-primary mr-3">
                   <Phone className="w-4 h-4" />
                 </div>
-                <p className="text-muted-foreground text-sm">+880 1715 429 512</p>
+                <p className="text-muted-foreground text-sm">
+                  +880 1715 429 512
+                </p>
               </div>
             </div>
 
@@ -137,7 +171,9 @@ const Footer = ({ isDark }: FooterProps) => {
                   className="w-7 h-7 mr-3"
                 />
                 <div className="text-left leading-none">
-                  <p className="text-[10px] font-medium text-muted-foreground">GET IT ON</p>
+                  <p className="text-[10px] font-medium text-muted-foreground">
+                    GET IT ON
+                  </p>
                   <p className="text-sm font-semibold text-foreground">
                     Google Play
                   </p>
@@ -155,7 +191,9 @@ const Footer = ({ isDark }: FooterProps) => {
                   className="w-7 h-7 mr-3"
                 />
                 <div className="text-left leading-none">
-                  <p className="text-[10px] font-medium text-muted-foreground">Download on the</p>
+                  <p className="text-[10px] font-medium text-muted-foreground">
+                    Download on the
+                  </p>
                   <p className="text-sm font-semibold text-foreground">
                     App Store
                   </p>
@@ -176,7 +214,7 @@ const Footer = ({ isDark }: FooterProps) => {
                 <img
                   src={method.src}
                   alt={method.label}
-                  className="w-8 h-8 mb-2 object-contain filter brightness-0 dark:filter-none dark:brightness-100"
+                  className="w-8 h-8 mb-2 object-contain"
                   loading="lazy"
                 />
                 <span className="text-[10px] text-muted-foreground">
@@ -191,10 +229,8 @@ const Footer = ({ isDark }: FooterProps) => {
         <div className="text-center text-sm py-8 border-t border-border text-muted-foreground">
           <p>
             © {new Date().getFullYear()}{" "}
-            <span className="font-medium text-primary">
-              Edutech
-            </span>
-            . All rights reserved. |
+            <span className="font-medium text-primary">Formacad</span>. All
+            rights reserved. |
             <a
               href="/privacy-policy"
               className="font-medium hover:underline text-primary ml-1"
