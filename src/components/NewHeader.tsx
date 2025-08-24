@@ -89,10 +89,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
                   alt="Formacad Logo" 
                   className="w-10 h-10 mr-3 object-contain"
                   loading="eager"
-                  fetchPriority="high"
                 />
-                <link rel="preload" as="image" href={formacadLogoLight} />
-                <link rel="preload" as="image" href={formacadLogoDark} />
                 <span className="text-xl font-extrabold text-primary">Formacad</span>
               </Link>
             </div>
