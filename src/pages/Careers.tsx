@@ -9,6 +9,7 @@ import EmployeeTestimonials from "@/components/careers/EmployeeTestimonials";
 import ApplicationProcess from "@/components/careers/ApplicationProcess";
 import OfficeLocations from "@/components/careers/OfficeLocations";
 import SocialImpact from "@/components/careers/SocialImpact";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 
 const Careers = () => {
   return (
@@ -51,6 +52,9 @@ const Careers = () => {
         {/* Social Impact */}
         <SocialImpact />
       </div>
+      
+      {/* Scroll to Top Button */}
+      <ScrollToTop />
     </>
   );
 };
