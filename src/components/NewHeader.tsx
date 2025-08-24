@@ -99,11 +99,11 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
                 <img
                   src={isDark ? formacadLogoDark : formacadLogoLight}
                   alt="Formacad Logo"
-                  style={{ width: 75, height: 75 }}
+                  style={{ width: 45, height: 45 }}
                   className="object-contain"
                   loading="eager"
                 />
-                <span className="text-2xl relative -left-3 font-brand font-bold bg-gradient-to-r from-primary via-primary to-blue-600 bg-clip-text text-transparent hover:from-blue-600 hover:via-primary hover:to-primary transition-all duration-300 tracking-tight">
+                <span className="text-3xl relative -left-2 font-brand font-bold bg-gradient-to-r from-primary via-primary to-blue-600 bg-clip-text text-transparent hover:from-blue-600 hover:via-primary hover:to-primary transition-all duration-300 tracking-tight">
                   Formacad
                 </span>
               </Link>
