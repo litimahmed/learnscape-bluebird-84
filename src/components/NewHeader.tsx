@@ -99,7 +99,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
                 <img
                   src={isDark ? formacadLogoDark : formacadLogoLight}
                   alt="Formacad Logo"
-                  style={{ width: 45, height: 45 }}
+                  style={{ width: 75, height: 75 }}
                   className="object-contain"
                   loading="eager"
                 />
