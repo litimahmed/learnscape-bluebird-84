@@ -19,10 +19,31 @@ const ScrollToTop = () => {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    const startPosition = window.pageYOffset;
+    const startTime = performance.now();
+    const duration = 1500; // 1.5 seconds for luxury smooth scroll
+
+    // Easing function for ultra-smooth acceleration/deceleration
+    const easeInOutCubic = (t: number): number => {
+      return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+    };
+
+    const animateScroll = (currentTime: number) => {
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      
+      // Apply easing for professional smooth motion
+      const easedProgress = easeInOutCubic(progress);
+      const currentPosition = startPosition * (1 - easedProgress);
+      
+      window.scrollTo(0, currentPosition);
+      
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+
+    requestAnimationFrame(animateScroll);
   };
 
   return (
