@@ -25,20 +25,7 @@ export default {
 				'prose': ['Source Sans Pro', 'sans-serif'],
 				'heading': ['Manrope', 'sans-serif'],
 				'body': ['Inter', 'sans-serif'],
-				'brand': ['Fredoka', 'sans-serif'], // Currently active - Playful rounded
-				'brand-comfortaa': ['Comfortaa', 'cursive'], // Soft bubbly geometric
-				'brand-pacifico': ['Pacifico', 'cursive'], // Handwritten script flowing
-				'brand-bungee': ['Bungee', 'display'], // Bold blocky graffiti style
-				'brand-pixel': ['Press Start 2P', 'monospace'], // Retro 8-bit gaming
-				'brand-kalam': ['Kalam', 'cursive'], // Handwritten casual marker
-				'brand-caveat': ['Caveat', 'cursive'], // Natural handwriting
-				'brand-bangers': ['Bangers', 'display'], // Comic book explosion
-				'brand-griffy': ['Griffy', 'display'], // Decorative vintage serif
-				'brand-faster': ['Faster One', 'display'], // Racing speed lines
-				'brand-creepster': ['Creepster', 'display'], // Horror movie poster
-				'brand-blackops': ['Black Ops One', 'display'], // Military stencil
-				'brand-audiowide': ['Audiowide', 'sans-serif'], // Sci-fi technology
-				'brand-orbitron': ['Orbitron', 'sans-serif'], // Futuristic space
+				'brand': ['Inter', 'sans-serif'], // Clean modern font like Lovable's logo
 			},
 			colors: {
 				border: 'hsl(var(--border))',
