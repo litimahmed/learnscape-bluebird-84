@@ -6,7 +6,7 @@ const MissionVision = () => {
   return (
     <section className="section-padding">
       <div className="container-custom">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Mission */}
           <div className="space-y-8">
             <div>
