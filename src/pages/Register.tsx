@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { ChevronLeft, ChevronRight, Upload, User, GraduationCap, BookOpen, Award, Shield, CheckCircle, X, FileText } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Upload, User, GraduationCap, BookOpen, Award, Shield, CheckCircle, X, FileText, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -81,6 +81,14 @@ const Register = () => {
   const [showOtpVerification, setShowOtpVerification] = useState(false);
   const [pendingRegistrationData, setPendingRegistrationData] = useState<any>(null);
   const [isDark, setIsDark] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [emailExists, setEmailExists] = useState<boolean | null>(null);
+  const [emailCheckLoading, setEmailCheckLoading] = useState(false);
+  const [ninExists, setNinExists] = useState<boolean | null>(null);
+  const [ninCheckLoading, setNinCheckLoading] = useState(false);
+  const [phoneExists, setPhoneExists] = useState<boolean | null>(null);
+  const [phoneCheckLoading, setPhoneCheckLoading] = useState(false);
   const maxSteps = userType === 'student' ? 5 : 6;
 
   // Load theme and uploaded files on component mount
@@ -116,6 +124,96 @@ const Register = () => {
       localStorage.setItem('registration-uploaded-files', JSON.stringify(uploadedFiles));
     }
   }, [uploadedFiles]);
+
+  // Validation utilities
+  const checkEmailExists = async (email: string) => {
+    if (!email || !email.includes('@')) return;
+    setEmailCheckLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('user_registrations')
+        .select('email')
+        .eq('email', email)
+        .maybeSingle();
+      
+      if (error && error.code !== 'PGRST116') {
+        console.error('Error checking email:', error);
+        return;
+      }
+      
+      setEmailExists(!!data);
+    } catch (error) {
+      console.error('Email check failed:', error);
+    } finally {
+      setEmailCheckLoading(false);
+    }
+  };
+
+  const checkNinExists = async (nin: string) => {
+    if (!nin || nin.length !== 18) return;
+    setNinCheckLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('user_registrations')
+        .select('nin')
+        .eq('nin', nin)
+        .maybeSingle();
+      
+      if (error && error.code !== 'PGRST116') {
+        console.error('Error checking NIN:', error);
+        return;
+      }
+      
+      setNinExists(!!data);
+    } catch (error) {
+      console.error('NIN check failed:', error);
+    } finally {
+      setNinCheckLoading(false);
+    }
+  };
+
+  const checkPhoneExists = async (phone: string) => {
+    if (!phone || !ALGERIA_PHONE_REGEX.test(phone)) return;
+    setPhoneCheckLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('user_registrations')
+        .select('phone')
+        .eq('phone', phone)
+        .maybeSingle();
+      
+      if (error && error.code !== 'PGRST116') {
+        console.error('Error checking phone:', error);
+        return;
+      }
+      
+      setPhoneExists(!!data);
+    } catch (error) {
+      console.error('Phone check failed:', error);
+    } finally {
+      setPhoneCheckLoading(false);
+    }
+  };
+
+  // Password strength calculation
+  const calculatePasswordStrength = (password: string) => {
+    let score = 0;
+    if (password.length >= 8) score += 25;
+    if (password.length >= 12) score += 25;
+    if (/[a-z]/.test(password)) score += 12.5;
+    if (/[A-Z]/.test(password)) score += 12.5;
+    if (/\d/.test(password)) score += 12.5;
+    if (/[^a-zA-Z\d]/.test(password)) score += 12.5;
+    return Math.min(score, 100);
+  };
+
+  const getPasswordStrengthLabel = (score: number) => {
+    if (score < 25) return { label: 'Très faible', color: 'bg-red-500' };
+    if (score < 50) return { label: 'Faible', color: 'bg-orange-500' };
+    if (score < 75) return { label: 'Moyen', color: 'bg-yellow-500' };
+    if (score < 90) return { label: 'Fort', color: 'bg-blue-500' };
+    return { label: 'Très fort', color: 'bg-green-500' };
+  };
   const form = useForm({
     resolver: zodResolver(currentStep === 1 ? step1Schema : currentStep === 2 ? step2Schema : currentStep === 3 ? step3Schema : currentStep === 4 ? userType === 'student' ? studentStep4Schema : teacherStep4Schema : currentStep === 5 ? userType === 'teacher' ? teacherStep5Schema : finalSchema : finalSchema),
     mode: 'onChange'
@@ -127,10 +225,26 @@ const Register = () => {
     });
     setCurrentStep(currentStep + 1);
     form.reset();
+    // Reset validation states
+    setEmailExists(null);
+    setNinExists(null);
+    setPhoneExists(null);
   };
   const onBack = () => {
     setCurrentStep(currentStep - 1);
+    // Reset validation states when going back
+    setEmailExists(null);
+    setNinExists(null);
+    setPhoneExists(null);
   };
+
+  // Reset validation states when user type changes
+  useEffect(() => {
+    setEmailExists(null);
+    setNinExists(null);
+    setPhoneExists(null);
+    form.reset();
+  }, [userType]);
 
   // File upload utility function
   const uploadFile = async (file: File, fileName: string): Promise<string | null> => {
@@ -415,35 +529,156 @@ const Register = () => {
           }) => <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input type="email" placeholder="votre.email@exemple.com" {...field} />
+                    <div className="relative">
+                      <Input 
+                        type="email" 
+                        placeholder="votre.email@exemple.com" 
+                        autoComplete="new-email"
+                        {...field} 
+                        onBlur={(e) => {
+                          field.onBlur();
+                          checkEmailExists(e.target.value);
+                        }}
+                        className={emailExists === true ? 'border-red-500 focus:border-red-500' : emailExists === false ? 'border-green-500 focus:border-green-500' : ''}
+                      />
+                      {emailCheckLoading && (
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                          <div className="w-4 h-4 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
+                        </div>
+                      )}
+                      {emailExists === true && (
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                          <AlertCircle className="w-4 h-4 text-red-500" />
+                        </div>
+                      )}
+                      {emailExists === false && (
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                          <CheckCircle className="w-4 h-4 text-green-500" />
+                        </div>
+                      )}
+                    </div>
                   </FormControl>
+                  {emailExists === true && (
+                    <p className="text-sm text-red-500 mt-1">
+                      Cet email est déjà utilisé. {' '}
+                      <button 
+                        type="button"
+                        onClick={() => navigate('/?login=true')} 
+                        className="text-primary hover:underline font-medium"
+                      >
+                        Se connecter?
+                      </button>
+                    </p>
+                  )}
                   <FormMessage />
                 </FormItem>} />
+            
             <FormField control={form.control} name="password" render={({
             field
           }) => <FormItem>
                   <FormLabel>Mot de passe</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="••••••••" {...field} />
+                    <div className="relative">
+                      <Input 
+                        type={showPassword ? "text" : "password"} 
+                        placeholder="••••••••" 
+                        autoComplete="new-password"
+                        {...field}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                      >
+                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
                   </FormControl>
+                  {field.value && (
+                    <div className="mt-2">
+                      {(() => {
+                        const score = calculatePasswordStrength(field.value);
+                        const { label, color } = getPasswordStrengthLabel(score);
+                        return (
+                          <div className="space-y-2">
+                            <div className="flex justify-between items-center">
+                              <span className="text-xs text-muted-foreground">Force du mot de passe</span>
+                              <span className="text-xs font-medium">{label}</span>
+                            </div>
+                            <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
+                              <div 
+                                className={`h-2 rounded-full transition-all duration-300 ${color}`}
+                                style={{ width: `${score}%` }}
+                              ></div>
+                            </div>
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  )}
                   <FormMessage />
                 </FormItem>} />
+            
             <FormField control={form.control} name="confirmPassword" render={({
             field
           }) => <FormItem>
                   <FormLabel>Confirmer le mot de passe</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="••••••••" {...field} />
+                    <div className="relative">
+                      <Input 
+                        type={showConfirmPassword ? "text" : "password"} 
+                        placeholder="••••••••" 
+                        autoComplete="new-password"
+                        {...field}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                      >
+                        {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>} />
+            
             <FormField control={form.control} name="phone" render={({
             field
           }) => <FormItem>
                   <FormLabel>Numéro de téléphone</FormLabel>
                   <FormControl>
-                    <Input placeholder="+213xxxxxxxxx" {...field} />
+                    <div className="relative">
+                      <Input 
+                        placeholder="+213xxxxxxxxx" 
+                        autoComplete="tel"
+                        {...field} 
+                        onBlur={(e) => {
+                          field.onBlur();
+                          checkPhoneExists(e.target.value);
+                        }}
+                        className={phoneExists === true ? 'border-red-500 focus:border-red-500' : phoneExists === false ? 'border-green-500 focus:border-green-500' : ''}
+                      />
+                      {phoneCheckLoading && (
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                          <div className="w-4 h-4 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
+                        </div>
+                      )}
+                      {phoneExists === true && (
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                          <AlertCircle className="w-4 h-4 text-red-500" />
+                        </div>
+                      )}
+                      {phoneExists === false && (
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                          <CheckCircle className="w-4 h-4 text-green-500" />
+                        </div>
+                      )}
+                    </div>
                   </FormControl>
+                  {phoneExists === true && (
+                    <p className="text-sm text-red-500 mt-1">Ce numéro de téléphone est déjà utilisé.</p>
+                  )}
                   <FormMessage />
                 </FormItem>} />
           </div>;
@@ -454,7 +689,11 @@ const Register = () => {
           }) => <FormItem>
                   <FormLabel>Nom complet</FormLabel>
                   <FormControl>
-                    <Input placeholder="Nom Prénom" {...field} />
+                    <Input 
+                      placeholder="Nom Prénom" 
+                      autoComplete="name"
+                      {...field} 
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>} />
@@ -463,7 +702,11 @@ const Register = () => {
           }) => <FormItem>
                   <FormLabel>Date de naissance</FormLabel>
                   <FormControl>
-                    <Input type="date" {...field} />
+                    <Input 
+                      type="date" 
+                      autoComplete="bday"
+                      {...field} 
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>} />
@@ -518,8 +761,38 @@ const Register = () => {
           }) => <FormItem>
                   <FormLabel>Numéro d'identification nationale (NIN)</FormLabel>
                   <FormControl>
-                    <Input placeholder="18 chiffres (ex: 123456789012345678)" maxLength={18} {...field} />
+                    <div className="relative">
+                      <Input 
+                        placeholder="18 chiffres (ex: 123456789012345678)" 
+                        maxLength={18}
+                        autoComplete="off"
+                        {...field} 
+                        onBlur={(e) => {
+                          field.onBlur();
+                          checkNinExists(e.target.value);
+                        }}
+                        className={ninExists === true ? 'border-red-500 focus:border-red-500' : ninExists === false ? 'border-green-500 focus:border-green-500' : ''}
+                      />
+                      {ninCheckLoading && (
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                          <div className="w-4 h-4 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
+                        </div>
+                      )}
+                      {ninExists === true && (
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                          <AlertCircle className="w-4 h-4 text-red-500" />
+                        </div>
+                      )}
+                      {ninExists === false && (
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                          <CheckCircle className="w-4 h-4 text-green-500" />
+                        </div>
+                      )}
+                    </div>
                   </FormControl>
+                  {ninExists === true && (
+                    <p className="text-sm text-red-500 mt-1">Ce numéro d'identification nationale est déjà utilisé.</p>
+                  )}
                   <FormMessage />
                 </FormItem>} />
             <FormField control={form.control} name="nationalIdFront" render={({
