@@ -54,71 +54,59 @@ const ImpactStats = () => {
       suffix: "+",
       label: "Active Learners",
       description: "Students worldwide transforming their careers",
-      icon: <Users className="w-7 h-7" />,
-      color: "text-blue-600",
-      bgColor: "bg-blue-50 dark:bg-blue-950/30"
+      icon: <Users className="w-6 h-6" />
     },
     {
       value: 500,
       suffix: "+",
       label: "Expert Courses",
       description: "Comprehensive programs across 20+ domains",
-      icon: <BookOpen className="w-7 h-7" />,
-      color: "text-emerald-600",
-      bgColor: "bg-emerald-50 dark:bg-emerald-950/30"
+      icon: <BookOpen className="w-6 h-6" />
     },
     {
       value: 95,
       suffix: "%",
       label: "Completion Rate",
       description: "Industry-leading engagement and success",
-      icon: <Award className="w-7 h-7" />,
-      color: "text-amber-600",
-      bgColor: "bg-amber-50 dark:bg-amber-950/30"
+      icon: <Award className="w-6 h-6" />
     },
     {
       value: 89,
       suffix: "%",
       label: "Career Growth",
       description: "Professionals advancing post-completion",
-      icon: <TrendingUp className="w-7 h-7" />,
-      color: "text-violet-600",
-      bgColor: "bg-violet-50 dark:bg-violet-950/30"
+      icon: <TrendingUp className="w-6 h-6" />
     },
     {
       value: 50,
       suffix: "+",
       label: "Countries",
       description: "Global educational impact and reach",
-      icon: <Globe className="w-7 h-7" />,
-      color: "text-rose-600",
-      bgColor: "bg-rose-50 dark:bg-rose-950/30"
+      icon: <Globe className="w-6 h-6" />
     },
     {
       value: 24,
       suffix: "/7",
       label: "Support",
       description: "Round-the-clock learner assistance",
-      icon: <Clock className="w-7 h-7" />,
-      color: "text-teal-600",
-      bgColor: "bg-teal-50 dark:bg-teal-950/30"
+      icon: <Clock className="w-6 h-6" />
     }
   ];
 
   return (
-    <section className="section-padding bg-gradient-to-b from-background to-muted/20">
+    <section className="section-padding bg-muted/30">
       <div className="container-custom">
         {/* Header Section */}
-        <div className="text-center mb-16 space-y-4">
-          <Badge variant="secondary" className="text-sm font-medium px-4 py-2 bg-primary/10 text-primary border-primary/20">
+        <div className="text-center mb-16 space-y-6">
+          <Badge variant="outline" className="text-sm font-medium">
             Our Global Impact
           </Badge>
-          <h2 className="text-4xl md:text-6xl font-heading font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground">
             Transforming Lives Through Education
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             These numbers represent real people whose careers and lives have been transformed 
-            through quality education, innovative learning experiences, and dedicated support.
+            through quality education and dedicated support.
           </p>
         </div>
 
@@ -127,25 +115,22 @@ const ImpactStats = () => {
           {stats.map((stat, index) => (
             <Card 
               key={index} 
-              className="group relative overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-lg transition-all duration-500 hover:border-primary/20 hover:-translate-y-1"
+              className="group relative overflow-hidden bg-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
             >
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
-              <div className="relative p-8 text-center space-y-4">
+              <div className="p-8 text-center space-y-4">
                 {/* Icon */}
-                <div className={`w-16 h-16 ${stat.bgColor} rounded-2xl flex items-center justify-center ${stat.color} mx-auto group-hover:scale-110 transition-all duration-300 shadow-sm`}>
+                <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mx-auto group-hover:scale-110 transition-all duration-300">
                   {stat.icon}
                 </div>
                 
                 {/* Number */}
-                <div className={`${stat.color} group-hover:scale-105 transition-transform duration-300`}>
+                <div className="text-primary">
                   <AnimatedCounter target={stat.value} suffix={stat.suffix} />
                 </div>
                 
                 {/* Label */}
                 <div className="space-y-2">
-                  <h3 className="text-xl font-heading font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-xl font-heading font-semibold text-foreground">
                     {stat.label}
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
