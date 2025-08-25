@@ -76,18 +76,18 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
       <div className="max-w-7xl mx-auto flex items-center justify-between h-12">
         {/* Left - Language Selector Skeleton */}
         <div className="flex-shrink-0">
-          <Skeleton className="h-6 w-16 bg-primary-foreground/20" />
+          <Skeleton className="h-5 w-14 rounded-sm bg-primary-foreground/15" />
         </div>
 
         {/* Center - Text Content Skeleton */}
         <div className="flex-1 text-center px-4">
-          <Skeleton className="h-4 w-80 mx-auto bg-primary-foreground/20 hidden sm:block" />
+          <Skeleton className="h-3.5 w-72 mx-auto rounded-sm bg-primary-foreground/15 hidden sm:block" />
         </div>
 
         {/* Right - Help Center & Theme Toggle Skeleton */}
         <div className="flex items-center gap-3 flex-shrink-0">
-          <Skeleton className="h-8 w-24 bg-primary-foreground/20" />
-          <Skeleton className="h-8 w-8 rounded-full bg-primary-foreground/20" />
+          <Skeleton className="h-7 w-20 rounded-sm bg-primary-foreground/15" />
+          <Skeleton className="h-7 w-7 rounded-full bg-primary-foreground/15" />
         </div>
       </div>
     </div>
@@ -99,25 +99,27 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
         <div className="flex items-center justify-between h-16">
           {/* Left - Logo Skeleton */}
           <div className="flex items-center flex-shrink-0">
-            <div className="flex items-center">
-              <Skeleton className="h-14 w-14 rounded-full" />
-              <Skeleton className="h-8 w-32 ml-2" />
+            <div className="flex items-center gap-2">
+              <Skeleton className="h-12 w-12 rounded-xl bg-muted/80" />
+              <Skeleton className="h-7 w-28 rounded-sm bg-muted/80" />
             </div>
           </div>
 
           {/* Center - Explore Menu & Search Skeleton */}
           <div className="flex items-center gap-6 flex-1 max-w-2xl mx-6">
-            <Skeleton className="h-10 w-24" />
+            <Skeleton className="h-9 w-20 rounded-md bg-muted/80" />
             <div className="flex-1 max-w-md">
-              <Skeleton className="h-10 w-full rounded-lg" />
+              <Skeleton className="h-9 w-full rounded-lg bg-muted/60" />
             </div>
           </div>
 
           {/* Right - Navigation Links & Login Skeleton */}
           <div className="flex items-center gap-6 flex-shrink-0">
-            <Skeleton className="h-4 w-20 hidden md:block" />
-            <Skeleton className="h-4 w-16 hidden md:block" />
-            <Skeleton className="h-10 w-16 rounded-md" />
+            <div className="hidden md:flex items-center gap-6">
+              <Skeleton className="h-4 w-18 rounded-sm bg-muted/70" />
+              <Skeleton className="h-4 w-14 rounded-sm bg-muted/70" />
+            </div>
+            <Skeleton className="h-9 w-14 rounded-md bg-primary/20" />
           </div>
         </div>
       </div>
