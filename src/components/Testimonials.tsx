@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { motion } from "framer-motion";
 import { FaQuoteLeft } from "react-icons/fa";
+import { Skeleton } from "@/components/ui/skeleton";
 import avatarFatima from "@/assets/avatar-fatima.jpg";
 import avatarHassan from "@/assets/avatar-hassan.jpg";
 import avatarJorge from "@/assets/avatar-jorge.jpg";
@@ -127,7 +128,49 @@ const TestimonialCard = ({ name, handle, img, idx }: TestimonialCardProps) => {
   );
 };
 
-const Testimonials = () => {
+const TestimonialsSkeleton = () => (
+  <section className="py-20 bg-muted/30">
+    <div className="max-w-6xl mx-auto px-6 text-center">
+      <Skeleton className="h-6 w-28 mx-auto mb-2 bg-primary/30" />
+      <div className="space-y-3 mb-12">
+        <Skeleton className="h-10 w-80 mx-auto bg-gradient-to-r from-muted/70 to-muted/50" />
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[1, 2, 3, 4, 5, 6].map((i) => (
+          <Card key={i} className="h-full bg-card text-card-foreground border border-border animate-fade-in">
+            <CardContent className="flex flex-col justify-between h-full p-6">
+              <div className="space-y-3">
+                <Skeleton className="w-8 h-8 bg-primary/30" />
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-full bg-muted/60" />
+                  <Skeleton className="h-4 w-5/6 bg-muted/50" />
+                  <Skeleton className="h-4 w-4/5 bg-muted/40" />
+                </div>
+              </div>
+              <div className="flex items-center justify-center gap-3 mt-6">
+                <Skeleton className="w-10 h-10 rounded-full bg-muted/60" />
+                <div className="space-y-1">
+                  <Skeleton className="h-4 w-24 bg-muted/60" />
+                  <Skeleton className="h-3 w-32 bg-muted/40" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+interface TestimonialsProps {
+  loading?: boolean;
+}
+
+const Testimonials = ({ loading = false }: TestimonialsProps) => {
+  if (loading) {
+    return <TestimonialsSkeleton />;
+  }
+
   return (
     <section className="py-20 bg-muted/30">
       <div className="max-w-6xl mx-auto px-6 text-center">

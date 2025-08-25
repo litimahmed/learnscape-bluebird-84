@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Crown, CheckCircle, Trophy, Flashlight } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const objectifs = [
   { icon: <Crown size={16} />, text: "Meilleure expérience" },
@@ -28,7 +29,42 @@ const Pill = ({
 
 const LOOP_DURATION = 100; // seconds
 
-export default function Objectifs() {
+const ObjectifsSkeleton = () => (
+  <div className="overflow-hidden w-full py-16 bg-gradient-to-r from-background to-muted/20">
+    <div className="max-w-6xl mx-auto px-6 text-center pb-15">
+      <Skeleton className="h-6 w-32 mx-auto mb-2 bg-primary/30" />
+      <div className="space-y-3">
+        <Skeleton className="h-8 w-64 mx-auto bg-gradient-to-r from-muted/70 to-muted/50" />
+        <Skeleton className="h-6 w-96 mx-auto bg-muted/50" />
+      </div>
+    </div>
+
+    <div className="relative mx-auto max-w-6xl pt-6">
+      {[0, 1].map((rowIndex) => (
+        <div key={rowIndex} className="overflow-hidden relative h-[56px] mb-4">
+          <div className="flex gap-4 w-max">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <Skeleton 
+                key={i} 
+                className="flex items-center gap-2 text-sm px-4 py-2 rounded-full h-10 w-32 animate-fade-in bg-muted/60" 
+              />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+interface ObjectifsProps {
+  loading?: boolean;
+}
+
+export default function Objectifs({ loading = false }: ObjectifsProps) {
+  if (loading) {
+    return <ObjectifsSkeleton />;
+  }
+
   const fullList = [...objectifs, ...objectifs]; // repeat for seamless loop
 
   const getAnimation = (reverse = false) => ({

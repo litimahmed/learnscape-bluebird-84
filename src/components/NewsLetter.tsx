@@ -1,12 +1,34 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const NewsLetterSkeleton = () => (
+  <section className="py-16 bg-background">
+    <div className="max-w-4xl mx-auto px-6 text-center">
+      <Skeleton className="h-6 w-24 mx-auto mb-2 bg-primary/30" />
+      <div className="space-y-3 mt-4 mb-6">
+        <Skeleton className="h-8 w-64 mx-auto bg-gradient-to-r from-muted/70 to-muted/50" />
+      </div>
+      <div className="flex gap-4 justify-center flex-wrap max-w-2xl mx-auto">
+        <Skeleton className="flex-1 min-w-[200px] h-12 bg-muted/60" />
+        <Skeleton className="flex-1 min-w-[200px] h-12 bg-muted/60" />
+        <Skeleton className="h-12 w-24 bg-primary/40" />
+      </div>
+    </div>
+  </section>
+);
 
 interface NewsLetterProps {
   isDark?: boolean;
+  loading?: boolean;
 }
 
-const NewsLetter = ({ isDark }: NewsLetterProps) => {
+const NewsLetter = ({ isDark, loading = false }: NewsLetterProps) => {
+  if (loading) {
+    return <NewsLetterSkeleton />;
+  }
+
   return (
     <section className="py-16 bg-background">
       <div className="max-w-4xl mx-auto px-6 text-center">

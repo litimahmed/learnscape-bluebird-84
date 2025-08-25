@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
+import { Skeleton } from "@/components/ui/skeleton";
 import courseReact from "@/assets/course-react.jpg";
 import courseJavaScript from "@/assets/course-javascript.jpg";
 import courseUXDesign from "@/assets/course-ux-design.jpg";
@@ -72,7 +73,92 @@ const mockCourses = [
   }
 ];
 
-export default function SmartSearchFilter() {
+const SmartSearchFilterSkeleton = () => (
+  <section className="bg-background py-10 px-4">
+    <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto px-6 text-center">
+        <Skeleton className="h-6 w-20 mx-auto mb-2 bg-primary/30" />
+        <div className="space-y-3 mb-12">
+          <Skeleton className="h-10 w-72 mx-auto bg-gradient-to-r from-muted/70 to-muted/50" />
+        </div>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-6">
+        {/* Sidebar Skeleton */}
+        <div className="w-full md:w-1/6 space-y-6">
+          {[1, 2, 3].map((section) => (
+            <div key={section}>
+              <Skeleton className="h-4 w-20 mb-4 bg-primary/40" />
+              <div className="space-y-3">
+                {[1, 2, 3].map((item) => (
+                  <div key={item} className="flex items-center space-x-2">
+                    <Skeleton className="w-4 h-4 rounded-full bg-muted/60" />
+                    <Skeleton className="h-4 w-24 bg-muted/50" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+          <div>
+            <Skeleton className="h-4 w-28 mb-4 bg-primary/40" />
+            <Skeleton className="h-2 w-full bg-muted/60" />
+            <Skeleton className="h-4 w-20 mt-2 bg-muted/40" />
+          </div>
+        </div>
+
+        {/* Main Content Skeleton */}
+        <main className="md:w-3/4 w-full">
+          {/* Search and Filters Skeleton */}
+          <div className="flex flex-col gap-4 mb-8">
+            <Skeleton className="h-10 w-80 bg-muted/60" />
+            <div className="flex items-center gap-2 flex-wrap">
+              {[1, 2, 3, 4].map((i) => (
+                <Skeleton key={i} className="h-8 w-24 rounded bg-muted/50" />
+              ))}
+              <Skeleton className="h-8 w-36 bg-muted/50" />
+            </div>
+          </div>
+
+          {/* Course Cards Skeleton */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="bg-card border border-border rounded-lg overflow-hidden animate-fade-in">
+                <Skeleton className="w-full h-48 bg-muted/60" />
+                <div className="p-4 space-y-3">
+                  <Skeleton className="h-4 w-16 rounded-full bg-primary/30" />
+                  <Skeleton className="h-6 w-full bg-muted/70" />
+                  <Skeleton className="h-4 w-24 bg-muted/50" />
+                  <div className="flex items-center justify-between">
+                    <Skeleton className="h-4 w-20 bg-muted/50" />
+                    <Skeleton className="h-5 w-12 bg-primary/40" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Navigation Pills Skeleton */}
+          <div className="flex justify-center mt-6 gap-2">
+            {[0, 1, 2].map((index) => (
+              <Skeleton 
+                key={index} 
+                className={`h-2 rounded-full transition-all ${
+                  index === 0 ? 'w-8 bg-primary/40' : 'w-2 bg-muted/40'
+                }`} 
+              />
+            ))}
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+);
+
+interface SmartSearchFilterProps {
+  loading?: boolean;
+}
+
+export default function SmartSearchFilter({ loading = false }: SmartSearchFilterProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("");
@@ -101,6 +187,10 @@ export default function SmartSearchFilter() {
 
   // Get total slides from carousel API (actual navigable slides)
   const totalSlides = api?.scrollSnapList().length || 0;
+
+  if (loading) {
+    return <SmartSearchFilterSkeleton />;
+  }
 
   return (
     <section className="bg-background py-10 px-4">

@@ -10,7 +10,7 @@ import NewsLetter from "@/components/NewsLetter";
 
 const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [heroLoading, setHeroLoading] = useState(true);
+  const [sectionsLoading, setSectionsLoading] = useState(true);
 
   useEffect(() => {
     const shouldOpenLogin = searchParams.get('login') === 'true';
@@ -22,20 +22,20 @@ const Home = () => {
     }
   }, [searchParams, setSearchParams]);
 
-  // Simulate loading for Hero section
+  // Simulate loading for all sections
   useEffect(() => {
     const timer = setTimeout(() => {
-      setHeroLoading(false);
+      setSectionsLoading(false);
     }, 2000); // Show skeleton for 2 seconds
 
     return () => clearTimeout(timer);
   }, []);
 
-  // Test mode - press 'H' key to toggle Hero skeleton
+  // Test mode - press 'H' key to toggle all section skeletons
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
       if (event.key === 'h' || event.key === 'H') {
-        setHeroLoading(prev => !prev);
+        setSectionsLoading(prev => !prev);
       }
     };
 
@@ -46,25 +46,25 @@ const Home = () => {
   return (
     <div className="bg-background">
       {/* Hero Section */}
-      <Hero loading={heroLoading} />
+      <Hero loading={sectionsLoading} />
       
       {/* Brands Section */}
-      <Brands />
+      <Brands loading={sectionsLoading} />
       
       {/* Objectifs Section */}
-      <Objectifs />
+      <Objectifs loading={sectionsLoading} />
       
       {/* Smart Search Filter Section */}
-      <SmartSearchFilter />
+      <SmartSearchFilter loading={sectionsLoading} />
       
       {/* Testimonials Section */}
-      <Testimonials />
+      <Testimonials loading={sectionsLoading} />
       
       {/* App Mobile Section */}
-      <AppMobile />
+      <AppMobile loading={sectionsLoading} />
       
       {/* Newsletter Section */}
-      <NewsLetter />
+      <NewsLetter loading={sectionsLoading} />
     </div>
   );
 };

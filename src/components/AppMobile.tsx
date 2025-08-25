@@ -1,9 +1,73 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Skeleton } from "@/components/ui/skeleton";
 import formacadMobileMockup from "@/assets/mobile-app-hero.png";
 
-const AppMobile = () => {
+const AppMobileSkeleton = () => (
+  <section className="py-20 bg-gradient-to-br from-primary/5 to-secondary/5">
+    <div className="max-w-6xl mx-auto px-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        {/* Content Side Skeleton */}
+        <div className="space-y-8 animate-fade-in">
+          <div>
+            <Skeleton className="h-6 w-28 mb-4 bg-primary/30" />
+            <div className="space-y-3">
+              <Skeleton className="h-12 w-full bg-gradient-to-r from-muted/70 to-muted/50" />
+              <Skeleton className="h-12 w-4/5 bg-gradient-to-r from-muted/60 to-muted/40" />
+            </div>
+            <div className="space-y-2 mt-6">
+              <Skeleton className="h-5 w-full bg-muted/60" />
+              <Skeleton className="h-5 w-5/6 bg-muted/50" />
+              <Skeleton className="h-5 w-4/5 bg-muted/40" />
+            </div>
+          </div>
+
+          {/* Features Skeleton */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="flex items-center gap-3">
+                <Skeleton className="w-2 h-2 rounded-full bg-primary/50" />
+                <Skeleton className="h-4 w-28 bg-muted/60" />
+              </div>
+            ))}
+          </div>
+
+          {/* Download Buttons Skeleton */}
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Skeleton className="w-[200px] h-[56px] rounded-xl bg-primary/40" />
+            <Skeleton className="w-[200px] h-[56px] rounded-xl bg-secondary/40" />
+          </div>
+
+          {/* Stats Skeleton */}
+          <div className="flex flex-wrap gap-8 pt-8 border-t border-border">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="text-center">
+                <Skeleton className="h-8 w-16 mx-auto mb-2 bg-primary/40" />
+                <Skeleton className="h-4 w-20 bg-muted/50" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Image Side Skeleton */}
+        <div className="relative animate-fade-in">
+          <Skeleton className="w-full h-[500px] rounded-2xl bg-gradient-to-br from-muted/60 to-muted/40" />
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+interface AppMobileProps {
+  loading?: boolean;
+}
+
+const AppMobile = ({ loading = false }: AppMobileProps) => {
+  if (loading) {
+    return <AppMobileSkeleton />;
+  }
+
   return (
     <section className="py-20 bg-gradient-to-br from-primary/5 to-secondary/5">
       <div className="max-w-6xl mx-auto px-6">

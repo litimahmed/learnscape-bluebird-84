@@ -14,11 +14,66 @@ import {
 } from "react-icons/si";
 import { useTheme } from "next-themes";
 import { useNavigate } from "react-router-dom";
+import { Skeleton } from "@/components/ui/skeleton";
 
-export default function Brands() {
+const BrandsSkeleton = () => (
+  <section className="w-full pt-1 pb-10 flex flex-col items-center text-center px-4 bg-background text-foreground">
+    <div className="max-w-4xl">
+      <section className="text-center px-4 py-12 text-foreground">
+        {/* Tagline Skeleton */}
+        <Skeleton className="h-4 w-64 mx-auto mb-4 bg-muted/60" />
+        
+        {/* "We support" Skeleton */}
+        <Skeleton className="h-10 w-32 mx-auto mb-4 bg-gradient-to-r from-muted/70 to-muted/50" />
+        
+        {/* "grXXXwing" Section Skeleton */}
+        <div className="flex justify-center items-center gap-2 mb-2 flex-wrap">
+          <Skeleton className="h-16 w-16 bg-muted/60" />
+          <Skeleton className="h-12 w-24 rounded-full bg-primary/30" />
+          <Skeleton className="h-16 w-20 bg-muted/60" />
+        </div>
+        
+        {/* "of your business" Skeleton */}
+        <Skeleton className="h-10 w-48 mx-auto mb-4 bg-gradient-to-r from-muted/70 to-muted/50" />
+        
+        {/* Description Skeleton */}
+        <div className="space-y-2 mt-4">
+          <Skeleton className="h-4 w-72 mx-auto bg-muted/50" />
+          <Skeleton className="h-4 w-80 mx-auto bg-muted/40" />
+        </div>
+      </section>
+
+      {/* Buttons Skeleton */}
+      <div className="flex flex-col sm:flex-row justify-center gap-4 mb-14">
+        <Skeleton className="h-12 w-48 rounded-full bg-primary/40" />
+        <Skeleton className="h-6 w-32 bg-muted/50" />
+      </div>
+
+      {/* Brand Icons Skeleton */}
+      <div className="flex flex-wrap justify-center items-center gap-14 text-center">
+        {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+          <div key={i} className="flex flex-col items-center animate-fade-in">
+            <Skeleton className="w-10 h-10 rounded bg-muted/60" />
+            <Skeleton className="h-4 w-16 mt-2 bg-muted/40" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+interface BrandsProps {
+  loading?: boolean;
+}
+
+export default function Brands({ loading = false }: BrandsProps) {
   const { theme } = useTheme();
   const isDark = theme === "dark";
   const navigate = useNavigate();
+
+  if (loading) {
+    return <BrandsSkeleton />;
+  }
 
   return (
     <section className="w-full pt-1 pb-10 flex flex-col items-center text-center px-4 bg-background text-foreground">
