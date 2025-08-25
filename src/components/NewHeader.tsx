@@ -15,6 +15,7 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import AuthDialog from "@/components/AuthDialog";
 import { useAuth } from "@/hooks/useAuth";
+import { Skeleton } from "@/components/ui/skeleton";
 import formacadLogoLight from "@/assets/light_logo.svg";
 import formacadLogoDark from "@/assets/dark_logo.svg";
 
@@ -43,6 +44,69 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
       window.removeEventListener("openLoginModal", handleOpenLoginModal);
     };
   }, []);
+
+  // Skeleton Components
+  const TopHeaderSkeleton = () => (
+    <div className="w-full bg-primary px-4 lg:px-6">
+      <div className="max-w-7xl mx-auto flex items-center justify-between h-12">
+        {/* Left - Language Selector Skeleton */}
+        <div className="flex-shrink-0">
+          <Skeleton className="h-6 w-16 bg-primary-foreground/20" />
+        </div>
+
+        {/* Center - Text Content Skeleton */}
+        <div className="flex-1 text-center px-4">
+          <Skeleton className="h-4 w-80 mx-auto bg-primary-foreground/20 hidden sm:block" />
+        </div>
+
+        {/* Right - Help Center & Theme Toggle Skeleton */}
+        <div className="flex items-center gap-3 flex-shrink-0">
+          <Skeleton className="h-8 w-24 bg-primary-foreground/20" />
+          <Skeleton className="h-8 w-8 rounded-full bg-primary-foreground/20" />
+        </div>
+      </div>
+    </div>
+  );
+
+  const MainNavSkeleton = () => (
+    <div className="w-full bg-background border-t border-border/50">
+      <div className="max-w-7xl mx-auto px-6 lg:px-20">
+        <div className="flex items-center justify-between h-16">
+          {/* Left - Logo Skeleton */}
+          <div className="flex items-center flex-shrink-0">
+            <div className="flex items-center">
+              <Skeleton className="h-14 w-14 rounded-full" />
+              <Skeleton className="h-8 w-32 ml-2" />
+            </div>
+          </div>
+
+          {/* Center - Explore Menu & Search Skeleton */}
+          <div className="flex items-center gap-6 flex-1 max-w-2xl mx-6">
+            <Skeleton className="h-10 w-24" />
+            <div className="flex-1 max-w-md">
+              <Skeleton className="h-10 w-full rounded-lg" />
+            </div>
+          </div>
+
+          {/* Right - Navigation Links & Login Skeleton */}
+          <div className="flex items-center gap-6 flex-shrink-0">
+            <Skeleton className="h-4 w-20 hidden md:block" />
+            <Skeleton className="h-4 w-16 hidden md:block" />
+            <Skeleton className="h-10 w-16 rounded-md" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  if (loading) {
+    return (
+      <div className="w-full sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border supports-[backdrop-filter]:bg-background/60">
+        <TopHeaderSkeleton />
+        <MainNavSkeleton />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border supports-[backdrop-filter]:bg-background/60">
