@@ -88,7 +88,7 @@ export default function SmartSearchFilter() {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
-  // Effect to handle carousel navigation
+  // Effect to handle carousel navigation and get slide count
   React.useEffect(() => {
     if (!api) {
       return;
@@ -98,6 +98,9 @@ export default function SmartSearchFilter() {
       setCurrent(api.selectedScrollSnap());
     });
   }, [api]);
+
+  // Get total slides from carousel API (actual navigable slides)
+  const totalSlides = api?.scrollSnapList().length || 0;
 
   return (
     <section className="bg-background py-10 px-4">
@@ -299,7 +302,7 @@ export default function SmartSearchFilter() {
               
               {/* Navigation Pills */}
               <div className="flex justify-center mt-6 gap-2">
-                {mockCourses.map((_, index) => (
+                {Array.from({ length: totalSlides }).map((_, index) => (
                   <button
                     key={index}
                     onClick={() => api?.scrollTo(index)}
@@ -308,7 +311,7 @@ export default function SmartSearchFilter() {
                         ? 'w-8 bg-primary shadow-lg' 
                         : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50 hover-scale'
                     }`}
-                    aria-label={`Go to course ${index + 1}`}
+                    aria-label={`Go to slide ${index + 1}`}
                   />
                 ))}
               </div>
