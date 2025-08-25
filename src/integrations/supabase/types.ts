@@ -21,8 +21,6 @@ export type Database = {
           created_at: string
           date_of_birth: string | null
           education_level: string | null
-          email: string | null
-          full_name: string | null
           gender: string | null
           highest_degree: string | null
           id: string
@@ -32,7 +30,6 @@ export type Database = {
           national_id_back_path: string | null
           national_id_front_path: string | null
           nin: string | null
-          phone: string | null
           status: string | null
           student_card_path: string | null
           teaching_qualification_path: string | null
@@ -47,8 +44,6 @@ export type Database = {
           created_at?: string
           date_of_birth?: string | null
           education_level?: string | null
-          email?: string | null
-          full_name?: string | null
           gender?: string | null
           highest_degree?: string | null
           id: string
@@ -58,7 +53,6 @@ export type Database = {
           national_id_back_path?: string | null
           national_id_front_path?: string | null
           nin?: string | null
-          phone?: string | null
           status?: string | null
           student_card_path?: string | null
           teaching_qualification_path?: string | null
@@ -73,8 +67,6 @@ export type Database = {
           created_at?: string
           date_of_birth?: string | null
           education_level?: string | null
-          email?: string | null
-          full_name?: string | null
           gender?: string | null
           highest_degree?: string | null
           id?: string
@@ -84,7 +76,6 @@ export type Database = {
           national_id_back_path?: string | null
           national_id_front_path?: string | null
           nin?: string | null
-          phone?: string | null
           status?: string | null
           student_card_path?: string | null
           teaching_qualification_path?: string | null
@@ -92,87 +83,6 @@ export type Database = {
           user_type?: string | null
           website?: string | null
           wilaya?: string | null
-        }
-        Relationships: []
-      }
-      user_registrations: {
-        Row: {
-          address: string | null
-          bio: string | null
-          created_at: string
-          date_of_birth: string
-          education_level: string | null
-          email: string
-          full_name: string
-          gender: string
-          highest_degree: string | null
-          id: string
-          institution_affiliation: string | null
-          institution_name: string | null
-          linkedin: string | null
-          national_id_back_path: string | null
-          national_id_front_path: string | null
-          nin: string
-          phone: string
-          status: string | null
-          student_card_path: string | null
-          teaching_qualification_path: string | null
-          updated_at: string
-          user_type: string
-          website: string | null
-          wilaya: string
-        }
-        Insert: {
-          address?: string | null
-          bio?: string | null
-          created_at?: string
-          date_of_birth: string
-          education_level?: string | null
-          email: string
-          full_name: string
-          gender: string
-          highest_degree?: string | null
-          id?: string
-          institution_affiliation?: string | null
-          institution_name?: string | null
-          linkedin?: string | null
-          national_id_back_path?: string | null
-          national_id_front_path?: string | null
-          nin: string
-          phone: string
-          status?: string | null
-          student_card_path?: string | null
-          teaching_qualification_path?: string | null
-          updated_at?: string
-          user_type: string
-          website?: string | null
-          wilaya: string
-        }
-        Update: {
-          address?: string | null
-          bio?: string | null
-          created_at?: string
-          date_of_birth?: string
-          education_level?: string | null
-          email?: string
-          full_name?: string
-          gender?: string
-          highest_degree?: string | null
-          id?: string
-          institution_affiliation?: string | null
-          institution_name?: string | null
-          linkedin?: string | null
-          national_id_back_path?: string | null
-          national_id_front_path?: string | null
-          nin?: string
-          phone?: string
-          status?: string | null
-          student_card_path?: string | null
-          teaching_qualification_path?: string | null
-          updated_at?: string
-          user_type?: string
-          website?: string | null
-          wilaya?: string
         }
         Relationships: []
       }
