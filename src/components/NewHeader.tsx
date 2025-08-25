@@ -22,13 +22,13 @@ import formacadLogoDark from "@/assets/dark_logo.svg";
 interface NewHeaderProps {
   isDark: boolean;
   toggleTheme: () => void;
+  loading?: boolean;
 }
 
-export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
-  const { user, loading } = useAuth();
+export default function NewHeader({ isDark, toggleTheme, loading: externalLoading }: NewHeaderProps) {
+  const { user, loading: authLoading } = useAuth();
   const location = useLocation();
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [showSkeleton, setShowSkeleton] = React.useState(true);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -46,29 +46,6 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
     };
   }, []);
 
-  // Control skeleton visibility with minimum loading time
-  React.useEffect(() => {
-    if (!loading) {
-      // Show skeleton for at least 1.5 seconds for better UX
-      const timer = setTimeout(() => {
-        setShowSkeleton(false);
-      }, 5500);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [loading]);
-
-  // Test mode - press 'S' key to toggle skeleton
-  React.useEffect(() => {
-    const handleKeyPress = (event: KeyboardEvent) => {
-      if (event.key === 's' || event.key === 'S') {
-        setShowSkeleton(prev => !prev);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, []);
 
   // Skeleton Components
   const TopHeaderSkeleton = () => (
@@ -112,7 +89,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
     </div>
   );
 
-  if (loading || showSkeleton) {
+  if (authLoading || externalLoading) {
     return (
       <div className="w-full sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border supports-[backdrop-filter]:bg-background/60">
         <TopHeaderSkeleton />

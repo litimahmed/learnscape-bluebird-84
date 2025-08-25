@@ -6,9 +6,11 @@ import ScrollToTop from "./ui/ScrollToTop";
 
 interface LayoutProps {
   children: React.ReactNode;
+  headerLoading?: boolean;
+  footerLoading?: boolean;
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children, headerLoading, footerLoading }: LayoutProps) => {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -41,11 +43,11 @@ const Layout = ({ children }: LayoutProps) => {
 
       {/* Content with higher z-index */}
       <div className="relative z-10">
-        <NewHeader isDark={isDark} toggleTheme={toggleTheme} />
+        <NewHeader isDark={isDark} toggleTheme={toggleTheme} loading={headerLoading} />
         <main>
           {children}
         </main>
-        <Footer isDark={isDark} />
+        <Footer isDark={isDark} loading={footerLoading} />
         <ChatbotFAB />
         <ScrollToTop />
       </div>
