@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import courseReact from "@/assets/course-react.jpg";
 import courseJavaScript from "@/assets/course-javascript.jpg";
 import courseUXDesign from "@/assets/course-ux-design.jpg";
@@ -40,6 +42,33 @@ const mockCourses = [
     reviews: 756,
     price: "Free",
     badge: "Featured"
+  },
+  {
+    imageSrc: courseReact,
+    title: "Full Stack Web Development",
+    instructor: "Emily Chen",
+    rating: 4.9,
+    reviews: 2156,
+    price: "$89",
+    badge: "Hot"
+  },
+  {
+    imageSrc: courseJavaScript,
+    title: "Node.js Backend Development",
+    instructor: "Alex Rodriguez",
+    rating: 4.6,
+    reviews: 892,
+    price: "$65",
+    badge: "Trending"
+  },
+  {
+    imageSrc: courseUXDesign,
+    title: "Mobile App Design",
+    instructor: "Lisa Wong",
+    rating: 4.8,
+    reviews: 1445,
+    price: "$55",
+    badge: "Best Seller"
   }
 ];
 
@@ -54,6 +83,21 @@ export default function SmartSearchFilter() {
   const [showWithCertificates, setShowWithCertificates] = useState(false);
   const [showRecentlyAdded, setShowRecentlyAdded] = useState(false);
   const [showShortCourses, setshowShortCourses] = useState(false);
+  
+  // Carousel state
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+
+  // Effect to handle carousel navigation
+  React.useEffect(() => {
+    if (!api) {
+      return;
+    }
+    setCurrent(api.selectedScrollSnap());
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
 
   return (
     <section className="bg-background py-10 px-4">
@@ -217,33 +261,57 @@ export default function SmartSearchFilter() {
               </div>
             </div>
 
-            {/* Course Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {mockCourses.map((course, index) => (
-                <div key={index} className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-                  <img
-                    src={course.imageSrc}
-                    alt={course.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="p-4">
-                    {course.badge && (
-                      <span className="inline-block bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full mb-2">
-                        {course.badge}
-                      </span>
-                    )}
-                    <h3 className="font-semibold text-card-foreground mb-2">{course.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-2">{course.instructor}</p>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-1">
-                        <span className="text-sm text-muted-foreground">⭐ {course.rating}</span>
-                        <span className="text-xs text-muted-foreground">({course.reviews})</span>
+            {/* Course Carousel */}
+            <div className="relative">
+              <Carousel setApi={setApi} className="w-full">
+                <CarouselContent className="flex">
+                  {mockCourses.map((course, index) => (
+                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 p-3">
+                      <div className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 hover-scale">
+                        <img
+                          src={course.imageSrc}
+                          alt={course.title}
+                          className="w-full h-48 object-cover"
+                        />
+                        <div className="p-4">
+                          {course.badge && (
+                            <span className="inline-block bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full mb-2 animate-fade-in">
+                              {course.badge}
+                            </span>
+                          )}
+                          <h3 className="font-semibold text-card-foreground mb-2">{course.title}</h3>
+                          <p className="text-sm text-muted-foreground mb-2">{course.instructor}</p>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-1">
+                              <span className="text-sm text-muted-foreground">⭐ {course.rating}</span>
+                              <span className="text-xs text-muted-foreground">({course.reviews})</span>
+                            </div>
+                            <span className="font-bold text-primary">{course.price}</span>
+                          </div>
+                        </div>
                       </div>
-                      <span className="font-bold text-primary">{course.price}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="hidden md:flex" />
+                <CarouselNext className="hidden md:flex" />
+              </Carousel>
+              
+              {/* Navigation Pills */}
+              <div className="flex justify-center mt-6 gap-2">
+                {mockCourses.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => api?.scrollTo(index)}
+                    className={`h-2 rounded-full transition-all duration-300 ease-in-out animate-scale-in ${
+                      index === current 
+                        ? 'w-8 bg-primary shadow-lg' 
+                        : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50 hover-scale'
+                    }`}
+                    aria-label={`Go to course ${index + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </main>
         </div>
