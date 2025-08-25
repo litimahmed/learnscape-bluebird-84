@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import UserProfileDropdown from "@/components/ui/UserProfileDropdown";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import AuthDialog from "@/components/AuthDialog";
 import { useAuth } from "@/hooks/useAuth";
 import formacadLogoLight from "@/assets/light_logo.svg";
@@ -50,20 +51,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
         <div className="max-w-7xl mx-auto flex items-center justify-between h-12">
           {/* Left - Language Selector */}
           <div className="flex-shrink-0">
-            <select
-              className="bg-transparent border border-primary-foreground/20 text-primary-foreground text-sm px-3 py-1 rounded hover:bg-primary-foreground/10 focus:outline-none cursor-pointer"
-              defaultValue="English"
-            >
-              <option value="English" className="text-black bg-white">
-                English
-              </option>
-              <option value="Arabic" className="text-black bg-white">
-                Arabic
-              </option>
-              <option value="French" className="text-black bg-white">
-                French
-              </option>
-            </select>
+            <LanguageSwitcher />
           </div>
 
           {/* Center - Text Content */}
