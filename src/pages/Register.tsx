@@ -132,7 +132,7 @@ const Register = () => {
     setEmailCheckLoading(true);
     try {
       const { data, error } = await supabase
-        .from('user_registrations')
+        .from('profiles')
         .select('email')
         .eq('email', email)
         .maybeSingle();
@@ -155,7 +155,7 @@ const Register = () => {
     setNinCheckLoading(true);
     try {
       const { data, error } = await supabase
-        .from('user_registrations')
+        .from('profiles')
         .select('nin')
         .eq('nin', nin)
         .maybeSingle();
@@ -178,7 +178,7 @@ const Register = () => {
     setPhoneCheckLoading(true);
     try {
       const { data, error } = await supabase
-        .from('user_registrations')
+        .from('profiles')
         .select('phone')
         .eq('phone', phone)
         .maybeSingle();
@@ -383,28 +383,17 @@ const Register = () => {
     if (!pendingRegistrationData) return;
     setIsSubmitting(true);
     try {
-      // Check if user already exists and update or insert accordingly
-      const { data: existingUser, error: selectError } = await supabase
-        .from('user_registrations')
-        .select('email')
-        .eq('email', pendingRegistrationData.email)
-        .maybeSingle();
-
-      let error;
-      if (existingUser) {
-        // Update existing registration
-        const { error: updateError } = await supabase
-          .from('user_registrations')
-          .update({ ...pendingRegistrationData, status: 'pending' })
-          .eq('email', pendingRegistrationData.email);
-        error = updateError;
-      } else {
-        // Insert new registration
-        const { error: insertError } = await supabase
-          .from('user_registrations')
-          .insert([pendingRegistrationData]);
-        error = insertError;
+      // Update the authenticated user's profile with registration data
+      const { data: userData } = await supabase.auth.getUser();
+      const userId = userData?.user?.id;
+      if (!userId) {
+        throw new Error('Utilisateur non authentifié après vérification.');
       }
+
+      const { error } = await supabase
+        .from('profiles')
+        .update({ ...pendingRegistrationData, status: 'pending' })
+        .eq('id', userId);
 
       if (error) {
         throw error;
