@@ -73,22 +73,8 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
   // Skeleton Components
   const TopHeaderSkeleton = () => (
     <div className="w-full bg-primary px-4 lg:px-6">
-      <div className="max-w-7xl mx-auto flex items-center justify-between h-12">
-        {/* Left - Language Selector Skeleton */}
-        <div className="flex-shrink-0">
-          <Skeleton className="h-5 w-14 rounded-sm bg-primary-foreground/15" />
-        </div>
-
-        {/* Center - Text Content Skeleton */}
-        <div className="flex-1 text-center px-4">
-          <Skeleton className="h-3.5 w-72 mx-auto rounded-sm bg-primary-foreground/15 hidden sm:block" />
-        </div>
-
-        {/* Right - Help Center & Theme Toggle Skeleton */}
-        <div className="flex items-center gap-3 flex-shrink-0">
-          <Skeleton className="h-7 w-20 rounded-sm bg-primary-foreground/15" />
-          <Skeleton className="h-7 w-7 rounded-full bg-primary-foreground/15" />
-        </div>
+      <div className="max-w-7xl mx-auto flex items-center justify-center h-12">
+        <Skeleton className="h-4 w-48 bg-primary-foreground/10" />
       </div>
     </div>
   );
