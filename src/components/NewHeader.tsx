@@ -28,6 +28,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
   const { user, loading } = useAuth();
   const location = useLocation();
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [showSkeleton, setShowSkeleton] = React.useState(true);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -43,6 +44,30 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
     return () => {
       window.removeEventListener("openLoginModal", handleOpenLoginModal);
     };
+  }, []);
+
+  // Control skeleton visibility with minimum loading time
+  React.useEffect(() => {
+    if (!loading) {
+      // Show skeleton for at least 1.5 seconds for better UX
+      const timer = setTimeout(() => {
+        setShowSkeleton(false);
+      }, 1500);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [loading]);
+
+  // Test mode - press 'S' key to toggle skeleton
+  React.useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 's' || event.key === 'S') {
+        setShowSkeleton(prev => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
   }, []);
 
   // Skeleton Components
@@ -99,7 +124,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
     </div>
   );
 
-  if (loading) {
+  if (loading || showSkeleton) {
     return (
       <div className="w-full sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border supports-[backdrop-filter]:bg-background/60">
         <TopHeaderSkeleton />
