@@ -126,28 +126,11 @@ const Register = () => {
     }
   }, [uploadedFiles]);
 
-  // Validation utilities
+// Validation utilities - Email checking removed since it's handled by Supabase auth
   const checkEmailExists = async (email: string) => {
-    if (!email || !email.includes('@')) return;
-    setEmailCheckLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('email')
-        .eq('email', email)
-        .maybeSingle();
-      
-      if (error && error.code !== 'PGRST116') {
-        console.error('Error checking email:', error);
-        return;
-      }
-      
-      setEmailExists(!!data);
-    } catch (error) {
-      console.error('Email check failed:', error);
-    } finally {
-      setEmailCheckLoading(false);
-    }
+    // Email existence will be checked by Supabase auth during signup
+    // No need to check separately since auth.users is not accessible via API
+    setEmailExists(null);
   };
 
   const checkNinExists = async (nin: string) => {
@@ -174,26 +157,8 @@ const Register = () => {
   };
 
   const checkPhoneExists = async (phone: string) => {
-    if (!phone || !ALGERIA_PHONE_REGEX.test(phone)) return;
-    setPhoneCheckLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('phone')
-        .eq('phone', phone)
-        .maybeSingle();
-      
-      if (error && error.code !== 'PGRST116') {
-        console.error('Error checking phone:', error);
-        return;
-      }
-      
-      setPhoneExists(!!data);
-    } catch (error) {
-      console.error('Phone check failed:', error);
-    } finally {
-      setPhoneCheckLoading(false);
-    }
+    // Phone is no longer stored in profiles table, handled by auth metadata
+    setPhoneExists(null);
   };
 
   // Password strength calculation
@@ -274,12 +239,16 @@ const Register = () => {
         userType
       };
 
-      // Create auth user with email and password
+      // Create auth user with email, password, and metadata
       const { error: otpError } = await supabase.auth.signUp({
         email: finalData.email,
         password: finalData.password,
         options: {
-          emailRedirectTo: `${window.location.origin}/`
+          emailRedirectTo: `${window.location.origin}/`,
+          data: {
+            full_name: finalData.fullName,
+            phone: finalData.phone
+          }
         }
       });
       if (otpError) {
@@ -327,11 +296,8 @@ const Register = () => {
       }
       const uploadResults = await Promise.all(uploadPromises);
 
-      // Prepare registration data
+      // Prepare registration data (only profile/onboarding fields)
       const registrationData: any = {
-        email: finalData.email,
-        phone: finalData.phone,
-        full_name: finalData.fullName,
         date_of_birth: finalData.dateOfBirth,
         gender: finalData.gender,
         wilaya: finalData.wilaya,
@@ -390,6 +356,7 @@ const Register = () => {
         throw new Error('Utilisateur non authentifié après vérification.');
       }
 
+      // Insert profile data (not update since profile is created by trigger)
       const { error } = await supabase
         .from('profiles')
         .update({ ...pendingRegistrationData, status: 'pending' })
@@ -537,37 +504,12 @@ const Register = () => {
                           field.onBlur();
                           checkEmailExists(e.target.value);
                         }}
-                        className={emailExists === true ? 'border-red-500 focus:border-red-500' : emailExists === false ? 'border-green-500 focus:border-green-500' : ''}
+                        className=""
                       />
-                      {emailCheckLoading && (
-                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                          <div className="w-4 h-4 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
-                        </div>
-                      )}
-                      {emailExists === true && (
-                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                          <AlertCircle className="w-4 h-4 text-red-500" />
-                        </div>
-                      )}
-                      {emailExists === false && (
-                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                          <CheckCircle className="w-4 h-4 text-green-500" />
-                        </div>
-                      )}
+                      {/* Email validation UI removed since it's handled by Supabase auth */}
                     </div>
                   </FormControl>
-                  {emailExists === true && (
-                    <p className="text-sm text-red-500 mt-1">
-                      Cet email est déjà utilisé. {' '}
-                      <button 
-                        type="button"
-                        onClick={() => navigate('/?login=true')} 
-                        className="text-primary hover:underline font-medium"
-                      >
-                        Se connecter?
-                      </button>
-                    </p>
-                  )}
+                  {/* Email error message removed since it's handled by Supabase auth */}
                   <FormMessage />
                 </FormItem>} />
             
@@ -654,28 +596,12 @@ const Register = () => {
                           field.onBlur();
                           checkPhoneExists(e.target.value);
                         }}
-                        className={phoneExists === true ? 'border-red-500 focus:border-red-500' : phoneExists === false ? 'border-green-500 focus:border-green-500' : ''}
+                        className=""
                       />
-                      {phoneCheckLoading && (
-                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                          <div className="w-4 h-4 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
-                        </div>
-                      )}
-                      {phoneExists === true && (
-                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                          <AlertCircle className="w-4 h-4 text-red-500" />
-                        </div>
-                      )}
-                      {phoneExists === false && (
-                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                          <CheckCircle className="w-4 h-4 text-green-500" />
-                        </div>
-                      )}
+                      {/* Phone validation UI removed since it's handled by auth metadata */}
                     </div>
                   </FormControl>
-                  {phoneExists === true && (
-                    <p className="text-sm text-red-500 mt-1">Ce numéro de téléphone est déjà utilisé.</p>
-                  )}
+                  {/* Phone error message removed since it's handled by auth metadata */}
                   <FormMessage />
                 </FormItem>} />
           </div>;
@@ -946,8 +872,10 @@ const Register = () => {
   };
 
   // Show OTP verification screen if needed
-  if (showOtpVerification && pendingRegistrationData) {
-    return <OtpVerification email={pendingRegistrationData.email} onVerified={handleOtpVerified} loading={isSubmitting} />;
+  if (showOtpVerification) {
+    // Get email from form data instead of pendingRegistrationData
+    const emailFromForm = (formData as any).email || '';
+    return <OtpVerification email={emailFromForm} onVerified={handleOtpVerified} loading={isSubmitting} />;
   }
   return <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10 flex items-center justify-center p-4">
       {/* Theme Toggle - Fixed Position */}
