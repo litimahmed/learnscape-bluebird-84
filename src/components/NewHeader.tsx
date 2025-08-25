@@ -50,8 +50,22 @@ export default function NewHeader({ isDark, toggleTheme, loading: externalLoadin
   // Skeleton Components
   const TopHeaderSkeleton = () => (
     <div className="w-full bg-primary px-4 lg:px-6">
-      <div className="max-w-7xl mx-auto flex items-center justify-center h-12">
-        <Skeleton className="h-4 w-48 bg-primary-foreground/10" />
+      <div className="max-w-7xl mx-auto flex items-center justify-between h-12">
+        {/* Left - Language Selector Skeleton */}
+        <div className="flex-shrink-0">
+          <Skeleton className="h-8 w-16 bg-primary-foreground/10 rounded-md" />
+        </div>
+
+        {/* Center - Text Content Skeleton */}
+        <div className="flex-1 text-center px-4">
+          <Skeleton className="h-4 w-64 bg-primary-foreground/10 mx-auto" />
+        </div>
+
+        {/* Right - Help Center & Theme Toggle Skeleton */}
+        <div className="flex items-center gap-3 flex-shrink-0">
+          <Skeleton className="h-8 w-24 bg-primary-foreground/10 rounded-md" />
+          <Skeleton className="h-8 w-8 bg-primary-foreground/10 rounded-md" />
+        </div>
       </div>
     </div>
   );
