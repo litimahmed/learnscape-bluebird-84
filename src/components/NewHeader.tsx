@@ -52,7 +52,7 @@ export default function NewHeader({ isDark, toggleTheme }: NewHeaderProps) {
       // Show skeleton for at least 1.5 seconds for better UX
       const timer = setTimeout(() => {
         setShowSkeleton(false);
-      }, 1500);
+      }, 5500);
       
       return () => clearTimeout(timer);
     }
