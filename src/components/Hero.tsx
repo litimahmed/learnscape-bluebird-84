@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { BookOpenIcon, Circle, Home, Navigation, NavigationIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // Simple FlipCard component to replace the missing one
 const FlipCard = ({
@@ -47,9 +48,208 @@ const FlipCard = ({
       </div>
     </div>;
 };
-export default function Hero() {
+// Professional Hero Skeleton Components
+const HeroSkeleton = () => {
+  const SkeletonSlide1 = () => (
+    <div className="relative w-full mb-10 items-start overflow-hidden bg-background">
+      {/* Background Image Skeleton */}
+      <div className="absolute -inset-y-0 w-[45%] right-0 top-0">
+        <Skeleton className="w-full h-full bg-gradient-to-r from-muted/60 to-muted/40" />
+      </div>
+      <div className="flex flex-col gap-6 w-[50%]">
+        {/* Title Skeleton */}
+        <div className="space-y-3">
+          <Skeleton className="h-14 w-full bg-gradient-to-r from-muted/80 via-muted/60 to-muted/80" />
+          <Skeleton className="h-14 w-4/5 bg-gradient-to-r from-muted/60 via-muted/40 to-muted/60" />
+        </div>
+        {/* Description Skeleton */}
+        <div className="space-y-2">
+          <Skeleton className="h-6 w-full bg-muted/60" />
+          <Skeleton className="h-6 w-5/6 bg-muted/50" />
+          <Skeleton className="h-6 w-4/5 bg-muted/40" />
+        </div>
+        {/* Buttons Skeleton */}
+        <div className="flex w-full gap-4">
+          <Skeleton className="h-12 flex-2 bg-gradient-to-r from-primary/30 to-primary/20" />
+          <Skeleton className="h-12 flex-1 bg-muted/50" />
+        </div>
+      </div>
+    </div>
+  );
+
+  const SkeletonSlide2 = () => (
+    <div className="relative w-full">
+      {/* Background Image Skeleton */}
+      <div className="absolute -inset-y-4 w-[50%] right-0">
+        <Skeleton className="w-full h-full bg-gradient-to-l from-muted/50 to-muted/30" />
+      </div>
+      <div className="flex flex-col gap-4 w-[50%]">
+        {/* Title Skeleton */}
+        <div className="space-y-3">
+          <Skeleton className="h-12 w-full bg-gradient-to-r from-muted/80 to-muted/60" />
+          <Skeleton className="h-12 w-3/4 bg-gradient-to-r from-muted/70 to-muted/50" />
+        </div>
+        {/* Separator Skeleton */}
+        <Skeleton className="h-1 w-[40%] bg-primary/40" />
+        {/* Feature Lists Skeleton */}
+        <div className="space-y-6">
+          <div className="w-full flex flex-col gap-3">
+            <div className="flex items-center gap-3">
+              <Skeleton className="w-3 h-3 rounded-full bg-primary/50" />
+              <Skeleton className="h-6 w-48 bg-muted/70" />
+            </div>
+            <div className="ml-6 space-y-2">
+              <Skeleton className="h-4 w-full bg-muted/50" />
+              <Skeleton className="h-4 w-4/5 bg-muted/40" />
+            </div>
+          </div>
+          <div className="w-full flex flex-col gap-3">
+            <div className="flex items-center gap-3">
+              <Skeleton className="w-3 h-3 rounded-full bg-primary/50" />
+              <Skeleton className="h-6 w-40 bg-muted/70" />
+            </div>
+            <div className="ml-6 space-y-2">
+              <Skeleton className="h-4 w-full bg-muted/50" />
+              <Skeleton className="h-4 w-3/4 bg-muted/40" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const SkeletonSlide3 = () => (
+    <div className="relative w-full flex flex-row-reverse items-center overflow-hidden">
+      <div className="flex flex-col gap-4 w-[60%] z-10">
+        {/* Title Skeleton */}
+        <div className="ml-24 space-y-3">
+          <Skeleton className="h-10 w-full bg-gradient-to-r from-muted/80 to-muted/60" />
+          <Skeleton className="h-10 w-3/4 bg-gradient-to-r from-muted/70 to-muted/50" />
+        </div>
+        {/* Separator Skeleton */}
+        <Skeleton className="ml-24 h-1 w-[40%] bg-primary/40" />
+        {/* Description Skeleton */}
+        <div className="ml-24 space-y-2">
+          <Skeleton className="h-4 w-full bg-muted/60" />
+          <Skeleton className="h-4 w-5/6 bg-muted/50" />
+        </div>
+        {/* Cards Skeleton */}
+        <div className="flex gap-4">
+          <div className="flex-1 relative p-0">
+            <Card className="w-full h-64 p-4 flex flex-col items-center text-center space-y-4">
+              <Skeleton className="w-12 h-12 rounded-full bg-primary/30" />
+              <Skeleton className="h-6 w-32 bg-muted/70" />
+              <div className="space-y-2 w-full">
+                <Skeleton className="h-3 w-full bg-muted/50" />
+                <Skeleton className="h-3 w-5/6 bg-muted/40" />
+                <Skeleton className="h-3 w-4/5 bg-muted/30" />
+              </div>
+            </Card>
+          </div>
+          <div className="flex-1 relative p-0">
+            <Card className="w-full h-64 p-4 flex flex-col items-center text-center space-y-4">
+              <Skeleton className="w-12 h-12 rounded-full bg-primary/30" />
+              <Skeleton className="h-6 w-28 bg-muted/70" />
+              <div className="space-y-2 w-full">
+                <Skeleton className="h-3 w-full bg-muted/50" />
+                <Skeleton className="h-3 w-4/5 bg-muted/40" />
+                <Skeleton className="h-3 w-5/6 bg-muted/30" />
+              </div>
+            </Card>
+          </div>
+        </div>
+      </div>
+      {/* Background Image Skeleton */}
+      <div className="absolute w-[120%] max-w-none right-[-15%] top-1/2 -translate-y-1/2 overflow-hidden">
+        <Skeleton className="w-[900px] h-[600px] bg-gradient-to-l from-muted/40 to-muted/20" />
+      </div>
+    </div>
+  );
+
+  const SkeletonSlide4 = () => (
+    <div className="relative w-full">
+      {/* Background Image Skeleton */}
+      <div className="absolute -inset-y-3 w-[55%] right-0">
+        <Skeleton className="w-full h-full bg-gradient-to-l from-muted/50 to-muted/30" />
+      </div>
+      <div className="flex flex-col gap-4 w-[75%]">
+        {/* Title Skeleton */}
+        <div className="w-[60%] space-y-3">
+          <Skeleton className="h-12 w-full bg-gradient-to-r from-muted/80 to-muted/60" />
+          <Skeleton className="h-12 w-3/4 bg-gradient-to-r from-muted/70 to-muted/50" />
+        </div>
+        {/* Separator Skeleton */}
+        <Skeleton className="h-1 w-[40%] bg-primary/40" />
+        {/* Description Skeleton */}
+        <div className="w-[60%] space-y-2">
+          <Skeleton className="h-4 w-full bg-muted/60" />
+          <Skeleton className="h-4 w-5/6 bg-muted/50" />
+        </div>
+        {/* Cards Grid Skeleton */}
+        <div className="flex gap-4">
+          {[1, 2, 3].map((i) => (
+            <Card key={i} className="flex-1 relative p-6 flex flex-col items-center text-center space-y-4">
+              <Skeleton className="w-10 h-10 rounded-full bg-primary/30" />
+              <Skeleton className="h-5 w-24 bg-muted/70" />
+              <div className="space-y-2 w-full">
+                <Skeleton className="h-3 w-full bg-muted/50" />
+                <Skeleton className="h-3 w-5/6 bg-muted/40" />
+                <Skeleton className="h-3 w-4/5 bg-muted/30" />
+                <Skeleton className="h-3 w-3/4 bg-muted/25" />
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  const skeletonSlides = [SkeletonSlide1, SkeletonSlide2, SkeletonSlide3, SkeletonSlide4];
+
+  return (
+    <section className="pb-16 md:pb-24 bg-background">
+      <div className="container-custom">
+        <div className="relative w-full max-w-5xl mx-auto bg-background overflow-hidden rounded-lg">
+          {/* Skeleton Carousel Content */}
+          <div className="flex items-center justify-center p-8 bg-background min-h-[500px]">
+            <div className="w-full animate-fade-in">
+              {React.createElement(skeletonSlides[0])}
+            </div>
+          </div>
+          
+          {/* Navigation Arrows Skeleton */}
+          <div className="absolute left-4 top-1/2 -translate-y-1/2">
+            <Skeleton className="w-10 h-10 rounded-full bg-muted/40" />
+          </div>
+          <div className="absolute right-4 top-1/2 -translate-y-1/2">
+            <Skeleton className="w-10 h-10 rounded-full bg-muted/40" />
+          </div>
+        </div>
+        
+        {/* Pagination Dots Skeleton */}
+        <div className="flex justify-center mt-4 gap-2">
+          {[0, 1, 2, 3].map((index) => (
+            <Skeleton 
+              key={index} 
+              className={`h-2 rounded-full transition-all duration-300 ${
+                index === 0 ? 'w-8 bg-primary/40' : 'w-2 bg-muted/40'
+              }`} 
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+interface HeroProps {
+  loading?: boolean;
+}
+
+export default function Hero({ loading = false }: HeroProps) {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
+  
   React.useEffect(() => {
     if (!api) {
       return;
@@ -59,6 +259,11 @@ export default function Hero() {
       setCurrent(api.selectedScrollSnap());
     });
   }, [api]);
+
+  // Show skeleton when loading
+  if (loading) {
+    return <HeroSkeleton />;
+  }
   return <section className="pb-16 md:pb-24 bg-background">
       <div className="container-custom">
         <Carousel setApi={setApi} className="relative w-full max-w-5xl mx-auto bg-background">
