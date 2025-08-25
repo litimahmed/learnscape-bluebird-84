@@ -275,9 +275,7 @@ const Register = () => {
       };
 
       // Create auth user with email and password
-      const {
-        error: otpError
-      } = await supabase.auth.signUp({
+      const { error: otpError } = await supabase.auth.signUp({
         email: finalData.email,
         password: finalData.password,
         options: {
@@ -285,6 +283,16 @@ const Register = () => {
         }
       });
       if (otpError) {
+        // If the user already exists, guide them to sign in instead of waiting for an OTP
+        if (typeof otpError.message === 'string' && otpError.message.toLowerCase().includes('already')) {
+          toast({
+            variant: "destructive",
+            title: "Email déjà enregistré",
+            description: "Cet email a déjà un compte. Veuillez vous connecter."
+          });
+          setIsSubmitting(false);
+          return;
+        }
         throw otpError;
       }
 

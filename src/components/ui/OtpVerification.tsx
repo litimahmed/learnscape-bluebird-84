@@ -66,7 +66,7 @@ export const OtpVerification = ({ email, onVerified, onResend, loading = false }
       const { data, error } = await supabase.auth.verifyOtp({
         email,
         token: otp,
-        type: 'email'
+        type: 'signup'
       });
 
       if (error) {
