@@ -274,16 +274,6 @@
   }
 }
 
-/* Modern Shimmer Animation for Skeletons */
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
 /* 3D Card Flip Effects */
 .transform-style-preserve-3d {
   transform-style: preserve-3d;
