@@ -12,6 +12,7 @@ interface LayoutProps {
 
 const Layout = ({ children, headerLoading, footerLoading }: LayoutProps) => {
   const [isDark, setIsDark] = useState(false);
+  const [headerFooterLoading, setHeaderFooterLoading] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -20,6 +21,16 @@ const Layout = ({ children, headerLoading, footerLoading }: LayoutProps) => {
     
     setIsDark(shouldBeDark);
     document.documentElement.classList.toggle("dark", shouldBeDark);
+  }, []);
+
+  // Listen for header/footer loading toggle from Home page
+  useEffect(() => {
+    const handleToggleHeaderFooter = (event: CustomEvent) => {
+      setHeaderFooterLoading(event.detail.loading);
+    };
+
+    window.addEventListener('toggleHeaderFooterLoading', handleToggleHeaderFooter as EventListener);
+    return () => window.removeEventListener('toggleHeaderFooterLoading', handleToggleHeaderFooter as EventListener);
   }, []);
 
   const toggleTheme = () => {
@@ -43,11 +54,11 @@ const Layout = ({ children, headerLoading, footerLoading }: LayoutProps) => {
 
       {/* Content with higher z-index */}
       <div className="relative z-10">
-        <NewHeader isDark={isDark} toggleTheme={toggleTheme} loading={headerLoading} />
+        <NewHeader isDark={isDark} toggleTheme={toggleTheme} loading={headerLoading || headerFooterLoading} />
         <main>
           {children}
         </main>
-        <Footer isDark={isDark} loading={footerLoading} />
+        <Footer isDark={isDark} loading={footerLoading || headerFooterLoading} />
         <ChatbotFAB />
         <ScrollToTop />
       </div>

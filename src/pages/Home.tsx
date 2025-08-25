@@ -7,12 +7,10 @@ import SmartSearchFilter from "@/components/SmartSearchFilter";
 import Testimonials from "@/components/Testimonials";
 import AppMobile from "@/components/AppMobile";
 import NewsLetter from "@/components/NewsLetter";
-import Layout from "@/components/Layout";
 
 const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [sectionsLoading, setSectionsLoading] = useState(true);
-  const [headerFooterLoading, setHeaderFooterLoading] = useState(true);
 
   useEffect(() => {
     const shouldOpenLogin = searchParams.get('login') === 'true';
@@ -24,22 +22,27 @@ const Home = () => {
     }
   }, [searchParams, setSearchParams]);
 
-  // Simulate loading for all sections and header/footer
+  // Simulate loading for all sections
   useEffect(() => {
     const timer = setTimeout(() => {
       setSectionsLoading(false);
-      setHeaderFooterLoading(false);
     }, 2000); // Show skeleton for 2 seconds
 
     return () => clearTimeout(timer);
   }, []);
 
-  // Test mode - press 'H' key to toggle ALL skeletons (sections, header, footer)
+  // Test mode - press 'H' key to toggle all section skeletons AND notify parent Layout
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
       if (event.key === 'h' || event.key === 'H') {
-        setSectionsLoading(prev => !prev);
-        setHeaderFooterLoading(prev => !prev);
+        setSectionsLoading(prev => {
+          const newState = !prev;
+          // Dispatch custom event to notify Layout about header/footer loading state
+          window.dispatchEvent(new CustomEvent('toggleHeaderFooterLoading', { 
+            detail: { loading: newState } 
+          }));
+          return newState;
+        });
       }
     };
 
@@ -48,30 +51,28 @@ const Home = () => {
   }, []);
 
   return (
-    <Layout headerLoading={headerFooterLoading} footerLoading={headerFooterLoading}>
-      <div className="bg-background">
-        {/* Hero Section */}
-        <Hero loading={sectionsLoading} />
-        
-        {/* Brands Section */}
-        <Brands loading={sectionsLoading} />
-        
-        {/* Objectifs Section */}
-        <Objectifs loading={sectionsLoading} />
-        
-        {/* Smart Search Filter Section */}
-        <SmartSearchFilter loading={sectionsLoading} />
-        
-        {/* Testimonials Section */}
-        <Testimonials loading={sectionsLoading} />
-        
-        {/* App Mobile Section */}
-        <AppMobile loading={sectionsLoading} />
-        
-        {/* Newsletter Section */}
-        <NewsLetter loading={sectionsLoading} />
-      </div>
-    </Layout>
+    <div className="bg-background">
+      {/* Hero Section */}
+      <Hero loading={sectionsLoading} />
+      
+      {/* Brands Section */}
+      <Brands loading={sectionsLoading} />
+      
+      {/* Objectifs Section */}
+      <Objectifs loading={sectionsLoading} />
+      
+      {/* Smart Search Filter Section */}
+      <SmartSearchFilter loading={sectionsLoading} />
+      
+      {/* Testimonials Section */}
+      <Testimonials loading={sectionsLoading} />
+      
+      {/* App Mobile Section */}
+      <AppMobile loading={sectionsLoading} />
+      
+      {/* Newsletter Section */}
+      <NewsLetter loading={sectionsLoading} />
+    </div>
   );
 };
 
