@@ -48,23 +48,23 @@ export function SchedulePage() {
         </span>
         
         {hasEvents && (
-          <div className="flex flex-wrap justify-center gap-0.5 max-w-full">
-            {dayEvents.slice(0, 4).map((event, index) => (
+          <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex gap-0.5">
+            {dayEvents.slice(0, 3).map((event, index) => (
               <div
                 key={event.id}
                 className={cn(
-                  "w-1.5 h-1.5 rounded-full flex-shrink-0",
-                  event.type === "live" && "bg-red-500",
-                  event.type === "workshop" && "bg-blue-500",
-                  event.type === "review" && "bg-green-500",
-                  event.type === "exam" && "bg-purple-500",
-                  event.type === "deadline" && "bg-orange-500"
+                  "w-1 h-1 rounded-full opacity-60",
+                  event.type === "live" && "bg-red-400",
+                  event.type === "workshop" && "bg-blue-400", 
+                  event.type === "review" && "bg-green-400",
+                  event.type === "exam" && "bg-purple-400",
+                  event.type === "deadline" && "bg-orange-400"
                 )}
                 title={`${event.title} - ${format(event.startAt, "h:mm a")}`}
               />
             ))}
-            {dayEvents.length > 4 && (
-              <div className="text-[10px] text-muted-foreground font-medium">+{dayEvents.length - 4}</div>
+            {dayEvents.length > 3 && (
+              <div className="w-1 h-1 rounded-full bg-muted-foreground opacity-40"></div>
             )}
           </div>
         )}
