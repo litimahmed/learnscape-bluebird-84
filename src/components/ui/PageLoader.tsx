@@ -3,23 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 const PageLoader = () => {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header Skeleton */}
-      <div className="h-20 bg-card border-b border-border">
-        <div className="container-custom h-full">
-          <div className="flex items-center justify-between h-full">
-            <Skeleton className="h-8 w-32 bg-muted/60" />
-            <div className="hidden md:flex gap-6">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <Skeleton key={i} className="h-4 w-16 bg-muted/40" />
-              ))}
-            </div>
-            <div className="flex items-center gap-4">
-              <Skeleton className="h-8 w-8 bg-muted/50 rounded-full" />
-              <Skeleton className="h-8 w-20 bg-primary/30 rounded" />
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Main Content Skeleton - Header skeleton removed as it's handled by Layout */}
 
       {/* Main Content Skeleton */}
       <div className="py-20 px-6">
