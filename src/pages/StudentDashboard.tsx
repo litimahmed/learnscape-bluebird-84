@@ -43,7 +43,6 @@ const StudentDashboard = () => {
               <Route path="/learning-path" element={<ModernLearningPath />} />
               <Route path="/schedule" element={<SchedulePage />} />
               <Route path="/achievements" element={<div className="p-6"><AchievementsPage /></div>} />
-              <Route path="/progress" element={<div className="p-6"><ComingSoon title="Progress" description="Monitor your learning progress with detailed analytics and insights." /></div>} />
               <Route path="/assignments" element={<div className="p-6"><ComingSoon title="Assignments" description="View and submit your assignments, track deadlines and grades." /></div>} />
               <Route path="/study-time" element={<div className="p-6"><ComingSoon title="Study Time" description="Track your study hours and optimize your learning schedule." /></div>} />
               <Route path="/reviews" element={<div className="p-6"><ComingSoon title="Reviews" description="Review and rate courses, instructors, and learning materials." /></div>} />

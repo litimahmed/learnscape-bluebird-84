@@ -40,7 +40,6 @@ const mainNavItems = [
   { title: "Learning Path", url: "/dashboard/learning-path", icon: GraduationCap },
   { title: "Schedule", url: "/dashboard/schedule", icon: Calendar },
   { title: "Achievements", url: "/dashboard/achievements", icon: Trophy },
-  { title: "Progress", url: "/dashboard/progress", icon: BarChart3 },
 ];
 
 const secondaryNavItems = [
