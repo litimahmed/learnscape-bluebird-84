@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { format, addDays, subDays, isSameDay } from "date-fns";
-import { ChevronLeft, ChevronRight, Plus, Calendar as CalendarIcon } from "lucide-react";
+import { format, addDays, subDays, isSameDay, startOfMonth, endOfMonth, eachDayOfInterval } from "date-fns";
+import { ChevronLeft, ChevronRight, Plus, Calendar as CalendarIcon, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { mockEvents } from "./mockData";
 import { cn } from "@/lib/utils";
 
@@ -24,6 +23,53 @@ export function SchedulePage() {
 
   const goToToday = () => {
     setCurrentDate(new Date());
+  };
+
+  // Get events by date for visual indicators
+  const getEventsForDate = (date: Date) => {
+    return mockEvents.filter(event => isSameDay(event.startAt, date));
+  };
+
+  // Custom day content with event indicators
+  const renderDay = (day: Date) => {
+    const dayEvents = getEventsForDate(day);
+    const hasEvents = dayEvents.length > 0;
+    const isToday = isSameDay(day, new Date());
+    const isSelected = isSameDay(day, currentDate);
+
+    return (
+      <div className="relative w-full h-full flex flex-col items-center justify-center">
+        <span className={cn(
+          "text-sm",
+          isToday && "font-bold",
+          isSelected && "text-primary-foreground"
+        )}>
+          {format(day, "d")}
+        </span>
+        
+        {hasEvents && (
+          <div className="flex flex-wrap gap-1 mt-1 max-w-8">
+            {dayEvents.slice(0, 3).map((event, index) => (
+              <div
+                key={event.id}
+                className={cn(
+                  "w-1.5 h-1.5 rounded-full",
+                  event.type === "live" && "bg-red-500",
+                  event.type === "workshop" && "bg-blue-500",
+                  event.type === "review" && "bg-green-500",
+                  event.type === "exam" && "bg-purple-500",
+                  event.type === "deadline" && "bg-orange-500"
+                )}
+                title={`${event.title} - ${format(event.startAt, "h:mm a")}`}
+              />
+            ))}
+            {dayEvents.length > 3 && (
+              <div className="text-xs text-muted-foreground">+</div>
+            )}
+          </div>
+        )}
+      </div>
+    );
   };
 
   return (
@@ -66,22 +112,73 @@ export function SchedulePage() {
             </h1>
           </div>
 
-          <Button size="sm">
-            <Plus className="h-4 w-4 mr-2" />
-            New Event
-          </Button>
+          <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-4 text-sm text-muted-foreground mr-4">
+              <div className="flex items-center space-x-1">
+                <div className="w-2 h-2 rounded-full bg-red-500"></div>
+                <span>Live</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                <span>Workshop</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                <span>Review</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+                <span>Exam</span>
+              </div>
+            </div>
+            
+            <Button size="sm">
+              <Plus className="h-4 w-4 mr-2" />
+              New Event
+            </Button>
+          </div>
         </div>
       </div>
 
       {/* Main Content */}
       <div className="flex h-[calc(100%-80px)]">
         {/* Calendar */}
-        <div className="w-80 border-r border-border p-4">
+        <div className="w-96 border-r border-border p-6">
           <Calendar
             mode="single"
             selected={currentDate}
             onSelect={(date) => date && setCurrentDate(date)}
             className="w-full pointer-events-auto"
+            classNames={{
+              months: "flex w-full",
+              month: "space-y-4 w-full",
+              caption: "flex justify-center pt-1 relative items-center mb-4",
+              caption_label: "text-lg font-semibold",
+              nav: "space-x-1 flex items-center",
+              nav_button: "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 border rounded-md",
+              nav_button_previous: "absolute left-1",
+              nav_button_next: "absolute right-1",
+              table: "w-full border-collapse",
+              head_row: "flex w-full",
+              head_cell: "text-muted-foreground rounded-md font-medium text-sm flex-1 p-2 text-center",
+              row: "flex w-full",
+              cell: "flex-1 relative p-0 text-center focus-within:relative focus-within:z-20",
+              day: "h-14 w-full p-1 font-normal aria-selected:bg-accent hover:bg-accent/50 focus:bg-accent focus:text-accent-foreground cursor-pointer rounded-md transition-colors",
+              day_range_end: "day-range-end",
+              day_selected: "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
+              day_today: "bg-accent text-accent-foreground font-bold",
+              day_outside: "text-muted-foreground opacity-50",
+              day_disabled: "text-muted-foreground opacity-50",
+              day_range_middle: "aria-selected:bg-accent aria-selected:text-accent-foreground",
+              day_hidden: "invisible",
+            }}
+            components={{
+              Day: ({ date, displayMonth }) => (
+                <div className="h-14 p-1">
+                  {renderDay(date)}
+                </div>
+              ),
+            }}
           />
         </div>
 
@@ -89,35 +186,49 @@ export function SchedulePage() {
         <div className="flex-1 p-6">
           <Card>
             <CardHeader>
-              <CardTitle>
-                {isSameDay(currentDate, new Date()) ? "Today's Events" : `Events for ${format(currentDate, "MMM d")}`}
+              <CardTitle className="flex items-center space-x-2">
+                <Clock className="h-5 w-5" />
+                <span>
+                  {isSameDay(currentDate, new Date()) ? "Today's Events" : `Events for ${format(currentDate, "MMM d")}`}
+                </span>
+                {todayEvents.length > 0 && (
+                  <Badge variant="secondary">{todayEvents.length}</Badge>
+                )}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {todayEvents.length === 0 ? (
-                <div className="text-center py-8 text-muted-foreground">
-                  <CalendarIcon className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                  <p>No events scheduled for this day</p>
+                <div className="text-center py-12 text-muted-foreground">
+                  <CalendarIcon className="h-16 w-16 mx-auto mb-4 opacity-50" />
+                  <h3 className="text-lg font-medium mb-2">No events scheduled</h3>
+                  <p className="text-sm">Click on a day with colored dots to see events, or create a new one.</p>
+                  <Button className="mt-4" size="sm">
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add Event
+                  </Button>
                 </div>
               ) : (
-                todayEvents.map((event) => (
+                todayEvents
+                  .sort((a, b) => a.startAt.getTime() - b.startAt.getTime())
+                  .map((event) => (
                   <div
                     key={event.id}
-                    className="flex items-center justify-between p-4 border border-border rounded-lg hover:bg-accent/50 cursor-pointer transition-colors"
+                    className="flex items-center justify-between p-4 border border-border rounded-lg hover:bg-accent/50 cursor-pointer transition-colors group"
                     onClick={() => setSelectedEvent(event)}
                   >
                     <div className="flex items-center space-x-4">
-                      <div className="text-sm text-muted-foreground">
+                      <div className="text-sm font-medium text-muted-foreground bg-muted px-2 py-1 rounded">
                         {format(event.startAt, "h:mm a")}
                       </div>
-                      <div>
-                        <h3 className="font-medium">{event.title}</h3>
+                      <div className="flex-1">
+                        <h3 className="font-medium group-hover:text-primary transition-colors">{event.title}</h3>
                         <p className="text-sm text-muted-foreground">{event.description}</p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Badge
                         className={cn(
+                          "transition-colors",
                           event.type === "live" && "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-300",
                           event.type === "workshop" && "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300",
                           event.type === "review" && "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300",
