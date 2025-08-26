@@ -177,11 +177,50 @@ export function SchedulePage() {
               day_hidden: "invisible",
             }}
             components={{
-              Day: ({ date, displayMonth }) => (
-                <div className="h-16 w-full">
-                  {renderDay(date)}
-                </div>
-              ),
+              Day: ({ date, displayMonth, ...props }) => {
+                const dayEvents = getEventsForDate(date);
+                const hasEvents = dayEvents.length > 0;
+                
+                return (
+                  <button
+                    {...props}
+                    className={cn(
+                      "h-16 w-full p-0 font-normal aria-selected:bg-accent hover:bg-accent/50 focus:bg-accent focus:text-accent-foreground cursor-pointer rounded-md transition-colors relative",
+                      isSameDay(date, currentDate) && "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
+                      isSameDay(date, new Date()) && "bg-accent text-accent-foreground font-bold"
+                    )}
+                    onClick={() => setCurrentDate(date)}
+                  >
+                    <div className="relative w-full h-full flex flex-col items-center justify-center p-1">
+                      <span className="text-sm mb-1">
+                        {format(date, "d")}
+                      </span>
+                      
+                      {hasEvents && (
+                        <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex gap-0.5">
+                          {dayEvents.slice(0, 3).map((event, index) => (
+                            <div
+                              key={event.id}
+                              className={cn(
+                                "w-1 h-1 rounded-full opacity-60",
+                                event.type === "live" && "bg-red-400",
+                                event.type === "workshop" && "bg-blue-400", 
+                                event.type === "review" && "bg-green-400",
+                                event.type === "exam" && "bg-purple-400",
+                                event.type === "deadline" && "bg-orange-400"
+                              )}
+                              title={`${event.title} - ${format(event.startAt, "h:mm a")}`}
+                            />
+                          ))}
+                          {dayEvents.length > 3 && (
+                            <div className="w-1 h-1 rounded-full bg-muted-foreground opacity-40"></div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </button>
+                );
+              },
             }}
           />
         </div>
