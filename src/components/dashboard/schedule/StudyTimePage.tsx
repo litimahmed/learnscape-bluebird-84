@@ -24,9 +24,11 @@ import { cn } from "@/lib/utils";
 import { useStudyTimer } from "@/hooks/useStudyTimer";
 import { useAmbientSounds } from "@/hooks/useAmbientSounds";
 import { useToast } from "@/hooks/use-toast";
+import { useTimerContext } from "@/contexts/TimerContext";
 
 export function StudyTimePage() {
   const { toast } = useToast();
+  const timerContext = useTimerContext();
   const [technique, setTechnique] = useState<'pomodoro' | 'custom'>('pomodoro');
 
   const {
@@ -69,6 +71,18 @@ export function StudyTimePage() {
   useEffect(() => {
     requestNotificationPermission();
   }, [requestNotificationPermission]);
+
+  // Update timer context whenever timer state changes
+  useEffect(() => {
+    timerContext.setTimerData({
+      timeLeft,
+      isActive: isRunning && !isPaused,
+      technique: currentSession?.technique || technique,
+      onStart: pauseTimer,
+      onPause: pauseTimer,
+      onStop: stopTimer,
+    });
+  }, [timeLeft, isRunning, isPaused, currentSession?.technique, technique, pauseTimer, stopTimer, timerContext]);
 
   const handleQuickStart = (type: 'focus' | 'short-break' | 'long-break', duration: number) => {
     startSession({
