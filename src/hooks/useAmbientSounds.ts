@@ -42,7 +42,10 @@ const AMBIENT_SOUNDS: AmbientSound[] = [
 export const useAmbientSounds = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSound, setCurrentSound] = useState<AmbientSound | null>(null);
-  const [volume, setVolume] = useState(0.3);
+  const [volume, setVolume] = useState(() => {
+    const savedVolume = localStorage.getItem('ambientSoundVolume');
+    return savedVolume ? parseFloat(savedVolume) : 0.3;
+  });
   
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -108,6 +111,7 @@ export const useAmbientSounds = () => {
 
   const changeVolume = useCallback((newVolume: number) => {
     setVolume(newVolume);
+    localStorage.setItem('ambientSoundVolume', newVolume.toString());
     
     if (audioRef.current) {
       audioRef.current.volume = newVolume;
