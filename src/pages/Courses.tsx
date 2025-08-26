@@ -1,7 +1,9 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Select,
   SelectContent,
@@ -23,6 +25,115 @@ import {
 } from "lucide-react";
 
 const Courses = () => {
+  const [headerFooterLoading, setHeaderFooterLoading] = useState(false);
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'H' || event.key === 'h') {
+        const newLoading = !headerFooterLoading;
+        setHeaderFooterLoading(newLoading);
+        
+        // Dispatch custom event to Layout component
+        window.dispatchEvent(new CustomEvent('toggleHeaderFooterLoading', {
+          detail: { loading: newLoading }
+        }));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [headerFooterLoading]);
+
+  const CoursesSkeleton = () => (
+    <div className="bg-background">
+      {/* Hero Skeleton */}
+      <div className="py-20 px-6 bg-gradient-to-br from-primary/10 via-primary/5 to-background">
+        <div className="max-w-3xl mx-auto text-center space-y-6">
+          <Skeleton className="h-6 w-32 mx-auto bg-primary/30" />
+          <Skeleton className="h-16 w-[450px] mx-auto bg-gradient-to-r from-muted/70 to-muted/50" />
+          <Skeleton className="h-6 w-[550px] mx-auto bg-muted/50" />
+        </div>
+      </div>
+      
+      {/* Search & Filters Skeleton */}
+      <div className="py-8 px-6 bg-card border-b">
+        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-4 items-center">
+          <Skeleton className="h-10 w-full max-w-md bg-muted/40" />
+          <div className="flex gap-4">
+            <Skeleton className="h-10 w-48 bg-muted/40" />
+            <Skeleton className="h-10 w-40 bg-muted/40" />
+            <Skeleton className="h-10 w-32 bg-muted/40" />
+          </div>
+        </div>
+      </div>
+
+      {/* Featured Courses Skeleton */}
+      <div className="py-16 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-12">
+            <Skeleton className="h-8 w-64 mb-4 bg-muted/60" />
+            <Skeleton className="h-4 w-96 bg-muted/40" />
+          </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {[1, 2].map((i) => (
+              <Card key={i} className="overflow-hidden">
+                <Skeleton className="aspect-video w-full bg-primary/20" />
+                <div className="p-6 space-y-4">
+                  <div className="flex gap-2">
+                    <Skeleton className="h-6 w-16 bg-muted/50 rounded-full" />
+                    <Skeleton className="h-6 w-20 bg-muted/50 rounded-full" />
+                  </div>
+                  <Skeleton className="h-6 w-3/4 bg-muted/60" />
+                  <Skeleton className="h-16 w-full bg-muted/40" />
+                  <div className="flex gap-4">
+                    <Skeleton className="h-4 w-20 bg-muted/40" />
+                    <Skeleton className="h-4 w-24 bg-muted/40" />
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <Skeleton className="h-8 w-16 bg-primary/30" />
+                    <Skeleton className="h-10 w-24 bg-primary/30" />
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* All Courses Grid Skeleton */}
+      <div className="py-16 px-6 bg-secondary/30">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-12">
+            <Skeleton className="h-8 w-32 mb-4 bg-muted/60" />
+            <Skeleton className="h-4 w-64 bg-muted/40" />
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <Card key={i} className="overflow-hidden">
+                <Skeleton className="aspect-video w-full bg-primary/20" />
+                <div className="p-5 space-y-3">
+                  <div className="flex gap-2">
+                    <Skeleton className="h-5 w-16 bg-muted/50 rounded-full" />
+                    <Skeleton className="h-5 w-20 bg-muted/50 rounded-full" />
+                  </div>
+                  <Skeleton className="h-6 w-3/4 bg-muted/60" />
+                  <Skeleton className="h-12 w-full bg-muted/40" />
+                  <div className="flex justify-between items-center">
+                    <Skeleton className="h-6 w-12 bg-primary/30" />
+                    <Skeleton className="h-8 w-16 bg-primary/30" />
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  if (headerFooterLoading) {
+    return <CoursesSkeleton />;
+  }
   const categories = [
     "All Categories",
     "Technology",

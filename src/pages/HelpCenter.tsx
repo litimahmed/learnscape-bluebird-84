@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Search, ChevronDown, Mail, Phone, MessageCircle, Book, Users, Shield, CreditCard, Settings, HelpCircle, FileText, Star, Clock, ArrowRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import helpCenterHero from "@/assets/help-center-hero.jpg";
@@ -14,6 +15,104 @@ import articleAccountSecurity from "@/assets/article-account-security.jpg";
 
 const HelpCenter = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [headerFooterLoading, setHeaderFooterLoading] = useState(false);
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'H' || event.key === 'h') {
+        const newLoading = !headerFooterLoading;
+        setHeaderFooterLoading(newLoading);
+        
+        // Dispatch custom event to Layout component
+        window.dispatchEvent(new CustomEvent('toggleHeaderFooterLoading', {
+          detail: { loading: newLoading }
+        }));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [headerFooterLoading]);
+
+  const HelpCenterSkeleton = () => (
+    <div className="min-h-screen bg-background">
+      {/* Hero Skeleton */}
+      <div className="py-24 px-6 bg-gradient-to-br from-primary/45 via-primary/35 to-primary/30">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          <Skeleton className="h-6 w-28 mx-auto bg-primary-foreground/20" />
+          <Skeleton className="h-16 w-[400px] mx-auto bg-primary-foreground/15" />
+          <Skeleton className="h-6 w-[500px] mx-auto bg-primary-foreground/10" />
+          <Skeleton className="h-16 w-full max-w-2xl mx-auto bg-background/20 rounded-2xl" />
+          <div className="flex gap-4 justify-center">
+            <Skeleton className="h-10 w-32 bg-primary-foreground/20" />
+            <Skeleton className="h-10 w-32 bg-primary-foreground/20" />
+            <Skeleton className="h-10 w-32 bg-primary-foreground/20" />
+          </div>
+        </div>
+      </div>
+      
+      {/* Help Topics Skeleton */}
+      <div className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <Skeleton className="h-6 w-32 mx-auto mb-6 bg-primary/30" />
+            <Skeleton className="h-12 w-64 mx-auto mb-6 bg-muted/60" />
+            <Skeleton className="h-6 w-96 mx-auto bg-muted/40" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <Card key={i} className="p-6">
+                <div className="flex items-start gap-6">
+                  <Skeleton className="w-16 h-16 bg-primary/30 rounded-2xl" />
+                  <div className="flex-1 space-y-3">
+                    <div className="flex justify-between items-center">
+                      <Skeleton className="h-6 w-32 bg-muted/60" />
+                      <Skeleton className="h-5 w-5 bg-muted/40" />
+                    </div>
+                    <Skeleton className="h-5 w-20 bg-primary/30" />
+                  </div>
+                </div>
+                <Skeleton className="h-12 w-full mt-4 bg-muted/40" />
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Popular Articles Skeleton */}
+      <div className="py-24 px-6 bg-gradient-to-br from-background via-accent/5 to-background">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <Skeleton className="h-6 w-32 mx-auto mb-6 bg-primary/30" />
+            <Skeleton className="h-12 w-48 mx-auto mb-6 bg-muted/60" />
+            <Skeleton className="h-6 w-80 mx-auto bg-muted/40" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+            {[1, 2, 3, 4].map((i) => (
+              <Card key={i} className="overflow-hidden">
+                <Skeleton className="h-56 w-full bg-primary/20" />
+                <CardContent className="p-8 space-y-4">
+                  <Skeleton className="h-8 w-3/4 bg-muted/60" />
+                  <Skeleton className="h-16 w-full bg-muted/40" />
+                  <div className="flex justify-between items-center pt-4">
+                    <div className="flex gap-6">
+                      <Skeleton className="h-4 w-16 bg-muted/40" />
+                      <Skeleton className="h-4 w-20 bg-muted/40" />
+                    </div>
+                    <Skeleton className="h-6 w-6 bg-primary/30" />
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  if (headerFooterLoading) {
+    return <HelpCenterSkeleton />;
+  }
 
   const helpCategories = [
     {

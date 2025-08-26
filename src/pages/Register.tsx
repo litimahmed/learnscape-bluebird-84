@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -90,6 +91,7 @@ const Register = () => {
   const [ninCheckLoading, setNinCheckLoading] = useState(false);
   const [phoneExists, setPhoneExists] = useState<boolean | null>(null);
   const [phoneCheckLoading, setPhoneCheckLoading] = useState(false);
+  const [headerFooterLoading, setHeaderFooterLoading] = useState(false);
   const maxSteps = userType === 'student' ? 5 : 6;
 
   // Load theme and uploaded files on component mount
@@ -110,7 +112,23 @@ const Register = () => {
         console.error('Failed to parse saved files:', error);
       }
     }
-  }, []);
+
+    // H key event listener for skeleton loading
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'H' || event.key === 'h') {
+        const newLoading = !headerFooterLoading;
+        setHeaderFooterLoading(newLoading);
+        
+        // Dispatch custom event to Layout component
+        window.dispatchEvent(new CustomEvent('toggleHeaderFooterLoading', {
+          detail: { loading: newLoading }
+        }));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [headerFooterLoading]);
 
   const toggleTheme = () => {
     const newIsDark = !isDark;
@@ -870,6 +888,83 @@ const Register = () => {
         return null;
     }
   };
+
+  const RegisterSkeleton = () => (
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10 flex items-center justify-center p-4">
+      <div className="w-full max-w-6xl mx-auto">
+        <div className="bg-card rounded-2xl shadow-2xl overflow-hidden border">
+          <div className="flex h-[700px]">
+            {/* Left Column Skeleton */}
+            <div className="hidden lg:block lg:w-1/2 bg-gradient-to-br from-primary/20 to-primary/5 p-8">
+              <div className="h-full flex flex-col justify-between">
+                <div className="space-y-4">
+                  <Skeleton className="h-8 w-48 bg-primary/30" />
+                  <Skeleton className="h-4 w-64 bg-primary/20" />
+                </div>
+                <div className="space-y-4">
+                  <Skeleton className="h-14 w-full bg-background/20" />
+                  <Skeleton className="h-14 w-full bg-background/20" />
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column Skeleton */}
+            <div className="w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-12">
+              <div className="w-full max-w-md space-y-6">
+                {/* Header Skeleton */}
+                <div className="text-center space-y-2">
+                  <Skeleton className="h-8 w-48 mx-auto bg-muted/60" />
+                  <Skeleton className="h-4 w-64 mx-auto bg-muted/40" />
+                </div>
+
+                {/* Tabs Skeleton */}
+                <div className="grid grid-cols-2 gap-2 p-1 bg-muted rounded-md">
+                  <Skeleton className="h-10 bg-primary/30" />
+                  <Skeleton className="h-10 bg-muted/60" />
+                </div>
+
+                {/* Progress Skeleton */}
+                <div className="flex items-center justify-between">
+                  <Skeleton className="h-4 w-20 bg-muted/60" />
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <Skeleton key={i} className="h-2 w-6 bg-primary/30" />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Form Fields Skeleton */}
+                <div className="space-y-5">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="space-y-2">
+                      <Skeleton className="h-4 w-24 bg-muted/60" />
+                      <Skeleton className="h-10 w-full bg-muted/40" />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Buttons Skeleton */}
+                <div className="flex justify-between pt-4">
+                  <Skeleton className="h-10 w-24 bg-muted/40" />
+                  <Skeleton className="h-10 w-32 bg-primary/30" />
+                </div>
+
+                {/* Footer Skeleton */}
+                <div className="text-center">
+                  <Skeleton className="h-4 w-40 mx-auto bg-muted/40" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  // Show skeleton if header/footer loading is active
+  if (headerFooterLoading) {
+    return <RegisterSkeleton />;
+  }
 
   // Show OTP verification screen if needed
   if (showOtpVerification) {

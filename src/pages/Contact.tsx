@@ -1,9 +1,11 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Select,
   SelectContent,
@@ -25,6 +27,88 @@ import {
 } from "lucide-react";
 
 const Contact = () => {
+  const [headerFooterLoading, setHeaderFooterLoading] = useState(false);
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'H' || event.key === 'h') {
+        const newLoading = !headerFooterLoading;
+        setHeaderFooterLoading(newLoading);
+        
+        // Dispatch custom event to Layout component
+        window.dispatchEvent(new CustomEvent('toggleHeaderFooterLoading', {
+          detail: { loading: newLoading }
+        }));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [headerFooterLoading]);
+
+  const ContactSkeleton = () => (
+    <div className="bg-background">
+      {/* Hero Skeleton */}
+      <div className="py-20 px-6 bg-gradient-to-br from-primary/10 via-primary/5 to-background">
+        <div className="max-w-3xl mx-auto text-center space-y-6">
+          <Skeleton className="h-6 w-28 mx-auto bg-primary/30" />
+          <Skeleton className="h-16 w-[400px] mx-auto bg-gradient-to-r from-muted/70 to-muted/50" />
+          <Skeleton className="h-6 w-[500px] mx-auto bg-muted/50" />
+        </div>
+      </div>
+      
+      {/* Contact Methods Skeleton */}
+      <div className="py-16 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <Skeleton className="h-8 w-48 mx-auto mb-4 bg-muted/60" />
+            <Skeleton className="h-4 w-64 mx-auto bg-muted/40" />
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[1, 2, 3].map((i) => (
+              <Card key={i} className="p-6 text-center">
+                <Skeleton className="w-12 h-12 mx-auto mb-4 bg-primary/30" />
+                <Skeleton className="h-6 w-24 mx-auto mb-2 bg-muted/60" />
+                <Skeleton className="h-4 w-32 mx-auto mb-4 bg-muted/40" />
+                <Skeleton className="h-4 w-28 mx-auto bg-primary/30" />
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Contact Form Skeleton */}
+      <div className="py-16 px-6 bg-secondary/30">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <Skeleton className="h-6 w-32 mx-auto mb-4 bg-primary/30" />
+            <Skeleton className="h-8 w-64 mx-auto mb-4 bg-muted/60" />
+            <Skeleton className="h-4 w-96 mx-auto bg-muted/40" />
+          </div>
+          <Card className="p-8">
+            <div className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-20 bg-muted/60" />
+                  <Skeleton className="h-10 w-full bg-muted/40" />
+                </div>
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-20 bg-muted/60" />
+                  <Skeleton className="h-10 w-full bg-muted/40" />
+                </div>
+              </div>
+              <Skeleton className="h-32 w-full bg-muted/40" />
+              <Skeleton className="h-12 w-full bg-primary/30" />
+            </div>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+
+  if (headerFooterLoading) {
+    return <ContactSkeleton />;
+  }
   const contactMethods = [
     {
       icon: <Mail className="w-6 h-6" />,
