@@ -1,10 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { 
-  Trophy, Award, Star, Target, Zap, BookOpen, 
-  Users, MessageSquare, Clock, CheckCircle, Flame, Crown
-} from "lucide-react";
+import { Award, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface BadgeGalleryProps {
@@ -17,92 +14,66 @@ export function BadgeGallery({ showAll = false }: BadgeGalleryProps) {
       id: 1,
       name: "First Course",
       description: "Complete your first course",
-      icon: BookOpen,
+      image: "/lovable-uploads/e2c99c4f-bee4-439a-89e3-3638d630f898.png",
       earned: true,
       earnedDate: "2024-01-15",
-      rarity: "common",
-      color: "text-green-500",
-      bgColor: "bg-green-500/10"
+      rarity: "common"
     },
     {
       id: 2,
       name: "Speed Demon",
       description: "Complete a course in under 7 days",
-      icon: Zap,
+      image: "/lovable-uploads/3354630d-3810-4433-8499-88e92ea2f937.png",
       earned: true,
       earnedDate: "2024-02-03",
-      rarity: "rare",
-      color: "text-yellow-500",
-      bgColor: "bg-yellow-500/10"
+      rarity: "rare"
     },
     {
       id: 3,
       name: "Community Helper",
       description: "Help 25 fellow students in discussions",
-      icon: Users,
+      image: "/lovable-uploads/4995e3a2-aecc-4084-85eb-c8396be50dbc.png",
       earned: true,
       earnedDate: "2024-02-20",
-      rarity: "uncommon",
-      color: "text-blue-500",
-      bgColor: "bg-blue-500/10"
+      rarity: "uncommon"
     },
     {
       id: 4,
       name: "Perfect Score",
       description: "Get 100% on 5 consecutive quizzes",
-      icon: Target,
+      image: "/lovable-uploads/fa7569ef-8a35-4410-b641-3b86010dea13.png",
       earned: false,
       progress: 3,
       total: 5,
-      rarity: "epic",
-      color: "text-purple-500",
-      bgColor: "bg-purple-500/10"
+      rarity: "epic"
     },
     {
       id: 5,
       name: "Night Owl",
       description: "Study for 3 hours after 10 PM",
-      icon: Clock,
+      image: "/lovable-uploads/260dc261-d9c0-4332-a3e4-351393d85a75.png",
       earned: true,
       earnedDate: "2024-03-01",
-      rarity: "uncommon",
-      color: "text-indigo-500",
-      bgColor: "bg-indigo-500/10"
+      rarity: "uncommon"
     },
     {
       id: 6,
       name: "Streak Master",
       description: "Maintain a 30-day learning streak",
-      icon: Flame,
+      image: "/lovable-uploads/6d1b0d65-4163-405d-8cc6-ff0d00f74c2f.png",
       earned: false,
       progress: 12,
       total: 30,
-      rarity: "legendary",
-      color: "text-orange-500",
-      bgColor: "bg-orange-500/10"
+      rarity: "legendary"
     },
     {
       id: 7,
       name: "Course Completionist",
       description: "Complete 10 courses",
-      icon: Crown,
+      image: "/lovable-uploads/a952f826-2ff7-432b-af9d-1b3fc1385c45.png",
       earned: true,
       earnedDate: "2024-03-10",
-      rarity: "epic",
-      color: "text-amber-500",
-      bgColor: "bg-amber-500/10"
-    },
-    {
-      id: 8,
-      name: "Discussion Starter",
-      description: "Start 10 meaningful discussions",
-      icon: MessageSquare,
-      earned: false,
-      progress: 6,
-      total: 10,
-      rarity: "rare",
-      color: "text-teal-500",
-      bgColor: "bg-teal-500/10"
+      rarity: "epic"
     }
   ];
 
@@ -146,15 +117,16 @@ export function BadgeGallery({ showAll = false }: BadgeGalleryProps) {
                   : "border-dashed border-muted-foreground/30 bg-muted/30"
               )}
             >
-              {/* Badge Icon */}
-              <div className={cn(
-                "w-12 h-12 mx-auto mb-3 rounded-full flex items-center justify-center transition-transform group-hover:scale-110",
-                badge.earned ? badge.bgColor : "bg-muted"
-              )}>
-                <badge.icon className={cn(
-                  "w-6 h-6",
-                  badge.earned ? badge.color : "text-muted-foreground"
-                )} />
+              {/* Badge Image */}
+              <div className="w-16 h-16 mx-auto mb-3 transition-transform group-hover:scale-110">
+                <img 
+                  src={badge.image} 
+                  alt={badge.name}
+                  className={cn(
+                    "w-full h-full object-contain transition-opacity",
+                    badge.earned ? "opacity-100" : "opacity-50 grayscale"
+                  )}
+                />
               </div>
 
               {/* Badge Info */}
