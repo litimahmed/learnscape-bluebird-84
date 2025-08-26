@@ -12,7 +12,7 @@ interface LayoutProps {
 
 const Layout = ({ children, headerLoading, footerLoading }: LayoutProps) => {
   const [isDark, setIsDark] = useState(false);
-  const [headerFooterLoading, setHeaderFooterLoading] = useState(false);
+  const [headerFooterLoading, setHeaderFooterLoading] = useState(true);
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
