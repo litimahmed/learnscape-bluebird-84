@@ -5,58 +5,42 @@ interface AmbientSound {
   name: string;
   icon: string;
   frequency: number; // Base frequency for generated sound
-  type: 'white-noise' | 'brown-noise' | 'rain' | 'forest' | 'cafe' | 'ocean';
+  type: 'white-noise' | 'brown-noise' | 'rain';
   description: string;
 }
 
 const AMBIENT_SOUNDS: AmbientSound[] = [
   {
-    id: 'white-noise',
-    name: 'White Noise',
-    icon: '🌊',
+    id: 'warm-noise',
+    name: 'Warm Static',
+    icon: '◈',
+    frequency: 120,
+    type: 'brown-noise',
+    description: 'Gentle warm static like Figma'
+  },
+  {
+    id: 'subtle-rain',
+    name: 'Light Rain',
+    icon: '◦',
+    frequency: 180,
+    type: 'rain',
+    description: 'Minimal rainfall ambience'
+  },
+  {
+    id: 'deep-hum',
+    name: 'Deep Focus',
+    icon: '●',
+    frequency: 60,
+    type: 'brown-noise',
+    description: 'Low frequency hum for deep work'
+  },
+  {
+    id: 'soft-wind',
+    name: 'Soft Wind',
+    icon: '◐',
     frequency: 200,
     type: 'white-noise',
-    description: 'Classic white noise for concentration'
-  },
-  {
-    id: 'brown-noise',
-    name: 'Brown Noise',
-    icon: '🎵',
-    frequency: 100,
-    type: 'brown-noise',
-    description: 'Deeper, warmer noise for relaxation'
-  },
-  {
-    id: 'rain',
-    name: 'Rain Sounds',
-    icon: '🌧️',
-    frequency: 150,
-    type: 'rain',
-    description: 'Gentle rainfall for focus'
-  },
-  {
-    id: 'forest',
-    name: 'Forest Ambience',
-    icon: '🌲',
-    frequency: 300,
-    type: 'forest',
-    description: 'Nature sounds with birds and wind'
-  },
-  {
-    id: 'cafe',
-    name: 'Coffee Shop',
-    icon: '☕',
-    frequency: 250,
-    type: 'cafe',
-    description: 'Subtle chatter and coffee shop atmosphere'
-  },
-  {
-    id: 'ocean',
-    name: 'Ocean Waves',
-    icon: '🌊',
-    frequency: 80,
-    type: 'ocean',
-    description: 'Calming ocean waves'
+    description: 'Gentle air movement'
   }
 ];
 
@@ -119,7 +103,7 @@ export const useAmbientSounds = () => {
       switch (sound.type) {
         case 'white-noise':
           for (let i = 0; i < bufferSize; i++) {
-            channelData[i] = (Math.random() * 2 - 1) * 0.3;
+            channelData[i] = (Math.random() * 2 - 1) * 0.15;
           }
           break;
           
@@ -127,52 +111,23 @@ export const useAmbientSounds = () => {
           let lastOut = 0;
           for (let i = 0; i < bufferSize; i++) {
             const white = Math.random() * 2 - 1;
-            const brown = (lastOut + (0.02 * white)) / 1.02;
+            const brown = (lastOut + (0.015 * white)) / 1.015;
             lastOut = brown;
-            channelData[i] = brown * 3; // Amplify brown noise
+            channelData[i] = brown * 1.5;
           }
           break;
           
         case 'rain':
           for (let i = 0; i < bufferSize; i++) {
-            // Simulate rain with filtered noise
-            const noise = (Math.random() * 2 - 1) * 0.2;
-            const filtered = noise * Math.sin(i * 0.01);
+            const noise = (Math.random() * 2 - 1) * 0.08;
+            const filtered = noise * (1 + Math.sin(i * 0.003) * 0.3);
             channelData[i] = filtered;
           }
           break;
           
-        case 'forest':
-          for (let i = 0; i < bufferSize; i++) {
-            // Mix of low frequency noise with occasional higher frequencies
-            const lowNoise = (Math.random() * 2 - 1) * 0.1;
-            const birdChirp = Math.random() < 0.001 ? Math.sin(i * 0.05) * 0.3 : 0;
-            channelData[i] = lowNoise + birdChirp;
-          }
-          break;
-          
-        case 'cafe':
-          for (let i = 0; i < bufferSize; i++) {
-            // Low murmur with occasional peaks
-            const murmur = (Math.random() * 2 - 1) * 0.05;
-            const chatter = Math.random() < 0.002 ? Math.sin(i * 0.02) * 0.2 : 0;
-            channelData[i] = murmur + chatter;
-          }
-          break;
-          
-        case 'ocean':
-          for (let i = 0; i < bufferSize; i++) {
-            // Wave-like pattern with low frequency
-            const wave = Math.sin(i * 0.005) * 0.3;
-            const noise = (Math.random() * 2 - 1) * 0.1;
-            channelData[i] = wave + noise;
-          }
-          break;
-          
         default:
-          // Default to white noise
           for (let i = 0; i < bufferSize; i++) {
-            channelData[i] = (Math.random() * 2 - 1) * 0.3;
+            channelData[i] = (Math.random() * 2 - 1) * 0.15;
           }
       }
     }
