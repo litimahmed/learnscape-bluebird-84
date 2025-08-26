@@ -1,134 +1,143 @@
 import { useState } from "react";
-import { ScheduleHeader } from "./ScheduleHeader";
-import { LeftFilters } from "./LeftFilters";
-import { AgendaView } from "./AgendaView";
-import { MonthView } from "./MonthView";
-import { WeekView } from "./WeekView";
-import { DayView } from "./DayView";
-import { RightRail } from "./RightRail";
-import { EventDialog } from "./EventDialog";
-import { ExportDrawer } from "./ExportDrawer";
+import { format, addDays, subDays, isSameDay } from "date-fns";
+import { ChevronLeft, ChevronRight, Plus, Calendar as CalendarIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { mockEvents } from "./mockData";
-
-export type ViewType = "month" | "week" | "day" | "agenda";
-
-export interface ScheduleFilters {
-  courses: string[];
-  types: string[];
-  instructors: string[];
-  conflictsOnly: boolean;
-}
+import { cn } from "@/lib/utils";
 
 export function SchedulePage() {
-  const [currentView, setCurrentView] = useState<ViewType>("week");
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [filters, setFilters] = useState<ScheduleFilters>({
-    courses: [],
-    types: [],
-    instructors: [],
-    conflictsOnly: false
-  });
-  const [isEventDialogOpen, setIsEventDialogOpen] = useState(false);
-  const [isExportDrawerOpen, setIsExportDrawerOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
 
-  const filteredEvents = mockEvents.filter(event => {
-    if (filters.courses.length > 0 && !filters.courses.includes(event.courseId)) return false;
-    if (filters.types.length > 0 && !filters.types.includes(event.type)) return false;
-    if (filters.instructors.length > 0 && !filters.instructors.includes(event.instructorId)) return false;
-    if (filters.conflictsOnly && !event.hasConflict) return false;
-    return true;
-  });
+  const todayEvents = mockEvents.filter(event =>
+    isSameDay(event.startAt, currentDate)
+  );
 
-  const renderMainView = () => {
-    switch (currentView) {
-      case "month":
-        return (
-          <MonthView 
-            events={filteredEvents} 
-            currentDate={currentDate}
-            onDateChange={setCurrentDate}
-            onEventClick={setSelectedEvent}
-          />
-        );
-      case "week":
-        return (
-          <WeekView 
-            events={filteredEvents} 
-            currentDate={currentDate}
-            onEventClick={setSelectedEvent}
-          />
-        );
-      case "day":
-        return (
-          <DayView 
-            events={filteredEvents} 
-            currentDate={currentDate}
-            onEventClick={setSelectedEvent}
-          />
-        );
-      case "agenda":
-        return (
-          <AgendaView 
-            events={filteredEvents} 
-            currentDate={currentDate}
-            onEventClick={setSelectedEvent}
-          />
-        );
-      default:
-        return null;
-    }
+  const navigateDate = (direction: "prev" | "next") => {
+    const newDate = direction === "next" ? addDays(currentDate, 1) : subDays(currentDate, 1);
+    setCurrentDate(newDate);
+  };
+
+  const goToToday = () => {
+    setCurrentDate(new Date());
   };
 
   return (
-    <div className="h-full flex flex-col bg-background">
-      <ScheduleHeader
-        currentView={currentView}
-        onViewChange={setCurrentView}
-        currentDate={currentDate}
-        onDateChange={setCurrentDate}
-        onNewEvent={() => {
-          setSelectedEvent(null);
-          setIsEventDialogOpen(true);
-        }}
-        onExport={() => setIsExportDrawerOpen(true)}
-      />
-      
-      <div className="flex-1 flex overflow-hidden">
-        <LeftFilters 
-          filters={filters}
-          onFiltersChange={setFilters}
-          events={mockEvents}
-        />
-        
-        <main className="flex-1 overflow-auto modern-scrollbar">
-          {renderMainView()}
-        </main>
-        
-        <RightRail 
-          events={filteredEvents}
-          currentDate={currentDate}
-        />
+    <div className="h-full bg-background">
+      {/* Header */}
+      <div className="border-b border-border p-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => navigateDate("prev")}
+                className="h-8 w-8 p-0"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => navigateDate("next")}
+                className="h-8 w-8 p-0"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+              
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={goToToday}
+                className="text-sm font-medium"
+              >
+                Today
+              </Button>
+            </div>
+            
+            <h1 className="text-xl font-semibold">
+              {format(currentDate, "EEEE, MMMM d, yyyy")}
+            </h1>
+          </div>
+
+          <Button size="sm">
+            <Plus className="h-4 w-4 mr-2" />
+            New Event
+          </Button>
+        </div>
       </div>
 
-      <EventDialog
-        isOpen={isEventDialogOpen}
-        onClose={() => {
-          setIsEventDialogOpen(false);
-          setSelectedEvent(null);
-        }}
-        event={selectedEvent}
-        onSave={(eventData) => {
-          console.log("Save event:", eventData);
-          setIsEventDialogOpen(false);
-          setSelectedEvent(null);
-        }}
-      />
+      {/* Main Content */}
+      <div className="flex h-[calc(100%-80px)]">
+        {/* Calendar */}
+        <div className="w-80 border-r border-border p-4">
+          <Calendar
+            mode="single"
+            selected={currentDate}
+            onSelect={(date) => date && setCurrentDate(date)}
+            className="w-full pointer-events-auto"
+          />
+        </div>
 
-      <ExportDrawer
-        isOpen={isExportDrawerOpen}
-        onClose={() => setIsExportDrawerOpen(false)}
-      />
+        {/* Events List */}
+        <div className="flex-1 p-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>
+                {isSameDay(currentDate, new Date()) ? "Today's Events" : `Events for ${format(currentDate, "MMM d")}`}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {todayEvents.length === 0 ? (
+                <div className="text-center py-8 text-muted-foreground">
+                  <CalendarIcon className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                  <p>No events scheduled for this day</p>
+                </div>
+              ) : (
+                todayEvents.map((event) => (
+                  <div
+                    key={event.id}
+                    className="flex items-center justify-between p-4 border border-border rounded-lg hover:bg-accent/50 cursor-pointer transition-colors"
+                    onClick={() => setSelectedEvent(event)}
+                  >
+                    <div className="flex items-center space-x-4">
+                      <div className="text-sm text-muted-foreground">
+                        {format(event.startAt, "h:mm a")}
+                      </div>
+                      <div>
+                        <h3 className="font-medium">{event.title}</h3>
+                        <p className="text-sm text-muted-foreground">{event.description}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Badge
+                        className={cn(
+                          event.type === "live" && "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-300",
+                          event.type === "workshop" && "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300",
+                          event.type === "review" && "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300",
+                          event.type === "exam" && "bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-300",
+                          event.type === "deadline" && "bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-300"
+                        )}
+                      >
+                        {event.type}
+                      </Badge>
+                      {event.hasConflict && (
+                        <Badge variant="destructive">Conflict</Badge>
+                      )}
+                    </div>
+                  </div>
+                ))
+              )}
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }
