@@ -7,7 +7,7 @@ import { DashboardContent } from "@/components/dashboard/DashboardContent";
 import { ComingSoon } from "@/components/dashboard/ComingSoon";
 import { MyCourses } from "@/components/dashboard/courses/MyCourses";
 import { ModernLearningPath } from "@/components/dashboard/learning-path/ModernLearningPath";
-import { SchedulePage } from "@/components/dashboard/schedule/SchedulePage";
+import { StudyTimePage } from "@/components/dashboard/schedule/StudyTimePage";
 import { AchievementsPage } from "@/components/dashboard/achievements/AchievementsPage";
 import { AssignmentsPage } from "@/components/dashboard/assignments/AssignmentsPage";
 
@@ -42,7 +42,7 @@ const StudentDashboard = () => {
               <Route path="/" element={<div className="p-6"><DashboardContent /></div>} />
               <Route path="/courses" element={<div className="p-6"><MyCourses /></div>} />
               <Route path="/learning-path" element={<ModernLearningPath />} />
-              <Route path="/schedule" element={<SchedulePage />} />
+              <Route path="/schedule" element={<StudyTimePage />} />
               <Route path="/achievements" element={<div className="p-6"><AchievementsPage /></div>} />
               <Route path="/assignments" element={<div className="p-6"><AssignmentsPage /></div>} />
               <Route path="/study-time" element={<div className="p-6"><ComingSoon title="Study Time" description="Track your study hours and optimize your learning schedule." /></div>} />
