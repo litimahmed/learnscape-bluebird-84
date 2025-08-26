@@ -30,6 +30,48 @@ export function SchedulePage() {
     return mockEvents.filter(event => isSameDay(event.startAt, date));
   };
 
+  // Custom day content with event indicators
+  const renderDay = (day: Date) => {
+    const dayEvents = getEventsForDate(day);
+    const hasEvents = dayEvents.length > 0;
+    const isToday = isSameDay(day, new Date());
+    const isSelected = isSameDay(day, currentDate);
+
+    return (
+      <div className="relative w-full h-full flex flex-col items-center justify-center p-1">
+        <span className={cn(
+          "text-sm mb-1",
+          isToday && "font-bold",
+          isSelected && "text-primary-foreground"
+        )}>
+          {format(day, "d")}
+        </span>
+        
+        {hasEvents && (
+          <div className="flex flex-wrap justify-center gap-0.5 max-w-full">
+            {dayEvents.slice(0, 4).map((event, index) => (
+              <div
+                key={event.id}
+                className={cn(
+                  "w-1.5 h-1.5 rounded-full flex-shrink-0",
+                  event.type === "live" && "bg-red-500",
+                  event.type === "workshop" && "bg-blue-500",
+                  event.type === "review" && "bg-green-500",
+                  event.type === "exam" && "bg-purple-500",
+                  event.type === "deadline" && "bg-orange-500"
+                )}
+                title={`${event.title} - ${format(event.startAt, "h:mm a")}`}
+              />
+            ))}
+            {dayEvents.length > 4 && (
+              <div className="text-[10px] text-muted-foreground font-medium">+{dayEvents.length - 4}</div>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <div className="h-full bg-background">
       {/* Header */}
@@ -72,10 +114,25 @@ export function SchedulePage() {
 
           <div className="flex items-center space-x-2">
             <div className="flex items-center space-x-4 text-sm text-muted-foreground mr-4">
-              <span className="font-medium">Legend:</span>
               <div className="flex items-center space-x-1">
-                <div className="w-3 h-3 border-l-2 border-primary"></div>
-                <span>Has Events</span>
+                <div className="w-2 h-2 rounded-full bg-red-500"></div>
+                <span>Live</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                <span>Workshop</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                <span>Review</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+                <span>Exam</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                <span>Deadline</span>
               </div>
             </div>
             
@@ -90,7 +147,7 @@ export function SchedulePage() {
       {/* Main Content */}
       <div className="flex h-[calc(100%-80px)]">
         {/* Calendar */}
-        <div className="w-96 border-r border-border p-6">
+        <div className="w-[60%] border-r border-border p-6">
           <Calendar
             mode="single"
             selected={currentDate}
@@ -109,27 +166,22 @@ export function SchedulePage() {
               head_row: "flex w-full",
               head_cell: "text-muted-foreground rounded-md font-medium text-sm flex-1 p-2 text-center",
               row: "flex w-full",
-              cell: cn(
-                "flex-1 relative p-0.5 text-center focus-within:relative focus-within:z-20"
-              ),
-              day: cn(
-                "h-12 w-full p-1 font-normal aria-selected:bg-accent hover:bg-accent/50 focus:bg-accent focus:text-accent-foreground cursor-pointer rounded-md transition-all duration-200",
-                // Add visual indicator for days with events
-                "relative"
-              ),
+              cell: "flex-1 relative p-0 text-center focus-within:relative focus-within:z-20",
+              day: "h-16 w-full p-0 font-normal aria-selected:bg-accent hover:bg-accent/50 focus:bg-accent focus:text-accent-foreground cursor-pointer rounded-md transition-colors",
               day_range_end: "day-range-end",
               day_selected: "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
-              day_today: "bg-accent text-accent-foreground font-bold ring-2 ring-primary/20",
+              day_today: "bg-accent text-accent-foreground font-bold",
               day_outside: "text-muted-foreground opacity-50",
               day_disabled: "text-muted-foreground opacity-50",
               day_range_middle: "aria-selected:bg-accent aria-selected:text-accent-foreground",
               day_hidden: "invisible",
             }}
-            modifiers={{
-              hasEvents: (date) => getEventsForDate(date).length > 0,
-            }}
-            modifiersClassNames={{
-              hasEvents: "border-l-2 border-primary bg-primary/5 font-medium",
+            components={{
+              Day: ({ date, displayMonth }) => (
+                <div className="h-16 w-full">
+                  {renderDay(date)}
+                </div>
+              ),
             }}
           />
         </div>
@@ -153,7 +205,7 @@ export function SchedulePage() {
                 <div className="text-center py-12 text-muted-foreground">
                   <CalendarIcon className="h-16 w-16 mx-auto mb-4 opacity-50" />
                   <h3 className="text-lg font-medium mb-2">No events scheduled</h3>
-                  <p className="text-sm">Click on a day with a blue border to see events, or create a new one.</p>
+                  <p className="text-sm">Click on a day with colored dots to see events, or create a new one.</p>
                   <Button className="mt-4" size="sm">
                     <Plus className="h-4 w-4 mr-2" />
                     Add Event
