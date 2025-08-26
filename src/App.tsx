@@ -1,3 +1,4 @@
+import { Suspense, lazy } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -5,17 +6,20 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Layout from "./components/Layout";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Courses from "./pages/Courses";
-import Contact from "./pages/Contact";
-import Register from "./pages/Register";
-import HelpCenter from "./pages/HelpCenter";
-import Business from "./pages/Business";
-import Careers from "./pages/Careers";
-import StudentDashboard from "./pages/StudentDashboard";
-import PartnerApplication from "./pages/PartnerApplication";
-import NotFound from "./pages/NotFound";
+import PageLoader from "./components/ui/PageLoader";
+
+// Lazy-loaded page components
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const Courses = lazy(() => import("./pages/Courses"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Register = lazy(() => import("./pages/Register"));
+const HelpCenter = lazy(() => import("./pages/HelpCenter"));
+const Business = lazy(() => import("./pages/Business"));
+const Careers = lazy(() => import("./pages/Careers"));
+const StudentDashboard = lazy(() => import("./pages/StudentDashboard"));
+const PartnerApplication = lazy(() => import("./pages/PartnerApplication"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
@@ -26,26 +30,30 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/register" element={<Register />} />
-            <Route path="/dashboard/*" element={<StudentDashboard />} />
-            <Route path="/partner-application" element={<PartnerApplication />} />
-            <Route path="/*" element={
-              <Layout>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/courses" element={<Courses />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/help" element={<HelpCenter />} />
-                  <Route path="/business" element={<Business />} />
-                  <Route path="/careers" element={<Careers />} />
-                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Layout>
-            } />
-          </Routes>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/register" element={<Register />} />
+              <Route path="/dashboard/*" element={<StudentDashboard />} />
+              <Route path="/partner-application" element={<PartnerApplication />} />
+              <Route path="/*" element={
+                <Layout>
+                  <Suspense fallback={<PageLoader />}>
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      <Route path="/about" element={<About />} />
+                      <Route path="/courses" element={<Courses />} />
+                      <Route path="/contact" element={<Contact />} />
+                      <Route path="/help" element={<HelpCenter />} />
+                      <Route path="/business" element={<Business />} />
+                      <Route path="/careers" element={<Careers />} />
+                      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                  </Suspense>
+                </Layout>
+              } />
+            </Routes>
+          </Suspense>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
