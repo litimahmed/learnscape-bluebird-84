@@ -30,48 +30,6 @@ export function SchedulePage() {
     return mockEvents.filter(event => isSameDay(event.startAt, date));
   };
 
-  // Custom day content with event indicators
-  const renderDay = (day: Date) => {
-    const dayEvents = getEventsForDate(day);
-    const hasEvents = dayEvents.length > 0;
-    const isToday = isSameDay(day, new Date());
-    const isSelected = isSameDay(day, currentDate);
-
-    return (
-      <div className="relative w-full h-full flex flex-col items-center justify-center p-1">
-        <span className={cn(
-          "text-sm mb-1",
-          isToday && "font-bold",
-          isSelected && "text-primary-foreground"
-        )}>
-          {format(day, "d")}
-        </span>
-        
-        {hasEvents && (
-          <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex gap-0.5">
-            {dayEvents.slice(0, 3).map((event, index) => (
-              <div
-                key={event.id}
-                className={cn(
-                  "w-1 h-1 rounded-full opacity-60",
-                  event.type === "live" && "bg-red-400",
-                  event.type === "workshop" && "bg-blue-400", 
-                  event.type === "review" && "bg-green-400",
-                  event.type === "exam" && "bg-purple-400",
-                  event.type === "deadline" && "bg-orange-400"
-                )}
-                title={`${event.title} - ${format(event.startAt, "h:mm a")}`}
-              />
-            ))}
-            {dayEvents.length > 3 && (
-              <div className="w-1 h-1 rounded-full bg-muted-foreground opacity-40"></div>
-            )}
-          </div>
-        )}
-      </div>
-    );
-  };
-
   return (
     <div className="h-full bg-background">
       {/* Header */}
@@ -180,42 +138,87 @@ export function SchedulePage() {
               Day: ({ date, displayMonth, ...props }) => {
                 const dayEvents = getEventsForDate(date);
                 const hasEvents = dayEvents.length > 0;
+                const isToday = isSameDay(date, new Date());
+                const isSelected = isSameDay(date, currentDate);
+                
+                // Get primary event type for styling
+                const primaryEvent = dayEvents[0];
+                const eventTypeStyles = primaryEvent ? {
+                  live: "bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/30 dark:to-red-900/20 border-t-2 border-red-400",
+                  workshop: "bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/30 dark:to-blue-900/20 border-t-2 border-blue-400",
+                  review: "bg-gradient-to-br from-green-50 to-green-100/50 dark:from-green-950/30 dark:to-green-900/20 border-t-2 border-green-400",
+                  exam: "bg-gradient-to-br from-purple-50 to-purple-100/50 dark:from-purple-950/30 dark:to-purple-900/20 border-t-2 border-purple-400",
+                  deadline: "bg-gradient-to-br from-orange-50 to-orange-100/50 dark:from-orange-950/30 dark:to-orange-900/20 border-t-2 border-orange-400"
+                }[primaryEvent.type] : "";
                 
                 return (
                   <button
                     {...props}
                     className={cn(
-                      "h-16 w-full p-0 font-normal aria-selected:bg-accent hover:bg-accent/50 focus:bg-accent focus:text-accent-foreground cursor-pointer rounded-md transition-colors relative",
-                      isSameDay(date, currentDate) && "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
-                      isSameDay(date, new Date()) && "bg-accent text-accent-foreground font-bold"
+                      "h-16 w-full p-0 font-normal cursor-pointer rounded-lg transition-all duration-200 relative overflow-hidden group border border-transparent",
+                      hasEvents && eventTypeStyles,
+                      hasEvents && "hover:shadow-md hover:scale-[1.02] transform",
+                      !hasEvents && "hover:bg-accent/30",
+                      isSelected && !hasEvents && "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground",
+                      isSelected && hasEvents && "ring-2 ring-primary ring-offset-1",
+                      isToday && !isSelected && "bg-accent/60 font-bold"
                     )}
                     onClick={() => setCurrentDate(date)}
                   >
-                    <div className="relative w-full h-full flex flex-col items-center justify-center p-1">
-                      <span className="text-sm mb-1">
+                    <div className="relative w-full h-full flex flex-col items-center justify-center p-2">
+                      <span className={cn(
+                        "text-sm font-medium mb-1 relative z-10",
+                        isSelected && !hasEvents && "text-primary-foreground",
+                        isToday && "font-bold"
+                      )}>
                         {format(date, "d")}
                       </span>
                       
                       {hasEvents && (
-                        <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex gap-0.5">
-                          {dayEvents.slice(0, 3).map((event, index) => (
-                            <div
-                              key={event.id}
-                              className={cn(
-                                "w-1 h-1 rounded-full opacity-60",
-                                event.type === "live" && "bg-red-400",
-                                event.type === "workshop" && "bg-blue-400", 
-                                event.type === "review" && "bg-green-400",
-                                event.type === "exam" && "bg-purple-400",
-                                event.type === "deadline" && "bg-orange-400"
-                              )}
-                              title={`${event.title} - ${format(event.startAt, "h:mm a")}`}
-                            />
-                          ))}
-                          {dayEvents.length > 3 && (
-                            <div className="w-1 h-1 rounded-full bg-muted-foreground opacity-40"></div>
+                        <>
+                          {/* Event count badge */}
+                          <div className="absolute top-1 right-1 z-10">
+                            <div className={cn(
+                              "w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shadow-sm",
+                              primaryEvent.type === "live" && "bg-red-500 text-white",
+                              primaryEvent.type === "workshop" && "bg-blue-500 text-white",
+                              primaryEvent.type === "review" && "bg-green-500 text-white",
+                              primaryEvent.type === "exam" && "bg-purple-500 text-white",
+                              primaryEvent.type === "deadline" && "bg-orange-500 text-white"
+                            )}>
+                              {dayEvents.length}
+                            </div>
+                          </div>
+                          
+                          {/* Multi-event indicator bars */}
+                          {dayEvents.length > 1 && (
+                            <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex gap-0.5">
+                              {dayEvents.slice(1, 4).map((event, index) => (
+                                <div
+                                  key={event.id}
+                                  className={cn(
+                                    "w-1 h-2 rounded-full opacity-70",
+                                    event.type === "live" && "bg-red-400",
+                                    event.type === "workshop" && "bg-blue-400",
+                                    event.type === "review" && "bg-green-400",
+                                    event.type === "exam" && "bg-purple-400",
+                                    event.type === "deadline" && "bg-orange-400"
+                                  )}
+                                />
+                              ))}
+                            </div>
                           )}
-                        </div>
+                          
+                          {/* Subtle glow effect on hover */}
+                          <div className={cn(
+                            "absolute inset-0 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity duration-200",
+                            primaryEvent.type === "live" && "bg-red-400",
+                            primaryEvent.type === "workshop" && "bg-blue-400",
+                            primaryEvent.type === "review" && "bg-green-400",
+                            primaryEvent.type === "exam" && "bg-purple-400",
+                            primaryEvent.type === "deadline" && "bg-orange-400"
+                          )} />
+                        </>
                       )}
                     </div>
                   </button>
