@@ -1,4 +1,20 @@
+import { useEffect, useState } from "react";
+
 const PageLoader = () => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  // Ensure loader shows for at least 1.5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!isVisible) {
+    return null;
+  }
   return (
     <div className="min-h-screen bg-background flex items-center justify-center relative overflow-hidden">
       {/* Background Animation */}
