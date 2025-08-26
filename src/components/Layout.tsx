@@ -14,6 +14,15 @@ const Layout = ({ children, headerLoading, footerLoading }: LayoutProps) => {
   const [isDark, setIsDark] = useState(false);
   const [headerFooterLoading, setHeaderFooterLoading] = useState(true);
 
+  // Auto-disable loading after initial page load
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setHeaderFooterLoading(false);
+    }, 100); // Small delay to ensure page components have mounted
+
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     const saved = localStorage.getItem("theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
