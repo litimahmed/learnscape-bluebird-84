@@ -1,8 +1,11 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Search, Grid, List, Calendar, Plus, Filter } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { SubmitWorkModal } from "./SubmitWorkModal";
 
 interface AssignmentsHeaderProps {
   viewMode: "list" | "grid";
@@ -17,6 +20,9 @@ export function AssignmentsHeader({
   searchQuery, 
   onSearchChange 
 }: AssignmentsHeaderProps) {
+  const navigate = useNavigate();
+  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
+  
   const stats = {
     total: 24,
     upcoming: 8,
@@ -38,11 +44,19 @@ export function AssignmentsHeader({
         </div>
         
         <div className="flex items-center gap-3">
-          <Button variant="outline" size="sm">
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => navigate('/dashboard/schedule')}
+          >
             <Calendar className="w-4 h-4 mr-2" />
             Calendar View
           </Button>
-          <Button size="sm" className="bg-primary hover:bg-primary/90">
+          <Button 
+            size="sm" 
+            className="bg-primary hover:bg-primary/90"
+            onClick={() => setIsSubmitModalOpen(true)}
+          >
             <Plus className="w-4 h-4 mr-2" />
             Submit Work
           </Button>
@@ -111,6 +125,11 @@ export function AssignmentsHeader({
           </Button>
         </div>
       </div>
+
+      <SubmitWorkModal 
+        isOpen={isSubmitModalOpen} 
+        onClose={() => setIsSubmitModalOpen(false)} 
+      />
     </div>
   );
 }
