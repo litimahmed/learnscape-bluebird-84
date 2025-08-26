@@ -7,6 +7,7 @@ import { DashboardContent } from "@/components/dashboard/DashboardContent";
 import { ComingSoon } from "@/components/dashboard/ComingSoon";
 import { MyCourses } from "@/components/dashboard/courses/MyCourses";
 import { ModernLearningPath } from "@/components/dashboard/learning-path/ModernLearningPath";
+import { ScheduleView } from "@/components/dashboard/schedule/ScheduleView";
 
 const StudentDashboard = () => {
   const [isDark, setIsDark] = useState(false);
@@ -39,7 +40,7 @@ const StudentDashboard = () => {
               <Route path="/" element={<div className="p-6"><DashboardContent /></div>} />
               <Route path="/courses" element={<div className="p-6"><MyCourses /></div>} />
               <Route path="/learning-path" element={<ModernLearningPath />} />
-              <Route path="/schedule" element={<div className="p-6"><ComingSoon title="Schedule" description="Manage your class schedule, upcoming sessions, and important deadlines." /></div>} />
+              <Route path="/schedule" element={<div className="p-6"><ScheduleView /></div>} />
               <Route path="/achievements" element={<div className="p-6"><ComingSoon title="Achievements" description="Track your accomplishments, certificates, and learning milestones." /></div>} />
               <Route path="/progress" element={<div className="p-6"><ComingSoon title="Progress" description="Monitor your learning progress with detailed analytics and insights." /></div>} />
               <Route path="/assignments" element={<div className="p-6"><ComingSoon title="Assignments" description="View and submit your assignments, track deadlines and grades." /></div>} />
