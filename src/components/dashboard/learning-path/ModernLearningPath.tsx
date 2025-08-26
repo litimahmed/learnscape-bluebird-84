@@ -18,7 +18,19 @@ import {
   Users,
   Trophy,
   Zap,
-  ArrowRight
+  ArrowRight,
+  ExternalLink,
+  FileText,
+  Video,
+  MessageSquare,
+  Download,
+  Share2,
+  Heart,
+  Eye,
+  BookmarkPlus,
+  Lightbulb,
+  GitBranch,
+  Globe
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -27,7 +39,29 @@ import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+interface ExternalResource {
+  id: string;
+  title: string;
+  description: string;
+  type: 'documentation' | 'tutorial' | 'practice' | 'article' | 'video' | 'tool';
+  url: string;
+  provider: string;
+  rating: number;
+  duration?: string;
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+}
+
+interface StudyNote {
+  id: string;
+  content: string;
+  timestamp: string;
+  tags: string[];
+}
 
 interface LearningModule {
   id: string;
@@ -45,6 +79,11 @@ interface LearningModule {
   };
   dueDate?: string;
   points: number;
+  externalResources: ExternalResource[];
+  studyNotes?: StudyNote[];
+  bookmarked?: boolean;
+  completedAt?: string;
+  timeSpent?: string;
 }
 
 interface LearningPath {
@@ -87,7 +126,33 @@ const sampleLearningPaths: LearningPath[] = [
         type: "video",
         skills: ["HTML", "CSS"],
         instructor: { name: "Sarah Chen", avatar: "/api/placeholder/32/32" },
-        points: 100
+        points: 100,
+        externalResources: [
+          {
+            id: "res-1",
+            title: "MDN HTML Guide",
+            description: "Complete HTML reference and tutorials",
+            type: "documentation",
+            url: "https://developer.mozilla.org/en-US/docs/Web/HTML",
+            provider: "MDN",
+            rating: 4.9,
+            difficulty: "beginner"
+          },
+          {
+            id: "res-2", 
+            title: "CSS Tricks Complete Guide",
+            description: "Learn CSS Grid and Flexbox",
+            type: "tutorial",
+            url: "https://css-tricks.com/snippets/css/complete-guide-grid/",
+            provider: "CSS Tricks",
+            rating: 4.8,
+            duration: "2 hours",
+            difficulty: "intermediate"
+          }
+        ],
+        bookmarked: true,
+        completedAt: "2024-01-05",
+        timeSpent: "4.5 hours"
       },
       {
         id: "mod-2", 
@@ -100,7 +165,32 @@ const sampleLearningPaths: LearningPath[] = [
         type: "video",
         skills: ["JavaScript", "ES6"],
         instructor: { name: "Alex Rodriguez", avatar: "/api/placeholder/32/32" },
-        points: 150
+        points: 150,
+        externalResources: [
+          {
+            id: "res-3",
+            title: "JavaScript.info",
+            description: "Modern JavaScript tutorial",
+            type: "tutorial",
+            url: "https://javascript.info/",
+            provider: "JavaScript.info",
+            rating: 4.9,
+            difficulty: "intermediate"
+          },
+          {
+            id: "res-4",
+            title: "ES6 Interactive Exercises",
+            description: "Practice ES6 features hands-on",
+            type: "practice",
+            url: "https://es6katas.org/",
+            provider: "ES6 Katas",
+            rating: 4.7,
+            duration: "3 hours",
+            difficulty: "intermediate"
+          }
+        ],
+        completedAt: "2024-01-10",
+        timeSpent: "8.2 hours"
       },
       {
         id: "mod-3",
@@ -114,7 +204,49 @@ const sampleLearningPaths: LearningPath[] = [
         skills: ["React", "JSX", "State Management"],
         instructor: { name: "Emma Wilson", avatar: "/api/placeholder/32/32" },
         dueDate: "2024-01-15",
-        points: 200
+        points: 200,
+        externalResources: [
+          {
+            id: "res-5",
+            title: "React Official Documentation",
+            description: "Official React docs and guides",
+            type: "documentation",
+            url: "https://react.dev/",
+            provider: "React Team",
+            rating: 4.9,
+            difficulty: "intermediate"
+          },
+          {
+            id: "res-6",
+            title: "React DevTools",
+            description: "Browser extension for debugging React",
+            type: "tool",
+            url: "https://react.dev/learn/react-developer-tools",
+            provider: "React Team",
+            rating: 4.8,
+            difficulty: "intermediate"
+          },
+          {
+            id: "res-7",
+            title: "Interactive React Tutorial",
+            description: "Build a tic-tac-toe game",
+            type: "practice",
+            url: "https://react.dev/learn/tutorial-tic-tac-toe",
+            provider: "React Team",
+            rating: 4.7,
+            duration: "2 hours",
+            difficulty: "beginner"
+          }
+        ],
+        bookmarked: true,
+        studyNotes: [
+          {
+            id: "note-1",
+            content: "Remember: useState returns an array with current state and setter function",
+            timestamp: "2024-01-12",
+            tags: ["hooks", "state"]
+          }
+        ]
       },
       {
         id: "mod-4",
@@ -127,7 +259,19 @@ const sampleLearningPaths: LearningPath[] = [
         type: "video",
         skills: ["React", "Context API", "Custom Hooks"],
         instructor: { name: "David Kim", avatar: "/api/placeholder/32/32" },
-        points: 250
+        points: 250,
+        externalResources: [
+          {
+            id: "res-8",
+            title: "Advanced React Patterns",
+            description: "Learn advanced patterns and best practices",
+            type: "article",
+            url: "https://kentcdodds.com/blog/advanced-react-patterns",
+            provider: "Kent C. Dodds",
+            rating: 4.8,
+            difficulty: "advanced"
+          }
+        ]
       },
       {
         id: "mod-5",
@@ -140,11 +284,42 @@ const sampleLearningPaths: LearningPath[] = [
         type: "project",
         skills: ["Node.js", "Express", "API Design"],
         instructor: { name: "Maria Garcia", avatar: "/api/placeholder/32/32" },
-        points: 300
+        points: 300,
+        externalResources: [
+          {
+            id: "res-9",
+            title: "Node.js Official Docs",
+            description: "Complete Node.js documentation",
+            type: "documentation", 
+            url: "https://nodejs.org/en/docs/",
+            provider: "Node.js",
+            rating: 4.8,
+            difficulty: "intermediate"
+          }
+        ]
       }
     ]
   }
 ];
+
+const getResourceIcon = (type: string) => {
+  switch (type) {
+    case 'documentation':
+      return <FileText className="h-4 w-4" />;
+    case 'tutorial':
+      return <Video className="h-4 w-4" />;
+    case 'practice':
+      return <Target className="h-4 w-4" />;
+    case 'article':
+      return <BookOpen className="h-4 w-4" />;
+    case 'video':
+      return <Play className="h-4 w-4" />;
+    case 'tool':
+      return <Zap className="h-4 w-4" />;
+    default:
+      return <Globe className="h-4 w-4" />;
+  }
+};
 
 const getStatusIcon = (status: string, progress: number) => {
   switch (status) {
@@ -193,6 +368,8 @@ export function ModernLearningPath() {
   const [filterStatus, setFilterStatus] = useState("all");
   const [filterDifficulty, setFilterDifficulty] = useState("all");
   const [activeTab, setActiveTab] = useState("path");
+  const [selectedModule, setSelectedModule] = useState<LearningModule | null>(null);
+  const [showModuleDetails, setShowModuleDetails] = useState(false);
 
   const filteredModules = selectedPath.modules.filter(module => {
     const matchesSearch = module.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -207,6 +384,21 @@ export function ModernLearningPath() {
   const earnedPoints = selectedPath.modules
     .filter(module => module.status === 'completed')
     .reduce((sum, module) => sum + module.points, 0);
+
+  const handleModuleAction = (module: LearningModule, action: 'start' | 'continue' | 'review') => {
+    if (action === 'review') {
+      setSelectedModule(module);
+      setShowModuleDetails(true);
+    } else {
+      // Handle start/continue logic
+      console.log(`${action} module:`, module.id);
+    }
+  };
+
+  const toggleBookmark = (moduleId: string) => {
+    // Handle bookmark toggle
+    console.log('Toggle bookmark for module:', moduleId);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-background/50">
@@ -399,17 +591,34 @@ export function ModernLearningPath() {
                                   </div>
                                 )}
                                 
-                                <Button 
-                                  variant={module.status === 'current' ? 'default' : 'outline'}
-                                  size="sm"
-                                  disabled={module.status === 'locked'}
-                                  className="group-hover:shadow-md transition-all"
-                                >
-                                  {module.status === 'completed' ? 'Review' :
-                                   module.status === 'current' ? 'Continue' :
-                                   module.status === 'locked' ? 'Locked' : 'Start'}
-                                  <ArrowRight className="h-3 w-3 ml-1" />
-                                </Button>
+                                <div className="flex items-center gap-2">
+                                  {module.bookmarked && (
+                                    <Button
+                                      variant="ghost"
+                                      size="sm"
+                                      onClick={() => toggleBookmark(module.id)}
+                                      className="p-2 h-8 w-8"
+                                    >
+                                      <Heart className="h-3 w-3 text-red-500 fill-current" />
+                                    </Button>
+                                  )}
+                                  
+                                  <Button 
+                                    variant={module.status === 'current' ? 'default' : 'outline'}
+                                    size="sm"
+                                    disabled={module.status === 'locked'}
+                                    onClick={() => handleModuleAction(module, 
+                                      module.status === 'completed' ? 'review' :
+                                      module.status === 'current' ? 'continue' : 'start'
+                                    )}
+                                    className="group-hover:shadow-md transition-all"
+                                  >
+                                    {module.status === 'completed' ? 'Review' :
+                                     module.status === 'current' ? 'Continue' :
+                                     module.status === 'locked' ? 'Locked' : 'Start'}
+                                    <ArrowRight className="h-3 w-3 ml-1" />
+                                  </Button>
+                                </div>
                               </div>
                             </div>
                             
@@ -445,6 +654,45 @@ export function ModernLearningPath() {
                                 </Badge>
                               )}
                             </div>
+
+                            {/* External Resources Preview */}
+                            {module.externalResources.length > 0 && (
+                              <div className="mt-4 p-3 bg-muted/30 rounded-lg">
+                                <div className="flex items-center justify-between mb-2">
+                                  <h4 className="text-sm font-medium text-foreground">External Resources</h4>
+                                  <Badge variant="outline" className="text-xs">
+                                    {module.externalResources.length} resources
+                                  </Badge>
+                                </div>
+                                <div className="space-y-2">
+                                  {module.externalResources.slice(0, 2).map((resource) => (
+                                    <div key={resource.id} className="flex items-center gap-2 text-xs">
+                                      {getResourceIcon(resource.type)}
+                                      <span className="flex-1 truncate">{resource.title}</span>
+                                      <div className="flex items-center gap-1">
+                                        <Star className="h-3 w-3 text-yellow-500 fill-current" />
+                                        <span>{resource.rating}</span>
+                                      </div>
+                                      <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        asChild
+                                        className="h-6 w-6 p-0"
+                                      >
+                                        <a href={resource.url} target="_blank" rel="noopener noreferrer">
+                                          <ExternalLink className="h-3 w-3" />
+                                        </a>
+                                      </Button>
+                                    </div>
+                                  ))}
+                                  {module.externalResources.length > 2 && (
+                                    <p className="text-xs text-muted-foreground">
+                                      +{module.externalResources.length - 2} more resources
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </CardContent>
@@ -520,6 +768,175 @@ export function ModernLearningPath() {
           </TabsContent>
         </Tabs>
       </div>
+
+      {/* Module Details Modal */}
+      <Dialog open={showModuleDetails} onOpenChange={setShowModuleDetails}>
+        <DialogContent className="max-w-4xl max-h-[90vh]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              {selectedModule && getStatusIcon(selectedModule.status, selectedModule.progress)}
+              {selectedModule?.title}
+            </DialogTitle>
+          </DialogHeader>
+          
+          {selectedModule && (
+            <ScrollArea className="max-h-[70vh]">
+              <div className="space-y-6 pr-4">
+                {/* Module Overview */}
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <Badge className={getDifficultyColor(selectedModule.difficulty)}>
+                        {selectedModule.difficulty}
+                      </Badge>
+                      <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                        {getTypeIcon(selectedModule.type)}
+                        <span className="capitalize">{selectedModule.type}</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                        <Clock className="h-3 w-3" />
+                        <span>{selectedModule.duration}</span>
+                      </div>
+                    </div>
+                    
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => toggleBookmark(selectedModule.id)}
+                    >
+                      {selectedModule.bookmarked ? (
+                        <Heart className="h-4 w-4 text-red-500 fill-current mr-2" />
+                      ) : (
+                        <BookmarkPlus className="h-4 w-4 mr-2" />
+                      )}
+                      {selectedModule.bookmarked ? 'Bookmarked' : 'Bookmark'}
+                    </Button>
+                  </div>
+                  
+                  <p className="text-muted-foreground">{selectedModule.description}</p>
+                  
+                  {selectedModule.status === 'completed' && selectedModule.completedAt && (
+                    <div className="flex items-center gap-4 p-3 bg-success/10 rounded-lg">
+                      <CheckCircle2 className="h-5 w-5 text-success" />
+                      <div>
+                        <p className="text-sm font-medium">Completed on {selectedModule.completedAt}</p>
+                        {selectedModule.timeSpent && (
+                          <p className="text-xs text-muted-foreground">Time spent: {selectedModule.timeSpent}</p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Skills */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-3">Skills You'll Learn</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedModule.skills.map((skill) => (
+                      <Badge key={skill} variant="secondary" className="px-3 py-1">
+                        <Zap className="h-3 w-3 mr-1" />
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+
+                {/* External Resources */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-3">External Resources</h3>
+                  <div className="grid gap-3">
+                    {selectedModule.externalResources.map((resource) => (
+                      <Card key={resource.id} className="p-4">
+                        <div className="flex items-start gap-3">
+                          <div className="p-2 bg-primary/10 rounded-lg">
+                            {getResourceIcon(resource.type)}
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-start justify-between mb-2">
+                              <h4 className="font-medium">{resource.title}</h4>
+                              <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-1 text-sm">
+                                  <Star className="h-3 w-3 text-yellow-500 fill-current" />
+                                  <span>{resource.rating}</span>
+                                </div>
+                                <Button variant="outline" size="sm" asChild>
+                                  <a href={resource.url} target="_blank" rel="noopener noreferrer">
+                                    <ExternalLink className="h-3 w-3 mr-1" />
+                                    Visit
+                                  </a>
+                                </Button>
+                              </div>
+                            </div>
+                            <p className="text-sm text-muted-foreground mb-2">{resource.description}</p>
+                            <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                              <span className="capitalize">{resource.type}</span>
+                              <span>by {resource.provider}</span>
+                              {resource.duration && (
+                                <>
+                                  <span>•</span>
+                                  <span>{resource.duration}</span>
+                                </>
+                              )}
+                              <Badge variant="outline" className={`text-xs ${getDifficultyColor(resource.difficulty)}`}>
+                                {resource.difficulty}
+                              </Badge>
+                            </div>
+                          </div>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Study Notes */}
+                {selectedModule.studyNotes && selectedModule.studyNotes.length > 0 && (
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3">Study Notes</h3>
+                    <div className="space-y-3">
+                      {selectedModule.studyNotes.map((note) => (
+                        <Card key={note.id} className="p-4">
+                          <div className="flex items-start gap-3">
+                            <Lightbulb className="h-4 w-4 text-yellow-500 mt-0.5" />
+                            <div className="flex-1">
+                              <p className="text-sm mb-2">{note.content}</p>
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs text-muted-foreground">{note.timestamp}</span>
+                                <div className="flex gap-1">
+                                  {note.tags.map((tag) => (
+                                    <Badge key={tag} variant="outline" className="text-xs">
+                                      {tag}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Action Buttons */}
+                <div className="flex gap-3 pt-4 border-t">
+                  <Button className="flex-1">
+                    {selectedModule.status === 'completed' ? 'Study Again' : 'Continue Learning'}
+                    <Play className="h-4 w-4 ml-2" />
+                  </Button>
+                  <Button variant="outline">
+                    <Share2 className="h-4 w-4 mr-2" />
+                    Share
+                  </Button>
+                  <Button variant="outline">
+                    <Download className="h-4 w-4 mr-2" />
+                    Download
+                  </Button>
+                </div>
+              </div>
+            </ScrollArea>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
