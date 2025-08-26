@@ -45,7 +45,7 @@ const StudentDashboard = () => {
               <Route path="/schedule" element={<StudyTimePage />} />
               <Route path="/achievements" element={<div className="p-6"><AchievementsPage /></div>} />
               <Route path="/assignments" element={<div className="p-6"><AssignmentsPage /></div>} />
-              <Route path="/study-time" element={<div className="p-6"><ComingSoon title="Study Time" description="Track your study hours and optimize your learning schedule." /></div>} />
+              <Route path="/study-time" element={<StudyTimePage />} />
               <Route path="/reviews" element={<div className="p-6"><ComingSoon title="Reviews" description="Review and rate courses, instructors, and learning materials." /></div>} />
               <Route path="/messages" element={<div className="p-6"><ComingSoon title="Messages" description="Communicate with instructors and fellow students." /></div>} />
               <Route path="/profile" element={<div className="p-6"><ComingSoon title="Profile" description="Manage your personal information and account settings." /></div>} />
