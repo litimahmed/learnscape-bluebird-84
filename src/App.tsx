@@ -6,7 +6,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Layout from "./components/Layout";
-import PageLoader from "./components/ui/PageLoader";
 
 // Lazy-loaded page components
 const Home = lazy(() => import("./pages/Home"));
@@ -30,14 +29,14 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Suspense fallback={<PageLoader />}>
+          <Suspense fallback={<div>Loading...</div>}>
             <Routes>
               <Route path="/register" element={<Register />} />
               <Route path="/dashboard/*" element={<StudentDashboard />} />
               <Route path="/partner-application" element={<PartnerApplication />} />
               <Route path="/*" element={
                 <Layout>
-                  <Suspense fallback={<PageLoader />}>
+                  <Suspense fallback={<div>Loading...</div>}>
                     <Routes>
                       <Route path="/" element={<Home />} />
                       <Route path="/about" element={<About />} />
