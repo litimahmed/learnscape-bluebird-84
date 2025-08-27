@@ -18,21 +18,21 @@ const AMBIENT_SOUNDS: AmbientSound[] = [
     id: 'bird-sound',
     name: 'Birds',
     icon: '🐦',
-    audioUrl: '/sounds/ambients/bird sound.mp3',
+    audioUrl: '/sounds/ambients/bird%20sound.mp3',
     description: 'Gentle bird chirping'
   },
   {
     id: 'bird-sound-2',
     name: 'Forest Birds',
     icon: '🌲',
-    audioUrl: '/sounds/ambients/bird sound 2.mp3',
+    audioUrl: '/sounds/ambients/bird%20sound%202.mp3',
     description: 'Forest ambience with birds'
   },
   {
     id: 'bird-sound-3',
     name: 'Morning Birds',
     icon: '🌅',
-    audioUrl: '/sounds/ambients/bird sound 3 (2).mp3',
+    audioUrl: '/sounds/ambients/bird%20sound%203%20(2).mp3',
     description: 'Morning bird sounds'
   },
   {
@@ -41,6 +41,20 @@ const AMBIENT_SOUNDS: AmbientSound[] = [
     icon: '🌧️',
     audioUrl: '/sounds/ambients/rain.mp3',
     description: 'Soft rainfall for focus'
+  },
+  {
+    id: 'waterfall',
+    name: 'Waterfall',
+    icon: '💧',
+    audioUrl: '/sounds/ambients/waterfall2.mp3',
+    description: 'Peaceful waterfall sounds'
+  },
+  {
+    id: 'lake-birds',
+    name: 'Lake Birds',
+    icon: '🏞️',
+    audioUrl: '/sounds/ambients/lake%20with%20bird%20sound.mp3',
+    description: 'Lake ambience with bird sounds'
   }
 ];
 
