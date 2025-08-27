@@ -3,15 +3,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Layout from "./components/Layout";
 import PageLoader from "./components/ui/PageLoader";
-import StudentDashboard from "./pages/StudentDashboard";
 import { TimerProvider } from "./contexts/TimerContext";
-import { AmbientSoundProvider } from "./contexts/AmbientSoundContext";
 import { FloatingTimer } from "./components/ui/FloatingTimer";
-import { FloatingSoundPlayer } from "./components/ui/FloatingSoundPlayer";
 import { useTimerContext } from "./contexts/TimerContext";
 
 // Lazy-loaded page components
@@ -23,13 +20,14 @@ const Register = lazy(() => import("./pages/Register"));
 const HelpCenter = lazy(() => import("./pages/HelpCenter"));
 const Business = lazy(() => import("./pages/Business"));
 const Careers = lazy(() => import("./pages/Careers"));
-// StudentDashboard imported eagerly above
+const StudentDashboard = lazy(() => import("./pages/StudentDashboard"));
 const PartnerApplication = lazy(() => import("./pages/PartnerApplication"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
 const AppContent = () => {
+  const location = useLocation();
   const timerContext = useTimerContext();
 
   return (
@@ -71,29 +69,24 @@ const AppContent = () => {
           onClose={timerContext.hideFloating}
         />
       )}
-
-      {/* Floating Sound Player */}
-      <FloatingSoundPlayer />
     </>
   );
 };
 
 const App = () => (
-    <HelmetProvider>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <TimerProvider>
-              <AmbientSoundProvider>
-                <AppContent />
-              </AmbientSoundProvider>
-            </TimerProvider>
-          </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </HelmetProvider>
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <TimerProvider>
+            <AppContent />
+          </TimerProvider>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </HelmetProvider>
 );
 
 export default App;
