@@ -36,6 +36,13 @@ const AMBIENT_SOUNDS: AmbientSound[] = [
     description: 'Morning bird sounds'
   },
   {
+    id: 'bird-exclusive',
+    name: 'Exclusive Birds',
+    icon: '🎵',
+    audioUrl: '/sounds/ambients/bird%20sound%20exclusive.mp3',
+    description: 'Exclusive bird sounds'
+  },
+  {
     id: 'rain',
     name: 'Rain',
     icon: '🌧️',
@@ -43,16 +50,30 @@ const AMBIENT_SOUNDS: AmbientSound[] = [
     description: 'Soft rainfall for focus'
   },
   {
-    id: 'waterfall',
+    id: 'thunder-rain',
+    name: 'Thunder & Rain',
+    icon: '⛈️',
+    audioUrl: '/sounds/ambients/thunder%20with%20rain.mp3',
+    description: 'Thunder sounds with rain'
+  },
+  {
+    id: 'waterfall2',
     name: 'Waterfall',
     icon: '💧',
     audioUrl: '/sounds/ambients/waterfall2.mp3',
     description: 'Peaceful waterfall sounds'
   },
   {
+    id: 'waterfall-birds',
+    name: 'Waterfall Birds',
+    icon: '🏞️',
+    audioUrl: '/sounds/ambients/waterfall%20with%20bird%20sound.mp3',
+    description: 'Waterfall with bird sounds'
+  },
+  {
     id: 'lake-birds',
     name: 'Lake Birds',
-    icon: '🏞️',
+    icon: '🏔️',
     audioUrl: '/sounds/ambients/lake%20with%20bird%20sound.mp3',
     description: 'Lake ambience with bird sounds'
   }
